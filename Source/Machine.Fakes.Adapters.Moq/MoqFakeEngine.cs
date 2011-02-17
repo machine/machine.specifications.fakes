@@ -1,7 +1,6 @@
 using System;
 using System.Linq.Expressions;
 using Moq;
-using Xunit;
 
 namespace Machine.Fakes.Adapters.Moq
 {
@@ -13,7 +12,7 @@ namespace Machine.Fakes.Adapters.Moq
     {
         #region IFakeEngine Members
 
-        public object Stub(Type interfaceType)
+        public object CreateFake(Type interfaceType)
         {
             var closedMockType = typeof (Mock<>).MakeGenericType(interfaceType);
             var objectProperty = closedMockType.GetProperty("Object", closedMockType);

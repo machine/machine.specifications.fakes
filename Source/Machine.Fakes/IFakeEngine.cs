@@ -1,8 +1,7 @@
 using System;
 using System.Linq.Expressions;
-using Machine.Fakes;
 
-namespace Xunit
+namespace Machine.Fakes
 {
     /// <summary>
     /// Interface to a fake framework. 
@@ -18,7 +17,7 @@ namespace Xunit
         /// <returns>
         /// The created fake instance.
         /// </returns>
-        object Stub(Type interfaceType);
+        object CreateFake(Type interfaceType);
 
         /// <summary>
         /// Creates a partial mock.

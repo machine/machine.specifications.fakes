@@ -1,7 +1,6 @@
 using System;
 using System.Linq.Expressions;
 using Machine.Fakes.Utils;
-using Xunit;
 
 namespace Machine.Fakes.Internal
 {
@@ -165,6 +164,11 @@ namespace Machine.Fakes.Internal
             Guard.AgainstArgumentNull(assignement, "assignement");
 
             return _fakeEngine.CreateEventRaiser(fake, assignement);
+        }
+
+        public static T Fake<T>()
+        {
+            return _fakeEngine.Stub<T>();
         }
     }
 }

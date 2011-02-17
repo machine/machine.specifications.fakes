@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Machine.Fakes.Utils;
-using Xunit;
 
 namespace Machine.Fakes.Internal
 {

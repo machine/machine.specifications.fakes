@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine.Fakes.Adapters.Moq"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine.Fakes.Examples", "Machine.Fakes.Examples\Machine.Fakes.Examples.csproj", "{A422AE98-F0A9-4D2B-9611-CDA32E09D621}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine.Fakes.Adapters.FakeItEasy", "Machine.Fakes.Adapters.FakeItEasy\Machine.Fakes.Adapters.FakeItEasy.csproj", "{41144591-156E-4901-A57A-F4249808D26A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specs", "Specs", "{167B9F97-0E10-4E03-A1C9-7AD403B9AC34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine.Fakes.Adapters.Specs", "Machine.Fakes.Adapters.Specs\Machine.Fakes.Adapters.Specs.csproj", "{EDC6F6B8-A1C5-4C36-BCC5-F4645F4283F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,8 +37,19 @@ Global
 		{A422AE98-F0A9-4D2B-9611-CDA32E09D621}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A422AE98-F0A9-4D2B-9611-CDA32E09D621}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A422AE98-F0A9-4D2B-9611-CDA32E09D621}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41144591-156E-4901-A57A-F4249808D26A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41144591-156E-4901-A57A-F4249808D26A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41144591-156E-4901-A57A-F4249808D26A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41144591-156E-4901-A57A-F4249808D26A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDC6F6B8-A1C5-4C36-BCC5-F4645F4283F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC6F6B8-A1C5-4C36-BCC5-F4645F4283F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC6F6B8-A1C5-4C36-BCC5-F4645F4283F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC6F6B8-A1C5-4C36-BCC5-F4645F4283F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EDC6F6B8-A1C5-4C36-BCC5-F4645F4283F7} = {167B9F97-0E10-4E03-A1C9-7AD403B9AC34}
 	EndGlobalSection
 EndGlobal

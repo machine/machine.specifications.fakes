@@ -1,7 +1,6 @@
 using System;
 using System.Linq.Expressions;
 using Rhino.Mocks;
-using Xunit;
 
 namespace Machine.Fakes.Adapters.Rhinomocks
 {
@@ -9,7 +8,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
     {
         #region IFakeEngine Members
 
-        public object Stub(Type interfaceType)
+        public object CreateFake(Type interfaceType)
         {
             var stub = MockRepository.GenerateStub(interfaceType);
             stub.Replay();

@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using Machine.Fakes.Utils;
 using StructureMap;
 using StructureMap.AutoMocking;
-using Xunit;
 
 namespace Machine.Fakes.Internal
 {
@@ -52,9 +51,9 @@ namespace Machine.Fakes.Internal
 		}
 
 
-		public object Stub(Type interfaceType)
+		public object CreateFake(Type interfaceType)
 		{
-			return _fakeEngine.Stub(interfaceType);
+			return _fakeEngine.CreateFake(interfaceType);
 		}
 
 		public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
@@ -101,7 +100,7 @@ namespace Machine.Fakes.Internal
 
 		object ServiceLocator.Service(Type serviceType)
 		{
-			return _fakeEngine.Stub(serviceType);
+			return _fakeEngine.CreateFake(serviceType);
 		}
 
 		#endregion

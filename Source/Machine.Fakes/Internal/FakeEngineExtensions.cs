@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Machine.Fakes.Utils;
-using Xunit;
 
 namespace Machine.Fakes.Internal
 {
@@ -29,12 +28,12 @@ namespace Machine.Fakes.Internal
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
             return Enumerable.Range(0, 3)
-                .Select(x => (T)fakeEngine.Stub(typeof(T)))
+                .Select(x => (T)fakeEngine.CreateFake(typeof(T)))
                 .ToList();
         }
 
         /// <summary>
-        /// Gives strong typed access to the generic <see cref="IFakeEngine.Stub"/> method.
+        /// Gives strong typed access to the generic <see cref="IFakeEngine.CreateFake"/> method.
         /// </summary>
         /// <typeparam name="T">
         /// Specifies the type to stub e.g. to create a fake for.
@@ -49,7 +48,7 @@ namespace Machine.Fakes.Internal
         {
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
-            return (T)fakeEngine.Stub(typeof(T));
+            return (T)fakeEngine.CreateFake(typeof(T));
         }
     }
 }

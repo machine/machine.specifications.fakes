@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
-using Xunit;
 
 namespace Machine.Fakes
 {
