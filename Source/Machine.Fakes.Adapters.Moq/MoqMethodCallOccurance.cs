@@ -1,0 +1,43 @@
+﻿using System;
+using System.Linq.Expressions;
+using Moq;
+using Machine.Fakes.Utils;
+
+namespace Machine.Fakes.Adapters.Moq
+{
+    class MoqMethodCallOccurance<TFake> : IMethodCallOccurance where TFake : class
+    {
+        private readonly Expression<Action<TFake>> _func;
+        private readonly Mock<TFake> _mock;
+
+        public MoqMethodCallOccurance(Mock<TFake> mock, Expression<Action<TFake>> func)
+        {
+            Guard.AgainstArgumentNull(mock, "mock");
+            Guard.AgainstArgumentNull(func, "func");
+
+            _mock = mock;
+            _func = func;
+
+            _mock.Verify(func, global::Moq.Times.AtLeastOnce());
+        }
+
+        #region IMethodCallOccurance Members
+
+        public void Times(int numberOfTimesTheMethodShouldHaveBeenCalled)
+        {
+            _mock.Verify(_func, global::Moq.Times.Exactly(numberOfTimesTheMethodShouldHaveBeenCalled));
+        }
+
+        public void OnlyOnce()
+        {
+            _mock.Verify(_func, global::Moq.Times.Once());
+        }
+
+        public void Twice()
+        {
+            Times(2);
+        }
+
+        #endregion
+    }
+}
