@@ -55,6 +55,7 @@
     <Compile Include="FakeItEasyEngine.cs" />
     <Compile Include="FakeItEasyMethodCallOccurance.cs" />
     <Compile Include="FakeItEasyQueryOptions.cs" />
+    <Compile Include="LocalAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\machine.fakes\Machine.Fakes.csproj">

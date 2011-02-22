@@ -11,6 +11,7 @@ properties {
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
   $specs_dir = "$base_dir\Specs"
+  $docu_dir = "$base_dir\Documentation"
   $fake_framework = "All"
 } 
 
@@ -26,6 +27,9 @@ task Clean {
   
   Info "Removing $specs_dir"
   remove-item -force -recurse $specs_dir -ErrorAction SilentlyContinue 
+  
+  Info "Removing $docu_dir"
+  remove-item -force -recurse $docu_dir -ErrorAction SilentlyContinue
 } 
 
 # Initialization of the build 
@@ -55,11 +59,42 @@ task Compile -depends Init {
   exec { msbuild /t:rebuild "/p:OutDir=$buildartifacts_dir" "/p:Configuration=Release" "/p:Platform=Any CPU" "$sln_file" }
 } 
 
+# Creates the documentation
+task Docu -depends Compile {
+  Info "Creating $docu_dir"
+  new-item $docu_dir -itemType directory 
+
+  exec { & $tools_dir\docu\docu.exe $build_dir\Machine.Fakes.dll --output=$docu_dir }
+}
+
 # Runs mspec against the machine.fakes specifications
 task Specs -depends Compile {
-  
   Info "Creating $specs_dir"
   new-item $specs_dir -itemType directory 
   
   exec { & $tools_dir\MSpec\mspec.exe --html $specs_dir $build_dir\Machine.Fakes.Adapters.Specs.dll }
+}
+
+# Merges the assemblies together into a bundle that is configured for rhino.mocks usage
+task Merge_Rhino -depends Compile {
+  
+  $framework_dir = Get-FrameworkDirectory
+  $old = pwd
+  cd $build_dir
+    
+  Remove-Item Machine.Fakes.RhinoMocks.dll -ErrorAction SilentlyContinue 
+ 
+  exec {
+        
+     & $tools_dir\ILMerge\ILMerge.exe /log:ilmerge.txt /out:Machine.Fakes.RhinoMocks.dll /attr:Machine.Fakes.Adapters.Rhinomocks.dll `
+        Machine.Fakes.dll `
+        Machine.Fakes.Adapters.Rhinomocks.dll `
+        StructureMap.dll `
+        StructureMap.AutoMocking.dll `
+        "/internalize:$base_dir\ILMergeExcludes.txt" `
+        /t:library  `
+        /targetplatform:"v4,$framework_dir"
+  }
+     
+  cd $old
 }

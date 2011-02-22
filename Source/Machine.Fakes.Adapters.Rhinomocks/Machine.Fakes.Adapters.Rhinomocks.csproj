@@ -46,6 +46,7 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="LocalAssemblyInfo.cs" />
     <Compile Include="RhinoCommandOptions.cs" />
     <Compile Include="RhinoEventRaiser.cs" />
     <Compile Include="RhinoFakeEngine.cs" />

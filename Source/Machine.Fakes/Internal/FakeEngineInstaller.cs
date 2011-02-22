@@ -11,9 +11,11 @@ namespace Machine.Fakes.Internal
             var currentSpecAssembly = specificationType.Assembly;
 
             var configuration = specificationType
-                .GetCustomAttributes(typeof (ConfigurationAttribute), false)
+                .GetCustomAttributes(typeof(ConfigurationAttribute),false)
                 .AlternativeIfNullOrEmpty(
-                    () => currentSpecAssembly.GetCustomAttributes(typeof (ConfigurationAttribute), true))
+                    () => currentSpecAssembly.GetCustomAttributes(typeof(ConfigurationAttribute), false))
+                .AlternativeIfNullOrEmpty(
+                    () => typeof(FakeEngineInstaller).Assembly.GetCustomAttributes(typeof(ConfigurationAttribute), false))
                 .Cast<ConfigurationAttribute>()
                 .FirstOrCustomDefaultValue(new ConfigurationAttribute());
 
