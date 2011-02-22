@@ -166,6 +166,15 @@ namespace Machine.Fakes.Internal
             return _fakeEngine.CreateEventRaiser(fake, assignement);
         }
 
+        /// <summary>
+        /// Creates a new fake instance of the interface specified by <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The interface you want to fake.
+        /// </typeparam>
+        /// <returns>
+        /// The fake.
+        /// </returns>
         public static T Fake<T>()
         {
             return _fakeEngine.Stub<T>();

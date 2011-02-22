@@ -30,7 +30,7 @@ namespace Machine.Fakes
         /// The type to create a fake for. (Should be an interface or an abstract class)
         /// </typeparam>
         /// <returns>
-        /// An instance implementing <see cref="TInterfaceType"/>.
+        /// An instance implementing <typeparamref name="TInterfaceType"/>.
         /// </returns>
         TInterfaceType The<TInterfaceType>() where TInterfaceType : class;
 

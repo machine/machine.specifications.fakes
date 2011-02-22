@@ -6,6 +6,14 @@ using Machine.Specifications;
 
 namespace Machine.Fakes
 {
+    /// <summary>
+    /// Base class that adds auto mocking (grasp), I mean auto faking capabilities
+    /// to Machine.Specifications. 
+    /// </summary>
+    /// <typeparam name="TSubject">
+    /// The subject for the specification. This is the type that is created by the
+    /// specification for you.
+    /// </typeparam>
     public abstract class auto_fake<TSubject> : IFakeAccessor where TSubject : class
     {
         private static auto_fake<TSubject> ExecutingSpec;
@@ -13,6 +21,9 @@ namespace Machine.Fakes
         private TSubject SpecificationSubject;
         private readonly AutoFakeContainer<TSubject> Container;
         
+        /// <summary>
+        /// Creates a new instance of the <see cref="auto_fake{T}"/> class.
+        /// </summary>
         protected auto_fake()
         {
             ExecutingSpec = this;
@@ -39,7 +50,7 @@ namespace Machine.Fakes
         /// </summary>
         /// <typeparam name = "TInterfaceType">The type to create a fake for. (Should be an interface or an abstract class)</typeparam>
         /// <returns>
-        ///   An instance implementing <see cref = "TInterfaceType" />.
+        ///   An instance implementing <typeparamref name="TInterfaceType" />.
         /// </returns>
         public static TInterfaceType The<TInterfaceType>() where TInterfaceType : class
         {

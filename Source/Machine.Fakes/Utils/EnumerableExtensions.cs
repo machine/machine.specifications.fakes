@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Machine.Fakes.Utils
 {
-    public static class EnumerableExtensions
+    static class EnumerableExtensions
     {
         public static T FirstOrCustomDefaultValue<T>(this IEnumerable<T> enumerable, T customDefaultValue)
         {
