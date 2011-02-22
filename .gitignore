@@ -11,5 +11,5 @@ _ReSharper.*
 NDependOut
 
 /Build
-/Distribution
-/Specs/*.xml
+/Release
+/Specs

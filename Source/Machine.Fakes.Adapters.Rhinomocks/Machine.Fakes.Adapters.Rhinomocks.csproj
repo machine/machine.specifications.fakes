@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="RhinoCommandOptions.cs" />
     <Compile Include="RhinoEventRaiser.cs" />
     <Compile Include="RhinoFakeEngine.cs" />
@@ -58,6 +60,9 @@
       <Project>{FF888220-969D-4283-9B00-78D2DA4BD7AB}</Project>
       <Name>Machine.Fakes</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,7 +7,7 @@ namespace Machine.Fakes.Internal
     /// <summary>
     /// A static facade for the current fake engine.
     /// </summary>
-    class FakeEngineGateway
+    public class FakeEngineGateway
     {
         private static IFakeEngine _fakeEngine;
 
