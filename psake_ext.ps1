@@ -9,7 +9,10 @@ function Info {
 }
 
 function Get-Git-Tag {
-    git describe
+    $gitDescribe = git describe
+    $gitDescribe = $gitDescribe.Split('-') 
+    return $gitDescribe[0]
+    
 }
 
 function Get-Git-Commit {
