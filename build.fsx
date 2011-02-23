@@ -127,7 +127,9 @@ Target "BuildNuGet" (fun _ ->
                     Project = sprintf "%s.%s" projectName flavour
                     Description = projectDescription       
                     Version = version                        
-                    OutputPath = nugetDir })  
+                    OutputPath = nugetDir
+                    AccessKey = getBuildParamOrDefault "nugetkey" ""
+                    Publish = hasBuildParam "nugetkey" })  
                 "machine.fakes.nuspec"
 
             XCopy (nugetDir + sprintf "Machine.Fakes.%s.%s.nupkg" flavour version) deployDir)
