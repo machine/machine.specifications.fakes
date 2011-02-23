@@ -10,6 +10,13 @@ _ReSharper.*
 *.swp
 NDependOut
 
+/docsBuild
+/build
+/nuget
+/deploy
+/test
+/docs
+/testOutput
 /Build
 /Release
 /Documentation

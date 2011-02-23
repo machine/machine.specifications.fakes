@@ -1,0 +1,149 @@
+#I "tools/FAKE"
+#r "FakeLib.dll"
+open Fake
+open Fake.Git
+
+(* properties *)
+let authors = ["Björn Rochel"]
+let projectName = "Machine.Fakes"
+let projectDescription = "Generic faking capabilites on top of Machine.Specifications"
+let copyright = "Copyright - Machine.Fakes 2011"
+let version = if isLocalBuild then getLastTag() else buildVersion
+let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
+
+(* flavours *)
+let flavours = ["RhinoMocks"; "FakeItEasy"; "Moq"]
+
+(* Directories *)
+let buildDir = @".\build\"
+let docsDir = @".\docs\"
+let deployDir = @".\deploy\"
+let testDir = @".\test\"
+let testOutputDir = @".\testOutput\"
+let nugetDir = @".\nuget\" 
+let targetPlatformDir = @"C:\Windows\Microsoft.NET\Framework64\v4.0.30319"
+
+(* files *)
+let appReferences = !! @".\Source\**\*.csproj"
+
+(* Targets *)
+Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; docsDir; testOutputDir] )
+
+Target "BuildApp" (fun _ -> 
+    AssemblyInfo
+      (fun p -> 
+        {p with
+            CodeLanguage = CSharp;
+            AssemblyVersion = version;
+            AssemblyTitle = title;
+            AssemblyDescription = projectDescription;
+            AssemblyCopyright = copyright;
+            Guid = "3745F3DA-6ABB-4C58-923D-B09E4A04688F";
+            OutputFileName = @".\Source\GlobalAssemblyInfo.cs"})                      
+
+    appReferences
+        |> MSBuildRelease buildDir "Build"
+        |> Log "AppBuild-Output: "
+)
+
+Target "BuildTest" (fun _ -> 
+    ActivateFinalTarget "DeployTestResults"
+    appReferences
+        |> MSBuildDebug testDir "Build"
+        |> Log "TestBuild-Output: "
+)
+
+Target "Test" (fun _ ->
+    !+ (testDir + "/*.Specs.dll")
+      ++ (testDir + "/*.Examples.dll")
+        |> Scan
+        |> MSpec (fun p -> 
+                    {p with 
+                        HtmlOutputDir = testOutputDir})
+)
+
+Target "MergeAssemblies" (fun _ ->
+    flavours
+      |> Seq.iter (fun flavour -> 
+            let adapter = buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour
+            let libs =
+                [adapter
+                 buildDir + "StructureMap.dll"
+                 buildDir + "StructureMap.AutoMocking.dll"]
+
+            ILMerge 
+                (fun p -> 
+                    {p with 
+                        Libraries = libs
+                        AttributeFile = adapter
+                        Internalize = InternalizeExcept "ILMergeExcludes.txt"
+                        TargetPlatform = sprintf @"v4,%s" targetPlatformDir})
+
+                (buildDir + sprintf "Machine.Fakes.%s.dll" flavour)
+                (buildDir + "Machine.Fakes.dll"))
+)
+
+FinalTarget "DeployTestResults" (fun () ->
+    !+ (testOutputDir + "\**\*.*") 
+      |> Scan
+      |> Zip testOutputDir (sprintf "%sMSpecResults.zip" deployDir)
+)
+
+Target "GenerateDocumentation" (fun _ ->
+    !+ (buildDir + "Machine.Fakes.dll")      
+      |> Scan
+      |> Docu (fun p ->
+          {p with
+              ToolPath = "./tools/docu/docu.exe"
+              TemplatesPath = "./tools/docu/templates"
+              OutputPath = docsDir })
+)
+
+Target "ZipDocumentation" (fun _ ->    
+    !! (docsDir + "/**/*.*")
+      |> Zip docsDir (deployDir + sprintf "Documentation-%s.zip" version)
+)
+
+Target "BuildZip" (fun _ -> 
+    !+ (buildDir + "/**/*.*")     
+      -- "*.zip"
+        |> Scan
+        |> Zip buildDir (deployDir + sprintf "%s-%s.zip" projectName version)
+)
+
+Target "BuildNuGet" (fun _ ->
+    flavours
+      |> Seq.iter (fun flavour -> 
+            CleanDir nugetDir
+            let nugetDocsDir = nugetDir @@ "docs/"
+            let nugetLibDir = nugetDir @@ "lib/"
+        
+            XCopy docsDir nugetDocsDir
+            XCopy (buildDir + sprintf "Machine.Fakes.%s.dll" flavour) nugetLibDir
+
+            NuGet (fun p -> 
+                {p with               
+                    Authors = authors
+                    Project = sprintf "%s.%s" projectName flavour
+                    Description = projectDescription       
+                    Version = version                        
+                    OutputPath = nugetDir })  
+                "machine.fakes.nuspec"
+
+            XCopy (nugetDir + sprintf "Machine.Fakes.%s.%s.nupkg" flavour version) deployDir)
+)
+
+Target "Default" DoNothing
+Target "Deploy" DoNothing
+
+// Dependencies
+"BuildApp" <== ["Clean"]
+"Test" <== ["BuildApp"; "BuildTest"]
+"MergeAssemblies"  <== ["Test"]
+"BuildZip" <== ["MergeAssemblies"]
+"ZipDocumentation" <== ["GenerateDocumentation"]
+"Deploy" <== ["BuildZip"; "ZipDocumentation"; "BuildNuGet"]
+"Default" <== ["Deploy"]
+
+// start build
+Run "Default"
