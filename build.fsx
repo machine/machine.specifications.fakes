@@ -133,7 +133,8 @@ Target "BuildNuGet" (fun _ ->
                     Publish = hasBuildParam "nugetkey" })  
                 "machine.fakes.nuspec"
 
-            XCopy (nugetDir + sprintf "Machine.Fakes.%s.%s.nupkg" flavour version) deployDir)
+            [nugetDir + sprintf "Machine.Fakes.%s.%s.nupkg" flavour version]
+              |> CopyTo deployDir)
 )
 
 Target "Default" DoNothing
