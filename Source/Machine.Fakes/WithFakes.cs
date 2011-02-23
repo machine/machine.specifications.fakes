@@ -5,17 +5,17 @@ using Machine.Specifications;
 namespace Machine.Fakes
 {
     /// <summary>
-    /// Base class for the simple cases than <see cref="auto_fake{TSubject}"/>. 
+    /// Base class for the simpler cases than <see cref="WithSubject{TSubject}"/>. 
     /// This class only contains the shortcuts for creating fakes via "An" and "Some".
     /// </summary>
-    public abstract class with_fakes  
+    public abstract class WithFakes  
     {
         private static IFakeEngine _fakeEngine;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="with_fakes"/> class.
+        /// Creates a new instance of the <see cref="WithFakes"/> class.
         /// </summary>
-        protected with_fakes()
+        protected WithFakes()
         {
             _fakeEngine = FakeEngineInstaller.InstallFor(GetType());
         }

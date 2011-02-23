@@ -14,17 +14,17 @@ namespace Machine.Fakes
     /// The subject for the specification. This is the type that is created by the
     /// specification for you.
     /// </typeparam>
-    public abstract class auto_fake<TSubject> : IFakeAccessor where TSubject : class
+    public abstract class WithSubject<TSubject> : IFakeAccessor where TSubject : class
     {
-        private static auto_fake<TSubject> ExecutingSpec;
+        private static WithSubject<TSubject> ExecutingSpec;
         private readonly List<IBehaviorConfig> BehaviorConfigs = new List<IBehaviorConfig>();
         private TSubject SpecificationSubject;
         private readonly AutoFakeContainer<TSubject> Container;
         
         /// <summary>
-        /// Creates a new instance of the <see cref="auto_fake{T}"/> class.
+        /// Creates a new instance of the <see cref="WithSubject{TSubject}"/> class.
         /// </summary>
-        protected auto_fake()
+        protected WithSubject()
         {
             ExecutingSpec = this;
             Container = new AutoFakeContainer<TSubject>(GetType());

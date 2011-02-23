@@ -56,7 +56,7 @@
     </Compile>
     <Compile Include="Internal\AutoFakeContainer.cs" />
     <Compile Include="BehaviorConfigBase.cs" />
-    <Compile Include="with_fakes.cs" />
+    <Compile Include="WithFakes.cs" />
     <Compile Include="Internal\FakeEngineInstaller.cs" />
     <Compile Include="Internal\FakeEngineGateway.cs" />
     <Compile Include="Utils\EnumerableExtensions.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="ConfigurationAttribute.cs" />
     <Compile Include="Internal\StructureMapAutoMockerAdapter.cs" />
     <Compile Include="Internal\TargetCreationException.cs" />
-    <Compile Include="auto_fake.cs" />
+    <Compile Include="WithSubject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

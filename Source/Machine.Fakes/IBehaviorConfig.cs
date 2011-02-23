@@ -2,7 +2,7 @@ namespace Machine.Fakes
 {
     /// <summary>
     /// A BehaviorConfig is a simple way to modularize the configuration
-    /// of fakes in an <see cref="auto_fake{TSubject}"/>. Implementing this
+    /// of fakes in an <see cref="WithSubject{TSubject}"/>. Implementing this
     /// interface enables you to participate in the setup and cleanup stages
     /// of a specification without having to derive from it.
     /// </summary>
