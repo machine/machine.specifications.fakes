@@ -345,6 +345,11 @@
  delimiter is a ,
 </summary>
 </member>
+<member name="M:Fake.FileHelper.DeleteDirs(System.Collections.Generic.IEnumerable{System.String})">
+<summary>
+ Delete multiple directories
+</summary>
+</member>
 <member name="M:Fake.FileHelper.CleanDirs(System.Collections.Generic.IEnumerable{System.String})">
 <summary>
  Clean multiple directories
@@ -1866,6 +1871,9 @@
 
 </member>
 <member name="T:Fake.NUnitHelper">
+
+</member>
+<member name="">
 
 </member>
 <member name="">

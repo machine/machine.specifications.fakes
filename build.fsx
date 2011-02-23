@@ -12,7 +12,10 @@ let version = if isLocalBuild then getLastTag() else buildVersion
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
 
 (* flavours *)
-let flavours = ["RhinoMocks"; "FakeItEasy"; "Moq"]
+let flavours = 
+    ["RhinoMocks","3.6"; 
+     "FakeItEasy","1.6.4062.205";
+     "Moq","4.0.10827"]
 
 (* Directories *)
 let buildDir = @".\Build\"
@@ -58,7 +61,7 @@ Target "Test" (fun _ ->
 
 Target "MergeAssemblies" (fun _ ->
     flavours
-      |> Seq.iter (fun flavour -> 
+      |> Seq.iter (fun (flavour,_) -> 
             let adapter = buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour
             let libs =
                 [adapter
@@ -107,7 +110,7 @@ Target "BuildZip" (fun _ ->
 
 Target "BuildNuGet" (fun _ ->
     flavours
-      |> Seq.iter (fun flavour ->             
+      |> Seq.iter (fun (flavour,flavourVersion) ->             
             let nugetDocsDir = nugetDir + @"docs\"
             let nugetLibDir = nugetDir + @"lib\"
             CleanDirs [nugetDir; nugetLibDir; nugetDocsDir]
@@ -123,6 +126,9 @@ Target "BuildNuGet" (fun _ ->
                     Description = projectDescription       
                     Version = version                        
                     OutputPath = nugetDir
+                    Dependencies = 
+                        ["Machine.Specifications","0.3.0.0"
+                         flavour,flavourVersion]
                     AccessKey = getBuildParamOrDefault "nugetkey" ""
                     Publish = hasBuildParam "nugetkey" })  
                 "machine.fakes.nuspec"

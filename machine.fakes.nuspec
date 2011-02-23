@@ -9,5 +9,6 @@
     <language>en-US</language>
     <summary>@summary@</summary>
     <tags>tdd bdd testing unittest fakes mocks</tags>
-  </metadata>
+    @dependencies@
+  </metadata>  
 </package>
