@@ -47,13 +47,13 @@ Target "BuildApp" (fun _ ->
 )
 
 Target "BuildTest" (fun _ -> 
-    ActivateFinalTarget "DeployTestResults"
     appReferences
         |> MSBuildDebug testDir "Build"
         |> Log "TestBuild-Output: "
 )
 
 Target "Test" (fun _ ->
+    ActivateFinalTarget "DeployTestResults"
     !+ (testDir + "/*.Specs.dll")
       ++ (testDir + "/*.Examples.dll")
         |> Scan
