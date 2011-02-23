@@ -9,14 +9,7 @@ _ReSharper.*
 *~
 *.swp
 NDependOut
-
-/docsBuild
-/build
-/nuget
-/deploy
-/test
-/docs
-/testOutput
+Source/GlobalAssemblyInfo.cs
 /Build
 /Release
 /Documentation
