@@ -148,4 +148,4 @@ Target "Deploy" DoNothing
 "Default" <== ["Deploy"]
 
 // start build
-Run "Default"
+Run <| getBuildParamOrDefault "target" "Default"
