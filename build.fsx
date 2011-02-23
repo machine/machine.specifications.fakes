@@ -46,12 +46,6 @@ Target "BuildApp" (fun _ ->
         |> Log "AppBuild-Output: "
 )
 
-Target "BuildTest" (fun _ -> 
-    appReferences
-        |> MSBuildDebug testDir "Build"
-        |> Log "TestBuild-Output: "
-)
-
 Target "Test" (fun _ ->
     ActivateFinalTarget "DeployTestResults"
     !+ (testDir + "/*.Specs.dll")
@@ -113,13 +107,14 @@ Target "BuildZip" (fun _ ->
 
 Target "BuildNuGet" (fun _ ->
     flavours
-      |> Seq.iter (fun flavour -> 
-            CleanDir nugetDir
-            let nugetDocsDir = nugetDir @@ "docs/"
-            let nugetLibDir = nugetDir @@ "lib/"
+      |> Seq.iter (fun flavour ->             
+            let nugetDocsDir = nugetDir + @"docs\"
+            let nugetLibDir = nugetDir + @"lib\"
+            CleanDirs [nugetDir; nugetLibDir; nugetDocsDir]
         
             XCopy docsDir nugetDocsDir
-            XCopy (buildDir + sprintf "Machine.Fakes.%s.dll" flavour) nugetLibDir
+            [buildDir + sprintf "Machine.Fakes.%s.dll" flavour]
+              |> CopyTo nugetLibDir
 
             NuGet (fun p -> 
                 {p with               
@@ -140,7 +135,7 @@ Target "Deploy" DoNothing
 
 // Dependencies
 "BuildApp" <== ["Clean"]
-"Test" <== ["BuildApp"; "BuildTest"]
+"Test" <== ["BuildApp"]
 "MergeAssemblies"  <== ["Test"]
 "BuildZip" <== ["MergeAssemblies"]
 "ZipDocumentation" <== ["GenerateDocumentation"]
