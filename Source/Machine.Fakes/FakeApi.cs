@@ -116,42 +116,5 @@ namespace Machine.Fakes
 
             return FakeEngineGateway.VerifyBehaviorWasExecuted(fake, func);
         }
-
-        /// <summary>
-        /// Gets an <see cref="IEventRaiser"/> which can be used to raise an event
-        /// on the fake specified via <typeparamref name="TFake"/>.
-        /// </summary>
-        /// <typeparam name="TFake">
-        /// Specifies the type of the fake.
-        /// </typeparam>
-        /// <param name="fake">
-        /// Specifies the fake instance.
-        /// </param>
-        /// <param name="assignement">
-        /// A function specifying the event assignement.
-        /// </param>
-        /// <returns>
-        /// A <see cref="IEventRaiser"/>.
-        /// </returns>
-        /// <remarks>
-        ///     Get a refrence to an <see cref="IEventRaiser"/> like this:
-        ///     <code>
-        ///         var eventRaiser = fake.Event(x => x.PropertyChanged +=null);
-        ///     </code>
-        ///     Use it to raise the event.
-        ///     <code>
-        ///         fake.Event(x => x.PropertyChanged += null)
-        ///             .Raise(this, new PropertyChangedArgs("NoProp")); 
-        ///     </code>
-        /// </remarks>
-        public static IEventRaiser Event<TFake>(
-            this TFake fake, 
-            Action<TFake> assignement) where TFake : class 
-        {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(assignement, "assignement");
-
-            return FakeEngineGateway.CreateEventRaiser(fake, assignement);
-        }
     }
 }

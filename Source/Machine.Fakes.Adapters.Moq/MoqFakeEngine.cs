@@ -10,8 +10,6 @@ namespace Machine.Fakes.Adapters.Moq
     /// </summary>
     public class MoqFakeEngine : IFakeEngine
     {
-        #region IFakeEngine Members
-
         public object CreateFake(Type interfaceType)
         {
             var closedMockType = typeof (Mock<>).MakeGenericType(interfaceType);
@@ -72,16 +70,5 @@ namespace Machine.Fakes.Adapters.Moq
 
             return new MoqMethodCallOccurance<TFake>(mock, func);
         }
-
-        public IEventRaiser CreateEventRaiser<TFake>(
-            TFake fake, 
-            Action<TFake> assignement) where TFake : class
-        {
-            var mock = Mock.Get(fake);
-
-            return new MoqEventRaiser<TFake>(mock, assignement);
-        }
-
-        #endregion
     }
 }

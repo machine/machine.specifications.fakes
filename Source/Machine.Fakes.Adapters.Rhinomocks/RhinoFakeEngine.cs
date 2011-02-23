@@ -6,8 +6,6 @@ namespace Machine.Fakes.Adapters.Rhinomocks
 {
     public class RhinoFakeEngine : IFakeEngine
     {
-        #region IFakeEngine Members
-
         public object CreateFake(Type interfaceType)
         {
             var stub = MockRepository.GenerateStub(interfaceType);
@@ -57,16 +55,5 @@ namespace Machine.Fakes.Adapters.Rhinomocks
 
             return new RhinoMethodCallOccurance<TFake>(fake, compiledFunction);
         }
-
-        public IEventRaiser CreateEventRaiser<TFake>(
-            TFake fake, 
-            Action<TFake> assignement) where TFake : class
-        {
-            var eventRaiser = fake.Stub(assignement).IgnoreArguments().GetEventRaiser();
-
-            return new RhinoEventRaiser(eventRaiser);
-        }
-
-        #endregion
     }
 }

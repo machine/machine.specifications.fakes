@@ -115,25 +115,5 @@ namespace Machine.Fakes
         IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) where TFake : class ;
-
-        /// <summary>
-        /// Gets an <see cref="IEventRaiser"/> which can be used to raise an event
-        /// on the fake specified via <typeparamref name="TFake"/>.
-        /// </summary>
-        /// <typeparam name="TFake">
-        /// Specifies the type of the fake.
-        /// </typeparam>
-        /// <param name="fake">
-        /// Specifies the fake instance.
-        /// </param>
-        /// <param name="assignement">
-        /// A function specifying the event assignement.
-        /// </param>
-        /// <returns>
-        /// A <see cref="IEventRaiser"/>.
-        /// </returns>
-        IEventRaiser CreateEventRaiser<TFake>(
-            TFake fake, 
-            Action<TFake> assignement) where TFake : class;
     }
 }

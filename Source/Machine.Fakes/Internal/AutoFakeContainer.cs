@@ -84,11 +84,6 @@ namespace Machine.Fakes.Internal
 			return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
 		}
 
-		public IEventRaiser CreateEventRaiser<TFake>(TFake fake, Action<TFake> assignement) where TFake : class
-		{
-			return _fakeEngine.CreateEventRaiser(fake, assignement);
-		}
-
 		#endregion
 
 		#region ServiceLocator Members

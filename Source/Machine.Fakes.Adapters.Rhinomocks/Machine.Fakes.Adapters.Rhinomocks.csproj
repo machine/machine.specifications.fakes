@@ -48,7 +48,6 @@
     </Compile>
     <Compile Include="LocalAssemblyInfo.cs" />
     <Compile Include="RhinoCommandOptions.cs" />
-    <Compile Include="RhinoEventRaiser.cs" />
     <Compile Include="RhinoFakeEngine.cs" />
     <Compile Include="RhinoMethodCallOccurance.cs" />
     <Compile Include="RhinoQueryOptions.cs" />

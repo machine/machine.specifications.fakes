@@ -51,10 +51,5 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             
             A.CallTo(callExpression).MustNotHaveHappened();
         }
-
-        public IEventRaiser CreateEventRaiser<TFake>(TFake fake, Action<TFake> assignement) where TFake : class
-        {
-           throw new NotSupportedException("Use FakeItEasy's Raise utility instead");
-        }
     }
 }

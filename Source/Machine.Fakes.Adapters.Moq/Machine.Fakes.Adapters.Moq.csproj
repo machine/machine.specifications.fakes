@@ -48,7 +48,6 @@
     </Compile>
     <Compile Include="LocalAssemblyInfo.cs" />
     <Compile Include="MoqCommandOptions.cs" />
-    <Compile Include="MoqEventRaiser.cs" />
     <Compile Include="MoqFakeEngine.cs" />
     <Compile Include="MoqMethodCallOccurance.cs" />
     <Compile Include="MoqQueryOptions.cs" />
