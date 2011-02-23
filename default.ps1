@@ -10,12 +10,13 @@ properties {
   $sln_file = "$base_dir\Source\Machine.Fakes.sln" 
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
-  $specs_dir = "$base_dir\Specs"
-  $docu_dir = "$base_dir\Documentation"
+  $documentation_base = "$base_dir\Documentation"
+  $specs_dir = "$documentation_base\Specs"
+  $docu_dir = "$documentation_base\Docu"
   $fake_framework = "All"
 } 
 
-task default -depends Specs 
+task default -depends Docu, Specs 
 
 # Removes the build and the release directory
 task Clean { 
@@ -24,12 +25,9 @@ task Clean {
   
   Info "Removing $release_dir"
   remove-item -force -recurse $release_dir -ErrorAction SilentlyContinue 
-  
-  Info "Removing $specs_dir"
-  remove-item -force -recurse $specs_dir -ErrorAction SilentlyContinue 
-  
-  Info "Removing $docu_dir"
-  remove-item -force -recurse $docu_dir -ErrorAction SilentlyContinue
+   
+  Info "Removing $documentation_base"
+  remove-item -force -recurse $documentation_base -ErrorAction SilentlyContinue
 } 
 
 # Initialization of the build 
