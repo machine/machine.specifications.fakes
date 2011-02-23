@@ -14,20 +14,22 @@ namespace Machine.Fakes
     /// The subject for the specification. This is the type that is created by the
     /// specification for you.
     /// </typeparam>
-    public abstract class WithSubject<TSubject> : IFakeAccessor where TSubject : class
+    /// <typeparam name="TFakeEngine">
+    /// Specifies the concrete fake engine that will be used for creating fake instances.
+    /// This must be a class with a parameterless constructor that implements <see cref="IFakeEngine"/>.
+    /// </typeparam>
+    public abstract class WithSubject<TSubject, TFakeEngine> 
+        where TSubject : class
+        where TFakeEngine : IFakeEngine, new()
     {
-        private static WithSubject<TSubject> ExecutingSpec;
-        private readonly List<IBehaviorConfig> BehaviorConfigs = new List<IBehaviorConfig>();
-        private TSubject SpecificationSubject;
-        private readonly AutoFakeContainer<TSubject> Container;
+        private static SpecificationController<TSubject, TFakeEngine> _specificationController;
         
         /// <summary>
-        /// Creates a new instance of the <see cref="WithSubject{TSubject}"/> class.
+        /// Creates a new instance of the <see cref="WithSubject{TSubject, TFakeEngine}"/> class.
         /// </summary>
         protected WithSubject()
         {
-            ExecutingSpec = this;
-            Container = new AutoFakeContainer<TSubject>(GetType());
+            _specificationController = new SpecificationController<TSubject, TFakeEngine>();
         }
 
         /// <summary>
@@ -37,8 +39,8 @@ namespace Machine.Fakes
         /// </summary>
         protected static TSubject Subject
         {
-            get { return ExecutingSpec.SpecificationSubject ?? (ExecutingSpec.SpecificationSubject = ExecutingSpec.Container.CreateTarget()); }
-            set { ExecutingSpec.SpecificationSubject = value; }
+            get { return _specificationController.Subject; }
+            set { _specificationController.Subject = value; }
         }
 
         /// <summary>
@@ -54,7 +56,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TInterfaceType The<TInterfaceType>() where TInterfaceType : class
         {
-            return ExecutingSpec.Container.Get<TInterfaceType>();
+            return _specificationController.The<TInterfaceType>();
         }
 
         /// <summary>
@@ -66,7 +68,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return ExecutingSpec.Container.Stub<TInterfaceType>();
+            return _specificationController.An<TInterfaceType>();
         }
 
         /// <summary>
@@ -77,7 +79,7 @@ namespace Machine.Fakes
         /// <returns>An <see cref = "IList{T}" />.</returns>
         public static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return ExecutingSpec.Container.CreateFakeCollectionOf<TInterfaceType>();
+            return _specificationController.Some<TInterfaceType>();
         }
 
         /// <summary>
@@ -88,7 +90,7 @@ namespace Machine.Fakes
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
         public static void Use<TInterfaceType>(TInterfaceType instance) where TInterfaceType : class
         {
-            ExecutingSpec.Container.Inject(typeof (TInterfaceType), instance);
+            _specificationController.Use(instance);
         }
 
         /// <summary>
@@ -100,9 +102,7 @@ namespace Machine.Fakes
         /// </typeparam>
         protected static TBehaviorConfig With<TBehaviorConfig>() where TBehaviorConfig : IBehaviorConfig, new()
         {
-            var behaviorConfig = new TBehaviorConfig();
-            With(behaviorConfig);
-            return behaviorConfig;
+            return _specificationController.With<TBehaviorConfig>();
         }
 
         /// <summary>
@@ -114,38 +114,9 @@ namespace Machine.Fakes
         /// </param>
         protected static void With(IBehaviorConfig behaviorConfig)
         {
-            Guard.AgainstArgumentNull(behaviorConfig, "behaviorConfig");
-
-            ExecutingSpec.BehaviorConfigs.Add(behaviorConfig);
-
-            behaviorConfig.EstablishContext(ExecutingSpec);
+            _specificationController.With(behaviorConfig);
         }
 
-        TInterfaceType IFakeAccessor.An<TInterfaceType>()
-        {
-            return An<TInterfaceType>();
-        }
-
-        TInterfaceType IFakeAccessor.The<TInterfaceType>()
-        {
-            return The<TInterfaceType>();
-        }
-
-        IList<TInterfaceType> IFakeAccessor.Some<TInterfaceType>()
-        {
-            return Some<TInterfaceType>();
-        }
-
-        void IFakeAccessor.Use<TInterfaceType>(TInterfaceType instance)
-        {
-            Use(instance);
-        }
-
-
-        Cleanup after = () =>
-        {
-            ExecutingSpec.BehaviorConfigs.ForEach(x => x.CleanUp(Subject));
-            ExecutingSpec = null;
-        };
+        Cleanup after = () => _specificationController.Dispose();
     }
 }

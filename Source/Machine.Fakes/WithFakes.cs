@@ -5,19 +5,23 @@ using Machine.Specifications;
 namespace Machine.Fakes
 {
     /// <summary>
-    /// Base class for the simpler cases than <see cref="WithSubject{TSubject}"/>. 
+    /// Base class for the simpler cases than <see cref="WithSubject{TSubject, TFakeEngine}"/>. 
     /// This class only contains the shortcuts for creating fakes via "An" and "Some".
     /// </summary>
-    public abstract class WithFakes  
+    /// <typeparam name="TFakeEngine">
+    /// Specifies the concrete fake engine that will be used for creating fake instances.
+    /// This must be a class with a parameterless constructor that implements <see cref="IFakeEngine"/>.
+    /// </typeparam>
+    public abstract class WithFakes<TFakeEngine> where TFakeEngine : IFakeEngine, new()  
     {
-        private static IFakeEngine _fakeEngine;
-
+        private static SpecificationController<object, TFakeEngine> _specificationController;
+        
         /// <summary>
-        /// Creates a new instance of the <see cref="WithFakes"/> class.
+        /// Creates a new instance of the <see cref="WithFakes{TFakeEngine}"/> class.
         /// </summary>
         protected WithFakes()
         {
-            _fakeEngine = FakeEngineInstaller.InstallFor(GetType());
+            _specificationController = new SpecificationController<object, TFakeEngine>();
         }
 
         /// <summary>
@@ -29,7 +33,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return _fakeEngine.Stub<TInterfaceType>();
+            return _specificationController.An<TInterfaceType>();
         }
 
         /// <summary>
@@ -40,12 +44,9 @@ namespace Machine.Fakes
         /// <returns>An <see cref = "IList{T}" />.</returns>
         public static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return _fakeEngine.CreateFakeCollectionOf<TInterfaceType>();
+            return _specificationController.Some<TInterfaceType>();
         }
 
-        Cleanup after = () =>
-        {
-            _fakeEngine = null;
-        };
+        Cleanup after = () => _specificationController.Dispose();
     }
 }

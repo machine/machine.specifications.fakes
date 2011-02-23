@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Machine.Fakes;
-using Machine.Fakes.Adapters.Rhinomocks;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -22,7 +20,7 @@ using Machine.Fakes.Adapters.Rhinomocks;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("891368f7-f443-43b4-80d4-a56fd2197431")]
+[assembly: Guid("b788fbf9-79b1-40a6-acb7-a0c51aa4958d")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -5,9 +5,9 @@ using StructureMap;
 
 namespace Machine.Fakes.Internal
 {
-	internal class TargetCreationException : SpecificationException
+	internal class SubjectCreationException : SpecificationException
 	{
-		public TargetCreationException(
+		public SubjectCreationException(
 			Type targetType, 
 			StructureMapException structureMapException) : base(Format(targetType, structureMapException))
 		{

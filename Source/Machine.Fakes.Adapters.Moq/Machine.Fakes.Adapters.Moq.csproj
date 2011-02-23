@@ -46,11 +46,12 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="LocalAssemblyInfo.cs" />
     <Compile Include="MoqCommandOptions.cs" />
     <Compile Include="MoqFakeEngine.cs" />
     <Compile Include="MoqMethodCallOccurance.cs" />
     <Compile Include="MoqQueryOptions.cs" />
+    <Compile Include="WithFakes.cs" />
+    <Compile Include="WithSubject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\machine.fakes\Machine.Fakes.csproj">
