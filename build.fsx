@@ -15,12 +15,12 @@ let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash
 let flavours = ["RhinoMocks"; "FakeItEasy"; "Moq"]
 
 (* Directories *)
-let buildDir = @".\build\"
-let docsDir = @".\docs\"
-let deployDir = @".\deploy\"
-let testDir = @".\test\"
-let testOutputDir = @".\testOutput\"
-let nugetDir = @".\nuget\" 
+let buildDir = @".\Build\"
+let docsDir = buildDir + @"Documentation\"
+let testOutputDir = buildDir + @"Specs\"
+let nugetDir = buildDir + @"NuGet\" 
+let testDir = buildDir
+let deployDir = @".\Release\"
 let targetPlatformDir = @"C:\Windows\Microsoft.NET\Framework64\v4.0.30319"
 
 (* files *)
