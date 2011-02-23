@@ -72,7 +72,7 @@ task Specs -depends Compile {
   Info "Creating $specs_dir"
   new-item $specs_dir -itemType directory 
   
-  exec { & $tools_dir\MSpec\mspec.exe --html $specs_dir $build_dir\Machine.Fakes.Adapters.Specs.dll }
+  exec { & $tools_dir\MSpec\mspec.exe --html $specs_dir $build_dir\Machine.Fakes.Specs.dll $build_dir\Machine.Fakes.Adapters.Specs.dll }
 }
 
 # Merges the assemblies together into a bundle that is configured for rhino.mocks usage
