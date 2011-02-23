@@ -4,7 +4,7 @@ open Fake
 open Fake.Git
 
 (* properties *)
-let authors = ["Björn Rochel"]
+let authors = ["Bjoern Rochel"]
 let projectName = "Machine.Fakes"
 let projectDescription = "Generic faking capabilites on top of Machine.Specifications"
 let copyright = "Copyright - Machine.Fakes 2011"
