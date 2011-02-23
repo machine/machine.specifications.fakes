@@ -8,6 +8,6 @@
     <owners>@authors@</owners>
     <language>en-US</language>
     <summary>@summary@</summary>
-    <tags>tdd bdd testing unittest</tags>
+    <tags>tdd bdd testing unittest fakes mocks</tags>
   </metadata>
 </package>
