@@ -59,19 +59,33 @@ Target "Test" (fun _ ->
                         HtmlOutputDir = testOutputDir})
 )
 
-Target "MergeAssemblies" (fun _ ->
+
+Target "MergeStructureMap" (fun _ ->
+    Rename (buildDir + "Machine.Fakes.Partial.dll") (buildDir + "Machine.Fakes.dll")
+
+    ILMerge 
+        (fun p -> 
+            {p with 
+                Libraries =
+                    [buildDir + "StructureMap.dll"
+                     buildDir + "StructureMap.AutoMocking.dll"]
+                Internalize = InternalizeExcept "ILMergeExcludes.txt"
+                TargetPlatform = sprintf @"v4,%s" targetPlatformDir})
+
+        (buildDir + "Machine.Fakes.dll")
+        (buildDir + "Machine.Fakes.Partial.dll")
+)
+
+
+Target "MergeFlavours" (fun _ ->
     flavours
       |> Seq.iter (fun (flavour,_) -> 
             let adapter = buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour
-            let libs =
-                [adapter
-                 buildDir + "StructureMap.dll"
-                 buildDir + "StructureMap.AutoMocking.dll"]
 
             ILMerge 
                 (fun p -> 
                     {p with 
-                        Libraries = libs
+                        Libraries = [adapter]
                         AttributeFile = adapter
                         Internalize = InternalizeExcept "ILMergeExcludes.txt"
                         TargetPlatform = sprintf @"v4,%s" targetPlatformDir})
@@ -143,8 +157,9 @@ Target "Deploy" DoNothing
 // Dependencies
 "BuildApp" <== ["Clean"]
 "Test" <== ["BuildApp"]
-"MergeAssemblies"  <== ["Test"]
-"BuildZip" <== ["MergeAssemblies"]
+"MergeStructureMap" <== ["Test"]
+"MergeFlavours"  <== ["MergeStructureMap"]
+"BuildZip" <== ["MergeFlavours"]
 "ZipDocumentation" <== ["GenerateDocumentation"]
 "Deploy" <== ["BuildZip"; "ZipDocumentation"; "BuildNuGet"]
 "Default" <== ["Deploy"]
