@@ -8,6 +8,8 @@
     <owners>@authors@</owners>
     <language>en-US</language>
     <summary>@summary@</summary>
+    <projectUrl>https://github.com/BjRo/Machine.Fakes</projectUrl>
+    <licenseUrl>https://github.com/BjRo/Machine.Fakes/raw/dev/License.txt</licenseUrl>
     <tags>tdd bdd testing unittest fakes mocks</tags>
     @dependencies@
   </metadata>  
