@@ -158,7 +158,7 @@ Target "BuildNuGetFlavours" (fun _ ->
                 {p with               
                     Authors = authors
                     Project = sprintf "%s.%s" projectName flavour
-                    Description = projectDescription       
+                    Description = sprintf "%s - Bundeled with %s %s" projectDescription flavour flavourVersion
                     Version = version                        
                     OutputPath = nugetDir
                     Dependencies = 
