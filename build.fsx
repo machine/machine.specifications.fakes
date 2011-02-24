@@ -74,6 +74,15 @@ Target "MergeStructureMap" (fun _ ->
 
         (buildDir + "Machine.Fakes.dll")
         (buildDir + "Machine.Fakes.Partial.dll")
+
+    ["StructureMap.dll";
+     "StructureMap.pdb";
+     "StructureMap.xml"; 
+     "StructureMap.AutoMocking.dll"; 
+     "StructureMap.AutoMocking.xml"; 
+     "Machine.Fakes.Partial.dll"]
+        |> Seq.map (fun a -> buildDir + a) 
+        |> DeleteFiles
 )
 
 
@@ -119,6 +128,7 @@ Target "BuildZip" (fun _ ->
     !+ (buildDir + "/**/*.*")     
       -- "*.zip"
         |> Scan
+        |> Seq.filter(fun fn -> not (fn.Contains "Specs"))
         |> Zip buildDir (deployDir + sprintf "%s-%s.zip" projectName version)
 )
 
