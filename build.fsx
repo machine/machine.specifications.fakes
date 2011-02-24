@@ -127,8 +127,8 @@ Target "ZipDocumentation" (fun _ ->
 Target "BuildZip" (fun _ -> 
     !+ (buildDir + "/**/*.*")     
       -- "*.zip"
+      -- "**/*.Specs.*"
         |> Scan
-        |> Seq.filter(fun fn -> not (fn.Contains "Specs"))
         |> Zip buildDir (deployDir + sprintf "%s-%s.zip" projectName version)
 )
 
