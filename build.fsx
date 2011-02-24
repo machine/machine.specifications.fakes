@@ -8,7 +8,13 @@ let authors = ["Bjoern Rochel"]
 let projectName = "Machine.Fakes"
 let projectDescription = "Generic faking capabilites on top of Machine.Specifications"
 let copyright = "Copyright - Machine.Fakes 2011"
-let version = if isLocalBuild then getLastTag() else buildVersion
+let versionFile = "version.txt"
+let version = 
+    if not isLocalBuild then ReadFileAsString versionFile else
+    let tag = getLastTag()
+    ReplaceFile versionFile tag
+    tag
+
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
 
 (* flavours *)
