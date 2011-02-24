@@ -10,7 +10,7 @@ let projectDescription = "Generic faking capabilites on top of Machine.Specifica
 let copyright = "Copyright - Machine.Fakes 2011"
 let versionFile = "version.txt"
 let version = 
-    if not isLocalBuild then ReadFileAsString versionFile else
+    if not isLocalBuild then ReadFile versionFile |> Seq.head else
     let tag = getLastTag()
     ReplaceFile versionFile tag
     tag
