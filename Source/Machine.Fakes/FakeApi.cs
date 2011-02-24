@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using Machine.Fakes.Internal;
-using Machine.Fakes.Utils;
+using Machine.Fakes.Sdk;
 
 namespace Machine.Fakes
 {

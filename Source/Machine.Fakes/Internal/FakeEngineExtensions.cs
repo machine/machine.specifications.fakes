@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Machine.Fakes.Utils;
+using Machine.Fakes.Sdk;
 
 namespace Machine.Fakes.Internal
 {

@@ -57,14 +57,14 @@
     </Compile>
     <Compile Include="Internal\AutoFakeContainer.cs" />
     <Compile Include="BehaviorConfigBase.cs" />
-    <Compile Include="Internal\SpecificationController.cs" />
+    <Compile Include="Sdk\SpecificationController.cs" />
     <Compile Include="LocalAssemblyInfo.cs" />
     <Compile Include="WithFakes.cs" />
     <Compile Include="Internal\FakeEngineGateway.cs" />
-    <Compile Include="Utils\EnumerableExtensions.cs" />
+    <Compile Include="Sdk\EnumerableExtensions.cs" />
     <Compile Include="FakeApi.cs" />
     <Compile Include="Internal\FakeEngineExtensions.cs" />
-    <Compile Include="Utils\Guard.cs" />
+    <Compile Include="Sdk\Guard.cs" />
     <Compile Include="IBehaviorConfig.cs" />
     <Compile Include="ICommandOptions.cs" />
     <Compile Include="IFakeAccessor.cs" />

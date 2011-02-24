@@ -1,5 +1,5 @@
 ﻿using System;
-using Machine.Fakes.Utils;
+using Machine.Fakes.Sdk;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
 

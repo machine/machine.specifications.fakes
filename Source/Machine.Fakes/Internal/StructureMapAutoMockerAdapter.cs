@@ -1,4 +1,4 @@
-using Machine.Fakes.Utils;
+using Machine.Fakes.Sdk;
 using StructureMap.AutoMocking;
 
 namespace Machine.Fakes.Internal

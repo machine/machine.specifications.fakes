@@ -1,5 +1,5 @@
 ﻿using System;
-using Machine.Fakes.Utils;
+using Machine.Fakes.Sdk;
 using Moq.Language.Flow;
 
 namespace Machine.Fakes.Adapters.Moq

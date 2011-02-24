@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Machine.Fakes.Internal;
-using Machine.Fakes.Utils;
+using Machine.Fakes.Sdk;
 using Machine.Specifications;
 
 namespace Machine.Fakes

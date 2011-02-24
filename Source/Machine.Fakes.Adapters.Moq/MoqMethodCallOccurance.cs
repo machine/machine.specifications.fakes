@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Machine.Fakes.Sdk;
 using Moq;
-using Machine.Fakes.Utils;
 
 namespace Machine.Fakes.Adapters.Moq
 {

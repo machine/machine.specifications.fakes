@@ -1,5 +1,6 @@
 using System;
 using Machine.Fakes.Internal;
+using Machine.Fakes.Sdk;
 using Machine.Fakes.Specs.TestClasses;
 using Machine.Specifications;
 

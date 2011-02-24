@@ -1,6 +1,6 @@
 using System;
 
-namespace Machine.Fakes.Utils
+namespace Machine.Fakes.Sdk
 {
     /// <summary>
     /// Container class for (as it name implies) guard clauses.
