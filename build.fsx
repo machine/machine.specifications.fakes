@@ -25,6 +25,8 @@ let nugetDir = buildDir + @"NuGet\"
 let testDir = buildDir
 let deployDir = @".\Release\"
 let targetPlatformDir = @"C:\Windows\Microsoft.NET\Framework64\v4.0.30319"
+let nugetDocsDir = nugetDir + @"docs\"
+let nugetLibDir = nugetDir + @"lib\"
 
 (* files *)
 let appReferences = !! @".\Source\**\*.csproj"
@@ -85,24 +87,6 @@ Target "MergeStructureMap" (fun _ ->
         |> DeleteFiles
 )
 
-
-Target "MergeFlavours" (fun _ ->
-    flavours
-      |> Seq.iter (fun (flavour,_) -> 
-            let adapter = buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour
-
-            ILMerge 
-                (fun p -> 
-                    {p with 
-                        Libraries = [adapter]
-                        AttributeFile = adapter
-                        Internalize = InternalizeExcept "ILMergeExcludes.txt"
-                        TargetPlatform = sprintf @"v4,%s" targetPlatformDir})
-
-                (buildDir + sprintf "Machine.Fakes.%s.dll" flavour)
-                (buildDir + "Machine.Fakes.dll"))
-)
-
 FinalTarget "DeployTestResults" (fun () ->
     !+ (testOutputDir + "\**\*.*") 
       |> Scan
@@ -133,14 +117,35 @@ Target "BuildZip" (fun _ ->
 )
 
 Target "BuildNuGet" (fun _ ->
+    CleanDirs [nugetDir; nugetLibDir; nugetDocsDir]
+        
+    XCopy docsDir nugetDocsDir
+    [buildDir + "Machine.Fakes.dll"]
+        |> CopyTo nugetLibDir
+
+    NuGet (fun p -> 
+        {p with               
+            Authors = authors
+            Project = projectName
+            Description = projectDescription       
+            Version = version                        
+            OutputPath = nugetDir
+            Dependencies = ["Machine.Specifications","0.3.0.0"]
+            AccessKey = getBuildParamOrDefault "nugetkey" ""
+            Publish = hasBuildParam "nugetkey" })
+        "machine.fakes.nuspec"
+
+    [nugetDir + sprintf "Machine.Fakes.%s.nupkg" version]
+        |> CopyTo deployDir
+)
+
+Target "BuildNuGetFlavours" (fun _ ->
     flavours
-      |> Seq.iter (fun (flavour,flavourVersion) ->             
-            let nugetDocsDir = nugetDir + @"docs\"
-            let nugetLibDir = nugetDir + @"lib\"
+      |> Seq.iter (fun (flavour,flavourVersion) ->
             CleanDirs [nugetDir; nugetLibDir; nugetDocsDir]
         
             XCopy docsDir nugetDocsDir
-            [buildDir + sprintf "Machine.Fakes.%s.dll" flavour]
+            [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour]
               |> CopyTo nugetLibDir
 
             NuGet (fun p -> 
@@ -151,7 +156,7 @@ Target "BuildNuGet" (fun _ ->
                     Version = version                        
                     OutputPath = nugetDir
                     Dependencies = 
-                        ["Machine.Specifications","0.3.0.0"
+                        ["Machine.Fakes",version
                          flavour,flavourVersion]
                     AccessKey = getBuildParamOrDefault "nugetkey" ""
                     Publish = hasBuildParam "nugetkey" })  
@@ -168,10 +173,10 @@ Target "Deploy" DoNothing
 "BuildApp" <== ["Clean"]
 "Test" <== ["BuildApp"]
 "MergeStructureMap" <== ["Test"]
-"MergeFlavours"  <== ["MergeStructureMap"]
-"BuildZip" <== ["MergeFlavours"]
+"BuildZip" <== ["MergeStructureMap"]
 "ZipDocumentation" <== ["GenerateDocumentation"]
-"Deploy" <== ["BuildZip"; "ZipDocumentation"; "BuildNuGet"]
+"BuildNuGetFlavours" <== ["BuildNuGet"]
+"Deploy" <== ["BuildZip"; "ZipDocumentation"; "BuildNuGetFlavours"]
 "Default" <== ["Deploy"]
 
 // start build
