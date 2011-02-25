@@ -1,7 +1,10 @@
 #I "tools/FAKE"
 #r "FakeLib.dll"
+
 open Fake
 open Fake.Git
+open System.Linq
+open System.Text.RegularExpressions
 
 (* properties *)
 let authors = ["Bjoern Rochel"]
@@ -10,10 +13,16 @@ let projectDescription = "Generic faking capabilites on top of Machine.Specifica
 let copyright = "Copyright - Machine.Fakes 2011"
 let versionFile = "version.txt"
 let version = 
-    if not isLocalBuild then ReadFile versionFile |> Seq.head else
-    let tag = getLastTag()
-    ReplaceFile versionFile tag
-    tag
+    // version is set to the last tag retrieved from GitHub Rest API
+    let url = "http://github.com/api/v2/json/repos/show/BjRo/Machine.Fakes/tags"
+    tracefn "Downloading tags from %s" url
+    let tagsFile = REST.ExecuteGetCommand null null url
+    let r = new Regex("[,][\"]([^\"]*)[\"]")
+    let matches = [for m in r.Matches tagsFile -> m.Groups.[1]]
+    matches
+      |> List.rev
+      |> List.head
+      |> fun m -> m.Value
 
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
 
