@@ -1917,6 +1917,12 @@
  Creates a new NuGet package   
 </summary>
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="M:Fake.NuGetHelper.NuGetDefaults">
 <summary>
  NuGet default params  
