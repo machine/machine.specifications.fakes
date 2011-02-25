@@ -90,3 +90,49 @@ The generic type parameter (*) tells Machine.Fakes what type to create for the s
 You can access the created instance through the lazy "Subject" property (***). The actual subject is created on the first read access to this property. If you want't to modify the subject when the context is established, go ahead, you can do so. You can even replace the subject by hand if case the automocking approach falls short by setting the property by yourself.
 
 Having the subject created for us is a good thing but how do we access the injected fake without having a reference to it? Thats exactly the purpose of the The<<TFake>>() method (**) which gives access to the injected dependency.
+
+### WithSubject<<TSubject>> and IBehaviorConfig
+
+Re-use in context / specification is an interesting topic. In case you've already used a test case class per fixture setup (like Machine.Specifications does) for a while I'm pretty sure you've stumpled on this too. 
+
+Very often we try to accomplish re-use in classes by using inheritance and course so you can do so with Machine.Fakes. However in .NET you can only inherit once and inheritance may not be the weapon of choice for more cross cutting aspects like for instance time (the ISystemClock used in the example above). Machine.Fakes also offers a composition model for specifications, the IBehaviorConfigs.
+
+    public interface IBehaviorConfig
+    {
+        void EstablishContext(IFakeAccessor fakeAccessor);
+        void CleanUp(object subject);
+    }
+
+IBehaviorConfig is a simple interface that mimics the setup and teardown phases of the context / specification. It gives the option of accessing all the fakes in a specification from the outside. There is a base class in Machine.Fakes for this interface, so that you only have to override the method you want. Applying an IBehaviorConfig in the context of the time might look like this:
+
+    public class CurrentTime : BehaviorConfigBase
+    {
+        public DateTime Time { get; set; }
+
+        public CurrentTime(DateTime time)
+        {
+            Time = time;
+        }
+
+        public override void EstablishContext(IFakeAccessor fakeAccessor)
+        {
+            fakeAccessor.The<ISystemClock>()
+                .WhenToldTo(x => x.CurrentTime)
+                .Return(Time);
+        }
+    }
+
+This is the "Mood" example now using a behavior configuration instead of configuring the fake by itself.
+
+    public class Given_the_current_day_is_monday_when_identifying_my_mood : WithSubject<MoodIdentifier>
+    {
+        static string _mood;
+
+        Establish context = () => With(new CurrentTime(new DateTime(2011, 2, 14)));
+
+        Because of = () => _mood = Subject.IdentifyMood();
+
+        It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
+    }
+
+
