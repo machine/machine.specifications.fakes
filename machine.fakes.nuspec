@@ -10,8 +10,9 @@ Machine.Fakes attempts to simplify the usage of such frameworks on top of Machin
     <owners>@authors@</owners>
     <language>en-US</language>
     <summary>@summary@</summary>
-    <projectUrl>https://github.com/BjRo/Machine.Fakes</projectUrl>
-    <licenseUrl>https://github.com/BjRo/Machine.Fakes/raw/dev/License.txt</licenseUrl>
+    <iconUrl>http://github.com/BjRo/Machine.Fakes/raw/dev/machine.fakes.png</iconUrl>
+    <projectUrl>http://github.com/BjRo/Machine.Fakes</projectUrl>
+    <licenseUrl>http://github.com/BjRo/Machine.Fakes/raw/dev/License.txt</licenseUrl>
     <tags>tdd bdd testing unittest fakes mocks</tags>
     @dependencies@
   </metadata>  
