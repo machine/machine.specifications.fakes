@@ -34,11 +34,11 @@ into the package management console and all necessary depedencies including Fake
 
 ## How to use it
 
-The core part of Machine.Fakes only consists of two classes: WithFakes and WithSubject<TSubject>. 
+The core part of Machine.Fakes only consists of two classes: WithFakes and WithSubject<<TSubject>>. 
 
 ### WithFakes
 
-Let's take a look at the simpler one first (WithFakes).By deriving from this class you can use the An<<TFake>>() and Some<<TFake>>() (*) methods for creating fakes as well as the Extensionmethods based API for setting up the behavior (**). The WithFakes class only provides the basic fake framework abstraction.
+Let's take a look at the simpler one first.By deriving from this class you can use the An<<TFake>>() and Some<<TFake>>() (*) methods for creating fakes as well as the Extensionmethods based API for setting up the behavior (**). The WithFakes class only provides the basic fake framework abstraction.
 
 
     public class Given_the_current_day_is_monday_when_identifying_my_mood : WithFakes
@@ -65,7 +65,7 @@ Let's take a look at the simpler one first (WithFakes).By deriving from this cla
 
 ### WithSubject<<TSubject>>
 
-Do we really need to create the subject of the specification by hand? Can we make it even more simpler? Yes, by introducing the concept of an AutoMockingContainer to the specification. That's exactly what WithSubject<TSubject> does. Here's the same example using WithSubject.
+Do we really need to create the subject of the specification by hand? Can we make it even more simpler? Yes, by introducing the concept of an AutoMockingContainer to the specification. That's exactly what WithSubject<TSubject> does. Here's a modified example.
 
     public class Given_the_current_day_is_monday_when_identifying_my_mood : WithSubject<MoodIdentifier> (*)
     {
@@ -95,7 +95,7 @@ Having the subject created for us is a good thing but how do we access the injec
 
 Re-use in context / specification is an interesting topic. In case you've already used a test case class per fixture setup (like Machine.Specifications does) for a while I'm pretty sure you've stumpled on this too. 
 
-Very often we try to accomplish re-use in classes by using inheritance and course so you can do so with Machine.Fakes. However in .NET you can only inherit once and inheritance may not be the weapon of choice for more cross cutting aspects like for instance time (the ISystemClock used in the example above). Machine.Fakes also offers a composition model for specifications, the IBehaviorConfigs.
+Very often we try to accomplish re-use in classes by using inheritance and of course you can do so with Machine.Fakes. However in .NET you can only inherit once and inheritance may not be the weapon of choice for more cross cutting aspects like for instance time (the ISystemClock used in the example above). Machine.Fakes also offers a composition model for specifications, the IBehaviorConfigs.
 
     public interface IBehaviorConfig
     {
@@ -103,7 +103,7 @@ Very often we try to accomplish re-use in classes by using inheritance and cours
         void CleanUp(object subject);
     }
 
-IBehaviorConfig is a simple interface that mimics the setup and teardown phases of the context / specification. It gives the option of accessing all the fakes in a specification from the outside. There is a base class in Machine.Fakes for this interface, so that you only have to override the method you want. Applying an IBehaviorConfig in the context of the time might look like this:
+IBehaviorConfig is a simple interface that mimics the setup and teardown phases of the context / specification. It currently gives the  option of accessing all the fakes in a specification from the outside and cleaning up the subject after a specification. There is a base class in Machine.Fakes for this interface, so that you only have to override the method you want. If you want to use behavior configuration a safe option is to use it by deriving from BehaviorConfigBase because we might add more hooks to IBehaviorConfig at a later point in time. In the context of the time might look like this:
 
     public class CurrentTime : BehaviorConfigBase
     {
