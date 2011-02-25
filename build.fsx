@@ -16,12 +16,11 @@ let version =
     let url = "http://github.com/api/v2/json/repos/show/BjRo/Machine.Fakes/tags"
     tracefn "Downloading tags from %s" url
     let tagsFile = REST.ExecuteGetCommand null null url
-    let r = new Regex("[,][\"]([^\"]*)[\"]")
-    let matches = [for m in r.Matches tagsFile -> m.Groups.[1]]
-    matches
-      |> List.rev
-      |> List.head
-      |> fun m -> m.Value
+    let r = new Regex("[,{][\"]([^\"]*)[\"]")
+    [for m in r.Matches tagsFile -> m.Groups.[1]]
+        |> List.map (fun m -> m.Value)
+        |> List.filter ((<>) "tags")
+        |> List.max
 
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
 
