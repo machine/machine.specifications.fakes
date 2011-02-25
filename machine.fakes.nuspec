@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <description>@description@</description>
+    <description> 
+Machine.Fakes attempts to simplify the usage of such frameworks on top of Machine.Specifications by helping to reduce a lot of the typical fake framwork related clutter code in specifications. If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. @description@
+    </description>
     <id>@project@</id>
     <version>@build.number@</version>
     <authors>@authors@</authors>

@@ -9,7 +9,6 @@ open System.Text.RegularExpressions
 (* properties *)
 let authors = ["Bjoern Rochel"]
 let projectName = "Machine.Fakes"
-let projectDescription = "Generic faking capabilites on top of Machine.Specifications"
 let copyright = "Copyright - Machine.Fakes 2011"
 let versionFile = "version.txt"
 let version = 
@@ -56,7 +55,7 @@ Target "BuildApp" (fun _ ->
             CodeLanguage = CSharp;
             AssemblyVersion = version;
             AssemblyTitle = title;
-            AssemblyDescription = projectDescription;
+            AssemblyDescription = "An integration layer for fake frameworks on top of MSpec";
             AssemblyCopyright = copyright;
             Guid = "3745F3DA-6ABB-4C58-923D-B09E4A04688F";
             OutputFileName = @".\Source\GlobalAssemblyInfo.cs"})                      
@@ -142,7 +141,6 @@ Target "BuildNuGet" (fun _ ->
         {p with               
             Authors = authors
             Project = projectName
-            Description = projectDescription       
             Version = version                        
             OutputPath = nugetDir
             Dependencies = ["Machine.Specifications","0.3.0.0"]
@@ -167,7 +165,7 @@ Target "BuildNuGetFlavours" (fun _ ->
                 {p with               
                     Authors = authors
                     Project = sprintf "%s.%s" projectName flavour
-                    Description = sprintf "%s - Bundeled with %s %s" projectDescription flavour flavourVersion
+                    Description = sprintf " This is the adapter for %s %s" flavour flavourVersion
                     Version = version                        
                     OutputPath = nugetDir
                     Dependencies = 
