@@ -38,7 +38,7 @@ The core part of Machine.Fakes only consists of two classes: WithFakes and WithS
 
 ### WithFakes
 
-Let's take a look at the simpler one first (WithFakes).By deriving from this class you can use the An<TFake>() and Some<TFake>() (*) methods for creating fakes as well as the Extensionmethods based API for setting up the behavior (**). The WithFakes class only provides the basic fake framework abstraction.
+Let's take a look at the simpler one first (WithFakes).By deriving from this class you can use the An<<TFake>>() and Some<<TFake>>() (*) methods for creating fakes as well as the Extensionmethods based API for setting up the behavior (**). The WithFakes class only provides the basic fake framework abstraction.
 
 
     public class Given_the_current_day_is_monday_when_identifying_my_mood : WithFakes
@@ -63,7 +63,7 @@ Let's take a look at the simpler one first (WithFakes).By deriving from this cla
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
 
-### With Subject<TSubject>
+### WithSubject<<TSubject>>
 
 Do we really need to create the subject of the specification by hand? Can we make it even more simpler? Yes, by introducing the concept of an AutoMockingContainer to the specification. That's exactly what WithSubject<TSubject> does. Here's the same example using WithSubject.
 
@@ -89,4 +89,4 @@ The generic type parameter (*) tells Machine.Fakes what type to create for the s
 
 You can access the created instance through the lazy "Subject" property (***). The actual subject is created on the first read access to this property. If you want't to modify the subject when the context is established, go ahead, you can do so. You can even replace the subject by hand if case the automocking approach falls short by setting the property by yourself.
 
-Having the subject created for us is a good thing but how do we access the injected fake without having a reference to it? Thats exactly the purpose of the The<TFake>() method (**) which gives access to the injected dependency.
+Having the subject created for us is a good thing but how do we access the injected fake without having a reference to it? Thats exactly the purpose of the The<<TFake>>() method (**) which gives access to the injected dependency.
