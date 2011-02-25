@@ -1,8 +1,8 @@
 # What is Machine.Fakes ?
 
-Machine.Fakes is little framework build on top of Machine.Specifications that can best be described as an extended integration layer between Machine.Specifications and different Mock/Fake/Substitute/"However you call them now" frameworks. At the moment of writing I prever the term "Fake". (What a surprise judging from the name of this project ;-))
+Machine.Fakes is little framework build on top of Machine.Specifications that can best be described as an extended integration layer between Machine.Specifications and different Mock/Fake/Substitute/"However you call them now" frameworks. At the moment of writing I prefer the term "Fake". (What a surprise judging from the name of this project ;-))
 
-Machine.Fakes attempts to simplify the usage of such fake frameworks on top of MSpec by helping to reduce a lot of the typical fake framwork related clutter code in specifications. 
+Machine.Fakes attempts to simplify the usage of such fake frameworks on top of MSpec by helping to reduce a lot of the typical fake framework related clutter code in specifications. 
 
 If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. 
 
@@ -15,7 +15,7 @@ Many credits for the ideas incorporated in this framework go to Jean Paul Boodho
 * Push your changes to your fork
 * Send me a pull request
 
-# How to get startet
+# How to get started
 
 ## Building Machine.Fakes from source
 
@@ -23,11 +23,11 @@ Just download the repository from github and run the build.cmd. The build of Mac
 
 ## Getting Machine.Fakes via the NuGet package manager
 
-If you've got NuGet installed on your machine it gets even easier. Currently there're 4 packages available on NuGet. These are the core framework and the different adapters for Rhino.Mocks, MOQ and FakeIteasy. If you want to use Machine.Fakes for example with FakeItEasy just go ahead and type 
+If you've got NuGet installed on your machine it gets even easier. Currently there are 4 packages available on NuGet. These are the core framework and the different adapters for Rhino.Mocks, MOQ and FakeItEasy. If you want to use Machine.Fakes for example with FakeItEasy just go ahead and type 
 
         install-package Machine.Fakes.FakeItEasy
 
-into the package management console and all necessary depedencies including FakeItEasy itself will be downloaded to your machine. The othe alternatives are
+into the package management console and all necessary dependencies including FakeItEasy itself will be downloaded to your machine. The other alternatives are
 
          install-package Machine.Fakes.RhinoMocks
          install-package Machine.Fakes.Moq
@@ -38,7 +38,7 @@ The core part of Machine.Fakes only consists of two classes: WithFakes and WithS
 
 ### WithFakes
 
-Let's take a look at the simpler one first.By deriving from this class you can use the An<<TFake>>() and Some<<TFake>>() (*) methods for creating fakes as well as the Extensionmethods based API for setting up the behavior (**). The WithFakes class only provides the basic fake framework abstraction.
+Let's take a look at the simpler one first. By deriving from this class you can use the An<<TFake>>() and Some<<TFake>>() (*) methods for creating fakes as well as the extension methods based API for setting up the behavior (**). The WithFakes class only provides the basic fake framework abstraction.
 
 
     public class Given_the_current_day_is_monday_when_identifying_my_mood : WithFakes
@@ -85,15 +85,15 @@ Do we really need to create the subject of the specification by hand? Can we mak
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
 
-The generic type parameter (*) tells Machine.Fakes what type to create for the specification. Each interface or abstract base class dependency in the constructor of the type specified there will be filled automatically by the configured fake framework. Dependency Injection with fakes so to speak. 
+The generic type parameter (*) tells Machine.Fakes what type to create for the specification. Each interface or abstract base class dependency in the constructor of the type will be filled automatically by the configured fake framework. Dependency Injection with fakes so to speak. 
 
-You can access the created instance through the lazy "Subject" property (***). The actual subject is created on the first read access to this property. If you want't to modify the subject when the context is established, go ahead, you can do so. You can even replace the subject by hand if case the automocking approach falls short by setting the property by yourself.
+You can access the created instance through the lazy "Subject" property (***). The actual subject is created on the first read access to this property. If you want to modify the subject when the context is established, go ahead, you can do so. You can even replace the subject by hand in case the automocking approach falls short.
 
-Having the subject created for us is a good thing but how do we access the injected fake without having a reference to it? Thats exactly the purpose of the The<<TFake>>() method (**) which gives access to the injected dependency.
+Having the subject created for us is a good thing but how do we access the injected fake without having a reference to it? That's exactly the purpose of the The<<TFake>>() method (**) which gives access to the injected dependency.
 
 ### WithSubject<<TSubject>> and IBehaviorConfig
 
-Re-use in context / specification is an interesting topic. In case you've already used a test case class per fixture setup (like Machine.Specifications does) for a while I'm pretty sure you've stumpled on this too. 
+Re-use in context / specification is an interesting topic. In case you've already used a test case class per fixture setup (like Machine.Specifications does) then I'm pretty sure you've stumpled on this too. 
 
 Very often we try to accomplish re-use in classes by using inheritance and of course you can do so with Machine.Fakes. However in .NET you can only inherit once and inheritance may not be the weapon of choice for more cross cutting aspects like for instance time (the ISystemClock used in the example above). Machine.Fakes also offers a composition model for specifications, the IBehaviorConfigs.
 
@@ -103,7 +103,7 @@ Very often we try to accomplish re-use in classes by using inheritance and of co
         void CleanUp(object subject);
     }
 
-IBehaviorConfig is a simple interface that mimics the setup and teardown phases of the context / specification. It currently gives the  option of accessing all the fakes in a specification from the outside and cleaning up the subject after a specification. There is a base class in Machine.Fakes for this interface, so that you only have to override the method you want. If you want to use behavior configuration a safe option is to use it by deriving from BehaviorConfigBase because we might add more hooks to IBehaviorConfig at a later point in time. In the context of the time might look like this:
+IBehaviorConfig is a simple interface that mimics the setup and teardown phases of the context / specification. It currently gives the  option of accessing all the fakes in a specification from the outside and cleaning up the subject after a specification. There is a base class in Machine.Fakes for this interface, so that you only have to override the method you want. If you want to use behavior configuration then a safe option is to use it by deriving from BehaviorConfigBase because we might add more hooks to IBehaviorConfig at a later point in time. In the context of the time this might look like this:
 
     public class CurrentTime : BehaviorConfigBase
     {
