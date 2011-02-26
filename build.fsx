@@ -12,6 +12,7 @@ let projectName = "Machine.Fakes"
 let copyright = "Copyright - Machine.Fakes 2011"
 let versionFile = "version.txt"
 let version = 
+    if isLocalBuild then getLastTag() else
     // version is set to the last tag retrieved from GitHub Rest API
     let url = "http://github.com/api/v2/json/repos/show/BjRo/Machine.Fakes/tags"
     tracefn "Downloading tags from %s" url
