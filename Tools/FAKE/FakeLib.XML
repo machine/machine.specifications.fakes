@@ -1470,12 +1470,12 @@
 </member>
 <member name="T:Fake.ILMergeHelper.AllowDuplicateTypes.DuplicateTypes">
 <summary>
- List of types to allow to be duplicate
+ List of types to allow to be duplicated
 </summary>
 </member>
 <member name="T:Fake.ILMergeHelper.AllowDuplicateTypes.AllPublicTypes">
 <summary>
- All public types are allowed to be duplicate and renamed
+ All public types are allowed to be duplicated and renamed
 </summary>
 </member>
 <member name="T:Fake.ILMergeHelper.AllowDuplicateTypes.NoDuplicateTypes">
@@ -1489,6 +1489,11 @@
 <member name="M:Fake.ILMergeHelper.ILMerge(Microsoft.FSharp.Core.FSharpFunc`2{Fake.ILMergeHelper.ILMergeParams,Fake.ILMergeHelper.ILMergeParams},System.String,System.String)">
 <summary>
  Use ILMerge to merge some .NET assemblies.
+</summary>
+</member>
+<member name="M:Fake.ILMergeHelper.getArguments(System.String,System.String,Fake.ILMergeHelper.ILMergeParams)">
+<summary>
+ Builds the arguments for the ILMerge task
 </summary>
 </member>
 <member name="P:Fake.ILMergeHelper.ILMergeDefaults">
@@ -2023,6 +2028,21 @@
 <summary>
  Searches the given directories for all occurrences of the given file name
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="M:Fake.ProcessHelper.UseDefaults``1">
 <summary>
