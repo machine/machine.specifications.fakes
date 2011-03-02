@@ -46,7 +46,12 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="NSubstituteCommandOptions.cs" />
+    <Compile Include="NSubstituteEngine.cs" />
+    <Compile Include="NSubstituteMethodCallOccurance.cs" />
+    <Compile Include="NSubstituteQueryOptions.cs" />
+    <Compile Include="WithFakes.cs" />
+    <Compile Include="WithSubject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
