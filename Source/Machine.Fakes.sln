@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine.Fakes.Adapters.Spec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine.Fakes.Specs", "Machine.Fakes.Specs\Machine.Fakes.Specs.csproj", "{0A1D6663-AA49-4841-BC5A-0E2BD5E91C8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine.Fakes.Adapters.NSubstitute", "Machine.Fakes.Adapters.NSubstitute\Machine.Fakes.Adapters.NSubstitute.csproj", "{9BB8EFFA-1017-45AF-9377-2BECBF881023}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{0A1D6663-AA49-4841-BC5A-0E2BD5E91C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A1D6663-AA49-4841-BC5A-0E2BD5E91C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A1D6663-AA49-4841-BC5A-0E2BD5E91C8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BB8EFFA-1017-45AF-9377-2BECBF881023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB8EFFA-1017-45AF-9377-2BECBF881023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BB8EFFA-1017-45AF-9377-2BECBF881023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BB8EFFA-1017-45AF-9377-2BECBF881023}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
