@@ -23,13 +23,14 @@ Just download the repository from github and run the build.cmd. The build of Mac
 
 ## Getting Machine.Fakes via the NuGet package manager
 
-If you've got NuGet installed on your machine it gets even easier. Currently there are 4 packages available on NuGet. These are the core framework and the different adapters for Rhino.Mocks, MOQ and FakeItEasy. If you want to use Machine.Fakes for example with FakeItEasy just go ahead and type 
+If you've got NuGet installed on your machine it gets even easier. Currently there are 5 packages available on NuGet. These are the core framework and the different adapters for Rhino.Mocks, MOQ, NSubstitute and FakeItEasy. If you want to use Machine.Fakes for example with FakeItEasy just go ahead and type 
 
         install-package Machine.Fakes.FakeItEasy
 
 into the package management console and all necessary dependencies including FakeItEasy itself will be downloaded to your machine. The other alternatives are
 
          install-package Machine.Fakes.RhinoMocks
+		 install-package Machine.Fakes.NSubstitute
          install-package Machine.Fakes.Moq
 
 ## How to use it
@@ -134,5 +135,3 @@ This is the "Mood" example now using a behavior configuration instead of configu
 
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
-
-
