@@ -72,7 +72,7 @@ namespace Machine.Fakes.Adapters.Specs
         private Because of =
             () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.RemoveService(null)).Twice());
 
-        private It should_not_throw_an_exception = () => _exception.ShouldNotBeNull();
+        private It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
     public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_only_once_but_was_excuted_twice :
@@ -92,7 +92,7 @@ namespace Machine.Fakes.Adapters.Specs
         private Because of =
             () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.RemoveService(null)).OnlyOnce());
 
-        private It should_not_throw_an_exception = () => _exception.ShouldNotBeNull();
+        private It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
     public class Given_a_query_was_configured_on_a_fake_when_verifying_whether_it_was_executed :
