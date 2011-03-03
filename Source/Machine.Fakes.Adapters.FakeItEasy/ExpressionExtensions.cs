@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -46,7 +46,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
             if (call == null)
             {
-                throw new InvalidOperationException("Expresion is not pointing to a method or property");
+                throw new InvalidOperationException("Expression is not pointing to a method or property");
             }
 
             return call;
