@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using Machine.Fakes.Sdk;
 using NSubstitute;
+using NSubstitute.Exceptions;
 
 namespace Machine.Fakes.Adapters.NSubstitute
 {
@@ -28,15 +27,27 @@ namespace Machine.Fakes.Adapters.NSubstitute
 
         public void Times(int numberOfTimesTheMethodShouldHaveBeenCalled)
         {
-            if (CountCalls() < numberOfTimesTheMethodShouldHaveBeenCalled)
-                throw new Exception();
+            var calls = CountCalls();
+            if (calls < numberOfTimesTheMethodShouldHaveBeenCalled)
+                throw new CallNotReceivedException(
+                    string.Format("Expected {0} calls to the method but received {1}",
+                                  numberOfTimesTheMethodShouldHaveBeenCalled, calls));
         }
 
         public void OnlyOnce()
         {
-            if (CountCalls() != 1)
-                throw new Exception();
+            var calls = CountCalls();
+            if (calls != 1)
+                throw new CallReceivedException(
+                    string.Format("Expected only 1 call to the method but received {0}", calls));
         }
+
+        public void Twice()
+        {
+            Times(2);
+        }
+
+        #endregion
 
         private int CountCalls()
         {
@@ -47,12 +58,5 @@ namespace Machine.Fakes.Adapters.NSubstitute
                 .Where(x => x == method)
                 .Count();
         }
-
-        public void Twice()
-        {
-            Times(2);
-        }
-
-        #endregion
     }
 }
