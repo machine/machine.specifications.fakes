@@ -7,37 +7,30 @@ namespace Machine.Fakes.Adapters.Specs
 {
     public class Given_a_simple_configured_command : WithCurrentEngine
     {
-        private static IServiceContainer _fake;
-        private static Type _receivedParameter;
+        static IServiceContainer _fake;
+        static Type _receivedParameter;
 
-        private Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
+        Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
 
-        private Because of =
-            () => _fake
-                      .WhenToldTo(x => x.RemoveService(typeof (string)))
-                      .Callback<Type>(p => _receivedParameter = p);
+        Because of = () => _fake.WhenToldTo(x => x.RemoveService(typeof (string)))
+                               .Callback<Type>(p => _receivedParameter = p);
 
-        private It should_execute_the_configured_behavior =
-            () =>
-                {
-                    _fake.RemoveService(typeof (string));
-                    _receivedParameter.ShouldEqual(typeof (string));
-                };
+        It should_execute_the_configured_behavior = () =>
+        {
+            _fake.RemoveService(typeof (string));
+            _receivedParameter.ShouldEqual(typeof (string));
+        };
     }
 
     public class Given_an_exception_configured_on_a_command_when_triggering_the_behavior :
         WithCurrentEngine
     {
-        private static IServiceContainer _fake;
+        static IServiceContainer _fake;
 
-        private Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
+        Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
 
-        private Because of =
-            () => _fake
-                      .WhenToldTo(x => x.RemoveService(typeof (string)))
-                      .Throw(new Exception("Blah"));
+        Because of = () => _fake.WhenToldTo(x => x.RemoveService(typeof (string))).Throw(new Exception("Blah"));
 
-        private It should_execute_the_configured_behavior =
-            () => Catch.Exception(() => _fake.RemoveService(typeof (string))).ShouldNotBeNull();
+        It should_execute_the_configured_behavior = () => Catch.Exception(() => _fake.RemoveService(typeof (string))).ShouldNotBeNull();
     }
 }

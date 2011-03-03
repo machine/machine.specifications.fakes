@@ -4,13 +4,12 @@ using Machine.Specifications;
 
 namespace Machine.Fakes.Adapters.Specs
 {
-    public class WithCurrentEngine
+    public class WithCurrentEngine : WithCurrentEngine<NSubstituteEngine>
     {
-        Establish context = () => FakeEngineGateway.EngineIs(CreateCurrentEngine());
+    }
 
-        private static IFakeEngine CreateCurrentEngine()
-        {
-            return new NSubstituteEngine();
-        }
+    public class WithCurrentEngine<TEngine> where TEngine : IFakeEngine, new()
+    {
+        Establish context = () => FakeEngineGateway.EngineIs(new TEngine());
     }
 }
