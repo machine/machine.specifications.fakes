@@ -8,20 +8,20 @@ namespace Machine.Fakes.Adapters.Specs
     public class Given_a_simple_configured_command : WithCurrentEngine
     {
         private static IServiceContainer _fake;
-        private static Type _recievedParameter;
+        private static Type _receivedParameter;
 
         private Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
 
         private Because of =
             () => _fake
                       .WhenToldTo(x => x.RemoveService(typeof (string)))
-                      .Callback<Type>(p => _recievedParameter = p);
+                      .Callback<Type>(p => _receivedParameter = p);
 
         private It should_execute_the_configured_behavior =
             () =>
                 {
                     _fake.RemoveService(typeof (string));
-                    _recievedParameter.ShouldEqual(typeof (string));
+                    _receivedParameter.ShouldEqual(typeof (string));
                 };
     }
 
