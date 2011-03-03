@@ -164,7 +164,7 @@ Target "BuildNuGetFlavours" (fun _ ->
 
             NuGet (fun p -> 
                 {p with               
-                    Authors = authors
+                    Authors = if flavour = "NSubstitute" then "Steffen Forkmann" :: authors else authors
                     Project = sprintf "%s.%s" projectName flavour
                     Description = sprintf " This is the adapter for %s %s" flavour flavourVersion
                     Version = version                        
