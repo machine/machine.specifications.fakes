@@ -55,6 +55,7 @@
     <Compile Include="TestClasses\ICar.cs" />
     <Compile Include="Specs_for_creating_subjects.cs" />
     <Compile Include="TestClasses\Bumsdi.cs" />
+    <Compile Include="Using_Some_to_create_an_amount_of_fakes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\machine.fakes\Machine.Fakes.csproj">

@@ -145,7 +145,24 @@ namespace Machine.Fakes.Sdk
         /// <returns>An <see cref = "IList{T}" />.</returns>
         public IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return _container.CreateFakeCollectionOf<TInterfaceType>();
+            return Some<TInterfaceType>(3);
+        }
+
+        /// <summary>
+        /// Creates a list of fakes.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the item type of the list. This should be an interface or an abstract class.
+        /// </typeparam>
+        /// <param name="amount">
+        /// Specifies the amount of fakes that have to be created and inserted into the list.
+        /// </param>
+        /// <returns>
+        /// An <see cref="IList{TInterfaceType}"/>.
+        /// </returns>
+        public IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class
+        {
+            return _container.CreateFakeCollectionOf<TInterfaceType>(amount);
         }
 
         /// <summary>

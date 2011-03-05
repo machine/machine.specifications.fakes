@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Machine.Fakes.Sdk;
@@ -11,23 +12,30 @@ namespace Machine.Fakes.Internal
     static class FakeEngineExtensions
     {
         /// <summary>
-        /// Creates a list containing 3 fake instances of the type specified 
-        /// via <typeparamref name="T"/>.
+        /// Creates a list of fakes.
         /// </summary>
         /// <typeparam name="T">
         /// Specifies the item type of the list. This should be an interface or an abstract class.
         /// </typeparam>
+        /// <param name="amount">
+        /// Specifies the amount of fakes that have to be created and inserted into the list.
+        /// </param>
         /// <param name="fakeEngine">
         /// Specifies the <see cref="IFakeEngine"/> which is used to create the individual items.
         /// </param>
         /// <returns>
         /// An <see cref="IList{T}"/>.
         /// </returns>
-        public static IList<T> CreateFakeCollectionOf<T>(this IFakeEngine fakeEngine)
+        public static IList<T> CreateFakeCollectionOf<T>(this IFakeEngine fakeEngine, int amount)
         {
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
-            return Enumerable.Range(0, 3)
+            if (amount < 0)
+            {
+                throw new ArgumentOutOfRangeException("amount");
+            }
+
+            return Enumerable.Range(0, amount)
                 .Select(x => (T)fakeEngine.CreateFake(typeof(T)))
                 .ToList();
         }

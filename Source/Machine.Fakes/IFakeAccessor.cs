@@ -47,6 +47,16 @@ namespace Machine.Fakes
         IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class;
 
         /// <summary>
+        /// Creates a list containing fake instances of the type specified via <typeparamref name = "TInterfaceType" />.
+        /// </summary>
+        /// <param name="amount">
+        /// Specifies the amount of fakes in the list.
+        /// </param>
+        /// <typeparam name = "TInterfaceType">Specifies the item type of the list. This should be an interface or an abstract class.</typeparam>
+        /// <returns>An <see cref = "IList{T}" />.</returns>
+        IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class;
+
+        /// <summary>
         /// Uses the instance supplied by <paramref name="instance"/> during the 
         /// creation of the sut. The specified instance will be injected into the constructor.
         /// </summary>
