@@ -183,15 +183,18 @@ Target "BuildNuGetFlavours" (fun _ ->
 Target "Default" DoNothing
 Target "Deploy" DoNothing
 
-// Dependencies
-"BuildApp" <== ["Clean"]
-"Test" <== ["BuildApp"]
-"MergeStructureMap" <== ["Test"]
-"BuildZip" <== ["MergeStructureMap"]
-"ZipDocumentation" <== ["GenerateDocumentation"]
-"BuildNuGetFlavours" <== ["BuildNuGet"]
-"Deploy" <== ["BuildZip"; "ZipDocumentation"; "BuildNuGetFlavours"]
-"Default" <== ["Deploy"]
+// Build order
+"Clean"
+  ==> "BuildApp"
+  ==> "Test"
+  ==> "MergeStructureMap"
+  ==> "BuildZip"
+  ==> "GenerateDocumentation"
+  ==> "ZipDocumentation"
+  ==> "BuildNuGet"
+  ==> "BuildNuGetFlavours"
+  ==> "Deploy"
+  ==> "Default"
 
 // start build
-Run <| getBuildParamOrDefault "target" "Default"
+RunParameterTargetOrDefault  "target" "Default"
