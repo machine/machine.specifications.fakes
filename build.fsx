@@ -138,6 +138,7 @@ Target "BuildNuGet" (fun _ ->
     [buildDir + "Machine.Fakes.dll"]
         |> CopyTo nugetLibDir
 
+    let key = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else ""
     NuGet (fun p -> 
         {p with               
             Authors = authors
@@ -145,8 +146,8 @@ Target "BuildNuGet" (fun _ ->
             Version = version                        
             OutputPath = nugetDir
             Dependencies = ["Machine.Specifications","0.4.7.0"]
-            AccessKey = getBuildParamOrDefault "nugetkey" ""
-            Publish = hasBuildParam "nugetkey" })
+            AccessKey = key
+            Publish = if key <> "" })
         "machine.fakes.nuspec"
 
     [nugetDir + sprintf "Machine.Fakes.%s.nupkg" version]
