@@ -10,7 +10,8 @@ open System.Text.RegularExpressions
 let authors = ["Bjoern Rochel"]
 let projectName = "Machine.Fakes"
 let copyright = "Copyright - Machine.Fakes 2011"
-let versionFile = "version.txt"
+let MSpecVersion = "0.4.7.0"
+
 let version = 
     if isLocalBuild then getLastTag() else
     // version is set to the last tag retrieved from GitHub Rest API
@@ -73,6 +74,7 @@ Target "Test" (fun _ ->
         |> Scan
         |> MSpec (fun p -> 
                     {p with 
+                        ToolPath = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" MSpecVersion
                         HtmlOutputDir = testOutputDir})
 )
 
@@ -145,7 +147,7 @@ Target "BuildNuGet" (fun _ ->
             Project = projectName
             Version = version                        
             OutputPath = nugetDir
-            Dependencies = ["Machine.Specifications","0.4.7.0"]
+            Dependencies = ["Machine.Specifications",MSpecVersion]
             AccessKey = key
             Publish = key <> "" })
         "machine.fakes.nuspec"
