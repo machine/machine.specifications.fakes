@@ -147,7 +147,7 @@ Target "BuildNuGet" (fun _ ->
             OutputPath = nugetDir
             Dependencies = ["Machine.Specifications","0.4.7.0"]
             AccessKey = key
-            Publish = if key <> "" })
+            Publish = key <> "" })
         "machine.fakes.nuspec"
 
     [nugetDir + sprintf "Machine.Fakes.%s.nupkg" version]
