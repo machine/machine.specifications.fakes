@@ -144,7 +144,7 @@ Target "BuildNuGet" (fun _ ->
             Project = projectName
             Version = version                        
             OutputPath = nugetDir
-            Dependencies = ["Machine.Specifications","0.3.0.0"]
+            Dependencies = ["Machine.Specifications","0.4.7.0"]
             AccessKey = getBuildParamOrDefault "nugetkey" ""
             Publish = hasBuildParam "nugetkey" })
         "machine.fakes.nuspec"
