@@ -14,6 +14,7 @@ let MSpecVersion = "0.4.7.0"
 let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else ""
 
 let version = 
+    if hasBuildParam "version" then getBuildParam "version" else
     if isLocalBuild then getLastTag() else
     // version is set to the last tag retrieved from GitHub Rest API
     let url = "http://github.com/api/v2/json/repos/show/BjRo/Machine.Fakes/tags"
