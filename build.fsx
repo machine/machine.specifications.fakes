@@ -11,6 +11,7 @@ let authors = ["Bjoern Rochel"]
 let projectName = "Machine.Fakes"
 let copyright = "Copyright - Machine.Fakes 2011"
 let MSpecVersion = "0.4.7.0"
+let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else ""
 
 let version = 
     if isLocalBuild then getLastTag() else
@@ -140,7 +141,7 @@ Target "BuildNuGet" (fun _ ->
     [buildDir + "Machine.Fakes.dll"]
         |> CopyTo nugetLibDir
 
-    let key = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else ""
+    
     NuGet (fun p -> 
         {p with               
             Authors = authors
@@ -148,8 +149,8 @@ Target "BuildNuGet" (fun _ ->
             Version = version                        
             OutputPath = nugetDir
             Dependencies = ["Machine.Specifications",MSpecVersion]
-            AccessKey = key
-            Publish = key <> "" })
+            AccessKey = NugetKey
+            Publish = NugetKey <> "" })
         "machine.fakes.nuspec"
 
     [nugetDir + sprintf "Machine.Fakes.%s.nupkg" version]
@@ -175,8 +176,8 @@ Target "BuildNuGetFlavours" (fun _ ->
                     Dependencies = 
                         ["Machine.Fakes",version
                          flavour,flavourVersion]
-                    AccessKey = getBuildParamOrDefault "nugetkey" ""
-                    Publish = hasBuildParam "nugetkey" })  
+                    AccessKey = NugetKey
+                    Publish = NugetKey <> "" })
                 "machine.fakes.nuspec"
 
             [nugetDir + sprintf "Machine.Fakes.%s.%s.nupkg" flavour version]
