@@ -135,6 +135,8 @@ Target "BuildZip" (fun _ ->
         |> Zip buildDir (deployDir + sprintf "%s-%s.zip" projectName version)
 )
 
+let requireExactly version = sprintf "[%s]" version
+
 Target "BuildNuGet" (fun _ ->
     CleanDirs [nugetDir; nugetLibDir; nugetDocsDir]
         
@@ -149,7 +151,7 @@ Target "BuildNuGet" (fun _ ->
             Project = projectName
             Version = version                        
             OutputPath = nugetDir
-            Dependencies = ["Machine.Specifications",MSpecVersion]
+            Dependencies = ["Machine.Specifications",requireExactly MSpecVersion]
             AccessKey = NugetKey
             Publish = NugetKey <> "" })
         "machine.fakes.nuspec"
@@ -175,8 +177,8 @@ Target "BuildNuGetFlavours" (fun _ ->
                     Version = version                        
                     OutputPath = nugetDir
                     Dependencies = 
-                        ["Machine.Fakes",version
-                         flavour,flavourVersion]
+                        ["Machine.Fakes",requireExactly version
+                         flavour,requireExactly flavourVersion]
                     AccessKey = NugetKey
                     Publish = NugetKey <> "" })
                 "machine.fakes.nuspec"
