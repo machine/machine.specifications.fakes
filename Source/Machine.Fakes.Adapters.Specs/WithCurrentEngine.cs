@@ -1,10 +1,10 @@
-using Machine.Fakes.Adapters.NSubstitute;
+using Machine.Fakes.Adapters.FakeItEasy;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
 namespace Machine.Fakes.Adapters.Specs
 {
-    public class WithCurrentEngine : WithCurrentEngine<NSubstituteEngine>
+    public class WithCurrentEngine : WithCurrentEngine<FakeItEasyEngine>
     {
     }
 
