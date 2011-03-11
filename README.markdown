@@ -19,18 +19,18 @@ Many credits for the ideas incorporated in this framework go to Jean Paul Boodho
 
 ## Building Machine.Fakes from source
 
-Just download the repository from github and run the build.cmd. The build of Machine.Fakes only requires the .NET Framework 4.0 to be installed on your machine. Everything else should work out-of-the-box. If not, please take the time to add an issue to this project. After a succesful build you find all the assemblies in a zip file under the "Release" folder.
+Just download the repository from github and run the build.cmd (or build.NoGit.cmd if you don't have git installed). The build of Machine.Fakes only requires the .NET Framework 4.0 to be installed on your machine. Everything else should work out-of-the-box. If not, please take the time to add an issue to this project. After a succesful build you find all the assemblies in a zip file under the "Release" folder.
 
 ## Getting Machine.Fakes via the NuGet package manager
 
 If you've got NuGet installed on your machine it gets even easier. Currently there are 5 packages available on NuGet. These are the core framework and the different adapters for Rhino.Mocks, MOQ, NSubstitute and FakeItEasy. If you want to use Machine.Fakes for example with FakeItEasy just go ahead and type 
 
-        install-package Machine.Fakes.FakeItEasy
+         install-package Machine.Fakes.FakeItEasy
 
 into the package management console and all necessary dependencies including FakeItEasy itself will be downloaded to your machine. The other alternatives are
 
          install-package Machine.Fakes.RhinoMocks
-		 install-package Machine.Fakes.NSubstitute
+         install-package Machine.Fakes.NSubstitute
          install-package Machine.Fakes.Moq
 
 ## How to use it
