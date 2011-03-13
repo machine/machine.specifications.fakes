@@ -45,7 +45,7 @@ let testDir = buildDir
 let deployDir = @".\Release\"
 let platformVersion = @"v4.0.30319"
 let targetPlatformPrefix = @"C:\Windows\Microsoft.NET\Framework"
-let targetPlatformDir = if (Directory.Exists(targetPlatformPrefix+ "64")) then Path.Combine(targetPlatformPrefix + "64",platformVersion) else Path.Combine(targetPlatformPrefix,platformVersion)
+let targetPlatformDir = if (Directory.Exists(targetPlatformPrefix + "64")) then Path.Combine(targetPlatformPrefix + "64",platformVersion) else Path.Combine(targetPlatformPrefix,platformVersion)
 let nugetDocsDir = nugetDir + @"docs\"
 let nugetLibDir = nugetDir + @"lib\"
 

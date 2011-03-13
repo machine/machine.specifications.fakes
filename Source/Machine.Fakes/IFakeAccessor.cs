@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Machine.Fakes
@@ -17,6 +18,18 @@ namespace Machine.Fakes
         /// An newly created fake implementing <typeparamref name="TInterfaceType"/>.
         /// </returns>
         TInterfaceType An<TInterfaceType>() where TInterfaceType : class;
+
+        /// <summary>
+        /// Creates a fake of the type specified by <paramref name="interfaceType"/>.
+        /// </summary>
+        /// The type to create a fake for. (Should be an interface or an abstract class)
+        /// <param name="interfaceType">
+        /// Specifies the type of item to fake.
+        /// </param>
+        /// <returns>
+        /// An newly created fake implementing <paramref name="interfaceType"/>.
+        /// </returns>
+        object An(Type interfaceType); 
 
         /// <summary>
         /// Creates a fake of the type specified by <typeparamref name="TInterfaceType"/>.

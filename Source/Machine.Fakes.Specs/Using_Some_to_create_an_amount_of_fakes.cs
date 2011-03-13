@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Data;
+using System.Data.SqlClient;
 using Machine.Fakes.Sdk;
 using Machine.Fakes.Specs.TestClasses;
 using Machine.Specifications;
 
 namespace Machine.Fakes.Specs
 {
-    [Subject(typeof(SpecificationController<,>))]
+    [Subject(typeof (SpecificationController<,>))]
     public class When_specifying_a_negative_amount_of_fakes_to_the_Some_method
     {
         Establish context = () => _specController = new SpecificationController<object, DummyFakeEngine>();
@@ -23,11 +25,11 @@ namespace Machine.Fakes.Specs
         const int NEGATIVE_AMOUNT = -1;
     }
 
-    [Subject(typeof(SpecificationController<,>))]
+    [Subject(typeof (SpecificationController<,>))]
     public class When_using_the_Some_method_and_specifying_the_amount_of_fakes_to_create
     {
         Establish context = () => _specController = new SpecificationController<object, DummyFakeEngine>();
-        
+
         Because of = () => _fakes = _specController.Some<IServiceContainer>(CONFIGURED_AMOUNT);
 
         It Should_not_return_null = () => _fakes.ShouldNotBeNull();
@@ -39,11 +41,32 @@ namespace Machine.Fakes.Specs
         static IList<IServiceContainer> _fakes;
     }
 
-    [Subject(typeof(SpecificationController<,>))]
+    [Subject(typeof (SpecificationController<,>))]
+    public class when_using_the_an_method_to_create_an_explicit_fake
+    {
+        Establish context = () =>
+                                {
+                                    _fake_engine = new DummyFakeEngine();
+                                    _fake_engine.CreatedFake = new SqlConnection();
+                                    _specController = new SpecificationController<object>(_fake_engine);
+                                };
+
+        Because of = () => result = _specController.An(typeof (IDbConnection));
+
+        It should_return_a_fake_that_implements_the_specified_type_interface = () =>
+                                                                               result.ShouldBe(typeof (SqlConnection));
+
+
+        static SpecificationController<object> _specController;
+        static object result;
+        static DummyFakeEngine _fake_engine;
+    }
+
+    [Subject(typeof (SpecificationController<,>))]
     public class When_using_the_Some_method
     {
-        Establish context = () => _specController = new SpecificationController<object, DummyFakeEngine>();
-        
+        Establish context = () =>  _specController = new SpecificationController<object, DummyFakeEngine>(); 
+
         Because of = () => _fakes = _specController.Some<IServiceContainer>();
 
         It Should_not_return_null = () => _fakes.ShouldNotBeNull();

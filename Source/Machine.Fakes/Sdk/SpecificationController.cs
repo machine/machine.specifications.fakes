@@ -118,7 +118,12 @@ namespace Machine.Fakes.Sdk
         /// </returns>
         public TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return (TInterfaceType)_container.CreateFake(typeof(TInterfaceType));
+            return (TInterfaceType) An(typeof (TInterfaceType));
+        }
+
+        public object An(Type interfaceType)
+        {
+            return _container.CreateFake(interfaceType);
         }
 
         /// <summary>
