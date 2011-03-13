@@ -20,7 +20,7 @@ namespace Machine.Fakes
         where TSubject : class
         where TFakeEngine : IFakeEngine, new()
     {
-        private static SpecificationController<TSubject, TFakeEngine> _specificationController;
+        protected static SpecificationController<TSubject, TFakeEngine> _specificationController;
         
         /// <summary>
         /// Creates a new instance of the <see cref="WithSubject{TSubject, TFakeEngine}"/> class.

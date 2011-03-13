@@ -5,6 +5,7 @@ open Fake
 open Fake.Git
 open System.Linq
 open System.Text.RegularExpressions
+open System.IO
 
 (* properties *)
 let authors = ["Bjoern Rochel"]
@@ -42,7 +43,9 @@ let testOutputDir = buildDir + @"Specs\"
 let nugetDir = buildDir + @"NuGet\" 
 let testDir = buildDir
 let deployDir = @".\Release\"
-let targetPlatformDir = @"C:\Windows\Microsoft.NET\Framework64\v4.0.30319"
+let platformVersion = @"v4.0.30319"
+let targetPlatformPrefix = @"C:\Windows\Microsoft.NET\Framework"
+let targetPlatformDir = if (Directory.Exists(targetPlatformPrefix+ "64")) then Path.Combine(targetPlatformPrefix + "64",platformVersion) else Path.Combine(targetPlatformPrefix,platformVersion)
 let nugetDocsDir = nugetDir + @"docs\"
 let nugetLibDir = nugetDir + @"lib\"
 
