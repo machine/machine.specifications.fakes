@@ -41,7 +41,10 @@
       <HintPath>..\packages\FakeItEasy.1.6.4075.221\lib\NET40\FakeItEasy.dll</HintPath>
     </Reference>
     <Reference Include="Machine.Specifications">
-      <HintPath>..\packages\Machine.Specifications.0.4.7.0\lib\Machine.Specifications.dll</HintPath>
+      <HintPath>..\packages\Machine.Specifications.0.4.8.0\lib\Machine.Specifications.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Specifications.TDNetRunner">
+      <HintPath>..\packages\Machine.Specifications.0.4.8.0\lib\Machine.Specifications.TDNetRunner.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
