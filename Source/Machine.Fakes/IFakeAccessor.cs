@@ -70,6 +70,8 @@ namespace Machine.Fakes
         IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class;
 
         /// <summary>
+        /// 
+        /// 
         /// Uses the instance supplied by <paramref name="instance"/> during the 
         /// creation of the sut. The specified instance will be injected into the constructor.
         /// </summary>
@@ -79,6 +81,6 @@ namespace Machine.Fakes
         /// <param name="instance">
         /// Specifies the instance to be used for the specification.
         /// </param>
-        void Use<TInterfaceType>(TInterfaceType instance) where TInterfaceType : class;
+        void Use<TInterfaceType>(TInterfaceType instance); 
     }
 }

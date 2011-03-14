@@ -98,12 +98,13 @@ namespace Machine.Fakes
         }
 
         /// <summary>
-        ///   Uses the instance supplied by <paramref name = "instance" /> during the
+        ///   
+        /// Uses the instance supplied by <paramref name = "instance" /> during the
         ///   creation of the sut. The specified instance will be injected into the constructor.
         /// </summary>
         /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
-        public static void Use<TInterfaceType>(TInterfaceType instance) where TInterfaceType : class
+        public static void Use<TInterfaceType>(TInterfaceType instance) 
         {
             _specificationController.Use(instance);
         }

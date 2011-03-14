@@ -74,7 +74,7 @@ namespace Machine.Fakes.Sdk
         /// </summary>
         /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
-        public void Use<TInterfaceType>(TInterfaceType instance) where TInterfaceType : class
+        public void Use<TInterfaceType>(TInterfaceType instance) 
         {
             _container.Inject(typeof (TInterfaceType), instance);
         }
