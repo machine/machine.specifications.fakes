@@ -12,8 +12,9 @@ Many credits for the ideas incorporated in this framework go to Jean Paul Boodho
 
 * Login in github (you need an account)
 * Fork the main repository from [Github](https://github.com/BjRo/Machine.Fakes)
-* Push your changes to your fork
-* Send me a pull request
+* Please contribute only on the dev branch. (We don't develop on the master branch. Only our releases are build from there) 
+* Push your changes to your GitHub repository. 
+* Send us a pull request
 
 # How to get started
 
