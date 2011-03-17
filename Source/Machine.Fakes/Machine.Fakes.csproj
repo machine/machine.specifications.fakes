@@ -79,7 +79,6 @@
     <Compile Include="WithSubject.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build.fsx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
