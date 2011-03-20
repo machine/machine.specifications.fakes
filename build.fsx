@@ -11,7 +11,7 @@ open System.IO
 let authors = ["Bjoern Rochel"]
 let projectName = "Machine.Fakes"
 let copyright = "Copyright - Machine.Fakes 2011"
-let MSpecVersion = "0.4.8.0"
+let MSpecVersion = "0.4.9.0"
 let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else ""
 
 let version = 
