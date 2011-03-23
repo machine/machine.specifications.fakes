@@ -32,7 +32,7 @@ let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash
 (* flavours *)
 let flavours = 
     ["RhinoMocks","3.6"; 
-     "FakeItEasy","1.6.4062.205";
+     "FakeItEasy","1.6.4075.221";
      "NSubstitute","1.0.0.0";
      "Moq","4.0.10827"]
 
