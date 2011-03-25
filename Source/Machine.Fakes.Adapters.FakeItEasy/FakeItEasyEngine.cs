@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using FakeItEasy;
+using Machine.Fakes.Internal;
 
 namespace Machine.Fakes.Adapters.FakeItEasy
 {
@@ -43,6 +44,11 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             var configuration = A.CallTo(callExpression);
 
             return new FakeItEasyMethodCallOccurance(configuration);
+        }
+
+        public IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
+        {
+            throw new NotImplementedException();
         }
 
         public void VerifyBehaviorWasNotExecuted<TFake>(TFake fake, Expression<Action<TFake>> func) where TFake : class

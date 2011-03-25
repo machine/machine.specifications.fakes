@@ -54,6 +54,11 @@ namespace Machine.Fakes.Internal
             return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
         }
 
+        public IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
+        {
+            return _fakeEngine.CreateMatcher<TReturnValue>();
+        }
+
         public T PartialMock<T>(params object[] args) where T : class
         {
             return _fakeEngine.PartialMock<T>(args);

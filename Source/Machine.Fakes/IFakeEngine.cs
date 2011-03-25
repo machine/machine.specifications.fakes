@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using Machine.Fakes.Internal;
 
 namespace Machine.Fakes
 {
@@ -115,5 +116,7 @@ namespace Machine.Fakes
         IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) where TFake : class ;
+
+        IMatcher<TReturnValue> CreateMatcher<TReturnValue>();
     }
 }

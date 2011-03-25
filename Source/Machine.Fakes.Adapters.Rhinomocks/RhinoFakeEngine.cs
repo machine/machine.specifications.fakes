@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using Machine.Fakes.Internal;
 using Rhino.Mocks;
 
 namespace Machine.Fakes.Adapters.Rhinomocks
@@ -54,6 +55,11 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             var compiledFunction = func.Compile();
 
             return new RhinoMethodCallOccurance<TFake>(fake, compiledFunction);
+        }
+
+        public IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
+        {
+            throw new NotImplementedException();
         }
     }
 }

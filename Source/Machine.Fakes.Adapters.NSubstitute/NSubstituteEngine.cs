@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Machine.Fakes.Internal;
 using NSubstitute;
 
 namespace Machine.Fakes.Adapters.NSubstitute
@@ -48,6 +49,11 @@ namespace Machine.Fakes.Adapters.NSubstitute
             Expression<Action<TFake>> func) where TFake : class
         {
             return new NSubstituteMethodCallOccurance<TFake>(fake, func);
+        }
+
+        public IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
