@@ -11,7 +11,6 @@ open System.IO
 let authors = ["Bjoern Rochel"]
 let projectName = "Machine.Fakes"
 let copyright = "Copyright - Machine.Fakes 2011"
-let MSpecVersion = "0.4.9.0"
 let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else ""
 
 let version = 
@@ -29,16 +28,18 @@ let version =
 
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
 
+
 (* flavours *)
 let flavours = 
-    ["RhinoMocks","3.6"; 
-     "FakeItEasy","1.6.4075.221";
-     "NSubstitute","1.0.0.0";
-     "Moq","4.0.10827"]
+    ["RhinoMocks"; 
+     "FakeItEasy";
+     "NSubstitute";
+     "Moq"]
 
 (* Directories *)
 let buildDir = @".\Build\"
-let docsDir = buildDir + @"Documentation\"
+let packagesDir = @".\Source\packages\"
+let docsDir = buildDir + @"Documentation\"  
 let testOutputDir = buildDir + @"Specs\"
 let nugetDir = buildDir + @"NuGet\" 
 let testDir = buildDir
@@ -49,11 +50,23 @@ let targetPlatformDir = if (Directory.Exists(targetPlatformPrefix + "64")) then 
 let nugetDocsDir = nugetDir + @"docs\"
 let nugetLibDir = nugetDir + @"lib\"
 
+
+
 (* files *)
 let appReferences = !! @".\Source\**\*.csproj"
 
+(* Helpers *)
+let GetPackageVersion (package) = 
+    let name = package + "."
+    let fullname = Directory.GetDirectories(packagesDir, name + "*").[0]
+    let pos = fullname.LastIndexOf(name)
+    fullname.Substring(pos+name.Length)
+
+let MSpecVersion = GetPackageVersion "Machine.Specifications"
+    
 (* Targets *)
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; docsDir; testOutputDir] )
+
 
 Target "BuildApp" (fun _ -> 
     AssemblyInfo
@@ -163,13 +176,15 @@ Target "BuildNuGet" (fun _ ->
 
 Target "BuildNuGetFlavours" (fun _ ->
     flavours
-      |> Seq.iter (fun (flavour,flavourVersion) ->
+      |> Seq.iter (fun (flavour) ->
             CleanDirs [nugetDir; nugetLibDir; nugetDocsDir]
         
             XCopy docsDir nugetDocsDir
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour]
               |> CopyTo nugetLibDir
-
+                
+            let flavourVersion = GetPackageVersion flavour
+            
             NuGet (fun p -> 
                 {p with               
                     Authors = if flavour = "NSubstitute" then "Steffen Forkmann" :: authors else authors
@@ -183,7 +198,7 @@ Target "BuildNuGetFlavours" (fun _ ->
                     AccessKey = NugetKey
                     Publish = NugetKey <> "" })
                 "machine.fakes.nuspec"
-
+        
             [nugetDir + sprintf "Machine.Fakes.%s.%s.nupkg" flavour version]
               |> CopyTo deployDir)
 )
