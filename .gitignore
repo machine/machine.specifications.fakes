@@ -13,3 +13,5 @@ Source/GlobalAssemblyInfo.cs
 /Build
 /Release
 /Documentation
+
+*.bak
