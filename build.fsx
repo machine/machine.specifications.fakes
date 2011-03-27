@@ -29,13 +29,6 @@ let version =
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
 
 
-(* flavours *)
-let flavours = 
-    ["RhinoMocks"; 
-     "FakeItEasy";
-     "NSubstitute";
-     "Moq"]
-
 (* Directories *)
 let buildDir = @".\Build\"
 let packagesDir = @".\Source\packages\"
@@ -44,25 +37,16 @@ let testOutputDir = buildDir + @"Specs\"
 let nugetDir = buildDir + @"NuGet\" 
 let testDir = buildDir
 let deployDir = @".\Release\"
-let platformVersion = @"v4.0.30319"
-let targetPlatformPrefix = @"C:\Windows\Microsoft.NET\Framework"
-let targetPlatformDir = if (Directory.Exists(targetPlatformPrefix + "64")) then Path.Combine(targetPlatformPrefix + "64",platformVersion) else Path.Combine(targetPlatformPrefix,platformVersion)
+let targetPlatformDir = getTargetPlatformDir "v4.0.30319"
 let nugetDocsDir = nugetDir + @"docs\"
 let nugetLibDir = nugetDir + @"lib\"
-
-
 
 (* files *)
 let appReferences = !! @".\Source\**\*.csproj"
 
-(* Helpers *)
-let GetPackageVersion (package) = 
-    let name = package + "."
-    let fullname = Directory.GetDirectories(packagesDir, name + "*").[0]
-    let pos = fullname.LastIndexOf(name)
-    fullname.Substring(pos+name.Length)
-
-let MSpecVersion = GetPackageVersion "Machine.Specifications"
+(* flavours *)
+let Flavours = ["RhinoMocks"; "FakeItEasy"; "NSubstitute"; "Moq"]
+let MSpecVersion = GetPackageVersion packagesDir "Machine.Specifications"
     
 (* Targets *)
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; docsDir; testOutputDir] )
@@ -175,15 +159,14 @@ Target "BuildNuGet" (fun _ ->
 )
 
 Target "BuildNuGetFlavours" (fun _ ->
-    flavours
+    Flavours
       |> Seq.iter (fun (flavour) ->
+            let flavourVersion = GetPackageVersion packagesDir flavour
             CleanDirs [nugetDir; nugetLibDir; nugetDocsDir]
         
             XCopy docsDir nugetDocsDir
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour]
-              |> CopyTo nugetLibDir
-                
-            let flavourVersion = GetPackageVersion flavour
+              |> CopyTo nugetLibDir               
             
             NuGet (fun p -> 
                 {p with               
