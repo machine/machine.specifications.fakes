@@ -58,7 +58,6 @@
     </Compile>
     <Compile Include="Internal\AutoFakeContainer.cs" />
     <Compile Include="BehaviorConfigBase.cs" />
-    <Compile Include="Internal\IMatcher.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="Sdk\SpecificationController.cs" />
     <Compile Include="LocalAssemblyInfo.cs" />
