@@ -55,9 +55,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
         public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
         {
-            var matcher = matchExpression.Compile();
-
-            return A<TParam>.That.Matches(matcher);
+            throw new NotSupportedException("Inline constraints are currently not supported in Machine.Fakes API. Use the FakeItEasy built-in mechanism instead!");
         }
     }
 }
