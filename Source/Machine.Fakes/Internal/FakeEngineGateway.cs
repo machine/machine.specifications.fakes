@@ -55,14 +55,14 @@ namespace Machine.Fakes.Internal
             return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
         }
 
-        public static IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
-        {
-            return _fakeEngine.CreateMatcher<TReturnValue>();
-        }
-
         public static T Fake<T>()
         {
             return _fakeEngine.Stub<T>();
+        }
+
+        public static TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
+        {
+            return _fakeEngine.Match(matchExpression);
         }
     }
 }

@@ -48,7 +48,6 @@
     </Compile>
     <Compile Include="RhinoCommandOptions.cs" />
     <Compile Include="RhinoFakeEngine.cs" />
-    <Compile Include="RhinoMatcher.cs" />
     <Compile Include="RhinoMethodCallOccurance.cs" />
     <Compile Include="RhinoQueryOptions.cs" />
     <Compile Include="WithFakes.cs" />

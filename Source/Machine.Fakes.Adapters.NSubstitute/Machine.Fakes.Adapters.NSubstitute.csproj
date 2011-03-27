@@ -48,7 +48,6 @@
     </Compile>
     <Compile Include="NSubstituteCommandOptions.cs" />
     <Compile Include="NSubstituteEngine.cs" />
-    <Compile Include="NSubstituteMatcher.cs" />
     <Compile Include="NSubstituteMethodCallOccurance.cs" />
     <Compile Include="NSubstituteQueryOptions.cs" />
     <Compile Include="WithFakes.cs" />

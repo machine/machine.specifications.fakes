@@ -117,6 +117,6 @@ namespace Machine.Fakes
             TFake fake, 
             Expression<Action<TFake>> func) where TFake : class ;
 
-        IMatcher<TReturnValue> CreateMatcher<TReturnValue>();
+        TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression);
     }
 }

@@ -40,7 +40,7 @@ namespace Machine.Fakes.Specs.TestClasses
             throw new NotImplementedException();
         }
 
-        public IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
+        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
         {
             throw new NotImplementedException();
         }

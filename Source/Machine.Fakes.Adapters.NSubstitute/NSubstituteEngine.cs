@@ -11,8 +11,6 @@ namespace Machine.Fakes.Adapters.NSubstitute
     /// </summary>
     public class NSubstituteEngine : IFakeEngine
     {
-        #region IFakeEngine Members
-
         public object CreateFake(Type interfaceType)
         {
             return Substitute.For(new[] {interfaceType}, null);
@@ -51,11 +49,11 @@ namespace Machine.Fakes.Adapters.NSubstitute
             return new NSubstituteMethodCallOccurance<TFake>(fake, func);
         }
 
-        public IMatcher<TParam> CreateMatcher<TParam>()
+        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
         {
-            return new NSubstituteMatcher<TParam>();
-        }
+            var matcher = matchExpression.Compile();
 
-        #endregion
+            return Arg.Is<TParam>(p => matcher(p));
+        }
     }
 }

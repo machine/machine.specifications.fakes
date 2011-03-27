@@ -54,9 +54,7 @@ namespace Machine.Fakes
         {
             Guard.AgainstArgumentNull(matchExpression, "matchExpression");
 
-            return FakeEngineGateway
-                .CreateMatcher<TParam>()
-                .Match(matchExpression);
+            return FakeEngineGateway.Match(matchExpression);
         }
     }
 }

@@ -46,16 +46,16 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             return new FakeItEasyMethodCallOccurance(configuration);
         }
 
-        public IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
-        {
-            throw new NotImplementedException();
-        }
-
         public void VerifyBehaviorWasNotExecuted<TFake>(TFake fake, Expression<Action<TFake>> func) where TFake : class
         {
             var callExpression = func.WrapExpression(fake);
             
             A.CallTo(callExpression).MustNotHaveHappened();
+        }
+
+        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
+        {
+            throw new NotSupportedException("Inline constraints are currently not supported in Machine.Fakes API. Use the FakeItEasy built-in mechanism instead!");
         }
     }
 }
