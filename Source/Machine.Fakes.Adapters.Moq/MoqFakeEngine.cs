@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using Machine.Fakes.Internal;
 using Moq;
 
 namespace Machine.Fakes.Adapters.Moq
@@ -69,6 +70,11 @@ namespace Machine.Fakes.Adapters.Moq
             var mock = Mock.Get(fake);
 
             return new MoqMethodCallOccurance<TFake>(mock, func);
+        }
+
+        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
+        {
+            return It.Is(matchExpression);
         }
     }
 }

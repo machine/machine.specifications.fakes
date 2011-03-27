@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Machine.Fakes.Internal;
 using NSubstitute;
 
 namespace Machine.Fakes.Adapters.NSubstitute
@@ -10,8 +11,6 @@ namespace Machine.Fakes.Adapters.NSubstitute
     /// </summary>
     public class NSubstituteEngine : IFakeEngine
     {
-        #region IFakeEngine Members
-
         public object CreateFake(Type interfaceType)
         {
             return Substitute.For(new[] {interfaceType}, null);
@@ -50,6 +49,11 @@ namespace Machine.Fakes.Adapters.NSubstitute
             return new NSubstituteMethodCallOccurance<TFake>(fake, func);
         }
 
-        #endregion
+        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
+        {
+            var matcher = matchExpression.Compile();
+
+            return Arg.Is<TParam>(p => matcher(p));
+        }
     }
 }
