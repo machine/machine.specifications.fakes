@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="CommandOptionsSpecs.cs" />
     <Compile Include="EngineSpecs.cs" />
+    <Compile Include="NSubstitute\NSubstituteMatcherSpecs.cs" />
     <Compile Include="SampleCode\IFlashVerifier.cs" />
     <Compile Include="SampleCode\ITablet.cs" />
     <Compile Include="SampleCode\IView.cs" />

@@ -51,9 +51,9 @@ namespace Machine.Fakes.Adapters.NSubstitute
             return new NSubstituteMethodCallOccurance<TFake>(fake, func);
         }
 
-        public IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
+        public IMatcher<TParam> CreateMatcher<TParam>()
         {
-            throw new NotImplementedException();
+            return new NSubstituteMatcher<TParam>();
         }
 
         #endregion
