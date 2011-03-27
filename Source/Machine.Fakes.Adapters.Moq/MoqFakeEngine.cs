@@ -72,9 +72,9 @@ namespace Machine.Fakes.Adapters.Moq
             return new MoqMethodCallOccurance<TFake>(mock, func);
         }
 
-        public IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
+        public IMatcher<TParam> CreateMatcher<TParam>()
         {
-            throw new NotImplementedException();
+            return new MoqMatcher<TParam>();
         }
     }
 }

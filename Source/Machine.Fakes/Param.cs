@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using Machine.Fakes.Internal;
+using Machine.Fakes.Sdk;
 
 namespace Machine.Fakes
 {
@@ -44,18 +45,15 @@ namespace Machine.Fakes
             return Matches(paramValue => Equals(paramValue, value));
         }
 
-        public static TParam IsOfType<TOther>() where TOther : TParam
+        public static TParam IsA<TOther>()
         {
             return Matches(paramValue => paramValue is TOther);
         }
 
-        public static TParam Implements<TInterface>()
-        {
-            return Matches(parmValue => typeof (TInterface).IsAssignableFrom(typeof (TParam)));
-        }
-
         public static TParam Matches(Expression<Func<TParam, bool>> matchExpression)
         {
+            Guard.AgainstArgumentNull(matchExpression, "matchExpression");
+
             return FakeEngineGateway
                 .CreateMatcher<TParam>()
                 .Match(matchExpression);

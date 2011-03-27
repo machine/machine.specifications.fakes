@@ -48,6 +48,7 @@
     </Compile>
     <Compile Include="MoqCommandOptions.cs" />
     <Compile Include="MoqFakeEngine.cs" />
+    <Compile Include="MoqMatcher.cs" />
     <Compile Include="MoqMethodCallOccurance.cs" />
     <Compile Include="MoqQueryOptions.cs" />
     <Compile Include="WithFakes.cs" />
