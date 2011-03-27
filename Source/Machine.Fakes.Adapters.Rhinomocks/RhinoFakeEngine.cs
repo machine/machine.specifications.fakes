@@ -57,9 +57,9 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             return new RhinoMethodCallOccurance<TFake>(fake, compiledFunction);
         }
 
-        public IMatcher<TReturnValue> CreateMatcher<TReturnValue>()
+        public IMatcher<TParam> CreateMatcher<TParam>()
         {
-            throw new NotImplementedException();
+            return new RhinoMatcher<TParam>();
         }
     }
 }
