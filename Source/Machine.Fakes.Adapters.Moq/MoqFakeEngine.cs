@@ -41,7 +41,7 @@ namespace Machine.Fakes.Adapters.Moq
         {
             var mock = Mock.Get(fake);
 
-            var configurationExpression = new ExpressionRewriter().Rewrite(func) as Expression<Func<TFake, TReturnValue>>;
+            var configurationExpression = new MoqExpressionRewriter().Rewrite(func) as Expression<Func<TFake, TReturnValue>>;
 
             return new MoqQueryOptions<TFake, TReturnValue>(mock.Setup(configurationExpression));
         }
@@ -75,7 +75,7 @@ namespace Machine.Fakes.Adapters.Moq
 
         public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
         {
-            return It.Is(matchExpression);
+            return default(TParam);
         }
     }
 }

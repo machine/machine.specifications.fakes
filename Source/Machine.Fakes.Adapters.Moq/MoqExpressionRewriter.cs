@@ -5,17 +5,17 @@ using Moq;
 
 namespace Machine.Fakes.Adapters.Moq
 {
-    public class ExpressionRewriter : AbstractExpressionRewriter
+    class MoqExpressionRewriter : AbstractExpressionRewriter
     {
-        public ExpressionRewriter()
+        public MoqExpressionRewriter()
         {
-            AddConverter("IsAny", RewriteIsAnyMethod);
-            AddConverter("Is", RewriteIsMethod);
-            AddConverter("IsA", RewriteIsAMethod);
-            AddConverter("Matches", RewriteMatchesMethod);
-            AddConverter("IsAnything", RewriteIsAnythingMember);
-            AddConverter("IsNull", RewriteIsNullMember);
-            AddConverter("IsNotNull", RewriteIsNotNullMember);
+            AddConverter(InlineConstaintNames.IsAny, RewriteIsAnyMethod);
+            AddConverter(InlineConstaintNames.Is, RewriteIsMethod);
+            AddConverter(InlineConstaintNames.IsA, RewriteIsAMethod);
+            AddConverter(InlineConstaintNames.Matches, RewriteMatchesMethod);
+            AddConverter(InlineConstaintNames.IsAnything, RewriteIsAnythingMember);
+            AddConverter(InlineConstaintNames.IsNull, RewriteIsNullMember);
+            AddConverter(InlineConstaintNames.IsNotNull, RewriteIsNotNullMember);
         }
 
         static Expression RewriteIsAnythingMember(MemberExpression node)

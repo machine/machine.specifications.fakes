@@ -61,6 +61,7 @@
     <Compile Include="Param.cs" />
     <Compile Include="Sdk\AbstractExpressionRewriter.cs" />
     <Compile Include="Sdk\IExpressionRewriter.cs" />
+    <Compile Include="Sdk\InlineConstaintNames.cs" />
     <Compile Include="Sdk\ReflectionExtensions.cs" />
     <Compile Include="Sdk\SpecificationController.cs" />
     <Compile Include="LocalAssemblyInfo.cs" />

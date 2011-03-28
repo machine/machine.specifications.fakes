@@ -1,6 +1,5 @@
 using System;
 using System.Linq.Expressions;
-using Machine.Fakes.Internal;
 using Rhino.Mocks;
 
 namespace Machine.Fakes.Adapters.Rhinomocks
