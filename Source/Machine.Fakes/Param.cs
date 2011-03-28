@@ -24,7 +24,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TParam Matches<TParam>(Expression<Func<TParam, bool>> matchExpression)
         {
-            return Param<TParam>.Matches(matchExpression);
+            return default(TParam);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TParam Is<TParam>(TParam value)
         {
-            return Param<TParam>.Is(value);
+            return default(TParam);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TParam IsAny<TParam>()
         {
-            return Param<TParam>.IsAnything;
+            return default(TParam);
         }
     }
 
@@ -72,7 +72,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TParam IsNull
         {
-            get { return Matches(paramValue => Equals(paramValue, null)); }
+            get { return default(TParam); }
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TParam IsNotNull
         {
-            get { return Matches(paramValue => !Equals(paramValue, null)); }
+            get { return default(TParam); }
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TParam IsAnything
         {
-            get { return Matches(paramValue => true); }
+            get { return default(TParam); }
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TParam Is(TParam value)
         {
-            return Matches(paramValue => Equals(paramValue, value));
+            return default(TParam);
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TParam IsA<TOther>()
         {
-            return Matches(paramValue => paramValue is TOther);
+            return default(TParam);
         }
 
         /// <summary>
@@ -136,9 +136,7 @@ namespace Machine.Fakes
         /// </returns>
         public static TParam Matches(Expression<Func<TParam, bool>> matchExpression)
         {
-            Guard.AgainstArgumentNull(matchExpression, "matchExpression");
-
-            return FakeEngineGateway.Match(matchExpression);
+            return default(TParam);
         }
     }
 }

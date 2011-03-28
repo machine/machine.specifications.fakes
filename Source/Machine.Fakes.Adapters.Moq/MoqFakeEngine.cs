@@ -42,7 +42,9 @@ namespace Machine.Fakes.Adapters.Moq
         {
             var mock = Mock.Get(fake);
 
-            return new MoqQueryOptions<TFake, TReturnValue>(mock.Setup(func));
+            var configurationExpression = new ExpressionRewriter().Modify(func) as Expression<Func<TFake, TReturnValue>>;
+
+            return new MoqQueryOptions<TFake, TReturnValue>(mock.Setup(configurationExpression));
         }
 
         public ICommandOptions SetUpCommandBehaviorFor<TFake>(
