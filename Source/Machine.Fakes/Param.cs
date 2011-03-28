@@ -1,7 +1,5 @@
 using System;
 using System.Linq.Expressions;
-using Machine.Fakes.Internal;
-using Machine.Fakes.Sdk;
 
 namespace Machine.Fakes
 {
@@ -95,20 +93,6 @@ namespace Machine.Fakes
         public static TParam IsAnything
         {
             get { return default(TParam); }
-        }
-
-        /// <summary>
-        /// Configures that the parameter must match the specified value.
-        /// </summary>
-        /// <param name="value">
-        /// Specifies the value on which is matched.
-        /// </param>
-        /// <returns>
-        /// A substitute type that isn't directly used.
-        /// </returns>
-        public static TParam Is(TParam value)
-        {
-            return default(TParam);
         }
 
         /// <summary>

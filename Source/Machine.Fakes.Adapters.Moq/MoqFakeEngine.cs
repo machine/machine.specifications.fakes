@@ -1,6 +1,5 @@
 using System;
 using System.Linq.Expressions;
-using Machine.Fakes.Internal;
 using Moq;
 
 namespace Machine.Fakes.Adapters.Moq
@@ -42,7 +41,7 @@ namespace Machine.Fakes.Adapters.Moq
         {
             var mock = Mock.Get(fake);
 
-            var configurationExpression = new ExpressionRewriter().Modify(func) as Expression<Func<TFake, TReturnValue>>;
+            var configurationExpression = new ExpressionRewriter().Rewrite(func) as Expression<Func<TFake, TReturnValue>>;
 
             return new MoqQueryOptions<TFake, TReturnValue>(mock.Setup(configurationExpression));
         }
