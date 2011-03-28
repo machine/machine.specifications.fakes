@@ -221,13 +221,13 @@ namespace Machine.Fakes.Adapters.Specs.Moq
             _flashVerifier = FakeEngineGateway.Fake<IFlashVerifier>();
 
             _flashVerifier
-                .WhenToldTo(v => v.CanPlayPlash(Param<ITablet>.IsA<ICanPlayFlash>()))
+                .WhenToldTo(v => v.CanPlayFlash(Param<ITablet>.IsA<ICanPlayFlash>()))
                 .Return(true);
         };
 
         Because of = () =>
         {
-            _configuredBehaviorWasTriggered = _flashVerifier.CanPlayPlash(new Xoom());
+            _configuredBehaviorWasTriggered = _flashVerifier.CanPlayFlash(new Xoom());
         };
 
         It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
@@ -245,13 +245,13 @@ namespace Machine.Fakes.Adapters.Specs.Moq
             _flashVerifier = FakeEngineGateway.Fake<IFlashVerifier>();
 
             _flashVerifier
-                .WhenToldTo(v => v.CanPlayPlash(Param<ITablet>.IsA<ICanPlayFlash>()))
+                .WhenToldTo(v => v.CanPlayFlash(Param<ITablet>.IsA<ICanPlayFlash>()))
                 .Return(true);
         };
 
         Because of = () =>
         {
-            _configuredBehaviorWasTriggered = _flashVerifier.CanPlayPlash(new IPad());
+            _configuredBehaviorWasTriggered = _flashVerifier.CanPlayFlash(new IPad());
         };
 
         It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
