@@ -55,12 +55,5 @@ namespace Machine.Fakes.Adapters.Rhinomocks
 
             return new RhinoMethodCallOccurance<TFake>(fake, compiledFunction);
         }
-
-        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
-        {
-            var matcher = matchExpression.Compile();
-
-            return Arg<TParam>.Matches(p => matcher(p));
-        }
     }
 }

@@ -116,19 +116,5 @@ namespace Machine.Fakes
         IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) where TFake : class ;
-
-        /// <summary>
-        /// Configures that the parameter must match the specified predicate.
-        /// </summary>
-        /// <typeparam name="TParam">
-        /// Specifies the parameter type.
-        /// </typeparam>
-        /// <param name="matchExpression">
-        /// Specifies the predicate.
-        /// </param>
-        /// <returns>
-        /// A substitute type that isn't directly used.
-        /// </returns>
-        TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression);
     }
 }

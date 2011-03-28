@@ -50,12 +50,5 @@ namespace Machine.Fakes.Adapters.NSubstitute
         {
             return new NSubstituteMethodCallOccurance<TFake>(fake, func);
         }
-
-        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
-        {
-            var matcher = matchExpression.Compile();
-
-            return Arg.Is<TParam>(p => matcher(p));
-        }
     }
 }

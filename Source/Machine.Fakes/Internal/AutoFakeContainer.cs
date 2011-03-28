@@ -54,11 +54,6 @@ namespace Machine.Fakes.Internal
             return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
         }
 
-        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
-        {
-            return _fakeEngine.Match(matchExpression);
-        }
-
         public T PartialMock<T>(params object[] args) where T : class
         {
             return _fakeEngine.PartialMock<T>(args);

@@ -72,10 +72,5 @@ namespace Machine.Fakes.Adapters.Moq
 
             return new MoqMethodCallOccurance<TFake>(mock, func);
         }
-
-        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
-        {
-            return default(TParam);
-        }
     }
 }

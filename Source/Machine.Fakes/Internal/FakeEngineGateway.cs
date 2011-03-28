@@ -59,10 +59,5 @@ namespace Machine.Fakes.Internal
         {
             return _fakeEngine.Stub<T>();
         }
-
-        public static TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
-        {
-            return _fakeEngine.Match(matchExpression);
-        }
     }
 }
