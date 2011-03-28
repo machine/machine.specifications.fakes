@@ -46,6 +46,7 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="NSubstituteExpressionRewriter.cs" />
     <Compile Include="NSubstituteCommandOptions.cs" />
     <Compile Include="NSubstituteEngine.cs" />
     <Compile Include="NSubstituteMethodCallOccurance.cs" />

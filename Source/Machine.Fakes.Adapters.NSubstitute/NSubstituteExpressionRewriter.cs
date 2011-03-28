@@ -1,13 +1,13 @@
 using System;
 using System.Linq.Expressions;
 using Machine.Fakes.Sdk;
-using Moq;
+using NSubstitute;
 
-namespace Machine.Fakes.Adapters.Moq
+namespace Machine.Fakes.Adapters.NSubstitute
 {
-    class MoqExpressionRewriter : AbstractExpressionRewriter
+    class NSubstituteExpressionRewriter : AbstractExpressionRewriter
     {
-        public MoqExpressionRewriter()
+        public NSubstituteExpressionRewriter()
         {
             AddConverter(InlineConstaintNames.IsAny, RewriteIsAnyMethod);
             AddConverter(InlineConstaintNames.Is, RewriteIsMethod);
@@ -24,9 +24,9 @@ namespace Machine.Fakes.Adapters.Moq
             var typeArgument = declaringType.GetFirstTypeArgument();
 
             return Expression.Call(
-                typeof (It),
-                "IsAny",
-                new[] {typeArgument});
+                typeof(Arg),
+                "Any",
+                new[] { typeArgument });
         }
 
         static Expression RewriteIsNullMember(MemberExpression node)
@@ -35,7 +35,7 @@ namespace Machine.Fakes.Adapters.Moq
             var typeArgument = declaringType.GetFirstTypeArgument();
 
             var parameterExpression = Expression.Parameter(typeArgument, "param");
-            var lamdaType = typeof (Func<,>).MakeGenericType(typeArgument, typeof (bool));
+            var lamdaType = typeof(Predicate<>).MakeGenericType(typeArgument);
 
             var equalExpression = Expression.Equal(
                 parameterExpression,
@@ -47,9 +47,9 @@ namespace Machine.Fakes.Adapters.Moq
                 parameterExpression);
 
             return Expression.Call(
-                typeof (It),
+                typeof(Arg),
                 "Is",
-                new[] {typeArgument},
+                new[] { typeArgument },
                 expr);
         }
 
@@ -59,7 +59,7 @@ namespace Machine.Fakes.Adapters.Moq
             var typeArgument = declaringType.GetFirstTypeArgument();
 
             var parameterExpression = Expression.Parameter(typeArgument, "param");
-            var lambdaType = typeof (Func<,>).MakeGenericType(typeArgument, typeof (bool));
+            var lambdaType = typeof(Predicate<>).MakeGenericType(typeArgument);
 
             var notEqualExpression = Expression.Not(
                 Expression.Equal(
@@ -71,45 +71,23 @@ namespace Machine.Fakes.Adapters.Moq
                 notEqualExpression,
                 parameterExpression);
 
-            return Expression.Call(typeof (It), "Is", new[] {typeArgument}, lambda);
-        }
-
-        Expression RewriteMatchesMethod(MethodCallExpression expression)
-        {
-            var method = expression.Method;
-            var matchExpression = expression.Arguments[0];
-
-            if (matchExpression is UnaryExpression)
-            {
-                matchExpression = ((UnaryExpression) matchExpression).Operand;
-                var methodTypeParameter = method.DeclaringType.GetFirstTypeArgument();
-                return Expression.Call(typeof(It), "Is", new[] { methodTypeParameter }, matchExpression);
-            }
-
-            return base.VisitMethodCall(expression);
+            return Expression.Call(typeof(Arg), "Is", new[] { typeArgument }, lambda);
         }
 
         static Expression RewriteIsAnyMethod(MethodCallExpression expression)
         {
             return Expression.Call(
-                typeof (It),
-                "IsAny",
-                new[] {expression.Method.GetFirstTypeArgument()});
+                typeof(Arg),
+                "Any",
+                new[] { expression.Method.GetFirstTypeArgument() });
         }
 
         static Expression RewriteIsMethod(MethodCallExpression expression)
         {
-            var argument = (ConstantExpression) expression.Arguments[0];
-            var parameterExpression = Expression.Parameter(argument.Type, "param");
-            var lambdaType = typeof (Func<,>).MakeGenericType(argument.Type, typeof (bool));
+            var argument = (ConstantExpression)expression.Arguments[0];
+            var valueExpression = Expression.Constant(argument.Value);
 
-            var equalExpression = Expression.Equal(
-                parameterExpression,
-                Expression.Constant(argument.Value));
-
-            var expr = Expression.Lambda(lambdaType, equalExpression, parameterExpression);
-
-            return Expression.Call(typeof (It), "Is", new[] {argument.Type}, expr);
+            return Expression.Call(typeof(Arg), "Is", new[] { argument.Type }, valueExpression);
         }
 
         static Expression RewriteIsAMethod(MethodCallExpression expression)
@@ -117,11 +95,36 @@ namespace Machine.Fakes.Adapters.Moq
             var derivedType = expression.Method.GetFirstTypeArgument();
             var baseType = expression.Method.DeclaringType.GetFirstTypeArgument();
             var parameterExpression = Expression.Parameter(baseType, "param");
-            var lamdaType = typeof (Func<,>).MakeGenericType(baseType, typeof (bool));
+            var lamdaType = typeof(Predicate<>).MakeGenericType(baseType);
             var isTypeExpression = Expression.TypeIs(parameterExpression, derivedType);
             var lambda = Expression.Lambda(lamdaType, isTypeExpression, parameterExpression);
 
-            return Expression.Call(typeof (It), "Is", new[] {baseType}, lambda);
+            return Expression.Call(typeof(Arg), "Is", new[] { baseType }, lambda);
+        }
+
+        Expression RewriteMatchesMethod(MethodCallExpression expression)
+        {
+            var method = expression.Method;
+            var matchExpression = expression.Arguments[0];
+           
+            if (matchExpression is UnaryExpression)
+            {
+                var typeParameter = method.DeclaringType.GetFirstTypeArgument();
+                var oldLambda = (LambdaExpression)((UnaryExpression)matchExpression).Operand;
+                
+                var newLambda = Expression.Lambda(
+                    typeof(Predicate<>).MakeGenericType(typeParameter),
+                    oldLambda.Body,
+                    oldLambda.Parameters);
+
+                return Expression.Call(
+                    typeof(Arg), 
+                    "Is",
+                    new[] { typeParameter },
+                    newLambda);
+            }
+
+            return base.VisitMethodCall(expression); 
         }
     }
 }

@@ -25,7 +25,9 @@ namespace Machine.Fakes.Adapters.NSubstitute
             TFake fake,
             Expression<Func<TFake, TReturnValue>> func) where TFake : class
         {
-            return new NSubstituteQueryOptions<TFake, TReturnValue>(fake, func);
+            var expression = new NSubstituteExpressionRewriter().Rewrite(func) as Expression<Func<TFake, TReturnValue>>;
+
+            return new NSubstituteQueryOptions<TFake, TReturnValue>(fake, expression);
         }
 
         public ICommandOptions SetUpCommandBehaviorFor<TFake>(

@@ -9,23 +9,6 @@ namespace Machine.Fakes
     public class Param
     {
         /// <summary>
-        /// Configures that the parameter must match the specified predicate.
-        /// </summary>
-        /// <typeparam name="TParam">
-        /// Specifies the parameter type.
-        /// </typeparam>
-        /// <param name="matchExpression">
-        /// Specifies the predicate.
-        /// </param>
-        /// <returns>
-        /// A substitute type that isn't directly used.
-        /// </returns>
-        public static TParam Matches<TParam>(Expression<Func<TParam, bool>> matchExpression)
-        {
-            return default(TParam);
-        }
-
-        /// <summary>
         /// Configures that the parameter must match the specified value.
         /// </summary>
         /// <typeparam name="TParam">
