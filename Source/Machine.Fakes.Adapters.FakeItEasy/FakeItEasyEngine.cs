@@ -1,13 +1,17 @@
 using System;
 using System.Linq.Expressions;
 using FakeItEasy;
-using Machine.Fakes.Internal;
+using Machine.Fakes.Sdk;
 
 namespace Machine.Fakes.Adapters.FakeItEasy
 {
-    public class FakeItEasyEngine : IFakeEngine
+    public class FakeItEasyEngine : RewritingFakeEngine
     {
-        public object CreateFake(Type interfaceType)
+        public FakeItEasyEngine() : base(new FakeItEasyExpressionRewriter())
+        {
+        }
+
+        public override object CreateFake(Type interfaceType)
         {
             var closedFakeType = typeof(Fake<>).MakeGenericType(interfaceType);
             var objectProperty = closedFakeType.GetProperty("FakedObject", interfaceType);
@@ -15,24 +19,25 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             return objectProperty.GetValue(instance, null);
         }
 
-        public T PartialMock<T>(params object[] args) where T : class
+        public override T PartialMock<T>(params object[] args) 
         {
             return A.Fake<T>(f => f.WithArgumentsForConstructor(args));
         }
 
-        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
+        protected override IQueryOptions<TReturnValue> OnSetUpQueryBehaviorFor<TFake, TReturnValue>(
             TFake fake, 
-            Expression<Func<TFake, TReturnValue>> func) where TFake : class
+            Expression<Func<TFake, TReturnValue>> func) 
         {
             var queryExpression = func.WrapExpression(fake);
-            var updatedExpression = new FakeItEasyExpressionRewriter().Rewrite(queryExpression);
 
-            var configuration = A.CallTo((Expression<Func<TReturnValue>>)updatedExpression);
+            var configuration = A.CallTo(queryExpression);
 
             return new FakeItEasyQueryOptions<TReturnValue>(configuration);
         }
 
-        public ICommandOptions SetUpCommandBehaviorFor<TFake>(TFake fake, Expression<Action<TFake>> func) where TFake : class
+        protected override ICommandOptions OnSetUpCommandBehaviorFor<TFake>(
+            TFake fake, 
+            Expression<Action<TFake>> func) 
         {
             var callExpression = func.WrapExpression(fake);
             var configuration = A.CallTo(callExpression);
@@ -40,7 +45,9 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             return new FakeItEasyCommandOptions(configuration);
         }
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(TFake fake, Expression<Action<TFake>> func) where TFake : class
+        protected override IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
+            TFake fake, 
+            Expression<Action<TFake>> func) 
         {
             var callExpression = func.WrapExpression(fake);
             var configuration = A.CallTo(callExpression);
@@ -48,7 +55,9 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             return new FakeItEasyMethodCallOccurance(configuration);
         }
 
-        public void VerifyBehaviorWasNotExecuted<TFake>(TFake fake, Expression<Action<TFake>> func) where TFake : class
+        protected override void OnVerifyBehaviorWasNotExecuted<TFake>(
+            TFake fake, 
+            Expression<Action<TFake>> func) 
         {
             var callExpression = func.WrapExpression(fake);
             

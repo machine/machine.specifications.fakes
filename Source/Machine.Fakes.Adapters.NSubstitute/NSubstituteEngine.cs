@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Machine.Fakes.Internal;
+using Machine.Fakes.Sdk;
 using NSubstitute;
 
 namespace Machine.Fakes.Adapters.NSubstitute
@@ -9,44 +9,46 @@ namespace Machine.Fakes.Adapters.NSubstitute
     ///   An implementation of <see cref = "IFakeEngine" />
     ///   using the NSubstitute framework.
     /// </summary>
-    public class NSubstituteEngine : IFakeEngine
+    public class NSubstituteEngine : RewritingFakeEngine
     {
-        public object CreateFake(Type interfaceType)
+        public NSubstituteEngine() : base(new NSubstituteExpressionRewriter())
+        {
+        }
+
+        public override object CreateFake(Type interfaceType)
         {
             return Substitute.For(new[] {interfaceType}, null);
         }
 
-        public T PartialMock<T>(params object[] args) where T : class
+        public override T PartialMock<T>(params object[] args) 
         {
             return Substitute.For<T>(args);
         }
 
-        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
+        protected override IQueryOptions<TReturnValue> OnSetUpQueryBehaviorFor<TFake, TReturnValue>(
             TFake fake,
-            Expression<Func<TFake, TReturnValue>> func) where TFake : class
+            Expression<Func<TFake, TReturnValue>> func) 
         {
-            var expression = new NSubstituteExpressionRewriter().Rewrite(func) as Expression<Func<TFake, TReturnValue>>;
-
-            return new NSubstituteQueryOptions<TFake, TReturnValue>(fake, expression);
+            return new NSubstituteQueryOptions<TFake, TReturnValue>(fake, func);
         }
 
-        public ICommandOptions SetUpCommandBehaviorFor<TFake>(
+        protected override ICommandOptions OnSetUpCommandBehaviorFor<TFake>(
             TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
+            Expression<Action<TFake>> func) 
         {
             return new NSubstituteCommandOptions<TFake>(fake, func);
         }
 
-        public void VerifyBehaviorWasNotExecuted<TFake>(
+        protected override void OnVerifyBehaviorWasNotExecuted<TFake>(
             TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
+            Expression<Action<TFake>> func)
         {
             func.Compile().Invoke(fake.DidNotReceive());
         }
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+        protected override IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
+            Expression<Action<TFake>> func) 
         {
             return new NSubstituteMethodCallOccurance<TFake>(fake, func);
         }

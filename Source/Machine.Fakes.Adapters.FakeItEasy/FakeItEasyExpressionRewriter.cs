@@ -6,7 +6,7 @@ using Machine.Fakes.Sdk;
 
 namespace Machine.Fakes.Adapters.FakeItEasy
 {
-    class FakeItEasyExpressionRewriter : AbstractExpressionRewriter
+    public class FakeItEasyExpressionRewriter : AbstractExpressionRewriter
     {
         public FakeItEasyExpressionRewriter()
         {

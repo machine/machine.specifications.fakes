@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using Machine.Fakes.Sdk;
 using Moq;
 
 namespace Machine.Fakes.Adapters.Moq
@@ -8,9 +9,13 @@ namespace Machine.Fakes.Adapters.Moq
     ///   An implementation of <see cref = "IFakeEngine" />
     ///   using the Moq framework.
     /// </summary>
-    public class MoqFakeEngine : IFakeEngine
+    public class MoqFakeEngine : RewritingFakeEngine
     {
-        public object CreateFake(Type interfaceType)
+        public MoqFakeEngine() : base(new MoqExpressionRewriter())
+        {
+        }
+
+        public override object CreateFake(Type interfaceType)
         {
             var closedMockType = typeof (Mock<>).MakeGenericType(interfaceType);
             var objectProperty = closedMockType.GetProperty("Object", closedMockType);
@@ -18,7 +23,7 @@ namespace Machine.Fakes.Adapters.Moq
             return objectProperty.GetValue(instance, null);
         }
 
-        public T PartialMock<T>(params object[] args) where T : class
+        public override T PartialMock<T>(params object[] args) 
         {
             var closedMockType = typeof (Mock<>).MakeGenericType(typeof (T));
             var callBaseProperty = closedMockType.GetProperty("CallBase", typeof (bool));
@@ -35,38 +40,36 @@ namespace Machine.Fakes.Adapters.Moq
             return objectProperty.GetValue(instance, null) as T;
         }
 
-        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
+        protected override IQueryOptions<TReturnValue> OnSetUpQueryBehaviorFor<TFake, TReturnValue>(
             TFake fake,
-            Expression<Func<TFake, TReturnValue>> func) where TFake : class
+            Expression<Func<TFake, TReturnValue>> func) 
         {
             var mock = Mock.Get(fake);
 
-            var configurationExpression = new MoqExpressionRewriter().Rewrite(func) as Expression<Func<TFake, TReturnValue>>;
-
-            return new MoqQueryOptions<TFake, TReturnValue>(mock.Setup(configurationExpression));
+            return new MoqQueryOptions<TFake, TReturnValue>(mock.Setup(func));
         }
 
-        public ICommandOptions SetUpCommandBehaviorFor<TFake>(
+        protected override ICommandOptions OnSetUpCommandBehaviorFor<TFake>(
             TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
+            Expression<Action<TFake>> func) 
         {
             var mock = Mock.Get(fake);
 
             return new MoqCommandOptions<TFake>(mock.Setup(func));
         }
 
-        public void VerifyBehaviorWasNotExecuted<TFake>(
+        protected override void OnVerifyBehaviorWasNotExecuted<TFake>(
             TFake fake, 
-            Expression<Action<TFake>> func) where TFake : class
+            Expression<Action<TFake>> func) 
         {
             var mock = Mock.Get(fake);
 
             mock.Verify(func, Times.Never());
         }
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+        protected override IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
-            Expression<Action<TFake>> func) where TFake : class
+            Expression<Action<TFake>> func) 
         {
             var mock = Mock.Get(fake);
 
