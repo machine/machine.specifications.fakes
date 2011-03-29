@@ -1,11 +1,14 @@
 using System;
 using System.ComponentModel.Design;
+using Machine.Fakes.Adapters.Moq;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
-namespace Machine.Fakes.Adapters.Specs
+namespace Machine.Fakes.Adapters.Specs.Moq
 {
-    public class Given_a_simple_configured_command : WithCurrentEngine
+    [Subject(typeof(MoqFakeEngine))]
+    [Tags("CommandOptions", "Moq")]
+    public class Given_a_simple_configured_command : WithCurrentEngine<MoqFakeEngine>
     {
         static IServiceContainer _fake;
         static Type _receivedParameter;
@@ -22,8 +25,10 @@ namespace Machine.Fakes.Adapters.Specs
         };
     }
 
+    [Subject(typeof(MoqFakeEngine))]
+    [Tags("CommandOptions", "Moq")]
     public class Given_an_exception_configured_on_a_command_when_triggering_the_behavior :
-        WithCurrentEngine
+        WithCurrentEngine<MoqFakeEngine>
     {
         static IServiceContainer _fake;
 

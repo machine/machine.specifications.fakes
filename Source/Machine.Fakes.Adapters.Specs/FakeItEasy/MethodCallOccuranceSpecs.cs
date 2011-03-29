@@ -1,12 +1,15 @@
 using System;
 using System.ComponentModel.Design;
+using Machine.Fakes.Adapters.FakeItEasy;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
-namespace Machine.Fakes.Adapters.Specs
+namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 {
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurance", "FakeItEasy")]
     public class Given_a_method_was_not_configured_on_a_Fake_when_verifying_whether_it_was_accessed :
-        WithCurrentEngine
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -18,8 +21,10 @@ namespace Machine.Fakes.Adapters.Specs
         It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurance", "FakeItEasy")]
     public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed :
-        WithCurrentEngine
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -35,8 +40,10 @@ namespace Machine.Fakes.Adapters.Specs
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurance", "FakeItEasy")]
     public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_twice :
-        WithCurrentEngine
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -53,8 +60,10 @@ namespace Machine.Fakes.Adapters.Specs
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurance", "FakeItEasy")]
     public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_twice_but_was_only_executed_once :
-        WithCurrentEngine
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -70,8 +79,10 @@ namespace Machine.Fakes.Adapters.Specs
         It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurance", "FakeItEasy")]
     public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_only_once_but_was_excuted_twice :
-        WithCurrentEngine
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -83,14 +94,15 @@ namespace Machine.Fakes.Adapters.Specs
             _fake.RemoveService(null);
         };
 
-        Because of =
-            () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.RemoveService(null)).OnlyOnce());
+        Because of = () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.RemoveService(null)).OnlyOnce());
 
         It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurance", "FakeItEasy")]
     public class Given_a_query_was_configured_on_a_fake_when_verifying_whether_it_was_executed :
-        WithCurrentEngine
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;

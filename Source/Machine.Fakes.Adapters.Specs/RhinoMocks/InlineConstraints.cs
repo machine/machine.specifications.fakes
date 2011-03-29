@@ -6,7 +6,7 @@ using Machine.Specifications;
 namespace Machine.Fakes.Adapters.Specs.RhinoMocks
 {
     [Subject(typeof(RhinoFakeEngine))] 
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_any_parameter_value_and_passing_null : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -26,7 +26,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof(RhinoFakeEngine))] 
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_any_parameter_value_and_passing_a_non_null_value : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -46,7 +46,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_only_non_null_parameter_values_and_passing_in_null : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -66,7 +66,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_only_non_null_parameter_values_and_passing_in_non_null_values : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -86,7 +86,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_only_null_parameter_values_and_passing_in_null : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -106,7 +106,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_only_null_parameter_values_and_passing_in_non_null_values : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -126,7 +126,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_only_on_a_particular_value_and_passing_in_that_value : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -146,7 +146,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
     
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_only_on_a_particular_value_and_passing_different_values : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -166,7 +166,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_using_expressions_and_passing_in_a_value_that_matches_the_expression : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -188,7 +188,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
     
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_using_expressions_and_passing_in_a_value_that_does_not_match_the_expression : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;
@@ -210,7 +210,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_only_when_a_type_implements_an_interface_and_the_parameter_value_implements_that_interface : WithCurrentEngine<RhinoFakeEngine>
     {
         static IFlashVerifier _flashVerifier;
@@ -234,7 +234,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof(RhinoFakeEngine))]
-    [Tags("Inline constraints", "Rhino")]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_only_when_a_type_implements_an_interface_and_the_parameter_value_does_not_implement_that_interface : WithCurrentEngine<RhinoFakeEngine>
     {
         static IFlashVerifier _flashVerifier;
