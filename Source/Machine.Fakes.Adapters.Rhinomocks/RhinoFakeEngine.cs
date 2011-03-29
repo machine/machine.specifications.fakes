@@ -24,7 +24,8 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             TDependency fake,
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
         {
-            var compiledFunction = func.Compile();
+            var expression = (Expression<Func<TDependency, TReturnValue>>)new RhinoMocksExpressionRewriter().Rewrite(func); 
+            var compiledFunction = expression.Compile();
 
             return new RhinoQueryOptions<TReturnValue>(fake.Stub(f => compiledFunction(f)));
         }
