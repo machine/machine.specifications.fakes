@@ -64,13 +64,14 @@
   <ItemGroup>
     <Compile Include="CommandOptionsSpecs.cs" />
     <Compile Include="EngineSpecs.cs" />
-    <Compile Include="NSubstitute\NSubstituteMatcherSpecs.cs" />
-    <Compile Include="RhinoMocks\RhinoMatcherSpecs.cs" />
+    <Compile Include="FakeItEasy\InlineConstraints.cs" />
+    <Compile Include="NSubstitute\InlineConstraints.cs" />
+    <Compile Include="RhinoMocks\InlineConstraints.cs" />
     <Compile Include="SampleCode\IFlashVerifier.cs" />
     <Compile Include="SampleCode\ITablet.cs" />
     <Compile Include="SampleCode\IView.cs" />
     <Compile Include="MethodCallOccuranceSpecs.cs" />
-    <Compile Include="Moq\MoqMatcherSpecs.cs" />
+    <Compile Include="Moq\InlineConstraints.cs" />
     <Compile Include="WithCurrentEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryOptionsSpecs.cs" />

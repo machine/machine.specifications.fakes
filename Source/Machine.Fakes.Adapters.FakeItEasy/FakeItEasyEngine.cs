@@ -25,7 +25,9 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             Expression<Func<TFake, TReturnValue>> func) where TFake : class
         {
             var queryExpression = func.WrapExpression(fake);
-            var configuration = A.CallTo(queryExpression);
+            var updatedExpression = new FakeItEasyExpressionRewriter().Rewrite(queryExpression);
+
+            var configuration = A.CallTo((Expression<Func<TReturnValue>>)updatedExpression);
 
             return new FakeItEasyQueryOptions<TReturnValue>(configuration);
         }
