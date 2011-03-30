@@ -113,7 +113,7 @@ Behavior configs mimic the setup and teardown phases of the context / specificat
 
         public CurrentTime(DateTime time) { Time = time; }
 
-        OnEstablishContext = fakeAccessor =>
+        OnEstablish context = fakeAccessor =>
         {
             fakeAccessor.The<ISystemClock>()
                 .WhenToldTo(x => x.CurrentTime)
