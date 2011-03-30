@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
-namespace Machine.Fakes.Specs.Mood
+namespace Machine.Fakes.Examples.SampleCode
 {
     public class MoodIdentifier
     {
-        private readonly ISystemClock _systemClock;
+        readonly ISystemClock _systemClock;
 
         public MoodIdentifier(ISystemClock systemClock)
         {
@@ -13,7 +13,9 @@ namespace Machine.Fakes.Specs.Mood
 
         public string IdentifyMood()
         {
-            if (_systemClock.CurrentTime.DayOfWeek == DayOfWeek.Monday)
+            var dayOfWeek = _systemClock.CurrentTime.DayOfWeek;
+
+            if (dayOfWeek == DayOfWeek.Monday)
             {
                 return "Pretty bad";
             }

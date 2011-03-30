@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Machine.Fakes.Specs.Mood
+namespace Machine.Fakes.Examples.SampleCode
 {
     public interface ISystemClock
     {
