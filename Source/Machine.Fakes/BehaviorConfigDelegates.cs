@@ -19,5 +19,5 @@ namespace Machine.Fakes
     /// <param name="subject">
     /// Specifies the subject of a context / specification.
     /// </param>
-    public delegate void OnCleanUp(object subject);
+    public delegate void OnCleanup(object subject);
 }

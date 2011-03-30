@@ -3,51 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Machine.Specifications.Runner.Impl;
 
 namespace Machine.Fakes.Sdk
 {
     /// <summary>
-    /// Helper class which contains all the helper method needed for reflection.
+    ///     Helper class which contains all the helper method needed for reflection.
     /// </summary>
     public static class ReflectionExtensions
     {
         /// <summary>
-        /// Checks whether the supplied type is one of the machine.fakes
-        /// inline constraint types.
+        ///     Checks whether the supplied type is one of the machine.fakes
+        ///     inline constraint types.
         /// </summary>
-        /// <param name="type">
-        /// Specifies the type to check.
+        /// <param name = "type">
+        ///     Specifies the type to check.
         /// </param>
         /// <returns>
-        /// <c>true</c> if it's one of the constraint types. Otherwise not.
+        ///     <c>true</c> if it's one of the constraint types. Otherwise not.
         /// </returns>
         public static bool IsMFakesConstaintType(this Type type)
         {
-            return type == typeof(Param) || type.ClosesGenericParamType();
+            return type == typeof (Param) || type.ClosesGenericParamType();
         }
 
         /// <summary>
-        /// Checks whether the supplied type closes the <see cref="Param{T}"/> class.
+        ///     Checks whether the supplied type closes the <see cref = "Param{T}" /> class.
         /// </summary>
-        /// <param name="type">
-        /// Specifies the type to be checked.
+        /// <param name = "type">
+        ///     Specifies the type to be checked.
         /// </param>
         /// <returns>
-        /// <c>true</c> if the type closes the <see cref="Param{T}"/> type. Otherwise <c>false</c>.
+        ///     <c>true</c> if the type closes the <see cref = "Param{T}" /> type. Otherwise <c>false</c>.
         /// </returns>
         public static bool ClosesGenericParamType(this Type type)
         {
-            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Param<>);
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Param<>);
         }
 
         /// <summary>
-        /// Gets the first generic type argument of the specified type.
+        ///     Gets the first generic type argument of the specified type.
         /// </summary>
-        /// <param name="type">
-        /// Specifies the type to extract the type argument from.
+        /// <param name = "type">
+        ///     Specifies the type to extract the type argument from.
         /// </param>
         /// <returns>
-        /// The extracted type.
+        ///     The extracted type.
         /// </returns>
         public static Type GetFirstTypeArgument(this Type type)
         {
@@ -60,13 +61,13 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        /// Gets the first generic type argument of the specified type.
+        ///     Gets the first generic type argument of the specified type.
         /// </summary>
-        /// <param name="method">
-        /// Specifies the method to extract the type argument from.
+        /// <param name = "method">
+        ///     Specifies the method to extract the type argument from.
         /// </param>
         /// <returns>
-        /// The extracted type.
+        ///     The extracted type.
         /// </returns>
         public static Type GetFirstTypeArgument(this MethodInfo method)
         {
@@ -79,19 +80,19 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        /// Creates a <see cref="MemberExpression"/> on a public instance property.
+        ///     Creates a <see cref = "MemberExpression" /> on a public instance property.
         /// </summary>
-        /// <param name="targetType">
-        /// Specifies the target type.
+        /// <param name = "targetType">
+        ///     Specifies the target type.
         /// </param>
-        /// <param name="property">
-        /// Specifies the name of the property to be accessed.
+        /// <param name = "property">
+        ///     Specifies the name of the property to be accessed.
         /// </param>
-        /// <param name="instanceExpression">
-        /// Specifies an instance via an <see cref="Expression"/>.
+        /// <param name = "instanceExpression">
+        ///     Specifies an instance via an <see cref = "Expression" />.
         /// </param>
         /// <returns>
-        /// The created <see cref="MemberExpression"/>.
+        ///     The created <see cref = "MemberExpression" />.
         /// </returns>
         public static MemberExpression MakePropertyAccess(this Type targetType, string property, Expression instanceExpression)
         {
@@ -107,16 +108,16 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        /// Creates a <see cref="MemberExpression"/> on a public static property.
+        ///     Creates a <see cref = "MemberExpression" /> on a public static property.
         /// </summary>
-        /// <param name="targetType">
-        /// Specifies the target type.
+        /// <param name = "targetType">
+        ///     Specifies the target type.
         /// </param>
-        /// <param name="property">
-        /// Specifies the name of the property to be accessed.
+        /// <param name = "property">
+        ///     Specifies the name of the property to be accessed.
         /// </param>
         /// <returns>
-        /// The created <see cref="MemberExpression"/>.
+        ///     The created <see cref = "MemberExpression" />.
         /// </returns>
         public static MemberExpression MakeStaticPropertyAccess(this Type targetType, string property)
         {
@@ -131,27 +132,52 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        /// Get all field values of the type specified by <typeparamref name="TFieldType"/>.
+        ///     Get all field values of the type specified by <typeparamref name = "TFieldType" />.
         /// </summary>
-        /// <typeparam name="TFieldType">
-        /// Specifies the field type.
+        /// <typeparam name = "TFieldType">
+        ///     Specifies the field type.
         /// </typeparam>
-        /// <param name="instance">
-        /// Specifies the instance to extract the field values from.
+        /// <param name = "instance">
+        ///     Specifies the instance to extract the field values from.
         /// </param>
         /// <returns>
-        /// A collection of all field values of the specified type.
+        ///     A collection of all field values of the specified type.
         /// </returns>
         public static IEnumerable<TFieldType> GetFieldValues<TFieldType>(this object instance)
         {
             Guard.AgainstArgumentNull(instance, "instance");
 
-            return instance
+            var fieldValues = instance
                 .GetType()
-                .GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
-                .Where(field => field.FieldType == typeof(TFieldType))
-                .Select(field => (TFieldType)field.GetValue(instance))
-                .Where(value => !Equals(value,null));
+                .GetAllFields()
+                .Where(field => field.FieldType == typeof (TFieldType))
+                .Select(field => (TFieldType) field.GetValue(instance))
+                .Where(value => !Equals(value, null));
+
+            return fieldValues;
+        }
+
+        /// <summary>
+        ///     Resets the references in the instance specified by <paramref name = "instance" />.
+        /// </summary>
+        public static void ResetReferences(this object instance)
+        {
+            var fields = instance
+                .GetType()
+                .GetAllFields()
+                .Where(x => !x.FieldType.IsValueType);
+
+            fields.ForEach(x => x.SetValue(instance, null));
+        }
+
+        static IEnumerable<FieldInfo> GetAllFields(this Type type)
+        {
+            return type.GetFields(
+                BindingFlags.Static |
+                BindingFlags.Instance |
+                BindingFlags.NonPublic |
+                BindingFlags.Public |
+                BindingFlags.FlattenHierarchy);
         }
 
         static MemberExpression MakePropertyAccess(this Type targetType, string property, BindingFlags flags, Expression instanceExpression)
@@ -165,8 +191,8 @@ namespace Machine.Fakes.Sdk
             {
                 throw new InvalidOperationException(
                     string.Format("Unable to find target property {0} on instance of target type {1}",
-                        property,
-                        targetType.FullName));
+                                  property,
+                                  targetType.FullName));
             }
 
             return Expression.MakeMemberAccess(instanceExpression, targetProperty);

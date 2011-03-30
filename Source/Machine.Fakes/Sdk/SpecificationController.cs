@@ -89,7 +89,7 @@ namespace Machine.Fakes.Sdk
         /// <remarks>
         /// The class specified by <typeparamref name="TBehaviorConfig"/>
         /// needs to have private fields assigned with either <see cref="OnEstablish"/>
-        /// or <see cref="OnCleanUp"/> delegates.
+        /// or <see cref="OnCleanup"/> delegates.
         /// </remarks>
         public TBehaviorConfig With<TBehaviorConfig>() where TBehaviorConfig : new ()
         {
@@ -108,7 +108,7 @@ namespace Machine.Fakes.Sdk
         /// <remarks>
         /// The object specified by <see cref="behaviorConfig"/>
         /// needs to have private fields assigned with either <see cref="OnEstablish"/>
-        /// or <see cref="OnCleanUp"/> delegates.
+        /// or <see cref="OnCleanup"/> delegates.
         /// </remarks>
         public void With(object behaviorConfig)
         {

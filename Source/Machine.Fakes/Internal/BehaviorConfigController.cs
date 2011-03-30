@@ -26,8 +26,11 @@ namespace Machine.Fakes.Internal
             Guard.AgainstArgumentNull(subject, "subject");
 
             _behaviorConfigs
-                .SelectMany(config => config.GetFieldValues<OnCleanUp>())
+                .SelectMany(config => config.GetFieldValues<OnCleanup>())
                 .ForEach(cleanupDelegate => cleanupDelegate(subject));
+
+            _behaviorConfigs.ForEach(config => config.ResetReferences());
+            _behaviorConfigs.Clear();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Machine.Fakes.Specs
     {
         static SpecificationController<object, DummyFakeEngine> _controller;
         static Exception _exception;
+        Cleanup after = () => _controller.Dispose();
 
         Establish context = () => { _controller = new SpecificationController<object, DummyFakeEngine>(); };
 
@@ -26,15 +27,16 @@ namespace Machine.Fakes.Specs
     public class BehaviorConfigWithNonInitializedDelegates
     {
         OnEstablish context;
-        OnCleanUp subject;
+        OnCleanup subject;
     }
 
-    [Subject(typeof(SpecificationController<>))]
+    [Subject(typeof (SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_executing_a_behavior_config_that_contains_non_initialized_delegate_fields
     {
         static SpecificationController<object, DummyFakeEngine> _controller;
         static Exception _exception;
+        Cleanup after = () => _controller.Dispose();
 
         Establish context = () => { _controller = new SpecificationController<object, DummyFakeEngine>(); };
 
@@ -45,97 +47,140 @@ namespace Machine.Fakes.Specs
 
     public class SimpleBehaviorConfig
     {
-        public static IFakeAccessor FakeAccessor;
-        public static object Subject;
-
-        OnEstablish context = fakeAccessor => FakeAccessor = fakeAccessor;
-
-        OnCleanUp subject = subject => Subject = subject;
+        public OnEstablish ContextDelegate;
+        public OnCleanup SubjectDelegate;
     }
 
-    [Subject(typeof(SpecificationController<>))]
+    [Subject(typeof (SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_adding_a_behavior_config
     {
         static SpecificationController<object> _controller;
+        static SimpleBehaviorConfig _simpleBehaviorConfig;
+        static IFakeAccessor _fakeAccessor;
+        static object _subject;
+        Cleanup after = () => _controller.Dispose();
 
         Establish context = () =>
         {
             _controller = new SpecificationController<object, DummyFakeEngine>();
+            _simpleBehaviorConfig = new SimpleBehaviorConfig
+            {
+                ContextDelegate = fa => _fakeAccessor = fa,
+                SubjectDelegate = subject => _subject = subject
+            };
         };
 
-        Because of = () => _controller.With<SimpleBehaviorConfig>();
+        Because of = () => _controller.With(_simpleBehaviorConfig);
 
-        It should_initialize_the_context_imediately = () => SimpleBehaviorConfig.FakeAccessor.ShouldNotBeNull();
+        It should_initialize_the_context_imediately = () => _fakeAccessor.ShouldNotBeNull();
 
-        It should_not_cleanup_anything = () => SimpleBehaviorConfig.Subject.ShouldBeNull();
+        It should_not_cleanup_anything = () => _subject.ShouldBeNull();
     }
 
-    [Subject(typeof(SpecificationController<>))]
+    [Subject(typeof (SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_cleaning_up_a_specification_controller
     {
         static SpecificationController<object> _controller;
+        static SimpleBehaviorConfig _simpleBehaviorConfig;
+        static object _subject;
 
         Establish context = () =>
         {
             _controller = new SpecificationController<object, DummyFakeEngine>();
-            _controller.With<SimpleBehaviorConfig>();
+            _simpleBehaviorConfig = new SimpleBehaviorConfig
+            {
+                SubjectDelegate = subject => _subject = subject
+            };
+            _controller.With(_simpleBehaviorConfig);
         };
 
         Because of = () => _controller.Dispose();
 
-        It should_cleanup_behavior_configs = () => SimpleBehaviorConfig.Subject.ShouldNotBeNull();
+        It should_cleanup_behavior_configs =
+            () => _subject.ShouldNotBeNull();
+
+        It should_reset_all_fields_in_the_behavior_configs =
+            () => _simpleBehaviorConfig.SubjectDelegate.ShouldBeNull();
     }
 
     public class DerivedBehaviorConfig : SimpleBehaviorConfig
     {
-        public static IFakeAccessor FakeAccessorDerived;
-        public static object SubjectDerived;
-
-        OnEstablish context = fakeAccessor => FakeAccessorDerived = fakeAccessor;
-
-        OnCleanUp subject = subject => SubjectDerived = subject;
+        public OnEstablish DerivedContextDelegate;
+        public OnCleanup DerivedSubjectDelegate;
     }
 
-    [Subject(typeof(SpecificationController<>))]
+    [Subject(typeof (SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_adding_a_derived_behavior_config
     {
         static SpecificationController<object> _controller;
-
+        static SimpleBehaviorConfig _derivedBehaviorConfig;
+        static IFakeAccessor _fakeAccessor;
+        static object _subject;
+        static IFakeAccessor _fakeAccessorDerived;
+        static object _subjectDerived;
+        
         Establish context = () =>
         {
             _controller = new SpecificationController<object, DummyFakeEngine>();
+
+            _derivedBehaviorConfig = new DerivedBehaviorConfig
+            {
+                ContextDelegate = fa => _fakeAccessor = fa,
+                SubjectDelegate = subject => _subject = subject,
+                DerivedContextDelegate = fa => _fakeAccessorDerived = fa,
+                DerivedSubjectDelegate = subject => _subjectDerived = subject
+            };
         };
 
-        Because of = () => _controller.With<DerivedBehaviorConfig>();
+        Because of = () => _controller.With(_derivedBehaviorConfig);
 
-        It should_execute_the_configuration_in_the_base_class = () => SimpleBehaviorConfig.FakeAccessor.ShouldNotBeNull();
+        It should_execute_the_configuration_in_the_base_class = 
+            () => _fakeAccessor.ShouldNotBeNull();
 
-        It should_execute_the_configuration_in_the_derived_class = () => DerivedBehaviorConfig.FakeAccessorDerived.ShouldNotBeNull();
+        It should_execute_the_configuration_in_the_derived_class = 
+            () => _fakeAccessorDerived.ShouldNotBeNull();
 
-        It should_not_cleanup_in_the_base_class = () => SimpleBehaviorConfig.Subject.ShouldBeNull();
-        
-        It should_not_cleanup_in_the_derived_class = () => DerivedBehaviorConfig.SubjectDerived.ShouldBeNull();
+        It should_not_cleanup_in_the_base_class = 
+            () => _subject.ShouldBeNull();
+
+        It should_not_cleanup_in_the_derived_class = 
+            () => _subjectDerived.ShouldBeNull();
+
+        Cleanup after = () => _controller.Dispose();
     }
 
-    [Subject(typeof(SpecificationController<>))]
+    [Subject(typeof (SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_cleaning_up_a_specification_controller_and_a_derived_behavior_config_has_been_configured
     {
         static SpecificationController<object> _controller;
+        static IFakeAccessor _fakeAccessor;
+        static object _subject;
+        static IFakeAccessor _fakeAccessorDerived;
+        static object _subjectDerived;
 
         Establish context = () =>
         {
             _controller = new SpecificationController<object, DummyFakeEngine>();
-            _controller.With<DerivedBehaviorConfig>();
+
+            _controller.With(new DerivedBehaviorConfig
+            {
+                ContextDelegate = fa => _fakeAccessor = fa,
+                SubjectDelegate = subject => _subject = subject,
+                DerivedContextDelegate = fa => _fakeAccessorDerived = fa,
+                DerivedSubjectDelegate = subject => _subjectDerived = subject
+            });
         };
 
         Because of = () => _controller.Dispose();
 
-        It should_execute_the_cleanup_logic_from_the_base_class = () => SimpleBehaviorConfig.Subject.ShouldNotBeNull();
+        It should_execute_the_cleanup_logic_from_the_base_class = 
+            () => _subject.ShouldNotBeNull();
 
-        It should_execute_the_cleanup_logic_from_the_derived_class= () => DerivedBehaviorConfig.SubjectDerived.ShouldNotBeNull();
+        It should_execute_the_cleanup_logic_from_the_derived_class = 
+            () => _subjectDerived.ShouldNotBeNull();
     }
 }
