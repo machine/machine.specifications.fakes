@@ -1,55 +1,60 @@
 using System;
 using System.Linq.Expressions;
+using Machine.Fakes.Sdk;
 using Rhino.Mocks;
 
 namespace Machine.Fakes.Adapters.Rhinomocks
 {
-    public class RhinoFakeEngine : IFakeEngine
+    public class RhinoFakeEngine : RewritingFakeEngine
     {
-        public object CreateFake(Type interfaceType)
+        public RhinoFakeEngine() : base(new RhinoMocksExpressionRewriter())
+        {
+        }
+
+        public override object CreateFake(Type interfaceType)
         {
             var stub = MockRepository.GenerateStub(interfaceType);
             stub.Replay();
             return stub;
         }
 
-        public T PartialMock<T>(params object[] args) where T : class
+        public override T PartialMock<T>(params object[] args)
         {
             var mock = MockRepository.GenerateMock<T>(args);
             mock.Replay();
             return mock;
         }
 
-        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
+        protected override IQueryOptions<TReturnValue> OnSetUpQueryBehaviorFor<TDependency, TReturnValue>(
             TDependency fake,
-            Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
+            Expression<Func<TDependency, TReturnValue>> func)
         {
             var compiledFunction = func.Compile();
 
             return new RhinoQueryOptions<TReturnValue>(fake.Stub(f => compiledFunction(f)));
         }
 
-        public ICommandOptions SetUpCommandBehaviorFor<TFake>(
+        protected override ICommandOptions OnSetUpCommandBehaviorFor<TFake>(
             TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
+            Expression<Action<TFake>> func) 
         {
             var compiledFunction = func.Compile();
 
             return new RhinoCommandOptions(fake.Stub(compiledFunction));
         }
 
-        public void VerifyBehaviorWasNotExecuted<TFake>(
+        protected override void OnVerifyBehaviorWasNotExecuted<TFake>(
             TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
+            Expression<Action<TFake>> func) 
         {
-            var compiledFunction = func.Compile();
+            var compiledFunction =  func.Compile();
 
             fake.AssertWasNotCalled(compiledFunction);
         }
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+        protected override IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
-            Expression<Action<TFake>> func) where TFake : class 
+            Expression<Action<TFake>> func)
         {
             var compiledFunction = func.Compile();
 

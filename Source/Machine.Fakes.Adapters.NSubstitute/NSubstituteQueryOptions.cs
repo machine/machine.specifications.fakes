@@ -7,8 +7,8 @@ namespace Machine.Fakes.Adapters.NSubstitute
 {
     public class NSubstituteQueryOptions<TFake, T> : IQueryOptions<T> where TFake : class
     {
-        private readonly Func<TFake, T> _expression;
-        private readonly TFake _fake;
+        readonly Func<TFake, T> _expression;
+        readonly TFake _fake;
 
         public NSubstituteQueryOptions(TFake fake, Expression<Func<TFake, T>> expression)
         {
@@ -19,12 +19,10 @@ namespace Machine.Fakes.Adapters.NSubstitute
             _expression = expression.Compile();
         }
 
-        private T Method
+        T Method
         {
             get { return _expression.Invoke(_fake); }
         }
-
-        #region IQueryOptions<T> Members
 
         public void Return(T returnValue)
         {
@@ -44,35 +42,33 @@ namespace Machine.Fakes.Adapters.NSubstitute
         public void Return<T1, T2>(Func<T1, T2, T> valueFunction)
         {
             Method.Returns(f =>
-                               {
-                                   var args = f.Args();
-                                   return valueFunction.Invoke((T1) args[0], (T2) args[1]);
-                               });
+            {
+                var args = f.Args();
+                return valueFunction.Invoke((T1) args[0], (T2) args[1]);
+            });
         }
 
         public void Return<T1, T2, T3>(Func<T1, T2, T3, T> valueFunction)
         {
             Method.Returns(f =>
-                               {
-                                   var args = f.Args();
-                                   return valueFunction.Invoke((T1) args[0], (T2) args[1], (T3) args[2]);
-                               });
+            {
+                var args = f.Args();
+                return valueFunction.Invoke((T1) args[0], (T2) args[1], (T3) args[2]);
+            });
         }
 
         public void Return<T1, T2, T3, T4>(Func<T1, T2, T3, T4, T> valueFunction)
         {
             Method.Returns(f =>
-                               {
-                                   var args = f.Args();
-                                   return valueFunction.Invoke((T1) args[0], (T2) args[1], (T3) args[2], (T4) args[3]);
-                               });
+            {
+                var args = f.Args();
+                return valueFunction.Invoke((T1) args[0], (T2) args[1], (T3) args[2], (T4) args[3]);
+            });
         }
 
         public void Throw(Exception exception)
         {
             Method.Returns(x => { throw exception; });
         }
-
-        #endregion
     }
 }

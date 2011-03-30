@@ -62,12 +62,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandOptionsSpecs.cs" />
-    <Compile Include="EngineSpecs.cs" />
-    <Compile Include="MethodCallOccuranceSpecs.cs" />
+    <Compile Include="FakeItEasy\CommandOptionsSpecs.cs" />
+    <Compile Include="FakeItEasy\EngineSpecs.cs" />
+    <Compile Include="FakeItEasy\InlineConstraints.cs" />
+    <Compile Include="Moq\CommandOptionsSpecs.cs" />
+    <Compile Include="Moq\EngineSpecs.cs" />
+    <Compile Include="Moq\MethodCallOccuranceSpecs.cs" />
+    <Compile Include="Moq\QueryOptionsSpecs.cs" />
+    <Compile Include="NSubstitute\CommandOptionsSpecs.cs" />
+    <Compile Include="NSubstitute\EngineSpecs.cs" />
+    <Compile Include="NSubstitute\InlineConstraints.cs" />
+    <Compile Include="NSubstitute\MethodCallOccuranceSpecs.cs" />
+    <Compile Include="NSubstitute\QueryOptionsSpecs.cs" />
+    <Compile Include="RhinoMocks\CommandOptionsSpecs.cs" />
+    <Compile Include="RhinoMocks\EngineSpecs.cs" />
+    <Compile Include="RhinoMocks\InlineConstraints.cs" />
+    <Compile Include="RhinoMocks\MethodCallOccuranceSpecs.cs" />
+    <Compile Include="RhinoMocks\QueryOptionsSpecs.cs" />
+    <Compile Include="SampleCode\IFlashVerifier.cs" />
+    <Compile Include="SampleCode\ITablet.cs" />
+    <Compile Include="SampleCode\IView.cs" />
+    <Compile Include="FakeItEasy\MethodCallOccuranceSpecs.cs" />
+    <Compile Include="Moq\InlineConstraints.cs" />
     <Compile Include="WithCurrentEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryOptionsSpecs.cs" />
+    <Compile Include="FakeItEasy\QueryOptionsSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

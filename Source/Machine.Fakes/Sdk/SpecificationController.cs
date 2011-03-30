@@ -39,7 +39,7 @@ namespace Machine.Fakes.Sdk
     /// </typeparam>
     public class SpecificationController<TSubject> : IFakeAccessor, IDisposable where TSubject : class
     {
-        private readonly List<IBehaviorConfig> _behaviorConfigs = new List<IBehaviorConfig>();
+        private readonly BehaviorConfigController _behaviorConfigController = new BehaviorConfigController();
         private TSubject _specificationSubject;
         private readonly AutoFakeContainer<TSubject> _container;
         
@@ -80,13 +80,18 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        ///   Configures the specification to execute the <see cref = "IBehaviorConfig" /> specified
-        ///   by <typeparamref name = "TBehaviorConfig" /> before the action on the sut is executed (<see cref = "Because" />).
+        ///   Configures the specification to execute a behavior config before the action on the subject
+        ///   is executed (<see cref = "Because" />).
         /// </summary>
         /// <typeparam name = "TBehaviorConfig">
         ///   Specifies the type of the config to be executed.
         /// </typeparam>
-        public TBehaviorConfig With<TBehaviorConfig>() where TBehaviorConfig : IBehaviorConfig, new()
+        /// <remarks>
+        /// The class specified by <typeparamref name="TBehaviorConfig"/>
+        /// needs to have private fields assigned with either <see cref="OnEstablish"/>
+        /// or <see cref="OnCleanup"/> delegates.
+        /// </remarks>
+        public TBehaviorConfig With<TBehaviorConfig>() where TBehaviorConfig : new ()
         {
             var behaviorConfig = new TBehaviorConfig();
             With(behaviorConfig);
@@ -94,19 +99,20 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        ///   Configures the specification to execute the <see cref = "IBehaviorConfig" /> specified
+        ///   Configures the specification to execute the behavior config specified
         ///   by <paramref name = "behaviorConfig" /> before the action on the sut is executed (<see cref = "Because" />).
         /// </summary>
         /// <param name = "behaviorConfig">
         ///   Specifies the behavior config to be executed.
         /// </param>
-        public void With(IBehaviorConfig behaviorConfig)
+        /// <remarks>
+        /// The object specified by <see cref="behaviorConfig"/>
+        /// needs to have private fields assigned with either <see cref="OnEstablish"/>
+        /// or <see cref="OnCleanup"/> delegates.
+        /// </remarks>
+        public void With(object behaviorConfig)
         {
-            Guard.AgainstArgumentNull(behaviorConfig, "behaviorConfig");
-
-            _behaviorConfigs.Add(behaviorConfig);
-
-            behaviorConfig.EstablishContext(this);
+            _behaviorConfigController.Establish(behaviorConfig, this);
         }
 
         /// <summary>
@@ -185,8 +191,7 @@ namespace Machine.Fakes.Sdk
         /// </summary>
         public void Dispose()
         {
-            _behaviorConfigs.ForEach(x => x.CleanUp(_specificationSubject));
-            _behaviorConfigs.Clear();
+            _behaviorConfigController.CleanUp(Subject);
         }
     }
 }

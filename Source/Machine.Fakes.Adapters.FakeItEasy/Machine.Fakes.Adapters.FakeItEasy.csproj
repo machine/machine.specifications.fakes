@@ -56,6 +56,7 @@
     <Compile Include="FakeItEasyEngine.cs" />
     <Compile Include="FakeItEasyMethodCallOccurance.cs" />
     <Compile Include="FakeItEasyQueryOptions.cs" />
+    <Compile Include="FakeItEasyExpressionRewriter.cs" />
     <Compile Include="WithFakes.cs" />
     <Compile Include="WithSubject.cs" />
   </ItemGroup>

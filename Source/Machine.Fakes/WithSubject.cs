@@ -110,25 +110,35 @@ namespace Machine.Fakes
         }
 
         /// <summary>
-        ///   Configures the specification to execute the <see cref = "IBehaviorConfig" /> specified
-        ///   by <typeparamref name = "TBehaviorConfig" /> before the action on the sut is executed (<see cref = "Because" />).
+        ///   Configures the specification to execute a behavior config before the action on the subject
+        ///   is executed (<see cref = "Because" />).
         /// </summary>
         /// <typeparam name = "TBehaviorConfig">
         ///   Specifies the type of the config to be executed.
         /// </typeparam>
-        protected static TBehaviorConfig With<TBehaviorConfig>() where TBehaviorConfig : IBehaviorConfig, new()
+        /// <remarks>
+        /// The class specified by <typeparamref name="TBehaviorConfig"/>
+        /// needs to have private fields assigned with either <see cref="OnEstablish"/>
+        /// or <see cref="OnCleanup"/> delegates.
+        /// </remarks>
+        protected static TBehaviorConfig With<TBehaviorConfig>() where TBehaviorConfig : new()
         {
             return _specificationController.With<TBehaviorConfig>();
         }
 
         /// <summary>
-        ///   Configures the specification to execute the <see cref = "IBehaviorConfig" /> specified
+        ///   Configures the specification to execute the behavior config specified
         ///   by <paramref name = "behaviorConfig" /> before the action on the sut is executed (<see cref = "Because" />).
         /// </summary>
         /// <param name = "behaviorConfig">
         ///   Specifies the behavior config to be executed.
         /// </param>
-        protected static void With(IBehaviorConfig behaviorConfig)
+        /// <remarks>
+        /// The object specified by <see cref="behaviorConfig"/>
+        /// needs to have private fields assigned with either <see cref="OnEstablish"/>
+        /// or <see cref="OnCleanup"/> delegates.
+        /// </remarks>
+        protected static void With(object behaviorConfig)
         {
             _specificationController.With(behaviorConfig);
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using Machine.Fakes.Internal;
 
 namespace Machine.Fakes.Specs.TestClasses
 {
@@ -35,6 +36,11 @@ namespace Machine.Fakes.Specs.TestClasses
         }
 
         public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(TFake fake, Expression<Action<TFake>> func) where TFake : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public TParam Match<TParam>(Expression<Func<TParam, bool>> matchExpression)
         {
             throw new NotImplementedException();
         }
