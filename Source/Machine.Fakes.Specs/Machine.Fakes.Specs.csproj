@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Specs_for_behavior_configs.cs" />
     <Compile Include="Specs_for_the_an_method.cs" />
     <Compile Include="Specs_for_the_The_accessor.cs" />
     <Compile Include="TestClasses\DummyFakeEngine.cs" />

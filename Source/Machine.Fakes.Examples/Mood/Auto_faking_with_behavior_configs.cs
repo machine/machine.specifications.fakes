@@ -3,21 +3,18 @@ using Machine.Specifications;
 
 namespace Machine.Fakes.Specs.Mood.BehaviorConfigs
 {
-    public class CurrentTime : BehaviorConfigBase
+    public class CurrentTime 
     {
-        public DateTime Time { get; set; }
+        static DateTime _time;
 
         public CurrentTime(DateTime time)
         {
-            Time = time;
+            _time = time;
         }
 
-        public override void EstablishContext(IFakeAccessor fakeAccessor)
-        {
-            fakeAccessor.The<ISystemClock>()
-                .WhenToldTo(x => x.CurrentTime)
-                .Return(Time);
-        }
+        OnEstablish context = fakeAccessor => fakeAccessor.The<ISystemClock>()
+                                                  .WhenToldTo(x => x.CurrentTime)
+                                                  .Return(_time);
     }
 
     public class Given_the_current_day_is_monday_when_identifying_my_mood : WithSubject<MoodIdentifier>

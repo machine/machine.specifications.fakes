@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -126,6 +128,30 @@ namespace Machine.Fakes.Sdk
                 property,
                 BindingFlags.Public | BindingFlags.Static,
                 null);
+        }
+
+        /// <summary>
+        /// Get all field values of the type specified by <typeparamref name="TFieldType"/>.
+        /// </summary>
+        /// <typeparam name="TFieldType">
+        /// Specifies the field type.
+        /// </typeparam>
+        /// <param name="instance">
+        /// Specifies the instance to extract the field values from.
+        /// </param>
+        /// <returns>
+        /// A collection of all field values of the specified type.
+        /// </returns>
+        public static IEnumerable<TFieldType> GetFieldValues<TFieldType>(this object instance)
+        {
+            Guard.AgainstArgumentNull(instance, "instance");
+
+            return instance
+                .GetType()
+                .GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
+                .Where(field => field.FieldType == typeof(TFieldType))
+                .Select(field => (TFieldType)field.GetValue(instance))
+                .Where(value => !Equals(value,null));
         }
 
         static MemberExpression MakePropertyAccess(this Type targetType, string property, BindingFlags flags, Expression instanceExpression)

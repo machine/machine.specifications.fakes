@@ -56,8 +56,9 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BehaviorConfigDelegates.cs" />
     <Compile Include="Internal\AutoFakeContainer.cs" />
-    <Compile Include="BehaviorConfigBase.cs" />
+    <Compile Include="Internal\BehaviorConfigController.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="Sdk\AbstractExpressionRewriter.cs" />
     <Compile Include="Sdk\ExpressionExtensions.cs" />
@@ -73,7 +74,6 @@
     <Compile Include="FakeApi.cs" />
     <Compile Include="Internal\FakeEngineExtensions.cs" />
     <Compile Include="Sdk\Guard.cs" />
-    <Compile Include="IBehaviorConfig.cs" />
     <Compile Include="ICommandOptions.cs" />
     <Compile Include="IFakeAccessor.cs" />
     <Compile Include="IFakeEngine.cs" />

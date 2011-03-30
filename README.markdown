@@ -97,26 +97,23 @@ Having the subject created for us is a good thing but how do we access the injec
 
 Re-use in context / specification is an interesting topic. In case you've already used a test case class per fixture setup (like Machine.Specifications does) then I'm pretty sure you've stumpled on this too. 
 
-Very often we try to accomplish re-use in classes by using inheritance and of course you can do so with Machine.Fakes. However in .NET you can only inherit once and inheritance may not be the weapon of choice for more cross cutting aspects like for instance time (the ISystemClock used in the example above). Machine.Fakes also offers a composition model for specifications, the IBehaviorConfigs.
+Very often we try to accomplish re-use in classes by using inheritance and of course you can do so with Machine.Fakes. However in .NET you can only inherit once and inheritance may not be the weapon of choice for more cross cutting aspects like for instance time (the ISystemClock used in the example above). Machine.Fakes also offers a composition model for specifications, the behavior configs.
 
-    public interface IBehaviorConfig
+    public class BehaviorConfig
     {
-        void EstablishContext(IFakeAccessor fakeAccessor);
-        void CleanUp(object subject);
+        OnEstablish context = fakeAccessor => {};
+        OnCleanUp subject => subject => {};
     }
 
-IBehaviorConfig is a simple interface that mimics the setup and teardown phases of the context / specification. It currently gives the  option of accessing all the fakes in a specification from the outside and cleaning up the subject after a specification. There is a base class in Machine.Fakes for this interface, so that you only have to override the method you want. If you want to use behavior configuration then a safe option is to use it by deriving from BehaviorConfigBase because we might add more hooks to IBehaviorConfig at a later point in time. In the context of the time this might look like this:
+Behavior configs mimic the setup and teardown phases of the context / specification. It currently gives the  option of accessing all the fakes in a specification from the outside and cleaning up the subject after a specification. You only need to implement the delegate you need. Machine.Fakes also ignores not initialized delegates. An example for behavior configs in the context of the time might look like this:
 
-    public class CurrentTime : BehaviorConfigBase
+    public class CurrentTime
     {
-        public DateTime Time { get; set; }
+        public static DateTime Time { get; set; }
 
-        public CurrentTime(DateTime time)
-        {
-            Time = time;
-        }
+        public CurrentTime(DateTime time) { Time = time; }
 
-        public override void EstablishContext(IFakeAccessor fakeAccessor)
+        OnEstablishContext = fakeAccessor =>
         {
             fakeAccessor.The<ISystemClock>()
                 .WhenToldTo(x => x.CurrentTime)
