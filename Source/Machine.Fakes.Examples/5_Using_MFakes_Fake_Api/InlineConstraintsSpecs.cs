@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace Machine.Fakes.Examples.UsingMFakesApi
 {
-    [Subject(typeof (VIPChecker))]
+    [Subject(typeof (VIPChecker)), Tags("Examples")]
     public class A_person_with_nick_ScottGu : WithFakes
     {
         static VIPChecker _vipChecker;
