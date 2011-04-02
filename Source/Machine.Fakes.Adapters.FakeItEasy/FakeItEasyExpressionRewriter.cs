@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using FakeItEasy;
-using FakeItEasy.Expressions;
+using FakeItEasy.Core;
 using Machine.Fakes.Sdk;
 
 namespace Machine.Fakes.Adapters.FakeItEasy
@@ -31,13 +31,12 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
                 var thatExpression = GetThatAccess(argumentType);
 
-                var methodCallExpression = Expression.Call(
-                    thatExpression,
+                return Expression.Call(
+                    typeof(ArgumentConstraintExtensions),
                     "Matches",
-                    new Type[] { },
+                    new[] { argumentType },
+                    thatExpression,
                     predicate);
-
-                return ArgumentPropertyAccess(argumentType, methodCallExpression); 
             }
 
             return base.VisitMethodCall(expression);
@@ -49,14 +48,12 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             var valueExpression = Expression.Constant(argument.Value);
             var thatAccess = GetThatAccess(argument.Type);
 
-            var methodCallExpression = Expression.Call(
+            return Expression.Call(
                 typeof(ArgumentConstraintExtensions),
                 "IsEqualTo",
                 new[] { argument.Type },
                 thatAccess,
                 valueExpression);
-
-            return ArgumentPropertyAccess(argument.Type, methodCallExpression); 
         }
 
         static Expression RewriteIsNullMember(MemberExpression node)
@@ -64,13 +61,11 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             var argumentType = node.Member.DeclaringType.GetFirstTypeArgument();
             var thatAccess = GetThatAccess(argumentType);
 
-            var methodCallExpression = Expression.Call(
+            return Expression.Call(
                 typeof(ArgumentConstraintExtensions),
                 "IsNull",
                 new[] { argumentType },
                 thatAccess);
-
-            return ArgumentPropertyAccess(argumentType, methodCallExpression);
         }
 
         static Expression RewriteIsNotNullMember(MemberExpression node)
@@ -78,39 +73,33 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             var argumentType = node.Member.DeclaringType.GetFirstTypeArgument();
             var thatAccess = GetThatAccess(argumentType);
 
-            var notAccess = typeof(ArgumentConstraintScope<>)
+            var notAccess = typeof(IArgumentConstraintManager<>)
                 .MakeGenericType(argumentType)
                 .MakePropertyAccess("Not", thatAccess);
 
-            var methodCallExpression = Expression.Call(
+            return Expression.Call(
                 typeof(ArgumentConstraintExtensions),
                 "IsNull",
                 new[] { argumentType },
                 notAccess);
-
-            return ArgumentPropertyAccess(argumentType, methodCallExpression);
         }
 
         static Expression RewriteIsAnyMethod(MethodCallExpression expression)
         {
             var argumentType = expression.Method.GetFirstTypeArgument();
 
-            var ignoredAccess = typeof(A<>)
+            return typeof(A<>)
                 .MakeGenericType(argumentType)
                 .MakeStaticPropertyAccess("Ignored");
-
-            return ArgumentPropertyAccess(argumentType, ignoredAccess);
         }
 
         static Expression RewriteIsAnythingMember(MemberExpression node)
         {
             var argumentType = node.Member.DeclaringType.GetFirstTypeArgument();
 
-            var ignoredAccess = typeof(A<>)
+            return typeof(A<>)
                 .MakeGenericType(argumentType)
                 .MakeStaticPropertyAccess("Ignored");
-
-            return ArgumentPropertyAccess(argumentType, ignoredAccess);
         }
 
         static Expression RewriteIsAMethod(MethodCallExpression expression)
@@ -125,13 +114,12 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
             var thatExpression = GetThatAccess(baseType);
 
-            var methodCallExpression = Expression.Call(
-                thatExpression,
-                "Matches",
-                new Type[] { },
-                lambda);
-
-            return ArgumentPropertyAccess(baseType, methodCallExpression);
+            return Expression.Call(
+                    typeof(ArgumentConstraintExtensions),
+                    "Matches",
+                    new[] { baseType },
+                    thatExpression,
+                    lambda);
         }
 
         static Expression GetThatAccess(Type typeArgument)
@@ -139,13 +127,6 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             return typeof(A<>)
                 .MakeGenericType(typeArgument)
                 .MakeStaticPropertyAccess("That");
-        }
-
-        static Expression ArgumentPropertyAccess(Type argumentType, Expression expression)
-        {
-            return typeof(ArgumentConstraint<>)
-                .MakeGenericType(argumentType)
-                .MakePropertyAccess("Argument", expression);
         }
     }
 }
