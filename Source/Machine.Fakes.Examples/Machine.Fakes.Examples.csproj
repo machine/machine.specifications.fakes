@@ -51,6 +51,7 @@
     <Compile Include="2_First_spec\BankingSpecs.cs" />
     <Compile Include="3_Handling_exceptions\BankingSpecs.cs" />
     <Compile Include="4_Using_Moq_Api\MoodIdentifierSpecs.cs" />
+    <Compile Include="5_Using_MFakes_Fake_Api\BehaviorVerificationsSpecs.cs" />
     <Compile Include="5_Using_MFakes_Fake_Api\InlineConstraintsSpecs.cs" />
     <Compile Include="5_Using_MFakes_Fake_Api\MoodIdentifierSpecs.cs" />
     <Compile Include="6_Mixed_mode_MFakes_Moq\MoodIdentifierSpecs.cs" />

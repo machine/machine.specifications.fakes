@@ -65,9 +65,52 @@ Let's take a look at the simpler one first. By deriving from this class you can 
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
 
+WhenToldTo is used for setting up a behavior but Machine.Fakes also supports behavior verification on fakes with the WasToldTo and WasNotToldTo extension methods.
+
+    public class When_a_method_is_called_on_a_fake : WithFakes
+    {
+        static IServiceContainer_subject;
+      
+        Establish context = () =>
+        {
+            _subject = An<IServiceContainer>();
+        };
+
+        Because of = () => _subject.GetService(null);
+
+        It should_be_able_to_verify_that = () => _subject.WasToldTo(s => s.GetService(null));
+    }
+
+Machine.Fakes even provides an abstraction for the various kinds of inline constraints used in the different fake framework flavors using the Param and Param<T> classes.
+
+    public class A_person_with_nick_ScottGu : WithFakes
+    {
+        static VIPChecker _vipChecker;
+        static bool _isVip;
+
+        Establish context = () =>
+        {
+            var specification = An<ISpecification<Person>>();
+            _vipChecker = new VIPChecker(specification);
+
+            specification
+                .WhenToldTo(x => x.IsSatisfiedBy(Param<Person>.Matches(p => p.NickName == "ScottGu")))
+                .Return(true);
+        };
+
+        Because of = () => { _isVip = _vipChecker.IsVip(new Person {NickName = "ScottGu"}); };
+
+        It should_be_vip = () => _isVip.ShouldBeTrue();
+    }
+
+Those constraints get translatet to the inline constraints of the target framework when Machine.Fakes executes. With this Machine.Fakes even preserves the nice verification error messages from the target frameworks and still allows you to be fake framework independant.
+
+Isn't that cool?
+
+
 ### WithSubject<<TSubject>>
 
-Do we really need to create the subject of the specification by hand? Can we make it even more simpler? Yes, by introducing the concept of an AutoMockingContainer to the specification. That's exactly what WithSubject<TSubject> does. Here's a modified example.
+Back to our example with the MoodIdentifier. Do we really need to create the subject of the specification by hand? Can we make it even more simpler? Yes, by introducing the concept of an AutoMockingContainer to the specification. That's exactly what WithSubject<TSubject> does. Here's a modified example.
 
     public class Given_the_current_day_is_monday_when_identifying_my_mood : WithSubject<MoodIdentifier> (*)
     {
@@ -118,7 +161,7 @@ Behavior configs mimic the setup and teardown phases of the context / specificat
             fakeAccessor.The<ISystemClock>()
                 .WhenToldTo(x => x.CurrentTime)
                 .Return(Time);
-        }
+        };
     }
 
 This is the "Mood" example now using a behavior configuration instead of configuring the fake by itself.
