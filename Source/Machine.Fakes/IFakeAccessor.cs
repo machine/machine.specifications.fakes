@@ -70,8 +70,6 @@ namespace Machine.Fakes
         IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class;
 
         /// <summary>
-        /// 
-        /// 
         /// Uses the instance supplied by <paramref name="instance"/> during the 
         /// creation of the sut. The specified instance will be injected into the constructor.
         /// </summary>
@@ -82,5 +80,18 @@ namespace Machine.Fakes
         /// Specifies the instance to be used for the specification.
         /// </param>
         void Use<TInterfaceType>(TInterfaceType instance); 
+        
+        /// <summary>
+        /// Registered the type specified via <typeparamref name="TImplementationType"/> as the default type
+        /// for the interface specified via <typeparamref name="TInterfaceType"/>. With this the type gets automatically
+        /// build when the subject is resolved.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the interface type.
+        /// </typeparam>
+        /// <typeparam name="TImplementationType">
+        /// Specifies the implementation type.
+        /// </typeparam>
+        void Use<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType; 
     }
 }

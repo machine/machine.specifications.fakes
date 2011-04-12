@@ -1,3 +1,4 @@
+using System;
 using Machine.Fakes.Sdk;
 using StructureMap.AutoMocking;
 
@@ -12,5 +13,13 @@ namespace Machine.Fakes.Internal
 			_serviceLocator = locator;
 			_container = new AutoMockedContainer(locator);
 		}
-	}
+
+	    public void Use(Type interfaceType, Type implementation)
+        {
+            Guard.AgainstArgumentNull(interfaceType, "interfaceType");
+            Guard.AgainstArgumentNull(implementation, "implementation");
+
+            _container.Configure(x => x.For(interfaceType).Use(implementation));    
+        }
+    }
 }

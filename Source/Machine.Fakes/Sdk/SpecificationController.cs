@@ -80,6 +80,22 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
+        /// Registered the type specified via <typeparamref name="TImplementationType"/> as the default type
+        /// for the interface specified via <typeparamref name="TInterfaceType"/>. With this the type gets automatically
+        /// build when the subject is resolved.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the interface type.
+        /// </typeparam>
+        /// <typeparam name="TImplementationType">
+        /// Specifies the implementation type.
+        /// </typeparam>
+        public void Use<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
+        {
+            _container.Use(typeof(TInterfaceType), typeof(TImplementationType));
+        }
+
+        /// <summary>
         ///   Configures the specification to execute a behavior config before the action on the subject
         ///   is executed (<see cref = "Because" />).
         /// </summary>

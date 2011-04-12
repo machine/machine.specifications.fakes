@@ -64,6 +64,18 @@
             <param name="callSpecification">An expression where the configured memeber is called.</param>
             <returns>A configuration object.</returns>
         </member>
+        <member name="M:FakeItEasy.A.CallTo(System.Object)">
+            <summary>
+            Gets a configuration object allowing for further configuration of
+            any calll to the specified faked object.
+            </summary>
+            <param name="fake">
+            The fake to configure.
+            </param>
+            <returns>
+            A configuration object.
+            </returns>
+        </member>
         <member name="M:FakeItEasy.A.CallTo``1(System.Linq.Expressions.Expression{System.Func{``0}})">
             <summary>
             Configures a call to a faked object.
@@ -98,12 +110,11 @@
             Provides configuration for any (not a specific) call on a faked object.
             </summary>
         </member>
-        <member name="M:FakeItEasy.Any.CallTo``1(``0)">
+        <member name="M:FakeItEasy.Any.CallTo(System.Object)">
             <summary>
             Gets a configuration object allowing for further configuration of
             any calll to the specified faked object.
             </summary>
-            <typeparam name="TFake">The type of fake object.</typeparam>
             <param name="fakedObject">The faked object to configure.</param>
             <returns>A configuration object.</returns>
         </member>
@@ -221,10 +232,11 @@
             to null its infinitely valid.
             </summary>
         </member>
-        <member name="P:FakeItEasy.Core.IFakeObjectCallRuleWithDescription.DescriptionOfValidCall">
+        <member name="M:FakeItEasy.Core.IFakeObjectCallRuleWithDescription.WriteDescriptionOfValidCall(FakeItEasy.IOutputWriter)">
             <summary>
-            Gets a description of calls the rule is applicable to.
+            Writes a description of calls the rule is applicable to.
             </summary>
+            <param name="writer"></param>
         </member>
         <member name="M:FakeItEasy.Configuration.BuildableCallRule.IsApplicableTo(FakeItEasy.Core.IFakeObjectCall)">
             <summary>
@@ -232,6 +244,12 @@
             </summary>
             <param name="fakeObjectCall">The call to validate.</param>
             <returns>True if the rule applies to the call.</returns>
+        </member>
+        <member name="M:FakeItEasy.Configuration.BuildableCallRule.WriteDescriptionOfValidCall(FakeItEasy.IOutputWriter)">
+            <summary>
+            Writes a description of calls the rule is applicable to.
+            </summary>
+            <param name="writer">The writer to write the description to.</param>
         </member>
         <member name="P:FakeItEasy.Configuration.BuildableCallRule.Applicator">
             <summary>
@@ -267,9 +285,24 @@
             </summary>
             <value></value>
         </member>
-        <member name="T:FakeItEasy.Configuration.IAnyCallConfiguration">
+        <member name="T:FakeItEasy.Configuration.IAnyCallConfigurationWithNoReturnTypeSpecified">
             <summary>
             Configuration for any call to a faked object.
+            </summary>
+        </member>
+        <member name="M:FakeItEasy.Configuration.IWhereConfiguration`1.Where(System.Func{FakeItEasy.Core.IFakeObjectCall,System.Boolean},System.Action{FakeItEasy.IOutputWriter})">
+            <summary>
+            Applies a predicate to constrain which calls will be considered for interception.
+            </summary>
+            <param name="predicate">A predicate for a fake object call.</param>
+            <param name="descriptionWriter">An action that writes a description of the predicate
+            to the output.</param>
+            <returns>The configuration object.</returns>
+        </member>
+        <member name="T:FakeItEasy.Configuration.IVoidArgumentValidationConfiguration">
+            <summary>
+            Provides configuration methods for methods that does not have a return value and
+            allows the use to specify validations for arguments.
             </summary>
         </member>
         <member name="T:FakeItEasy.Configuration.IVoidConfiguration">
@@ -389,7 +422,20 @@
             </summary>
             <returns>A configuration object.</returns>
         </member>
-        <member name="M:FakeItEasy.Configuration.IAnyCallConfiguration.WithReturnType``1">
+        <member name="T:FakeItEasy.Configuration.IArgumentValidationConfiguration`1">
+            <summary>
+            Provides configurations to validate arguments of a fake object call.
+            </summary>
+            <typeparam name="TInterface">The type of interface to return.</typeparam>
+        </member>
+        <member name="M:FakeItEasy.Configuration.IArgumentValidationConfiguration`1.WhenArgumentsMatch(System.Func{FakeItEasy.ArgumentCollection,System.Boolean})">
+            <summary>
+            Configures the call to be accepted when the specified predicate returns true.
+            </summary>
+            <param name="argumentsPredicate">The argument predicate.</param>
+            <returns>A configuration object.</returns>
+        </member>
+        <member name="M:FakeItEasy.Configuration.IAnyCallConfigurationWithNoReturnTypeSpecified.WithReturnType``1">
             <summary>
             Matches calls that has the return type specified in the generic type parameter.
             </summary>
@@ -500,29 +546,6 @@
             interfaces.
             </summary>
         </member>
-        <member name="T:FakeItEasy.Configuration.IArgumentValidationConfiguration`1">
-            <summary>
-            Provides configurations to validate arguments of a fake object call.
-            </summary>
-            <typeparam name="TInterface">The type of interface to return.</typeparam>
-        </member>
-        <member name="M:FakeItEasy.Configuration.IArgumentValidationConfiguration`1.WhenArgumentsMatch(System.Func{FakeItEasy.ArgumentCollection,System.Boolean})">
-            <summary>
-            Configures the call to be accepted when the specified predicate returns true.
-            </summary>
-            <param name="argumentsPredicate">The argument predicate.</param>
-            <returns>A configuration object.</returns>
-        </member>
-        <member name="T:FakeItEasy.Configuration.IRecordingConfiguration">
-            <summary>
-            Configurations for when a configured call is recorded.
-            </summary>
-        </member>
-        <member name="T:FakeItEasy.Configuration.IRecordingConfigurationWithArgumentValidation">
-            <summary>
-            Provides configuration from VisualBasic.
-            </summary>
-        </member>
         <member name="T:FakeItEasy.Configuration.IReturnValueArgumentValidationConfiguration`1">
             <summary>
             Configures a call that returns a value and allows the use to
@@ -544,6 +567,16 @@
             </summary>
             <param name="valueProducer">A function that produces the return value.</param>
             <returns>A configuration object.</returns>
+        </member>
+        <member name="T:FakeItEasy.Configuration.IRecordingConfiguration">
+            <summary>
+            Configurations for when a configured call is recorded.
+            </summary>
+        </member>
+        <member name="T:FakeItEasy.Configuration.IRecordingConfigurationWithArgumentValidation">
+            <summary>
+            Provides configuration from VisualBasic.
+            </summary>
         </member>
         <member name="T:FakeItEasy.Configuration.IStartConfiguration`1">
             <summary>
@@ -574,12 +607,6 @@
             object.
             </summary>
             <returns>A configuration object.</returns>
-        </member>
-        <member name="T:FakeItEasy.Configuration.IVoidArgumentValidationConfiguration">
-            <summary>
-            Provides configuration methods for methods that does not have a return value and
-            allows the use to specify validations for arguments.
-            </summary>
         </member>
         <member name="T:FakeItEasy.Configuration.RecordedCallRule">
             <summary>
@@ -1126,6 +1153,26 @@
             <param name="fakeManager">The fake object.</param>
             <param name="rule">The rule to add.</param>
         </member>
+        <member name="T:FakeItEasy.IOutputWriter">
+            <summary>
+            Represents a text writer that writes to the output.
+            </summary>
+        </member>
+        <member name="M:FakeItEasy.IOutputWriter.Write(System.String)">
+            <summary>
+            Writes the specified value to the output.
+            </summary>
+            <param name="value">The value to write.</param>
+            <returns>The writer for method chaining.</returns>
+        </member>
+        <member name="M:FakeItEasy.IOutputWriter.WriteArgumentValue(System.Object)">
+            <summary>
+            Formats the specified argument value as a string and writes
+            it to the output.
+            </summary>
+            <param name="value">The value to write.</param>
+            <returns>The writer for method chainging.</returns>
+        </member>
         <member name="T:FakeItEasy.Core.ICompletedFakeObjectCall">
             <summary>
             Represents a completed call to a fake object.
@@ -1151,26 +1198,6 @@
             <summary>
             The event arguments of the event.
             </summary>
-        </member>
-        <member name="T:FakeItEasy.IOutputWriter">
-            <summary>
-            Represents a text writer that writes to the output.
-            </summary>
-        </member>
-        <member name="M:FakeItEasy.IOutputWriter.Write(System.String)">
-            <summary>
-            Writes the specified value to the output.
-            </summary>
-            <param name="value">The value to write.</param>
-            <returns>The writer for method chaining.</returns>
-        </member>
-        <member name="M:FakeItEasy.IOutputWriter.WriteArgumentValue(System.Object)">
-            <summary>
-            Formats the specified argument value as a string and writes
-            it to the output.
-            </summary>
-            <param name="value">The value to write.</param>
-            <returns>The writer for method chainging.</returns>
         </member>
         <member name="T:FakeItEasy.Core.MethodInfoManager">
             <summary>
@@ -1565,6 +1592,14 @@
             <returns>Options object.</returns>
             <exception cref="T:System.ArgumentException">The specified type is not an interface.</exception>
             <exception cref="T:System.ArgumentNullException">The specified type is null.</exception>
+        </member>
+        <member name="M:FakeItEasy.Creation.IFakeOptionsBuilder`1.OnFakeCreated(System.Action{`0})">
+            <summary>
+            Specifies an action that should be run over the fake object
+            once it's created.
+            </summary>
+            <param name="action">An action to perform.</param>
+            <returns>Options object.</returns>
         </member>
         <member name="M:FakeItEasy.Creation.IFakeOptionsBuilderForWrappers`1.RecordedBy(FakeItEasy.SelfInitializedFakes.ISelfInitializingFakeRecorder)">
             <summary>
@@ -2501,7 +2536,7 @@
             <param name="configuration">The configuration to extend.</param>
             <returns>A configuration object.</returns>
         </member>
-        <member name="M:FakeItEasy.FakeExtensions.Write``1(System.Collections.Generic.IEnumerable{``0},System.IO.TextWriter)">
+        <member name="M:FakeItEasy.FakeExtensions.Write``1(System.Collections.Generic.IEnumerable{``0},FakeItEasy.IOutputWriter)">
             <summary>
             Writes the calls in the collection to the specified text writer.
             </summary>
@@ -2533,6 +2568,33 @@
             <param name="call">The call to get the argument from.</param>
             <param name="argumentName">The name of the argument.</param>
             <returns>The value of the argument with the specified name.</returns>
+        </member>
+        <member name="M:FakeItEasy.FakeExtensions.Strict``1(FakeItEasy.Creation.IFakeOptionsBuilder{``0})">
+            <summary>
+            Makes the fake strict, this means that any call to the fake
+            that has not been explicitly configured will throw an exception.
+            </summary>
+            <typeparam name="T">The type of fake object.</typeparam>
+            <param name="options">The configuration.</param>
+            <returns>A configuration object.</returns>
+        </member>
+        <member name="M:FakeItEasy.FakeExtensions.Where``1(FakeItEasy.Configuration.IWhereConfiguration{``0},System.Linq.Expressions.Expression{System.Func{FakeItEasy.Core.IFakeObjectCall,System.Boolean}})">
+            <summary>
+            Applies a predicate to constrain which calls will be considered for interception.
+            </summary>
+            <typeparam name="T">
+            The return type of the where method.
+            </typeparam>
+            <param name="configuration">
+            The configuration object to extend.
+            </param>
+            <param name="predicate">
+            A predicate for a fake object call.
+            </param>
+            to the output.
+            <returns>
+            The configuration object.
+            </returns>
         </member>
         <member name="T:FakeItEasy.ArgumentCollection">
             <summary>
