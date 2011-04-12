@@ -90,5 +90,10 @@ namespace Machine.Fakes.Internal
         {
             _autoMocker.Inject(contract, implementation);
         }
+
+        public void Use(Type interfaceType, Type implementation)
+        {
+            _autoMocker.Use(interfaceType, implementation);
+        }
     }
 }

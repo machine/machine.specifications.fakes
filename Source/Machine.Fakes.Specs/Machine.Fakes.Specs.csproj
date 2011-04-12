@@ -47,10 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Specs_for_behavior_configs.cs" />
+    <Compile Include="Specs_for_using_a_custom_type_in_the_build_process.cs" />
     <Compile Include="Specs_for_the_an_method.cs" />
     <Compile Include="Specs_for_the_The_accessor.cs" />
     <Compile Include="TestClasses\DummyFakeEngine.cs" />
     <Compile Include="TestClasses\Car.cs" />
+    <Compile Include="TestClasses\IGarage.cs" />
     <Compile Include="TestClasses\WithMultipleConstructors.cs" />
     <Compile Include="TestClasses\WithoutPublicConstructor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
