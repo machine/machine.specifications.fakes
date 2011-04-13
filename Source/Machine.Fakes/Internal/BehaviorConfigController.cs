@@ -16,8 +16,8 @@ namespace Machine.Fakes.Internal
 
             _behaviorConfigs.Add(behaviorConfig);
 
-            _behaviorConfigs
-                .SelectMany(config => config.GetFieldValues<OnEstablish>())
+            behaviorConfig
+                .GetFieldValues<OnEstablish>()
                 .ForEach(establishDelegate => establishDelegate(fakeAccessor));
         }
 
