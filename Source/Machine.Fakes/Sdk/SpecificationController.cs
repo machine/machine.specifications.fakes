@@ -54,6 +54,7 @@ namespace Machine.Fakes.Sdk
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
             _container = new AutoFakeContainer<TSubject>(fakeEngine);
+            
             FakeEngineGateway.EngineIs(_container);
         }
 
@@ -208,6 +209,17 @@ namespace Machine.Fakes.Sdk
         public void Dispose()
         {
             _behaviorConfigController.CleanUp(Subject);
+        }
+
+        /// <summary>
+        /// Ensures that the subject has been created. This will trigger the lazy loading in case creation hasn't happened
+        /// before.
+        /// </summary>
+        public void EnsureSubjectCreated()
+        {
+            if (Subject != null)
+            {
+            }
         }
     }
 }

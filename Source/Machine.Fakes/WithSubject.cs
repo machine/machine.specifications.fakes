@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Machine.Fakes.Sdk;
 using Machine.Specifications;
+using Machine.Specifications.Factories;
 
 namespace Machine.Fakes
 {
@@ -28,6 +29,8 @@ namespace Machine.Fakes
         protected WithSubject()
         {
             _specificationController = new SpecificationController<TSubject, TFakeEngine>();
+
+            ContextFactory.ChangeAllowedNumberOfBecauseBlocksTo(2);
         }
 
         /// <summary>
@@ -143,6 +146,12 @@ namespace Machine.Fakes
             _specificationController.With(behaviorConfig);
         }
 
-        Cleanup after = () => _specificationController.Dispose();
+        Because of = () => _specificationController.EnsureSubjectCreated();
+
+        Cleanup after = () =>
+        {
+            ContextFactory.ChangeAllowedNumberOfBecauseBlocksTo(1);
+            _specificationController.Dispose();
+        };
     }
 }

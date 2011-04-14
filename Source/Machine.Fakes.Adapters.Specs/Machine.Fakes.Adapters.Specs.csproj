@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bugs\Alex_1.cs" />
+    <Compile Include="Bugs\Alex_2.cs" />
     <Compile Include="FakeItEasy\CommandOptionsSpecs.cs" />
     <Compile Include="FakeItEasy\EngineSpecs.cs" />
     <Compile Include="FakeItEasy\InlineConstraints.cs" />
