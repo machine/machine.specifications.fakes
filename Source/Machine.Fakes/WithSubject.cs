@@ -56,7 +56,7 @@ namespace Machine.Fakes
         /// <returns>
         ///   An instance implementing <typeparamref name="TInterfaceType" />.
         /// </returns>
-        public static TInterfaceType The<TInterfaceType>() where TInterfaceType : class
+        protected static TInterfaceType The<TInterfaceType>() where TInterfaceType : class
         {
             return _specificationController.The<TInterfaceType>();
         }
@@ -68,7 +68,7 @@ namespace Machine.Fakes
         /// <returns>
         ///   An newly created fake implementing <typeparamref name = "TInterfaceType" />.
         /// </returns>
-        public static TInterfaceType An<TInterfaceType>() where TInterfaceType : class
+        protected static TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
             return _specificationController.An<TInterfaceType>();
         }
@@ -79,7 +79,7 @@ namespace Machine.Fakes
         /// </summary>
         /// <typeparam name = "TInterfaceType">Specifies the item type of the list. This should be an interface or an abstract class.</typeparam>
         /// <returns>An <see cref = "IList{T}" />.</returns>
-        public static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
+        protected static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
             return _specificationController.Some<TInterfaceType>();
         }
@@ -96,7 +96,7 @@ namespace Machine.Fakes
         /// <returns>
         /// An <see cref="IList{TInterfaceType}"/>.
         /// </returns>
-        public static IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class
+        protected static IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class
         {
             return _specificationController.Some<TInterfaceType>(amount);
         }
@@ -107,7 +107,7 @@ namespace Machine.Fakes
         /// </summary>
         /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
-        public static void Use<TInterfaceType>(TInterfaceType instance) 
+        protected static void Use<TInterfaceType>(TInterfaceType instance) 
         {
             _specificationController.Use(instance);
         }
@@ -123,7 +123,7 @@ namespace Machine.Fakes
         /// <typeparam name="TImplementationType">
         /// Specifies the implementation type.
         /// </typeparam>
-        public void Use<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
+        protected static void Use<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
         {
             _specificationController.Use<TInterfaceType, TImplementationType>();
         }
@@ -137,11 +137,26 @@ namespace Machine.Fakes
         /// <exception cref="ArgumentNullException">
         /// Thrown when the supplied registrar is <c>null</c>.
         /// </exception>
-        public void Use(Registrar registrar)
+        protected static void Use(Registrar registrar)
         {
             Guard.AgainstArgumentNull(registrar, "registar");
 
             _specificationController.Use(registrar);
+        }
+
+        /// <summary>
+        /// Applies the configuration embedded in the registar to the underlying container.
+        /// Shortcut for <see cref="Use(Registrar)"/> so that you don't have to create the 
+        /// registrar manually.
+        /// </summary>
+        /// <typeparam name="TRegistrar">
+        /// Specifies the registrar type.
+        /// </typeparam>
+        protected static TRegistrar Use<TRegistrar>() where TRegistrar : Registrar, new()
+        {
+            var registrar = new TRegistrar();
+            _specificationController.Use(registrar);
+            return registrar;
         }
 
         /// <summary>
@@ -156,7 +171,7 @@ namespace Machine.Fakes
         /// <exception cref="ArgumentNullException">
         /// Thrown when the supplied registrar is <c>null</c>.
         /// </exception>
-        public void Use(Action<Registrar> registrarExpression)
+        protected static void Use(Action<Registrar> registrarExpression)
         {
             Guard.AgainstArgumentNull(registrarExpression, "registar");
 

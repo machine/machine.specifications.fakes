@@ -76,6 +76,7 @@
     <Compile Include="NSubstitute\InlineConstraints.cs" />
     <Compile Include="NSubstitute\MethodCallOccuranceSpecs.cs" />
     <Compile Include="NSubstitute\QueryOptionsSpecs.cs" />
+    <Compile Include="RegistrarSpecs\Faking_only_a_particular_dependency_in_an_object_graph.cs" />
     <Compile Include="RhinoMocks\CommandOptionsSpecs.cs" />
     <Compile Include="RhinoMocks\EngineSpecs.cs" />
     <Compile Include="RhinoMocks\InlineConstraints.cs" />

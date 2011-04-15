@@ -11,9 +11,9 @@ namespace Machine.Fakes.Internal
             _config = config;
         }
 
-        public void Register(TypeMapping objectMapping)
+        public void Register(TypeMapping typeMapping)
         {
-            _config.For(objectMapping.InterfaceType).Use(objectMapping.ImplementationType);
+            _config.For(typeMapping.InterfaceType).Use(typeMapping.ImplementationType);
         }
 
         public void Register<T>(FactoryMapping<T> factoryMapping)

@@ -2,7 +2,7 @@
 
 namespace Machine.Fakes.Internal
 {
-    class TypeMapping : ITypeMapping
+    class TypeMapping : IMapping
     {
         public TypeMapping(Type interfaceType, Type implementationType)
         {

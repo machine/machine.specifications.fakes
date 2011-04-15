@@ -61,7 +61,7 @@
     <Compile Include="Internal\AutoFakeContainer.cs" />
     <Compile Include="Internal\BehaviorConfigController.cs" />
     <Compile Include="Internal\IContainer.cs" />
-    <Compile Include="Internal\ITypeMapping.cs" />
+    <Compile Include="Internal\IMapping.cs" />
     <Compile Include="Internal\ObjectMapping.cs" />
     <Compile Include="FakeAccessorRegistrarExtensions.cs" />
     <Compile Include="Internal\StructureMapConfiguration.cs" />

@@ -2,7 +2,7 @@
 
 namespace Machine.Fakes.Internal
 {
-    interface ITypeMapping
+    interface IMapping
     {
         Type InterfaceType { get; }
 

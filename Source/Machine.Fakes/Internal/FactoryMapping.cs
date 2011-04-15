@@ -2,7 +2,7 @@
 
 namespace Machine.Fakes.Internal
 {
-    class FactoryMapping<TInterface> : ITypeMapping
+    class FactoryMapping<TInterface> : IMapping
     {
         public FactoryMapping(Func<TInterface> factory)
         {
