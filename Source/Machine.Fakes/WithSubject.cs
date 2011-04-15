@@ -102,9 +102,8 @@ namespace Machine.Fakes
         }
 
         /// <summary>
-        ///   
-        /// Uses the instance supplied by <paramref name = "instance" /> during the
-        ///   creation of the sut. The specified instance will be injected into the constructor.
+        ///     Uses the instance supplied by <paramref name = "instance" /> during the
+        ///     creation of the sut. The specified instance will be injected into the constructor.
         /// </summary>
         /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
@@ -143,6 +142,25 @@ namespace Machine.Fakes
             Guard.AgainstArgumentNull(registrar, "registar");
 
             _specificationController.Use(registrar);
+        }
+
+        /// <summary>
+        /// Shortcut for <see cref="Use(Registrar)"/>. This one will create
+        /// a registrar for you and allow configuration via the delegate passed
+        /// in via <paramref name="registrarExpression"/>.
+        /// 
+        /// </summary>
+        /// <param name="registrarExpression">
+        /// Specifies the configuration for the registrar.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the supplied registrar is <c>null</c>.
+        /// </exception>
+        public void Use(Action<Registrar> registrarExpression)
+        {
+            Guard.AgainstArgumentNull(registrarExpression, "registar");
+
+            _specificationController.Use(registrarExpression);
         }
 
         /// <summary>

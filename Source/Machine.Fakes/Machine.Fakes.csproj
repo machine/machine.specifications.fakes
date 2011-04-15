@@ -63,6 +63,7 @@
     <Compile Include="Internal\IContainer.cs" />
     <Compile Include="Internal\ITypeMapping.cs" />
     <Compile Include="Internal\ObjectMapping.cs" />
+    <Compile Include="FakeAccessorRegistrarExtensions.cs" />
     <Compile Include="Internal\StructureMapConfiguration.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="Registrar.cs" />

@@ -70,37 +70,6 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        ///   Uses the instance supplied by <paramref name = "instance" /> during the
-        ///   creation of the sut. The specified instance will be injected into the constructor.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
-        /// <param name = "instance">Specifies the instance to be used for the specification.</param>
-        public void Use<TInterfaceType>(TInterfaceType instance) 
-        {
-            var registrar = new Registrar();
-            registrar.For<TInterfaceType>().Use(instance);
-            _container.Register(registrar);
-        }
-
-        /// <summary>
-        /// Registered the type specified via <typeparamref name="TImplementationType"/> as the default type
-        /// for the interface specified via <typeparamref name="TInterfaceType"/>. With this the type gets automatically
-        /// build when the subject is resolved.
-        /// </summary>
-        /// <typeparam name="TInterfaceType">
-        /// Specifies the interface type.
-        /// </typeparam>
-        /// <typeparam name="TImplementationType">
-        /// Specifies the implementation type.
-        /// </typeparam>
-        public void Use<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
-        {
-            var registrar = new Registrar();
-            registrar.For<TInterfaceType>().Use<TImplementationType>();
-            _container.Register(registrar);
-        }
-
-        /// <summary>
         /// Applies the configuration embedded in the registar to the underlying container.
         /// </summary>
         /// <param name="registrar">

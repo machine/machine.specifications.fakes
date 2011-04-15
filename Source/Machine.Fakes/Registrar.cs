@@ -31,6 +31,8 @@ namespace Machine.Fakes
 
         public RegistrationExpression For(Type type)
         {
+            Guard.AgainstArgumentNull(type, "type");
+
             return new RegistrationExpression(type, this);
         }
 
@@ -52,11 +54,15 @@ namespace Machine.Fakes
 
             public void Use(object implementation)
             {
+                Guard.AgainstArgumentNull(implementation, "implementation");
+
                 _register.Store(new ObjectMapping(_interfaceType, implementation));
             }
 
             public void Use(Type implementationType)
             {
+                Guard.AgainstArgumentNull(implementationType, "implementationType");
+
                 _register.Store(new TypeMapping(_interfaceType, implementationType));
             }
         }
@@ -82,6 +88,8 @@ namespace Machine.Fakes
 
             public void Use(Func<T> factory)
             {
+                Guard.AgainstArgumentNull(factory, "factory");
+
                 _register.Store(new FactoryMapping<T>(factory));
             }
         }
