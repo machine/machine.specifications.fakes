@@ -217,9 +217,7 @@ namespace Machine.Fakes.Sdk
         /// </summary>
         public void EnsureSubjectCreated()
         {
-            if (Subject != null)
-            {
-            }
+            Subject.ToString();
         }
     }
 }
