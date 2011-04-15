@@ -77,7 +77,9 @@ namespace Machine.Fakes.Sdk
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
         public void Use<TInterfaceType>(TInterfaceType instance) 
         {
-            _container.Inject(typeof (TInterfaceType), instance);
+            var registrar = new Registrar();
+            registrar.For<TInterfaceType>().Use(instance);
+            _container.Register(registrar);
         }
 
         /// <summary>
@@ -93,7 +95,25 @@ namespace Machine.Fakes.Sdk
         /// </typeparam>
         public void Use<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
         {
-            _container.Use(typeof(TInterfaceType), typeof(TImplementationType));
+            var registrar = new Registrar();
+            registrar.For<TInterfaceType>().Use<TImplementationType>();
+            _container.Register(registrar);
+        }
+
+        /// <summary>
+        /// Applies the configuration embedded in the registar to the underlying container.
+        /// </summary>
+        /// <param name="registrar">
+        /// Specifies the registrar.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the supplied registrar is <c>null</c>.
+        /// </exception>
+        public void Use(Registrar registrar)
+        {
+            Guard.AgainstArgumentNull(registrar, "registar");
+
+            _container.Register(registrar);
         }
 
         /// <summary>

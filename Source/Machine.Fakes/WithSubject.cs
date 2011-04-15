@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Machine.Fakes.Sdk;
 using Machine.Specifications;
@@ -110,6 +111,38 @@ namespace Machine.Fakes
         public static void Use<TInterfaceType>(TInterfaceType instance) 
         {
             _specificationController.Use(instance);
+        }
+
+        /// <summary>
+        /// Registered the type specified via <typeparamref name="TImplementationType"/> as the default type
+        /// for the interface specified via <typeparamref name="TInterfaceType"/>. With this the type gets automatically
+        /// build when the subject is resolved.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the interface type.
+        /// </typeparam>
+        /// <typeparam name="TImplementationType">
+        /// Specifies the implementation type.
+        /// </typeparam>
+        public void Use<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
+        {
+            _specificationController.Use<TInterfaceType, TImplementationType>();
+        }
+
+        /// <summary>
+        /// Applies the configuration embedded in the registar to the underlying container.
+        /// </summary>
+        /// <param name="registrar">
+        /// Specifies the registrar.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the supplied registrar is <c>null</c>.
+        /// </exception>
+        public void Use(Registrar registrar)
+        {
+            Guard.AgainstArgumentNull(registrar, "registar");
+
+            _specificationController.Use(registrar);
         }
 
         /// <summary>

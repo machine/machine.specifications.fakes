@@ -57,9 +57,15 @@
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BehaviorConfigDelegates.cs" />
+    <Compile Include="Internal\FactoryMapping.cs" />
     <Compile Include="Internal\AutoFakeContainer.cs" />
     <Compile Include="Internal\BehaviorConfigController.cs" />
+    <Compile Include="Internal\IContainer.cs" />
+    <Compile Include="Internal\ITypeMapping.cs" />
+    <Compile Include="Internal\ObjectMapping.cs" />
+    <Compile Include="Internal\StructureMapConfiguration.cs" />
     <Compile Include="Param.cs" />
+    <Compile Include="Registrar.cs" />
     <Compile Include="Sdk\AbstractExpressionRewriter.cs" />
     <Compile Include="Sdk\ExpressionExtensions.cs" />
     <Compile Include="Sdk\IExpressionRewriter.cs" />
@@ -68,6 +74,7 @@
     <Compile Include="Sdk\ExpressionRewriterBase.cs" />
     <Compile Include="Sdk\SpecificationController.cs" />
     <Compile Include="LocalAssemblyInfo.cs" />
+    <Compile Include="Internal\TypeMapping.cs" />
     <Compile Include="WithFakes.cs" />
     <Compile Include="Internal\FakeEngineGateway.cs" />
     <Compile Include="Sdk\EnumerableExtensions.cs" />
