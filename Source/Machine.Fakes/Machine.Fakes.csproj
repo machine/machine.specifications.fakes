@@ -33,9 +33,8 @@
     <DocumentationFile>bin\Release\Machine.Fakes.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications, Version=0.4.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Machine.Specifications.0.4.9.0\lib\Machine.Specifications.dll</HintPath>
+    <Reference Include="Machine.Specifications">
+      <HintPath>..\packages\Machine.Specifications.0.4.10.0\lib\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.6.2.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,9 +56,16 @@
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BehaviorConfigDelegates.cs" />
+    <Compile Include="Internal\FactoryMapping.cs" />
     <Compile Include="Internal\AutoFakeContainer.cs" />
     <Compile Include="Internal\BehaviorConfigController.cs" />
+    <Compile Include="Internal\IContainer.cs" />
+    <Compile Include="Internal\IMapping.cs" />
+    <Compile Include="Internal\ObjectMapping.cs" />
+    <Compile Include="FakeAccessorRegistrarExtensions.cs" />
+    <Compile Include="Internal\StructureMapConfiguration.cs" />
     <Compile Include="Param.cs" />
+    <Compile Include="Registrar.cs" />
     <Compile Include="Sdk\AbstractExpressionRewriter.cs" />
     <Compile Include="Sdk\ExpressionExtensions.cs" />
     <Compile Include="Sdk\IExpressionRewriter.cs" />
@@ -68,6 +74,7 @@
     <Compile Include="Sdk\ExpressionRewriterBase.cs" />
     <Compile Include="Sdk\SpecificationController.cs" />
     <Compile Include="LocalAssemblyInfo.cs" />
+    <Compile Include="Internal\TypeMapping.cs" />
     <Compile Include="WithFakes.cs" />
     <Compile Include="Internal\FakeEngineGateway.cs" />
     <Compile Include="Sdk\EnumerableExtensions.cs" />

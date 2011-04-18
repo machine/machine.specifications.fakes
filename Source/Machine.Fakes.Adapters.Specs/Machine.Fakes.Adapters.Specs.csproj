@@ -40,9 +40,8 @@
     <Reference Include="FakeItEasy">
       <HintPath>..\packages\FakeItEasy.1.7.4117.2\lib\NET40\FakeItEasy.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications, Version=0.4.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Machine.Specifications.0.4.9.0\lib\Machine.Specifications.dll</HintPath>
+    <Reference Include="Machine.Specifications">
+      <HintPath>..\packages\Machine.Specifications.0.4.10.0\lib\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
@@ -62,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bugs\Run_more_than_one_behavior_config.cs" />
+    <Compile Include="Bugs\Issue28.cs" />
     <Compile Include="FakeItEasy\CommandOptionsSpecs.cs" />
     <Compile Include="FakeItEasy\EngineSpecs.cs" />
     <Compile Include="FakeItEasy\InlineConstraints.cs" />
@@ -74,6 +75,8 @@
     <Compile Include="NSubstitute\InlineConstraints.cs" />
     <Compile Include="NSubstitute\MethodCallOccuranceSpecs.cs" />
     <Compile Include="NSubstitute\QueryOptionsSpecs.cs" />
+    <Compile Include="RegistrarSpecs\Faking_only_a_particular_dependency_in_an_object_graph.cs" />
+    <Compile Include="RegistrarSpecs\Using_registrars_and_factories.cs" />
     <Compile Include="RhinoMocks\CommandOptionsSpecs.cs" />
     <Compile Include="RhinoMocks\EngineSpecs.cs" />
     <Compile Include="RhinoMocks\InlineConstraints.cs" />

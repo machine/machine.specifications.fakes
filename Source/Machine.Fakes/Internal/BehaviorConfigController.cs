@@ -14,11 +14,11 @@ namespace Machine.Fakes.Internal
             Guard.AgainstArgumentNull(behaviorConfig, "behaviorConfig");
             Guard.AgainstArgumentNull(fakeAccessor, "fakeAccessor");
 
-            _behaviorConfigs.Add(behaviorConfig);
-
-            _behaviorConfigs
-                .SelectMany(config => config.GetFieldValues<OnEstablish>())
+            behaviorConfig
+                .GetFieldValues<OnEstablish>()
                 .ForEach(establishDelegate => establishDelegate(fakeAccessor));
+
+            _behaviorConfigs.Add(behaviorConfig);
         }
 
         public void CleanUp(object subject)

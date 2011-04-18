@@ -32,7 +32,7 @@ namespace Machine.Fakes.Specs
             var dummyFakeEngine = new DummyFakeEngine {CreatedFake = new CarFromFakeFramework()};
 
             _specController = new SpecificationController<LittleKingdom>(dummyFakeEngine);
-            _specController.Use<IGarage, Garage>();
+            _specController.Configure<IGarage, Garage>();
         };
 
         Because of = () =>  _subject = _specController.Subject;
@@ -53,8 +53,8 @@ namespace Machine.Fakes.Specs
         Establish context = () =>
         {
             _specController = new SpecificationController<LittleKingdom>(new DummyFakeEngine());
-            _specController.Use<IGarage, Garage>();
-            _specController.Use<ICar, Car>();
+            _specController.Configure<IGarage, Garage>();
+            _specController.Configure<ICar, Car>();
         };
 
         Because of = () => _subject = _specController.Subject;

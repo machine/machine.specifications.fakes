@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Machine.Fakes.Sdk;
 using Machine.Specifications;
+using Machine.Specifications.Factories;
 
 namespace Machine.Fakes
 {
@@ -28,6 +30,8 @@ namespace Machine.Fakes
         protected WithSubject()
         {
             _specificationController = new SpecificationController<TSubject, TFakeEngine>();
+
+            ContextFactory.ChangeAllowedNumberOfBecauseBlocksTo(2);
         }
 
         /// <summary>
@@ -52,7 +56,7 @@ namespace Machine.Fakes
         /// <returns>
         ///   An instance implementing <typeparamref name="TInterfaceType" />.
         /// </returns>
-        public static TInterfaceType The<TInterfaceType>() where TInterfaceType : class
+        protected static TInterfaceType The<TInterfaceType>() where TInterfaceType : class
         {
             return _specificationController.The<TInterfaceType>();
         }
@@ -64,7 +68,7 @@ namespace Machine.Fakes
         /// <returns>
         ///   An newly created fake implementing <typeparamref name = "TInterfaceType" />.
         /// </returns>
-        public static TInterfaceType An<TInterfaceType>() where TInterfaceType : class
+        protected static TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
             return _specificationController.An<TInterfaceType>();
         }
@@ -75,7 +79,7 @@ namespace Machine.Fakes
         /// </summary>
         /// <typeparam name = "TInterfaceType">Specifies the item type of the list. This should be an interface or an abstract class.</typeparam>
         /// <returns>An <see cref = "IList{T}" />.</returns>
-        public static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
+        protected static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
             return _specificationController.Some<TInterfaceType>();
         }
@@ -92,21 +96,98 @@ namespace Machine.Fakes
         /// <returns>
         /// An <see cref="IList{TInterfaceType}"/>.
         /// </returns>
-        public static IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class
+        protected static IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class
         {
             return _specificationController.Some<TInterfaceType>(amount);
         }
 
         /// <summary>
-        ///   
-        /// Uses the instance supplied by <paramref name = "instance" /> during the
-        ///   creation of the sut. The specified instance will be injected into the constructor.
+        ///     Uses the instance supplied by <paramref name = "instance" /> during the
+        ///     build process of the subject. The specified instance will be injected into the constructor.
         /// </summary>
         /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
-        public static void Use<TInterfaceType>(TInterfaceType instance) 
+        [Obsolete("Use the new Configure methods instead. This method will be removed soon ...")]
+        protected static void Use<TInterfaceType>(TInterfaceType instance) 
         {
-            _specificationController.Use(instance);
+            _specificationController.Configure(instance);
+        }
+
+        /// <summary>
+        ///     Uses the instance supplied by <paramref name = "instance" /> during the
+        ///     build process of the subject. The specified instance will be injected into the constructor.
+        /// </summary>
+        /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
+        /// <param name = "instance">Specifies the instance to be used for the specification.</param>
+        protected static void Configure<TInterfaceType>(TInterfaceType instance)
+        {
+            _specificationController.Configure(instance);
+        }
+
+        /// <summary>
+        /// Registered the type specified via <typeparamref name="TImplementationType"/> as the default type
+        /// for the interface specified via <typeparamref name="TInterfaceType"/>. With this the type gets automatically
+        /// build when the subject is resolved.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the interface type.
+        /// </typeparam>
+        /// <typeparam name="TImplementationType">
+        /// Specifies the implementation type.
+        /// </typeparam>
+        protected static void Configure<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
+        {
+            _specificationController.Configure<TInterfaceType, TImplementationType>();
+        }
+
+        /// <summary>
+        /// Applies the configuration embedded in the registar to the underlying container.
+        /// </summary>
+        /// <param name="registrar">
+        /// Specifies the registrar.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the supplied registrar is <c>null</c>.
+        /// </exception>
+        protected static void Configure(Registrar registrar)
+        {
+            Guard.AgainstArgumentNull(registrar, "registar");
+
+            _specificationController.Configure(registrar);
+        }
+
+        /// <summary>
+        /// Applies the configuration embedded in the registar to the underlying container.
+        /// Shortcut for <see cref="Configure(Registrar)"/> so that you don't have to create the 
+        /// registrar manually.
+        /// </summary>
+        /// <typeparam name="TRegistrar">
+        /// Specifies the registrar type.
+        /// </typeparam>
+        protected static TRegistrar Configure<TRegistrar>() where TRegistrar : Registrar, new()
+        {
+            var registrar = new TRegistrar();
+            _specificationController.Configure(registrar);
+            return registrar;
+        }
+
+        /// <summary>
+        /// Shortcut for <see cref="Configure(Registrar)"/>. This one will create
+        /// a registrar for you and allow configuration via the delegate passed
+        /// in via <paramref name="registrarExpression"/>.
+        /// 
+        /// </summary>
+        /// <param name="registrarExpression">
+        /// Specifies the configuration for the registrar.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the supplied registrar is <c>null</c>.
+        /// </exception>
+        protected static void Configure(Action<Registrar> registrarExpression)
+        {
+            Guard.AgainstArgumentNull(registrarExpression, "registar");
+
+            _specificationController.Configure(registrarExpression);
         }
 
         /// <summary>
@@ -143,6 +224,12 @@ namespace Machine.Fakes
             _specificationController.With(behaviorConfig);
         }
 
-        Cleanup after = () => _specificationController.Dispose();
+        Because of = () => _specificationController.EnsureSubjectCreated();
+
+        Cleanup after = () =>
+        {
+            ContextFactory.ChangeAllowedNumberOfBecauseBlocksTo(1);
+            _specificationController.Dispose();
+        };
     }
 }

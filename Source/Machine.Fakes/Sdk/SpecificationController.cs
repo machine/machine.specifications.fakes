@@ -54,6 +54,7 @@ namespace Machine.Fakes.Sdk
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
             _container = new AutoFakeContainer<TSubject>(fakeEngine);
+            
             FakeEngineGateway.EngineIs(_container);
         }
 
@@ -69,30 +70,19 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        ///   Uses the instance supplied by <paramref name = "instance" /> during the
-        ///   creation of the sut. The specified instance will be injected into the constructor.
+        /// Applies the configuration embedded in the registar to the underlying container.
         /// </summary>
-        /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
-        /// <param name = "instance">Specifies the instance to be used for the specification.</param>
-        public void Use<TInterfaceType>(TInterfaceType instance) 
+        /// <param name="registrar">
+        /// Specifies the registrar.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the supplied registrar is <c>null</c>.
+        /// </exception>
+        public void Configure(Registrar registrar)
         {
-            _container.Inject(typeof (TInterfaceType), instance);
-        }
+            Guard.AgainstArgumentNull(registrar, "registar");
 
-        /// <summary>
-        /// Registered the type specified via <typeparamref name="TImplementationType"/> as the default type
-        /// for the interface specified via <typeparamref name="TInterfaceType"/>. With this the type gets automatically
-        /// build when the subject is resolved.
-        /// </summary>
-        /// <typeparam name="TInterfaceType">
-        /// Specifies the interface type.
-        /// </typeparam>
-        /// <typeparam name="TImplementationType">
-        /// Specifies the implementation type.
-        /// </typeparam>
-        public void Use<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
-        {
-            _container.Use(typeof(TInterfaceType), typeof(TImplementationType));
+            _container.Register(registrar);
         }
 
         /// <summary>
@@ -208,6 +198,15 @@ namespace Machine.Fakes.Sdk
         public void Dispose()
         {
             _behaviorConfigController.CleanUp(Subject);
+        }
+
+        /// <summary>
+        /// Ensures that the subject has been created. This will trigger the lazy loading in case creation hasn't happened
+        /// before.
+        /// </summary>
+        public void EnsureSubjectCreated()
+        {
+            Subject.ToString();
         }
     }
 }

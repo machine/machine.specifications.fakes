@@ -91,9 +91,9 @@ namespace Machine.Fakes.Internal
             _autoMocker.Inject(contract, implementation);
         }
 
-        public void Use(Type interfaceType, Type implementation)
+        public void Register(Registrar registar)
         {
-            _autoMocker.Use(interfaceType, implementation);
+            _autoMocker.Register(registar);
         }
     }
 }

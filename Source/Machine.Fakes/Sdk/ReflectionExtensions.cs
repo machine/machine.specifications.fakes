@@ -172,12 +172,14 @@ namespace Machine.Fakes.Sdk
 
         static IEnumerable<FieldInfo> GetAllFields(this Type type)
         {
-            return type.GetFields(
-                BindingFlags.Static |
-                BindingFlags.Instance |
-                BindingFlags.NonPublic |
-                BindingFlags.Public |
-                BindingFlags.FlattenHierarchy);
+            return type
+                .GetFields(
+                    BindingFlags.Static |
+                    BindingFlags.Instance |
+                    BindingFlags.NonPublic |
+                    BindingFlags.Public |
+                    BindingFlags.FlattenHierarchy)
+                .Where(t => !t.Name.StartsWith("CS$"));
         }
 
         static MemberExpression MakePropertyAccess(this Type targetType, string property, BindingFlags flags, Expression instanceExpression)
