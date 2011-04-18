@@ -12,7 +12,7 @@ namespace Machine.Fakes.Adapters.Specs.RegistrarSpecs
     {
         Establish context = () =>
         {
-            Use(config =>
+            Configure(config =>
             {
                 config.For<ICommandBus>().Use<CommandBus>();
                 config.For<ICommand>().Use<TestCommand>();
@@ -28,7 +28,7 @@ namespace Machine.Fakes.Adapters.Specs.RegistrarSpecs
     [Subject(typeof(SpecificationController<>))]
     public class When_using_a_registrar_to_configure_the_dependency_graph_of_a_subject_and_leaving_one_dependency_out : WithSubject<ServiceFacade, RhinoFakeEngine>
     {
-        Establish context = () => Use<MyRegistrar>();
+        Establish context = () => Configure<MyRegistrar>();
 
         Because of = () => Subject.DoIt("TestMessage");
 

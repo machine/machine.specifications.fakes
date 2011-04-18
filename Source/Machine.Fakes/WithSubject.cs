@@ -103,13 +103,25 @@ namespace Machine.Fakes
 
         /// <summary>
         ///     Uses the instance supplied by <paramref name = "instance" /> during the
-        ///     creation of the sut. The specified instance will be injected into the constructor.
+        ///     build process of the subject. The specified instance will be injected into the constructor.
         /// </summary>
         /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
+        [Obsolete("Use the new Configure methods instead. This method will be removed soon ...")]
         protected static void Use<TInterfaceType>(TInterfaceType instance) 
         {
-            _specificationController.Use(instance);
+            _specificationController.Configure(instance);
+        }
+
+        /// <summary>
+        ///     Uses the instance supplied by <paramref name = "instance" /> during the
+        ///     build process of the subject. The specified instance will be injected into the constructor.
+        /// </summary>
+        /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
+        /// <param name = "instance">Specifies the instance to be used for the specification.</param>
+        protected static void Configure<TInterfaceType>(TInterfaceType instance)
+        {
+            _specificationController.Configure(instance);
         }
 
         /// <summary>
@@ -123,9 +135,9 @@ namespace Machine.Fakes
         /// <typeparam name="TImplementationType">
         /// Specifies the implementation type.
         /// </typeparam>
-        protected static void Use<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
+        protected static void Configure<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
         {
-            _specificationController.Use<TInterfaceType, TImplementationType>();
+            _specificationController.Configure<TInterfaceType, TImplementationType>();
         }
 
         /// <summary>
@@ -137,30 +149,30 @@ namespace Machine.Fakes
         /// <exception cref="ArgumentNullException">
         /// Thrown when the supplied registrar is <c>null</c>.
         /// </exception>
-        protected static void Use(Registrar registrar)
+        protected static void Configure(Registrar registrar)
         {
             Guard.AgainstArgumentNull(registrar, "registar");
 
-            _specificationController.Use(registrar);
+            _specificationController.Configure(registrar);
         }
 
         /// <summary>
         /// Applies the configuration embedded in the registar to the underlying container.
-        /// Shortcut for <see cref="Use(Registrar)"/> so that you don't have to create the 
+        /// Shortcut for <see cref="Configure(Registrar)"/> so that you don't have to create the 
         /// registrar manually.
         /// </summary>
         /// <typeparam name="TRegistrar">
         /// Specifies the registrar type.
         /// </typeparam>
-        protected static TRegistrar Use<TRegistrar>() where TRegistrar : Registrar, new()
+        protected static TRegistrar Configure<TRegistrar>() where TRegistrar : Registrar, new()
         {
             var registrar = new TRegistrar();
-            _specificationController.Use(registrar);
+            _specificationController.Configure(registrar);
             return registrar;
         }
 
         /// <summary>
-        /// Shortcut for <see cref="Use(Registrar)"/>. This one will create
+        /// Shortcut for <see cref="Configure(Registrar)"/>. This one will create
         /// a registrar for you and allow configuration via the delegate passed
         /// in via <paramref name="registrarExpression"/>.
         /// 
@@ -171,11 +183,11 @@ namespace Machine.Fakes
         /// <exception cref="ArgumentNullException">
         /// Thrown when the supplied registrar is <c>null</c>.
         /// </exception>
-        protected static void Use(Action<Registrar> registrarExpression)
+        protected static void Configure(Action<Registrar> registrarExpression)
         {
             Guard.AgainstArgumentNull(registrarExpression, "registar");
 
-            _specificationController.Use(registrarExpression);
+            _specificationController.Configure(registrarExpression);
         }
 
         /// <summary>

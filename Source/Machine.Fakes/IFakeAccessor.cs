@@ -78,6 +78,6 @@ namespace Machine.Fakes
         /// <exception cref="ArgumentNullException">
         /// Thrown when the supplied registrar is <c>null</c>.
         /// </exception>
-        void Use(Registrar registrar);
+        void Configure(Registrar registrar);
     }
 }

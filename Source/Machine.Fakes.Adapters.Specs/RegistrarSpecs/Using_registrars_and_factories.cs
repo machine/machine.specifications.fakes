@@ -9,7 +9,7 @@ namespace Machine.Fakes.Adapters.Specs.RegistrarSpecs
     {
         Establish context = () =>
         {
-            Use(c => c.For<IConfigurationStore>().Use(() => new ConfigurationStore()));
+            Configure(c => c.For<IConfigurationStore>().Use(() => new ConfigurationStore()));
         };
 
         Because of = () => { };

@@ -18,13 +18,30 @@ namespace Machine.Fakes
         /// <param name = "accessor">
         ///     Specifies the fake accessor
         /// </param>
+        [Obsolete("Use the new Configure methods instead. This method will be removed soon ...")]
         public static void Use<TInterfaceType>(
+            this IFakeAccessor accessor,
+            TInterfaceType instance)
+        {
+            accessor.Configure(instance);
+        }
+
+        /// <summary>
+        ///     Uses the instance supplied by <paramref name = "instance" /> during the
+        ///     creation of the sut. The specified instance will be injected into the constructor.
+        /// </summary>
+        /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
+        /// <param name = "instance">Specifies the instance to be used for the specification.</param>
+        /// <param name = "accessor">
+        ///     Specifies the fake accessor
+        /// </param>
+        public static void Configure<TInterfaceType>(
             this IFakeAccessor accessor,
             TInterfaceType instance)
         {
             Guard.AgainstArgumentNull(accessor, "accessor");
 
-            accessor.Use(Registrar.New(config => config.For<TInterfaceType>().Use(instance)));
+            accessor.Configure(Registrar.New(config => config.For<TInterfaceType>().Use(instance)));
         }
 
         /// <summary>
@@ -41,17 +58,17 @@ namespace Machine.Fakes
         /// <typeparam name = "TImplementationType">
         ///     Specifies the implementation type.
         /// </typeparam>
-        public static void Use<TInterfaceType, TImplementationType>(
+        public static void Configure<TInterfaceType, TImplementationType>(
             this IFakeAccessor accessor)
             where TImplementationType : TInterfaceType
         {
             Guard.AgainstArgumentNull(accessor, "accessor");
 
-            accessor.Use(Registrar.New(config => config.For<TInterfaceType>().Use<TImplementationType>()));
+            accessor.Configure(Registrar.New(config => config.For<TInterfaceType>().Use<TImplementationType>()));
         }
 
         /// <summary>
-        ///     Shortcut for <see cref = "IFakeAccessor.Use(Registrar)" />. This one will create
+        ///     Shortcut for <see cref = "IFakeAccessor.Configure" />. This one will create
         ///     a registrar for you and allow configuration via the delegate passed
         ///     in via <paramref name = "registrarExpression" />.
         /// </summary>
@@ -64,14 +81,14 @@ namespace Machine.Fakes
         /// <exception cref = "ArgumentNullException">
         ///     Thrown when the supplied registrar expression is <c>null</c>.
         /// </exception>
-        public static void Use(
+        public static void Configure(
             this IFakeAccessor accessor,
             Action<Registrar> registrarExpression)
         {
             Guard.AgainstArgumentNull(accessor, "accessor");
             Guard.AgainstArgumentNull(registrarExpression, "registrarExpression");
 
-            accessor.Use(Registrar.New(registrarExpression));
+            accessor.Configure(Registrar.New(registrarExpression));
         }
     }
 }

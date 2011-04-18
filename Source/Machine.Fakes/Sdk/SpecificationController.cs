@@ -78,7 +78,7 @@ namespace Machine.Fakes.Sdk
         /// <exception cref="ArgumentNullException">
         /// Thrown when the supplied registrar is <c>null</c>.
         /// </exception>
-        public void Use(Registrar registrar)
+        public void Configure(Registrar registrar)
         {
             Guard.AgainstArgumentNull(registrar, "registar");
 
