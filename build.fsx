@@ -38,7 +38,6 @@ let nugetDir = buildDir + @"NuGet\"
 let testDir = buildDir
 let deployDir = @".\Release\"
 let targetPlatformDir = getTargetPlatformDir "v4.0.30319"
-let nugetDocsDir = nugetDir + @"docs\"
 let nugetLibDir = nugetDir + @"lib\"
 
 (* files *)
@@ -136,9 +135,9 @@ Target "BuildZip" (fun _ ->
 )
 
 Target "BuildNuGet" (fun _ ->
-    CleanDirs [nugetDir; nugetLibDir; nugetDocsDir]
+    CleanDirs [nugetDir; nugetLibDir]
         
-    XCopy docsDir nugetDocsDir
+    XCopy docsDir 
     [buildDir + "Machine.Fakes.dll"]
         |> CopyTo nugetLibDir
 
@@ -162,9 +161,9 @@ Target "BuildNuGetFlavours" (fun _ ->
     Flavours
       |> Seq.iter (fun (flavour) ->
             let flavourVersion = GetPackageVersion packagesDir flavour
-            CleanDirs [nugetDir; nugetLibDir; nugetDocsDir]
+            CleanDirs [nugetDir; nugetLibDir]
         
-            XCopy docsDir nugetDocsDir
+            XCopy docsDir 
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour]
               |> CopyTo nugetLibDir               
             
