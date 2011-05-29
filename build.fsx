@@ -41,11 +41,12 @@ let targetPlatformDir = getTargetPlatformDir "v4.0.30319"
 let nugetLibDir = nugetDir + @"lib\"
 
 (* files *)
-let appReferences = !! @".\Source\**\*.csproj"
+let slnReferences = !! @".\Source\*.sln"
 
 (* flavours *)
 let Flavours = ["RhinoMocks"; "FakeItEasy"; "NSubstitute"; "Moq"]
 let MSpecVersion = GetPackageVersion packagesDir "Machine.Specifications"
+let mspecTool = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" MSpecVersion
     
 (* Targets *)
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; docsDir; testOutputDir] )
@@ -63,7 +64,7 @@ Target "BuildApp" (fun _ ->
             Guid = "3745F3DA-6ABB-4C58-923D-B09E4A04688F";
             OutputFileName = @".\Source\GlobalAssemblyInfo.cs"})                      
 
-    appReferences
+    slnReferences
         |> MSBuildRelease buildDir "Build"
         |> Log "AppBuild-Output: "
 )
@@ -75,7 +76,7 @@ Target "Test" (fun _ ->
         |> Scan
         |> MSpec (fun p -> 
                     {p with 
-                        ToolPath = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" MSpecVersion
+                        ToolPath = mspecTool
                         HtmlOutputDir = testOutputDir})
 )
 
@@ -137,7 +138,6 @@ Target "BuildZip" (fun _ ->
 Target "BuildNuGet" (fun _ ->
     CleanDirs [nugetDir; nugetLibDir]
         
-    XCopy docsDir 
     [buildDir + "Machine.Fakes.dll"]
         |> CopyTo nugetLibDir
 
@@ -162,8 +162,7 @@ Target "BuildNuGetFlavours" (fun _ ->
       |> Seq.iter (fun (flavour) ->
             let flavourVersion = GetPackageVersion packagesDir flavour
             CleanDirs [nugetDir; nugetLibDir]
-        
-            XCopy docsDir 
+
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour]
               |> CopyTo nugetLibDir               
             
