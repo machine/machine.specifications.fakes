@@ -41,7 +41,7 @@ let targetPlatformDir = getTargetPlatformDir "v4.0.30319"
 let nugetLibDir = nugetDir + @"lib\"
 
 (* files *)
-let appReferences = !! @".\Source\**\*.csproj"
+let slnReferences = !! @".\Source\*.sln"
 
 (* flavours *)
 let Flavours = ["RhinoMocks"; "FakeItEasy"; "NSubstitute"; "Moq"]
@@ -63,7 +63,7 @@ Target "BuildApp" (fun _ ->
             Guid = "3745F3DA-6ABB-4C58-923D-B09E4A04688F";
             OutputFileName = @".\Source\GlobalAssemblyInfo.cs"})                      
 
-    appReferences
+    slnReferences
         |> MSBuildRelease buildDir "Build"
         |> Log "AppBuild-Output: "
 )
