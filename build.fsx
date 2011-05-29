@@ -137,7 +137,6 @@ Target "BuildZip" (fun _ ->
 Target "BuildNuGet" (fun _ ->
     CleanDirs [nugetDir; nugetLibDir]
         
-    XCopy docsDir 
     [buildDir + "Machine.Fakes.dll"]
         |> CopyTo nugetLibDir
 
@@ -162,8 +161,7 @@ Target "BuildNuGetFlavours" (fun _ ->
       |> Seq.iter (fun (flavour) ->
             let flavourVersion = GetPackageVersion packagesDir flavour
             CleanDirs [nugetDir; nugetLibDir]
-        
-            XCopy docsDir 
+
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour]
               |> CopyTo nugetLibDir               
             
