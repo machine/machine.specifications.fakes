@@ -21,6 +21,20 @@ namespace Machine.Fakes
         object CreateFake(Type interfaceType);
 
         /// <summary>
+        /// Creates a fake of the type specified via <paramref name="interfaceType"/> using a non default constructor.
+        /// </summary>
+        /// <param name="interfaceType">
+        /// Specifies the interface type to create a fake for.
+        /// </param>
+        /// <param name="args">
+        /// Specifies parameters for non default constructor.
+        /// </param>
+        /// <returns>
+        /// The created fake instance.
+        /// </returns>
+        object CreateFake(Type interfaceType, params object[] args);
+
+        /// <summary>
         /// Creates a partial mock.
         /// </summary>
         /// <typeparam name="T">

@@ -134,6 +134,21 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
+        ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" /> without a default constructor.
+        /// </summary>
+        /// <typeparam name = "TInterfaceType">The type to create a fake for.</typeparam>
+        /// <param name="args">
+        ///   No default constructor arguments
+        /// </param>
+        /// <returns>
+        ///   An newly created fake implementing <typeparamref name = "TInterfaceType" />.
+        /// </returns>
+        public TInterfaceType An<TInterfaceType>(params object[] args) where TInterfaceType : class
+        {
+            return (TInterfaceType)An(typeof(TInterfaceType), args);
+        }
+
+        /// <summary>
         /// Creates a fake of the type specified by <paramref name="interfaceType"/>.
         /// </summary>
         /// The type to create a fake for. (Should be an interface or an abstract class)
@@ -144,6 +159,24 @@ namespace Machine.Fakes.Sdk
         /// An newly created fake implementing <paramref name="interfaceType"/>.
         /// </returns>
         public object An(Type interfaceType)
+        {
+            return _container.CreateFake(interfaceType);
+        }
+
+        /// <summary>
+        /// Creates a fake of the type specified by <paramref name="interfaceType"/> without default constructor.
+        /// </summary>
+        /// The type to create a fake for.
+        /// <param name="interfaceType">
+        /// Specifies the type of item to fake.
+        /// </param>
+        /// <param name="args">
+        /// Specifies the constructor parameters if the class is a concrete class without default constructor
+        /// </param>
+        /// <returns>
+        /// An newly created fake implementing <paramref name="interfaceType"/>.
+        /// </returns>
+        public object An(Type interfaceType, params object[] args)
         {
             return _container.CreateFake(interfaceType);
         }

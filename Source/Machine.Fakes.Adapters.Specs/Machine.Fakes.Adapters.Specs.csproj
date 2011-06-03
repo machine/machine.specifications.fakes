@@ -84,6 +84,7 @@
     <Compile Include="RhinoMocks\InlineConstraints.cs" />
     <Compile Include="RhinoMocks\MethodCallOccuranceSpecs.cs" />
     <Compile Include="RhinoMocks\QueryOptionsSpecs.cs" />
+    <Compile Include="SampleCode\DummyNoDefaultCtorClass.cs" />
     <Compile Include="SampleCode\IFlashVerifier.cs" />
     <Compile Include="SampleCode\ITablet.cs" />
     <Compile Include="SampleCode\IView.cs" />

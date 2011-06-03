@@ -26,6 +26,11 @@ namespace Machine.Fakes.Internal
             return _fakeEngine.CreateFake(interfaceType);
         }
 
+        public object CreateFake(Type interfaceType, params object[] args)
+        {
+            return _fakeEngine.CreateFake(interfaceType, args);
+        }
+
         public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
             TFake fake,
             Expression<Func<TFake, TReturnValue>> func) where TFake : class

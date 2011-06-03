@@ -52,11 +52,11 @@ namespace Machine.Fakes.Internal
         /// <returns>
         /// A new fake for the type specified via <typeparamref name="T"/>.
         /// </returns>
-        public static T Stub<T>(this IFakeEngine fakeEngine)
+        public static T Stub<T>(this IFakeEngine fakeEngine, params object[] args)
         {
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
-            return (T)fakeEngine.CreateFake(typeof(T));
+            return (T)fakeEngine.CreateFake(typeof(T), args);
         }
     }
 }

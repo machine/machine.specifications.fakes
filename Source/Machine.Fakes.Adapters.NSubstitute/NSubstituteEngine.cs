@@ -17,7 +17,12 @@ namespace Machine.Fakes.Adapters.NSubstitute
 
         public override object CreateFake(Type interfaceType)
         {
-            return Substitute.For(new[] {interfaceType}, null);
+            return CreateFake(interfaceType, null);
+        }
+
+        public override object CreateFake(Type interfaceType, params object[] args)
+        {
+            return Substitute.For(new[] { interfaceType }, args);
         }
 
         public override T PartialMock<T>(params object[] args) 

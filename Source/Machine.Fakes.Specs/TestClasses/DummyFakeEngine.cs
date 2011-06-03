@@ -15,6 +15,11 @@ namespace Machine.Fakes.Specs.TestClasses
             return CreatedFake;
         }
 
+        public object CreateFake(Type interfaceType, params object[] args)
+        {
+            throw new NotImplementedException();
+        }
+
         public T PartialMock<T>(params object[] args) where T : class
         {
             throw new NotImplementedException();
