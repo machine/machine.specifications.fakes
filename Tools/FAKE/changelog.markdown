@@ -1,3 +1,8 @@
+## 1.56.0.0
+
+* Allows to publish symbols via nuget.exe
+* Autotrim trailing .0 from version in order to fullfill nuget standards.
+
 ## 1.54.0.0
 
 * If the publishment of a Nuget package fails, then FAKE will try it again.

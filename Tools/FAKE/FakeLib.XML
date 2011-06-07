@@ -279,7 +279,12 @@
 </member>
 <member name="M:Fake.EnvironmentHelper.op_AtAt(System.String,System.String)">
 <summary>
- Combines to path strings
+ Combines two path strings
+</summary>
+</member>
+<member name="M:Fake.EnvironmentHelper.combinePaths(System.String,System.String)">
+<summary>
+ Combines two path strings
 </summary>
 </member>
 <member name="M:Fake.EnvironmentHelper.environVar(System.String)">
@@ -1928,6 +1933,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="M:Fake.NuGetHelper.NuGet(Microsoft.FSharp.Core.FSharpFunc`2{Fake.NuGetHelper.NuGetParams,Fake.NuGetHelper.NuGetParams},System.String)">
 <summary>
  Creates a new NuGet package   
@@ -2281,6 +2289,11 @@
  Converts a sequence of strings into a string separated with line ends
 </summary>
 </member>
+<member name="M:Fake.StringHelper.split(System.Char,System.String)">
+<summary>
+ Splits the given string at the given delimiter
+</summary>
+</member>
 <member name="M:Fake.StringHelper.trimSlash(System.String)">
 <summary>
  Removes the slashes from the end of the given string
@@ -2397,6 +2410,11 @@
 <member name="M:Fake.StringHelper.WriteStringToFile(System.Boolean,System.String,System.String)">
 <summary>
  Writes string to a file
+</summary>
+</member>
+<member name="M:Fake.StringHelper.NormalizeVersion(System.String)">
+<summary>
+ Removes all trailing .0 from a version string
 </summary>
 </member>
 <member name="M:Fake.StringHelper.WriteToFile(System.Boolean,System.String,System.Collections.Generic.IEnumerable{System.String})">

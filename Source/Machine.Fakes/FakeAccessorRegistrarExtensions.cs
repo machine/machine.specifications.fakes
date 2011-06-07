@@ -18,23 +18,6 @@ namespace Machine.Fakes
         /// <param name = "accessor">
         ///     Specifies the fake accessor
         /// </param>
-        [Obsolete("Use the new Configure methods instead. This method will be removed soon ...")]
-        public static void Use<TInterfaceType>(
-            this IFakeAccessor accessor,
-            TInterfaceType instance)
-        {
-            accessor.Configure(instance);
-        }
-
-        /// <summary>
-        ///     Uses the instance supplied by <paramref name = "instance" /> during the
-        ///     creation of the sut. The specified instance will be injected into the constructor.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
-        /// <param name = "instance">Specifies the instance to be used for the specification.</param>
-        /// <param name = "accessor">
-        ///     Specifies the fake accessor
-        /// </param>
         public static void Configure<TInterfaceType>(
             this IFakeAccessor accessor,
             TInterfaceType instance)

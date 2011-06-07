@@ -107,18 +107,6 @@ namespace Machine.Fakes
         /// </summary>
         /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
-        [Obsolete("Use the new Configure methods instead. This method will be removed soon ...")]
-        protected static void Use<TInterfaceType>(TInterfaceType instance) 
-        {
-            _specificationController.Configure(instance);
-        }
-
-        /// <summary>
-        ///     Uses the instance supplied by <paramref name = "instance" /> during the
-        ///     build process of the subject. The specified instance will be injected into the constructor.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
-        /// <param name = "instance">Specifies the instance to be used for the specification.</param>
         protected static void Configure<TInterfaceType>(TInterfaceType instance)
         {
             _specificationController.Configure(instance);
