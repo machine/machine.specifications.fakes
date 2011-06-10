@@ -63,4 +63,52 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         It should_be_able_to_create_an_instance = () => _fake.ShouldNotBeNull();
     }
+
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("FakeItEasy", "Constructing an instance")]
+    public class When_using_a_non_default_ctor_an_executing_fake : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static MyInternal _inner;
+        static Sample _fake;
+
+        Establish context = () =>
+        {
+            _inner = new MyInternal();
+            _fake = FakeEngineGateway.Fake<Sample>(_inner);
+        };
+
+        Because of = () => _fake.DoCall();
+
+        It should_call_inner_instance = () => _inner.Used.ShouldBeTrue();
+    }
+
+    public class Sample
+    {
+        readonly MyInternal inner;
+
+        public Sample(MyInternal inner)
+        {
+            this.inner = inner;
+        }
+
+        public void DoCall()
+        {
+            inner.UseIt();
+        }
+    }
+
+    public class MyInternal
+    {
+        public bool Used { get; private set; }
+
+        public MyInternal()
+        {
+            Used = false;
+        }
+
+        public void UseIt()
+        {
+            Used = true;
+        }
+    }
 }

@@ -21,8 +21,13 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
         public override object CreateFake(Type interfaceType, params object[] args)
         {
-            // TODO: need to check how to do this in fakeiteasy :(
-            return CreateFake(interfaceType);
+            var closedFakeType = typeof(Fake<>).MakeGenericType(interfaceType);
+            var objectProperty = closedFakeType.GetProperty("FakedObject", interfaceType);
+
+            var options = FakeItEasyHelper.CreateForType(interfaceType, args);
+
+            var instance = Activator.CreateInstance(closedFakeType, new object[] { options });
+            return objectProperty.GetValue(instance, null);
         }
 
         public override T PartialMock<T>(params object[] args) 

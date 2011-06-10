@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Notes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Note Project="ff888220-969d-4283-9b00-78d2da4bd7ab" Date="2011-06-03T20:00:38.7005439+10:00">
+    <Region StartLine="51" EndLine="51" StartColumn="0" EndColumn="84" />
+    <Item>Sdk\ExpressionRewriterBase.cs</Item>
+    <User>cristian</User>
+    <Content>Need to be an abstract method</Content>
+  </Note>
+</Notes>

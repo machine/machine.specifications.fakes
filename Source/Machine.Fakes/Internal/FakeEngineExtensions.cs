@@ -56,7 +56,9 @@ namespace Machine.Fakes.Internal
         {
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
-            return (T)fakeEngine.CreateFake(typeof(T), args);
+            return args != null && args.Length > 0 
+                ? (T) fakeEngine.CreateFake(typeof (T), args) 
+                : (T) fakeEngine.CreateFake(typeof (T));
         }
     }
 }
