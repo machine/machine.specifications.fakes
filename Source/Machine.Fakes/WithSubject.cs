@@ -65,12 +65,15 @@ namespace Machine.Fakes
         ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" />.
         /// </summary>
         /// <typeparam name = "TInterfaceType">The type to create a fake for. (Should be an interface or an abstract class)</typeparam>
+        /// <param name="args">
+        /// The optional ctor parameters for non default ctor classes
+        /// </param>
         /// <returns>
         ///   An newly created fake implementing <typeparamref name = "TInterfaceType" />.
         /// </returns>
-        protected static TInterfaceType An<TInterfaceType>() where TInterfaceType : class
+        protected static TInterfaceType An<TInterfaceType>(params object[] args) where TInterfaceType : class
         {
-            return _specificationController.An<TInterfaceType>();
+            return _specificationController.An<TInterfaceType>(args);
         }
 
         /// <summary>

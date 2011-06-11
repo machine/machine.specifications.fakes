@@ -122,18 +122,6 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" />.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">The type to create a fake for. (Should be an interface or an abstract class)</typeparam>
-        /// <returns>
-        ///   An newly created fake implementing <typeparamref name = "TInterfaceType" />.
-        /// </returns>
-        public TInterfaceType An<TInterfaceType>() where TInterfaceType : class
-        {
-            return (TInterfaceType) An(typeof (TInterfaceType));
-        }
-
-        /// <summary>
         ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" /> without a default constructor.
         /// </summary>
         /// <typeparam name = "TInterfaceType">The type to create a fake for.</typeparam>
@@ -146,21 +134,6 @@ namespace Machine.Fakes.Sdk
         public TInterfaceType An<TInterfaceType>(params object[] args) where TInterfaceType : class
         {
             return (TInterfaceType)An(typeof(TInterfaceType), args);
-        }
-
-        /// <summary>
-        /// Creates a fake of the type specified by <paramref name="interfaceType"/>.
-        /// </summary>
-        /// The type to create a fake for. (Should be an interface or an abstract class)
-        /// <param name="interfaceType">
-        /// Specifies the type of item to fake.
-        /// </param>
-        /// <returns>
-        /// An newly created fake implementing <paramref name="interfaceType"/>.
-        /// </returns>
-        public object An(Type interfaceType)
-        {
-            return _container.CreateFake(interfaceType);
         }
 
         /// <summary>
@@ -178,7 +151,7 @@ namespace Machine.Fakes.Sdk
         /// </returns>
         public object An(Type interfaceType, params object[] args)
         {
-            return _container.CreateFake(interfaceType);
+            return _container.CreateFake(interfaceType, args);
         }
 
         /// <summary>

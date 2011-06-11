@@ -15,17 +15,12 @@ namespace Machine.Fakes.Adapters.Moq
         {
         }
 
-        public override object CreateFake(Type interfaceType)
-        {
-            return CreateFake(interfaceType, null);
-        }
-
         public override object CreateFake(Type interfaceType, params object[] args)
         {
             var closedMockType = typeof(Mock<>).MakeGenericType(interfaceType);
             var objectProperty = closedMockType.GetProperty("Object", closedMockType);
-            var instance = args == null 
-                ? Activator.CreateInstance(closedMockType) : Activator.CreateInstance(closedMockType, args);
+            var instance = (args != null && args.Length > 0)
+                ? Activator.CreateInstance(closedMockType, args) : Activator.CreateInstance(closedMockType);
             return objectProperty.GetValue(instance, null);
         }
 

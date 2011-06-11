@@ -21,11 +21,6 @@ namespace Machine.Fakes.Internal
             _autoMocker = new StructureMapAutoMockerAdapter<TSubject>(this);
         }
 
-        public object CreateFake(Type interfaceType)
-        {
-            return _fakeEngine.CreateFake(interfaceType);
-        }
-
         public object CreateFake(Type interfaceType, params object[] args)
         {
             return _fakeEngine.CreateFake(interfaceType, args);

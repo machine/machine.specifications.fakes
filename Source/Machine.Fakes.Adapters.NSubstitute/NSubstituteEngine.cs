@@ -15,11 +15,6 @@ namespace Machine.Fakes.Adapters.NSubstitute
         {
         }
 
-        public override object CreateFake(Type interfaceType)
-        {
-            return CreateFake(interfaceType, null);
-        }
-
         public override object CreateFake(Type interfaceType, params object[] args)
         {
             return Substitute.For(new[] { interfaceType }, args);

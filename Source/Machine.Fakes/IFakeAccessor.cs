@@ -14,10 +14,13 @@ namespace Machine.Fakes
         /// <typeparam name="TInterfaceType">
         /// The type to create a fake for. (Should be an interface or an abstract class)
         /// </typeparam>
+        /// <param name="args">
+        /// The ctor parameters for the newly created entity
+        /// </param>
         /// <returns>
         /// An newly created fake implementing <typeparamref name="TInterfaceType"/>.
         /// </returns>
-        TInterfaceType An<TInterfaceType>() where TInterfaceType : class;
+        TInterfaceType An<TInterfaceType>(params object[] args) where TInterfaceType : class;
 
         /// <summary>
         /// Creates a fake of the type specified by <paramref name="interfaceType"/>.
@@ -26,10 +29,13 @@ namespace Machine.Fakes
         /// <param name="interfaceType">
         /// Specifies the type of item to fake.
         /// </param>
+        /// <param name="args">
+        /// The ctor parameters for the newly created entity
+        /// </param>
         /// <returns>
         /// An newly created fake implementing <paramref name="interfaceType"/>.
         /// </returns>
-        object An(Type interfaceType); 
+        object An(Type interfaceType, params object[] args);
 
         /// <summary>
         /// Creates a fake of the type specified by <typeparamref name="TInterfaceType"/>.

@@ -11,22 +11,18 @@ namespace Machine.Fakes.Adapters.FakeItEasy
         {
         }
 
-        public override object CreateFake(Type interfaceType)
-        {
-            var closedFakeType = typeof(Fake<>).MakeGenericType(interfaceType);
-            var objectProperty = closedFakeType.GetProperty("FakedObject", interfaceType);
-            var instance = Activator.CreateInstance(closedFakeType);
-            return objectProperty.GetValue(instance, null);
-        }
-
         public override object CreateFake(Type interfaceType, params object[] args)
         {
             var closedFakeType = typeof(Fake<>).MakeGenericType(interfaceType);
             var objectProperty = closedFakeType.GetProperty("FakedObject", interfaceType);
 
-            var options = FakeItEasyHelper.CreateForType(interfaceType, args);
+            var options = args != null && args.Length > 0 
+                ? FakeItEasyHelper.CreateForType(interfaceType, args) : null;
 
-            var instance = Activator.CreateInstance(closedFakeType, new object[] { options });
+            var instance = args != null && args.Length > 0 
+                ? Activator.CreateInstance(closedFakeType, new object[] {options}) 
+                : Activator.CreateInstance(closedFakeType);
+
             return objectProperty.GetValue(instance, null);
         }
 

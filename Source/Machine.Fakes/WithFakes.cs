@@ -31,9 +31,9 @@ namespace Machine.Fakes
         /// <returns>
         ///   An newly created fake implementing <typeparamref name = "TInterfaceType" />.
         /// </returns>
-        public static TInterfaceType An<TInterfaceType>() where TInterfaceType : class
+        public static TInterfaceType An<TInterfaceType>(params object[] args) where TInterfaceType : class
         {
-            return _specificationController.An<TInterfaceType>();
+            return _specificationController.An<TInterfaceType>(args);
         }
 
         /// <summary>
