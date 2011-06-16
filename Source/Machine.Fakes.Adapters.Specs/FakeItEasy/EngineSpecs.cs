@@ -4,6 +4,7 @@ using Machine.Fakes.Adapters.FakeItEasy;
 using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
+using Machine.Fakes;
 
 namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 {
@@ -66,49 +67,29 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
     [Subject(typeof(FakeItEasyEngine))]
     [Tags("FakeItEasy", "Constructing an instance")]
-    public class When_using_a_non_default_ctor_an_executing_fake : WithCurrentEngine<FakeItEasyEngine>
+    public class When_using_a_abstract_base_classes_as_a_fakes_and_the_constructor_parameter_is_unfakable : WithCurrentEngine<FakeItEasyEngine>
     {
-        static MyInternal _inner;
-        static Sample _fake;
+        static ClassWithUnfakableParameter _fake;
+        static string _unfakableCtoParameter;
+        static string _recievedValue;
 
         Establish context = () =>
         {
-            _inner = new MyInternal();
-            _fake = FakeEngineGateway.Fake<Sample>(_inner);
+            _unfakableCtoParameter = "Look at me! I'm unfakable!!!";
         };
 
-        Because of = () => _fake.DoCall();
+        Because of = () => _fake = FakeEngineGateway.Fake<ClassWithUnfakableParameter>(_unfakableCtoParameter);
 
-        It should_call_inner_instance = () => _inner.Used.ShouldBeTrue();
-    }
+        It should_able_to_construct_the_instance_when_ctor_parameters_are_supplied = 
+            () => _fake.RecievedCtorArgument.ShouldEqual(_unfakableCtoParameter);
 
-    public class Sample
-    {
-        readonly MyInternal inner;
-
-        public Sample(MyInternal inner)
+        It should_be_able_to_fake_virtual_methods_on_the_abstract_base_class = () =>
         {
-            this.inner = inner;
-        }
+            _fake.WhenToldTo(x => x.VirtualMethod()).Return("Faked result");   
 
-        public void DoCall()
-        {
-            inner.UseIt();
-        }
-    }
+            var result = _fake.VirtualMethod();
 
-    public class MyInternal
-    {
-        public bool Used { get; private set; }
-
-        public MyInternal()
-        {
-            Used = false;
-        }
-
-        public void UseIt()
-        {
-            Used = true;
-        }
+            result.ShouldEqual("Faked result");
+        };
     }
 }
