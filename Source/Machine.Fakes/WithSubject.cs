@@ -66,7 +66,7 @@ namespace Machine.Fakes
         /// </summary>
         /// <typeparam name = "TInterfaceType">The type to create a fake for. (Should be an interface or an abstract class)</typeparam>
         /// <param name="args">
-        /// The optional ctor parameters for non default ctor classes
+        ///  Optional constructor parameters for abstract base classes as fakes.
         /// </param>
         /// <returns>
         ///   An newly created fake implementing <typeparamref name = "TInterfaceType" />.
