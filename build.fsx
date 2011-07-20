@@ -153,8 +153,8 @@ Target "BuildNuGet" (fun _ ->
             Publish = NugetKey <> "" })
         "machine.fakes.nuspec"
 
-    [nugetDir + sprintf "Machine.Fakes.%s.nupkg" version]
-        |> CopyTo deployDir
+    !! (nugetDir + "Machine.Fakes.*.nupkg")
+      |> CopyTo deployDir
 )
 
 Target "BuildNuGetFlavours" (fun _ ->
@@ -180,7 +180,7 @@ Target "BuildNuGetFlavours" (fun _ ->
                     Publish = NugetKey <> "" })
                 "machine.fakes.nuspec"
         
-            [nugetDir + sprintf "Machine.Fakes.%s.%s.nupkg" flavour version]
+            !! (nugetDir + sprintf "Machine.Fakes.%s.*.nupkg" flavour)
               |> CopyTo deployDir)
 )
 

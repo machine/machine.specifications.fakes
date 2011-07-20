@@ -27,15 +27,18 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        /// Creates a fake of the type specified via <paramref name="interfaceType"/>.
+        /// Creates a fake of the type specified via <paramref name="interfaceType"/> with no default constructor.
         /// </summary>
         /// <param name="interfaceType">
         /// Specifies the interface type to create a fake for.
         /// </param>
+        /// <param name="args">
+        /// Specifies the constructor parameters.
+        /// </param>
         /// <returns>
         /// The created fake instance.
         /// </returns>
-        public abstract object CreateFake(Type interfaceType);
+        public abstract object CreateFake(Type interfaceType, params object[] args);
 
         /// <summary>
         /// Creates a partial mock.

@@ -9,7 +9,7 @@ namespace Machine.Fakes.Specs.TestClasses
         public object CreatedFake { get; set; }
         public Type RequestedFakeType { get; private set; }
 
-        public object CreateFake(Type interfaceType)
+        public object CreateFake(Type interfaceType, params object[] args)
         {
             RequestedFakeType = interfaceType;
             return CreatedFake;

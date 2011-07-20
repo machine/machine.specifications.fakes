@@ -55,9 +55,9 @@ namespace Machine.Fakes.Internal
             return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
         }
 
-        public static T Fake<T>()
+        public static T Fake<T>(params object[] args)
         {
-            return _fakeEngine.Stub<T>();
+            return _fakeEngine.Stub<T>(args);
         }
     }
 }
