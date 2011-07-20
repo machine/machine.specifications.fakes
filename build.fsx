@@ -174,7 +174,7 @@ Target "BuildNuGetFlavours" (fun _ ->
                     Version = version                        
                     OutputPath = nugetDir
                     Dependencies = 
-                        ["Machine.Fakes",RequireExactly version
+                        ["Machine.Fakes",RequireExactly (NormalizeVersion version)
                          flavour,RequireExactly flavourVersion]
                     AccessKey = NugetKey
                     Publish = NugetKey <> "" })
