@@ -16,3 +16,4 @@ Source/GlobalAssemblyInfo.cs
 /Documentation
 
 *.bak
+*_mm_cache.bin
