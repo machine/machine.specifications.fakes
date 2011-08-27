@@ -28,7 +28,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
         public void Times(int numberOfTimesTheMethodShouldHaveBeenCalled)
         {
             var calls = CountCalls();
-            if (calls < numberOfTimesTheMethodShouldHaveBeenCalled)
+            if (calls != numberOfTimesTheMethodShouldHaveBeenCalled)
                 throw new CallNotReceivedException(
                     string.Format("Expected {0} calls to the method but received {1}",
                                   numberOfTimesTheMethodShouldHaveBeenCalled, calls));
