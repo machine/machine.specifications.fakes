@@ -13,7 +13,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
 
         public override object CreateFake(Type interfaceType, params object[] args)
         {
-            var stub = MockRepository.GenerateStub(interfaceType, args);
+            var stub = MockRepository.GenerateMock(interfaceType, new Type[0], args);
             stub.Replay();
             return stub;
         }

@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bugs\Issue44.cs" />
     <Compile Include="Bugs\Run_more_than_one_behavior_config.cs" />
     <Compile Include="Bugs\Issue28.cs" />
     <Compile Include="FakeItEasy\CommandOptionsSpecs.cs" />
