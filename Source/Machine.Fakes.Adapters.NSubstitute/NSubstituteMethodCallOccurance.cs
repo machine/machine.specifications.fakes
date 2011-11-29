@@ -29,7 +29,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
         {
             var calls = CountCalls();
             if (calls != numberOfTimesTheMethodShouldHaveBeenCalled)
-                throw new CallNotReceivedException(
+                throw new ReceivedCallsException(
                     string.Format("Expected {0} calls to the method but received {1}",
                                   numberOfTimesTheMethodShouldHaveBeenCalled, calls));
         }
@@ -38,7 +38,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
         {
             var calls = CountCalls();
             if (calls != 1)
-                throw new CallReceivedException(
+                throw new ReceivedCallsException(
                     string.Format("Expected only 1 call to the method but received {0}", calls));
         }
 
