@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <description> 
+    <description>
 Machine.Fakes attempts to simplify the usage of such frameworks on top of Machine.Specifications by helping to reduce a lot of the typical fake framwork related clutter code in specifications. If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. @description@
     </description>
     <id>@project@</id>
@@ -10,10 +10,10 @@ Machine.Fakes attempts to simplify the usage of such frameworks on top of Machin
     <owners>@authors@</owners>
     <language>en-US</language>
     <summary>@summary@</summary>
-    <iconUrl>http://github.com/BjRo/Machine.Fakes/raw/dev/machine.fakes.png</iconUrl>
-    <projectUrl>http://github.com/BjRo/Machine.Fakes</projectUrl>
-    <licenseUrl>http://github.com/BjRo/Machine.Fakes/raw/dev/License.txt</licenseUrl>
+    <iconUrl>http://github.com/machine/machine.fakes/raw/dev/machine.fakes.png</iconUrl>
+    <projectUrl>http://github.com/machine/machine.fakes</projectUrl>
+    <licenseUrl>http://github.com/machine/machine.fakes/raw/dev/License.txt</licenseUrl>
     <tags>tdd bdd testing unittest fakes mocks mspec mfakes</tags>
     @dependencies@
-  </metadata>  
+  </metadata>
 </package>

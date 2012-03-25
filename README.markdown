@@ -2,18 +2,18 @@
 
 Machine.Fakes is little framework build on top of Machine.Specifications that can best be described as an extended integration layer between Machine.Specifications and different Mock/Fake/Substitute/"However you call them now" frameworks. At the moment of writing I prefer the term "Fake". (What a surprise judging from the name of this project ;-))
 
-Machine.Fakes attempts to simplify the usage of such fake frameworks on top of MSpec by helping to reduce a lot of the typical fake framework related clutter code in specifications. 
+Machine.Fakes attempts to simplify the usage of such fake frameworks on top of MSpec by helping to reduce a lot of the typical fake framework related clutter code in specifications.
 
-If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. 
+If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks.
 
 Many credits for the ideas incorporated in this framework go to Jean Paul Boodhoo (http://blog.jpboodhoo.com/) who introduced me to a completely different way of handling Mocks/Fakes/etc during his NothingButDotnet bootcamp. Maybe this a way for me to give something back ...
 
 ## How to contribute code
 
 * Login in github (you need an account)
-* Fork the main repository from [Github](https://github.com/BjRo/Machine.Fakes)
-* Please contribute only on the dev branch. (We don't develop on the master branch. Only our releases are build from there) 
-* Push your changes to your GitHub repository. 
+* Fork the main repository from [Github](https://github.com/machine/machine.fakes)
+* Please contribute only on the dev branch. (We don't develop on the master branch. Only our releases are build from there)
+* Push your changes to your GitHub repository.
 * Send us a pull request
 
 # How to get started
@@ -24,7 +24,7 @@ Just download the repository from github and run the build.cmd (or build.NoGit.c
 
 ## Getting Machine.Fakes via the NuGet package manager
 
-If you've got NuGet installed on your machine it gets even easier. Currently there are 5 packages available on NuGet. These are the core framework and the different adapters for Rhino.Mocks, MOQ, NSubstitute and FakeItEasy. If you want to use Machine.Fakes for example with FakeItEasy just go ahead and type 
+If you've got NuGet installed on your machine it gets even easier. Currently there are 5 packages available on NuGet. These are the core framework and the different adapters for Rhino.Mocks, MOQ, NSubstitute and FakeItEasy. If you want to use Machine.Fakes for example with FakeItEasy just go ahead and type
 
          install-package Machine.Fakes.FakeItEasy
 
@@ -36,7 +36,7 @@ into the package management console and all necessary dependencies including Fak
 
 ## How to use it
 
-The core part of Machine.Fakes only consists of two classes: WithFakes and WithSubject<<TSubject>>. 
+The core part of Machine.Fakes only consists of two classes: WithFakes and WithSubject<<TSubject>>.
 
 ### WithFakes
 
@@ -52,7 +52,7 @@ Let's take a look at the simpler one first. By deriving from this class you can 
         {
             var monday = new DateTime(2011, 2, 14);
             var systemClock = An<ISystemClock>(); (*)
-            
+
             systemClock
                 .WhenToldTo(x => x.CurrentTime) (**)
                 .Return(monday);
@@ -70,7 +70,7 @@ WhenToldTo is used for setting up a behavior but Machine.Fakes also supports beh
     public class When_a_method_is_called_on_a_fake : WithFakes
     {
         static IServiceContainer_subject;
-      
+
         Establish context = () =>
         {
             _subject = An<IServiceContainer>();
@@ -130,7 +130,7 @@ Back to our example with the MoodIdentifier. Do we really need to create the sub
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
 
-The generic type parameter (*) tells Machine.Fakes what type to create for the specification. Each interface or abstract base class dependency in the constructor of the type will be filled automatically by the configured fake framework. Dependency Injection with fakes so to speak. 
+The generic type parameter (*) tells Machine.Fakes what type to create for the specification. Each interface or abstract base class dependency in the constructor of the type will be filled automatically by the configured fake framework. Dependency Injection with fakes so to speak.
 
 You can access the created instance through the lazy "Subject" property (***). The actual subject is created on the first read access to this property. If you want to modify the subject when the context is established, go ahead, you can do so. You can even replace the subject by hand in case the automocking approach falls short.
 
@@ -138,7 +138,7 @@ Having the subject created for us is a good thing but how do we access the injec
 
 ### WithSubject<<TSubject>> and behavior configurations
 
-Re-use in context / specification is an interesting topic. In case you've already used a test case class per fixture setup (like Machine.Specifications does) then I'm pretty sure you've stumpled on this too. 
+Re-use in context / specification is an interesting topic. In case you've already used a test case class per fixture setup (like Machine.Specifications does) then I'm pretty sure you've stumpled on this too.
 
 Very often we try to accomplish re-use in classes by using inheritance and of course you can do so with Machine.Fakes. However in .NET you can only inherit once and inheritance may not be the weapon of choice for more cross cutting aspects like for instance time (the ISystemClock used in the example above). Machine.Fakes also offers a composition model for specifications, the behavior configs.
 
