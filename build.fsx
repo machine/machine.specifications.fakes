@@ -8,16 +8,16 @@ open System.Text.RegularExpressions
 open System.IO
 
 (* properties *)
-let authors = ["Bjoern Rochel"]
+let authors = ["The machine project"]
 let projectName = "Machine.Fakes"
-let copyright = "Copyright - Machine.Fakes 2011"
+let copyright = "Copyright - Machine.Fakes 2011 - 2012"
 let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else ""
 
-let version = 
+let version =
     if hasBuildParam "version" then getBuildParam "version" else
     if isLocalBuild then getLastTag() else
     // version is set to the last tag retrieved from GitHub Rest API
-    let url = "http://github.com/api/v2/json/repos/show/BjRo/Machine.Fakes/tags"
+    let url = "http://github.com/api/v2/json/repos/show/machine/machine.fakes/tags"
     tracefn "Downloading tags from %s" url
     let tagsFile = REST.ExecuteGetCommand null null url
     let r = new Regex("[,{][\"]([^\"]*)[\"]")
@@ -32,9 +32,9 @@ let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash
 (* Directories *)
 let buildDir = @".\Build\"
 let packagesDir = @".\Source\packages\"
-let docsDir = buildDir + @"Documentation\"  
+let docsDir = buildDir + @"Documentation\"
 let testOutputDir = buildDir + @"Specs\"
-let nugetDir = buildDir + @"NuGet\" 
+let nugetDir = buildDir + @"NuGet\"
 let testDir = buildDir
 let deployDir = @".\Release\"
 let targetPlatformDir = getTargetPlatformDir "v4.0.30319"
@@ -47,14 +47,14 @@ let slnReferences = !! @".\Source\*.sln"
 let Flavours = ["RhinoMocks"; "FakeItEasy"; "NSubstitute"; "Moq"]
 let MSpecVersion = GetPackageVersion packagesDir "Machine.Specifications"
 let mspecTool = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" MSpecVersion
-    
+
 (* Targets *)
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; docsDir; testOutputDir] )
 
 
-Target "BuildApp" (fun _ -> 
+Target "BuildApp" (fun _ ->
     AssemblyInfo
-      (fun p -> 
+      (fun p ->
         {p with
             CodeLanguage = CSharp;
             AssemblyVersion = version;
@@ -62,7 +62,7 @@ Target "BuildApp" (fun _ ->
             AssemblyDescription = "An integration layer for fake frameworks on top of MSpec";
             AssemblyCopyright = copyright;
             Guid = "3745F3DA-6ABB-4C58-923D-B09E4A04688F";
-            OutputFileName = @".\Source\GlobalAssemblyInfo.cs"})                      
+            OutputFileName = @".\Source\GlobalAssemblyInfo.cs"})
 
     slnReferences
         |> MSBuildRelease buildDir "Build"
@@ -74,8 +74,8 @@ Target "Test" (fun _ ->
     !+ (testDir + "/*.Specs.dll")
       ++ (testDir + "/*.Examples.dll")
         |> Scan
-        |> MSpec (fun p -> 
-                    {p with 
+        |> MSpec (fun p ->
+                    {p with
                         ToolPath = mspecTool
                         HtmlOutputDir = testOutputDir})
 )
@@ -84,9 +84,9 @@ Target "Test" (fun _ ->
 Target "MergeStructureMap" (fun _ ->
     Rename (buildDir + "Machine.Fakes.Partial.dll") (buildDir + "Machine.Fakes.dll")
 
-    ILMerge 
-        (fun p -> 
-            {p with 
+    ILMerge
+        (fun p ->
+            {p with
                 Libraries =
                     [buildDir + "StructureMap.dll"
                      buildDir + "StructureMap.AutoMocking.dll"]
@@ -98,22 +98,22 @@ Target "MergeStructureMap" (fun _ ->
 
     ["StructureMap.dll";
      "StructureMap.pdb";
-     "StructureMap.xml"; 
-     "StructureMap.AutoMocking.dll"; 
-     "StructureMap.AutoMocking.xml"; 
+     "StructureMap.xml";
+     "StructureMap.AutoMocking.dll";
+     "StructureMap.AutoMocking.xml";
      "Machine.Fakes.Partial.dll"]
-        |> Seq.map (fun a -> buildDir + a) 
+        |> Seq.map (fun a -> buildDir + a)
         |> DeleteFiles
 )
 
 FinalTarget "DeployTestResults" (fun () ->
-    !+ (testOutputDir + "\**\*.*") 
+    !+ (testOutputDir + "\**\*.*")
       |> Scan
       |> Zip testOutputDir (sprintf "%sMSpecResults.zip" deployDir)
 )
 
 Target "GenerateDocumentation" (fun _ ->
-    !+ (buildDir + "Machine.Fakes.dll")      
+    !+ (buildDir + "Machine.Fakes.dll")
       |> Scan
       |> Docu (fun p ->
           {p with
@@ -122,13 +122,13 @@ Target "GenerateDocumentation" (fun _ ->
               OutputPath = docsDir })
 )
 
-Target "ZipDocumentation" (fun _ ->    
+Target "ZipDocumentation" (fun _ ->
     !! (docsDir + "/**/*.*")
       |> Zip docsDir (deployDir + sprintf "Documentation-%s.zip" version)
 )
 
-Target "BuildZip" (fun _ -> 
-    !+ (buildDir + "/**/*.*")     
+Target "BuildZip" (fun _ ->
+    !+ (buildDir + "/**/*.*")
       -- "*.zip"
       -- "**/*.Specs.*"
         |> Scan
@@ -137,16 +137,16 @@ Target "BuildZip" (fun _ ->
 
 Target "BuildNuGet" (fun _ ->
     CleanDirs [nugetDir; nugetLibDir]
-        
+
     [buildDir + "Machine.Fakes.dll"]
         |> CopyTo nugetLibDir
 
-    
-    NuGet (fun p -> 
-        {p with               
+
+    NuGet (fun p ->
+        {p with
             Authors = authors
             Project = projectName
-            Version = version                        
+            Version = version
             OutputPath = nugetDir
             Dependencies = ["Machine.Specifications",RequireExactly MSpecVersion]
             AccessKey = NugetKey
@@ -164,22 +164,22 @@ Target "BuildNuGetFlavours" (fun _ ->
             CleanDirs [nugetDir; nugetLibDir]
 
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour]
-              |> CopyTo nugetLibDir               
-            
-            NuGet (fun p -> 
-                {p with               
+              |> CopyTo nugetLibDir
+
+            NuGet (fun p ->
+                {p with
                     Authors = if flavour = "NSubstitute" then "Steffen Forkmann" :: authors else authors
                     Project = sprintf "%s.%s" projectName flavour
                     Description = sprintf " This is the adapter for %s %s" flavour flavourVersion
-                    Version = version                        
+                    Version = version
                     OutputPath = nugetDir
-                    Dependencies = 
+                    Dependencies =
                         ["Machine.Fakes",RequireExactly (NormalizeVersion version)
                          flavour,RequireExactly flavourVersion]
                     AccessKey = NugetKey
                     Publish = NugetKey <> "" })
                 "machine.fakes.nuspec"
-        
+
             !! (nugetDir + sprintf "Machine.Fakes.%s.*.nupkg" flavour)
               |> CopyTo deployDir)
 )
