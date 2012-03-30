@@ -19,7 +19,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof (RhinoFakeEngine))]
-    [Tags("Verifying a mock (without inline constaints)", "Rhinomocks")]
+    [Tags("Verifying a mock (without inline constraints)", "Rhinomocks")]
     public class Given_that_a_call_was_not_expected_to_happen_but_happened_when_verifying : WithCurrentEngine<RhinoFakeEngine>
     {
         static Exception _exception;
@@ -37,7 +37,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 
     [Subject(typeof (RhinoFakeEngine))]
-    [Tags("Verifying a mock (without inline constaints)", "Rhinomocks")]
+    [Tags("Verifying a mock (without inline constraints)", "Rhinomocks")]
     public class Given_that_a_call_was_not_expected_to_happen_and_did_not_happened_when_verifying :
         WithCurrentEngine<RhinoFakeEngine>
     {

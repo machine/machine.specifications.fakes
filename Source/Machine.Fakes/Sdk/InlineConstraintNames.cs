@@ -1,6 +1,6 @@
 namespace Machine.Fakes.Sdk
 {
-    public static class InlineConstaintNames
+    public static class InlineConstraintNames
     {
         public const string IsAny = "IsAny";
         public const string IsA = "IsA";

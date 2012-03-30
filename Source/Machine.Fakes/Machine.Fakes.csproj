@@ -69,7 +69,7 @@
     <Compile Include="Sdk\AbstractExpressionRewriter.cs" />
     <Compile Include="Sdk\ExpressionExtensions.cs" />
     <Compile Include="Sdk\IExpressionRewriter.cs" />
-    <Compile Include="Sdk\InlineConstaintNames.cs" />
+    <Compile Include="Sdk\InlineConstraintNames.cs" />
     <Compile Include="Sdk\ReflectionExtensions.cs" />
     <Compile Include="Sdk\ExpressionRewriterBase.cs" />
     <Compile Include="Sdk\SpecificationController.cs" />
