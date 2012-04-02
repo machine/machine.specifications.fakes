@@ -4,7 +4,6 @@ using Machine.Fakes.Adapters.FakeItEasy;
 using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
-using Machine.Fakes;
 
 namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 {
@@ -20,7 +19,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
     }
 
     [Subject(typeof(FakeItEasyEngine))]
-    [Tags("Verifying a mock (without inline constaints)", "FakeItEasy")]
+    [Tags("Verifying a mock (without inline constraints)", "FakeItEasy")]
     public class Given_that_a_call_was_not_expected_to_happen_but_happened_when_verifying : WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
@@ -38,7 +37,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
     }
 
     [Subject(typeof(FakeItEasyEngine))]
-    [Tags("Verifying a mock (without inline constaints)", "FakeItEasy")]
+    [Tags("Verifying a mock (without inline constraints)", "FakeItEasy")]
     public class Given_that_a_call_was_not_expected_to_happen_and_did_not_happened_when_verifying :
         WithCurrentEngine<FakeItEasyEngine>
     {

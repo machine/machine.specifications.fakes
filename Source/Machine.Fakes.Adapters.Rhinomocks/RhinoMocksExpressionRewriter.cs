@@ -11,13 +11,13 @@ namespace Machine.Fakes.Adapters.Rhinomocks
     {
         public RhinoMocksExpressionRewriter()
         {
-            AddConverter(InlineConstaintNames.IsAny, RewriteIsAnyMethod);
-            AddConverter(InlineConstaintNames.Is, RewriteIsMethod);
-            AddConverter(InlineConstaintNames.IsA, RewriteIsAMethod);
-            AddConverter(InlineConstaintNames.Matches, RewriteMatchesMethod);
-            AddConverter(InlineConstaintNames.IsAnything, RewriteIsAnythingMember);
-            AddConverter(InlineConstaintNames.IsNull, RewriteIsNullMember);
-            AddConverter(InlineConstaintNames.IsNotNull, RewriteIsNotNullMember);
+            AddConverter(InlineConstraintNames.IsAny, RewriteIsAnyMethod);
+            AddConverter(InlineConstraintNames.Is, RewriteIsMethod);
+            AddConverter(InlineConstraintNames.IsA, RewriteIsAMethod);
+            AddConverter(InlineConstraintNames.Matches, RewriteMatchesMethod);
+            AddConverter(InlineConstraintNames.IsAnything, RewriteIsAnythingMember);
+            AddConverter(InlineConstraintNames.IsNull, RewriteIsNullMember);
+            AddConverter(InlineConstraintNames.IsNotNull, RewriteIsNotNullMember);
         }
 
         Expression RewriteMatchesMethod(MethodCallExpression expression)

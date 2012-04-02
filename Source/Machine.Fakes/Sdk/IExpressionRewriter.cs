@@ -11,7 +11,7 @@ namespace Machine.Fakes.Sdk
     {
         /// <summary>
         /// Rewrites the expression tree and replaces all occurences
-        /// of Machine.Fakes specific inline constaints with the 
+        /// of Machine.Fakes specific inline constraints with the 
         /// equivalents of a specific mock framework.
         /// </summary>
         /// <param name="expr">
