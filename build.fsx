@@ -142,8 +142,8 @@ Target "BuildNuGet" (fun _ ->
 
     [buildDir + "Machine.Fakes.dll"]
         |> CopyTo nugetLibDir
-		
-	NuGet (fun p ->
+    
+    NuGet (fun p ->
         {p with
             Authors = authors
             Project = projectName
