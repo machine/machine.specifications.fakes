@@ -1,6 +1,5 @@
 using System;
 using System.Linq.Expressions;
-using Machine.Fakes.Internal;
 
 namespace Machine.Fakes
 {
