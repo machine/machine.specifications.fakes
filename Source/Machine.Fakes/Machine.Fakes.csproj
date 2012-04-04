@@ -33,9 +33,11 @@
     <DocumentationFile>bin\Release\Machine.Fakes.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Machine.Specifications.0.5.2.0\lib\Machine.Specifications.dll</HintPath>
+    <Reference Include="Machine.Specifications">
+      <HintPath>..\packages\Machine.Specifications.0.5.6.0\lib\net40\Machine.Specifications.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Specifications.Clr4">
+      <HintPath>..\packages\Machine.Specifications.0.5.6.0\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
@@ -69,7 +71,7 @@
     <Compile Include="Sdk\AbstractExpressionRewriter.cs" />
     <Compile Include="Sdk\ExpressionExtensions.cs" />
     <Compile Include="Sdk\IExpressionRewriter.cs" />
-    <Compile Include="Sdk\InlineConstaintNames.cs" />
+    <Compile Include="Sdk\InlineConstraintNames.cs" />
     <Compile Include="Sdk\ReflectionExtensions.cs" />
     <Compile Include="Sdk\ExpressionRewriterBase.cs" />
     <Compile Include="Sdk\SpecificationController.cs" />
