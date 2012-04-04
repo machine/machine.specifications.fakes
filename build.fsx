@@ -135,7 +135,7 @@ Target "BuildZip" (fun _ ->
         |> Zip buildDir (deployDir + sprintf "%s-%s.zip" projectName version)
 )
 
-let RequireAtLeast version = sprintf "[%s)" version
+let RequireAtLeast version = sprintf "%s" <| NormalizeVersion version
 
 Target "BuildNuGet" (fun _ ->
     CleanDirs [nugetDir; nugetLibDir]
