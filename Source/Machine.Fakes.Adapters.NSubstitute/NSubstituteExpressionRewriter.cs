@@ -124,7 +124,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
                     newLambda);
             }
 
-            return base.VisitMethodCall(expression); 
+            return VisitMethodCall(expression); 
         }
     }
 }

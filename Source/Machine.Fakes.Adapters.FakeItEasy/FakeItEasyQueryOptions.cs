@@ -29,7 +29,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
         public void Return<T>(Func<T, TReturnValue> valueFunction)
         {
-            _configuration.ReturnsLazily(f => valueFunction((T) f.Arguments[0]));
+            _configuration.ReturnsLazily(f => valueFunction((T)f.Arguments[0]));
         }
 
         public void Return<T1, T2>(Func<T1, T2, TReturnValue> valueFunction)

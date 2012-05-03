@@ -7,17 +7,14 @@ using Machine.Specifications.Utility;
 
 namespace Machine.Fakes.Adapters.Specs.RegistrarSpecs
 {
-    [Subject(typeof (SpecificationController<>))]
+    [Subject(typeof(SpecificationController<>))]
     public class When_using_an_registrar_expression_to_configure_the_dependency_graph_of_a_subject_and_leaving_one_dependency_out : WithSubject<ServiceFacade, RhinoFakeEngine>
     {
-        Establish context = () =>
+        Establish context = () => Configure(config =>
         {
-            Configure(config =>
-            {
-                config.For<ICommandBus>().Use<CommandBus>();
-                config.For<ICommand>().Use<TestCommand>();
-            });
-        };
+            config.For<ICommandBus>().Use<CommandBus>();
+            config.For<ICommand>().Use<TestCommand>();
+        });
 
         Because of = () => Subject.DoIt("TestMessage");
 
@@ -87,9 +84,7 @@ namespace Machine.Fakes.Adapters.Specs.RegistrarSpecs
 
         public void Execute<T>(T commandObj)
         {
-            _commands.Where(cmd => cmd is ICommand<T>)
-                .Select(cmd => cmd as ICommand<T>)
-                .Each(cmd => cmd.Execute(commandObj));
+            _commands.OfType<ICommand<T>>().Each(cmd => cmd.Execute(commandObj));
         }
     }
 
@@ -114,5 +109,4 @@ namespace Machine.Fakes.Adapters.Specs.RegistrarSpecs
     }
 
     #endregion
-
 }

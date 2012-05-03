@@ -39,7 +39,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
                     predicate);
             }
 
-            return base.VisitMethodCall(expression);
+            return VisitMethodCall(expression);
         }
 
         static Expression RewriteIsMethod(MethodCallExpression expression)

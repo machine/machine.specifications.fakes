@@ -17,11 +17,11 @@ namespace Machine.Fakes.Internal
         /// <typeparam name="T">
         /// Specifies the item type of the list. This should be an interface or an abstract class.
         /// </typeparam>
-        /// <param name="amount">
-        /// Specifies the amount of fakes that have to be created and inserted into the list.
-        /// </param>
         /// <param name="fakeEngine">
         /// Specifies the <see cref="IFakeEngine"/> which is used to create the individual items.
+        /// </param>
+        /// <param name="amount">
+        /// Specifies the amount of fakes that have to be created and inserted into the list.
         /// </param>
         /// <returns>
         /// An <see cref="IList{T}"/>.
@@ -40,25 +40,18 @@ namespace Machine.Fakes.Internal
                 .ToList();
         }
 
-        /// <summary>
-        /// Gives strong typed access to the generic <see cref="IFakeEngine.CreateFake"/> method.
-        /// </summary>
-        /// <typeparam name="T">
-        /// Specifies the type to stub e.g. to create a fake for.
-        /// </typeparam>
-        /// <param name="fakeEngine">
-        /// Specifies the <see cref="IFakeEngine"/>.
-        /// </param>
-        /// <returns>
-        /// A new fake for the type specified via <typeparamref name="T"/>.
-        /// </returns>
+        /// <summary>Gives strong typed access to the generic <see cref="IFakeEngine.CreateFake"/> method.</summary>
+        /// <typeparam name="T">Specifies the type to stub e.g. to create a fake for.</typeparam>
+        /// <param name="fakeEngine">Specifies the <see cref="IFakeEngine"/>.</param>
+        /// <param name="args">Contructor arguments for fake to create.</param>
+        /// <returns>A new fake for the type specified via <typeparamref name="T"/>.</returns>
         public static T Stub<T>(this IFakeEngine fakeEngine, params object[] args)
         {
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
-            return args != null && args.Length > 0 
-                ? (T) fakeEngine.CreateFake(typeof (T), args) 
-                : (T) fakeEngine.CreateFake(typeof (T));
+            return args != null && args.Length > 0
+                ? (T)fakeEngine.CreateFake(typeof(T), args)
+                : (T)fakeEngine.CreateFake(typeof(T));
         }
     }
 }

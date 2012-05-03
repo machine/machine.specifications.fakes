@@ -2,6 +2,7 @@ using System;
 using Machine.Fakes.Examples.SampleCode;
 using Machine.Specifications;
 
+#pragma warning disable 0169 // Behavior usage is through unused private fields
 namespace Machine.Fakes.Examples.ReuseViaBehaviors
 {
     [Behaviors]
@@ -12,7 +13,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviors
         It should_be_OK = () => _mood.ShouldEqual("Ok");
     }
 
-    [Subject(typeof (MoodIdentifier)), Tags("Behavior")]
+    [Subject(typeof(MoodIdentifier)), Tags("Behavior")]
     public class Given_the_current_day_is_tuesday_when_identifying_my_mood : WithSubject<MoodIdentifier>
     {
         protected static string _mood;
@@ -31,7 +32,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviors
         };
     }
 
-    [Subject(typeof (MoodIdentifier)), Tags("Behavior")]
+    [Subject(typeof(MoodIdentifier)), Tags("Behavior")]
     public class Given_the_current_day_is_wednesday_when_identifying_my_mood : WithSubject<MoodIdentifier>
     {
         protected static string _mood;

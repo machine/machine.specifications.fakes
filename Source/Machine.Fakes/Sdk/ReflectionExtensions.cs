@@ -24,7 +24,7 @@ namespace Machine.Fakes.Sdk
         /// </returns>
         public static bool IsMFakesConstaintType(this Type type)
         {
-            return type == typeof (Param) || type.ClosesGenericParamType();
+            return type == typeof(Param) || type.ClosesGenericParamType();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Machine.Fakes.Sdk
         /// </returns>
         public static bool ClosesGenericParamType(this Type type)
         {
-            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Param<>);
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Param<>);
         }
 
         /// <summary>
@@ -150,16 +150,17 @@ namespace Machine.Fakes.Sdk
             var fieldValues = instance
                 .GetType()
                 .GetAllFields()
-                .Where(field => field.FieldType == typeof (TFieldType))
-                .Select(field => (TFieldType) field.GetValue(instance))
+                .Where(field => field.FieldType == typeof(TFieldType))
+                .Select(field => (TFieldType)field.GetValue(instance))
                 .Where(value => !Equals(value, null));
 
             return fieldValues;
         }
 
         /// <summary>
-        ///     Resets the references in the instance specified by <paramref name = "instance" />.
+        /// Resets the references in the instance specified by <paramref name="instance"/>.
         /// </summary>
+        /// <param name="instance">The instance.</param>
         public static void ResetReferences(this object instance)
         {
             var fields = instance
@@ -192,9 +193,7 @@ namespace Machine.Fakes.Sdk
             if (targetProperty == null)
             {
                 throw new InvalidOperationException(
-                    string.Format("Unable to find target property {0} on instance of target type {1}",
-                                  property,
-                                  targetType.FullName));
+                    string.Format("Unable to find target property {0} on instance of target type {1}", property, targetType.FullName));
             }
 
             return Expression.MakeMemberAccess(instanceExpression, targetProperty);

@@ -42,7 +42,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
                     newLambda);
             }
 
-            return base.VisitMethodCall(expression);
+            return VisitMethodCall(expression);
         }
 
         static Expression RewriteIsAMethod(MethodCallExpression expression)

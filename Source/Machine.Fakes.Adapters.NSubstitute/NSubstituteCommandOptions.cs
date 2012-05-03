@@ -42,7 +42,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
                 .Do(f =>
                         {
                             var args = f.Args();
-                            callback((T1) args[0], (T2) args[1]);
+                            callback((T1)args[0], (T2)args[1]);
                         });
         }
 
@@ -53,7 +53,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
                 .Do(f =>
                         {
                             var args = f.Args();
-                            callback((T1) args[0], (T2) args[1], (T3) args[2]);
+                            callback((T1)args[0], (T2)args[1], (T3)args[2]);
                         });
         }
 
@@ -64,7 +64,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
                 .Do(f =>
                         {
                             var args = f.Args();
-                            callback((T1) args[0], (T2) args[1], (T3) args[2], (T4) args[3]);
+                            callback((T1)args[0], (T2)args[1], (T3)args[2], (T4)args[3]);
                         });
         }
 

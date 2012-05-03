@@ -15,7 +15,7 @@ namespace Machine.Fakes.Examples.SampleCode
         {
             if (amount > Balance)
             {
-                throw new ArgumentException(String.Format("Cannot transfer ${0}. The available balance is ${1}.", amount, Balance));
+                throw new ArgumentException(string.Format("Cannot transfer ${0}. The available balance is ${1}.", amount, Balance));
             }
 
             Balance -= amount;

@@ -9,7 +9,7 @@ namespace Machine.Fakes.Specs
     {
     }
 
-    [Subject(typeof (SpecificationController<>))]
+    [Subject(typeof(SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_executing_a_behavior_config_that_does_not_contain_the_relevant_delegate_definitions
     {
@@ -30,7 +30,7 @@ namespace Machine.Fakes.Specs
         OnCleanup subject;
     }
 
-    [Subject(typeof (SpecificationController<>))]
+    [Subject(typeof(SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_executing_a_behavior_config_that_contains_non_initialized_delegate_fields
     {
@@ -51,7 +51,7 @@ namespace Machine.Fakes.Specs
         public OnCleanup SubjectDelegate;
     }
 
-    [Subject(typeof (SpecificationController<>))]
+    [Subject(typeof(SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_adding_a_behavior_config
     {
@@ -78,7 +78,7 @@ namespace Machine.Fakes.Specs
         It should_not_cleanup_anything = () => _subject.ShouldBeNull();
     }
 
-    [Subject(typeof (SpecificationController<>))]
+    [Subject(typeof(SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_cleaning_up_a_specification_controller
     {
@@ -111,7 +111,7 @@ namespace Machine.Fakes.Specs
         public OnCleanup DerivedSubjectDelegate;
     }
 
-    [Subject(typeof (SpecificationController<>))]
+    [Subject(typeof(SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_adding_a_derived_behavior_config
     {
@@ -152,7 +152,7 @@ namespace Machine.Fakes.Specs
         Cleanup after = () => _controller.Dispose();
     }
 
-    [Subject(typeof (SpecificationController<>))]
+    [Subject(typeof(SpecificationController<>))]
     [Tags("BehaviorConfigs")]
     public class When_cleaning_up_a_specification_controller_and_a_derived_behavior_config_has_been_configured
     {

@@ -11,12 +11,9 @@ namespace Machine.Fakes
         /// <summary>
         /// Configures that the parameter must match the specified value.
         /// </summary>
-        /// <typeparam name="TParam">
-        /// Specifies the parameter type.
-        /// </typeparam>
-        /// <returns>
-        /// A substitute type that isn't directly used.
-        /// </returns>
+        /// <param name="value">The value.</param>
+        /// <typeparam name="TParam">Specifies the parameter type.</typeparam>
+        /// <returns>A substitute type that isn't directly used.</returns>
         public static TParam Is<TParam>(TParam value)
         {
             return default(TParam);

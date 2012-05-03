@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace Machine.Fakes.Examples.FirstSpec
 {
-    [Subject(typeof (Account)), Tags("Examples")]
+    [Subject(typeof(Account)), Tags("Examples")]
     public class Given_two_accounts_when_transferring_money_between_them
     {
         static Account _source;

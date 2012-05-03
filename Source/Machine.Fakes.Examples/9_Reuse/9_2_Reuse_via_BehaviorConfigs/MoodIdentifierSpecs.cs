@@ -6,7 +6,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigs
 {
     public class CurrentTime 
     {
-        static  DateTime _currentDate;
+        static DateTime _currentDate;
 
         public CurrentTime(DateTime currentDate)
         {
@@ -19,7 +19,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigs
         };
     }
 
-    [Subject(typeof (MoodIdentifier)), Tags("BehaviorConfigs")]
+    [Subject(typeof(MoodIdentifier)), Tags("BehaviorConfigs")]
     public class Given_the_current_day_is_monday_when_identifying_my_mood : WithSubject<MoodIdentifier>
     {
         static string _mood;
@@ -34,7 +34,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigs
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
 
-    [Subject(typeof (MoodIdentifier)), Tags("BehaviorConfigs")]
+    [Subject(typeof(MoodIdentifier)), Tags("BehaviorConfigs")]
     public class Given_the_current_day_is_tuesday_when_identifying_my_mood : WithSubject<MoodIdentifier>
     {
         static string _mood;

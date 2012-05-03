@@ -14,6 +14,9 @@ namespace Machine.Fakes
     /// </typeparam>
     public abstract class WithFakes<TFakeEngine> where TFakeEngine : IFakeEngine, new()  
     {
+        /// <summary>
+        /// The specification controller
+        /// </summary>
         protected static SpecificationController<object, TFakeEngine> _specificationController;
         
         /// <summary>

@@ -26,12 +26,12 @@ namespace Machine.Fakes.Adapters.Moq
 
         public override T PartialMock<T>(params object[] args) 
         {
-            var closedMockType = typeof (Mock<>).MakeGenericType(typeof (T));
-            var callBaseProperty = closedMockType.GetProperty("CallBase", typeof (bool));
-            var objectProperty = closedMockType.GetProperty("Object", typeof (T));
+            var closedMockType = typeof(Mock<>).MakeGenericType(typeof(T));
+            var callBaseProperty = closedMockType.GetProperty("CallBase", typeof(bool));
+            var objectProperty = closedMockType.GetProperty("Object", typeof(T));
             var constructor = closedMockType.GetConstructor(new[]
             {
-                typeof (object[])
+                typeof(object[])
             });
             var instance = constructor.Invoke(new[]
             {

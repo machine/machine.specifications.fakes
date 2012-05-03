@@ -28,7 +28,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
 
         public void Return<T>(Func<T, TReturnValue> valueFunction)
         {
-            RepeatAny(invocation => { invocation.ReturnValue = valueFunction((T) invocation.Arguments[0]); });
+            RepeatAny(invocation => { invocation.ReturnValue = valueFunction((T)invocation.Arguments[0]); });
         }
 
         public void Return<T1, T2>(Func<T1, T2, TReturnValue> valueFunction)
@@ -36,8 +36,8 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             RepeatAny(invocation =>
             {
                 invocation.ReturnValue = valueFunction(
-                    (T1) invocation.Arguments[0],
-                    (T2) invocation.Arguments[1]);
+                    (T1)invocation.Arguments[0],
+                    (T2)invocation.Arguments[1]);
             });
         }
 
@@ -46,9 +46,9 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             RepeatAny(invocation =>
             {
                 invocation.ReturnValue = valueFunction(
-                    (T1) invocation.Arguments[0],
-                    (T2) invocation.Arguments[1],
-                    (T3) invocation.Arguments[2]);
+                    (T1)invocation.Arguments[0],
+                    (T2)invocation.Arguments[1],
+                    (T3)invocation.Arguments[2]);
             });
         }
 
@@ -57,10 +57,10 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             RepeatAny(invocation =>
             {
                 invocation.ReturnValue = valueFunction(
-                    (T1) invocation.Arguments[0],
-                    (T2) invocation.Arguments[1],
-                    (T3) invocation.Arguments[2],
-                    (T4) invocation.Arguments[3]);
+                    (T1)invocation.Arguments[0],
+                    (T2)invocation.Arguments[1],
+                    (T3)invocation.Arguments[2],
+                    (T4)invocation.Arguments[3]);
             });
         }
 

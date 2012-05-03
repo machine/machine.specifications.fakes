@@ -15,13 +15,13 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
 
-        Because of = () => _fake.WhenToldTo(x => x.RemoveService(typeof (string)))
+        Because of = () => _fake.WhenToldTo(x => x.RemoveService(typeof(string)))
                                .Callback<Type>(p => _receivedParameter = p);
 
         It should_execute_the_configured_behavior = () =>
         {
-            _fake.RemoveService(typeof (string));
-            _receivedParameter.ShouldEqual(typeof (string));
+            _fake.RemoveService(typeof(string));
+            _receivedParameter.ShouldEqual(typeof(string));
         };
     }
 
@@ -34,8 +34,8 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
 
-        Because of = () => _fake.WhenToldTo(x => x.RemoveService(typeof (string))).Throw(new Exception("Blah"));
+        Because of = () => _fake.WhenToldTo(x => x.RemoveService(typeof(string))).Throw(new Exception("Blah"));
 
-        It should_execute_the_configured_behavior = () => Catch.Exception(() => _fake.RemoveService(typeof (string))).ShouldNotBeNull();
+        It should_execute_the_configured_behavior = () => Catch.Exception(() => _fake.RemoveService(typeof(string))).ShouldNotBeNull();
     }
 }

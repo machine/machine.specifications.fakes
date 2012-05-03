@@ -42,7 +42,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
 
         public void Callback<T1, T2>(Action<T1, T2> callback)
         {
-            _methodOptions.Callback<T1, T2>((p1,p2) =>
+            _methodOptions.Callback<T1, T2>((p1, p2) =>
             {
                 callback(p1, p2);
                 return true;

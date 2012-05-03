@@ -29,9 +29,10 @@ namespace Machine.Fakes.Adapters.NSubstitute
         {
             var calls = CountCalls();
             if (calls != numberOfTimesTheMethodShouldHaveBeenCalled)
-                throw new ReceivedCallsException(
-                    string.Format("Expected {0} calls to the method but received {1}",
-                                  numberOfTimesTheMethodShouldHaveBeenCalled, calls));
+                throw new ReceivedCallsException(string.Format(
+                        "Expected {0} calls to the method but received {1}",
+                        numberOfTimesTheMethodShouldHaveBeenCalled,
+                        calls));
         }
 
         public void OnlyOnce()
@@ -51,12 +52,10 @@ namespace Machine.Fakes.Adapters.NSubstitute
 
         private int CountCalls()
         {
-            var method = ((MethodCallExpression) _func.Body).Method;
+            var method = ((MethodCallExpression)_func.Body).Method;
             return _fake
                 .ReceivedCalls()
-                .Select(x => x.GetMethodInfo())
-                .Where(x => x == method)
-                .Count();
+                .Select(x => x.GetMethodInfo()).Count(x => x == method);
         }
     }
 }

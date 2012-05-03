@@ -29,13 +29,13 @@ namespace Machine.Fakes.Specs
     {
         Establish context = () =>
         {
-            var dummyFakeEngine = new DummyFakeEngine {CreatedFake = new CarFromFakeFramework()};
+            var dummyFakeEngine = new DummyFakeEngine { CreatedFake = new CarFromFakeFramework() };
 
             _specController = new SpecificationController<LittleKingdom>(dummyFakeEngine);
             _specController.Configure<IGarage, Garage>();
         };
 
-        Because of = () =>  _subject = _specController.Subject;
+        Because of = () => _subject = _specController.Subject;
 
         It should_use_the_configured_type_in_the_build_process = 
             () => _subject.Garage.ShouldBeOfType<Garage>();

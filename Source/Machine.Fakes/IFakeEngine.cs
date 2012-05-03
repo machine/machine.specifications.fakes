@@ -35,7 +35,7 @@ namespace Machine.Fakes
         /// <returns>
         /// The created instance.
         /// </returns>
-        T PartialMock<T>(params  object[] args) where T : class;
+        T PartialMock<T>(params object[] args) where T : class;
 
         /// <summary>
         ///   Configures the behavior of the fake specified by <paramref name = "fake" />.
@@ -117,6 +117,6 @@ namespace Machine.Fakes
         /// </returns>
         IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
-            Expression<Action<TFake>> func) where TFake : class ;
+            Expression<Action<TFake>> func) where TFake : class;
     }
 }

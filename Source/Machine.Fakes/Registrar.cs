@@ -168,7 +168,7 @@ namespace Machine.Fakes
             /// </typeparam>
             public void Use<TImplementationType>() where TImplementationType : T
             {
-                _registrar.Store(new TypeMapping(typeof (T), typeof (TImplementationType)));
+                _registrar.Store(new TypeMapping(typeof(T), typeof(TImplementationType)));
             }
 
             /// <summary>
@@ -181,7 +181,7 @@ namespace Machine.Fakes
             /// </param>
             public void Use(T instance)
             {
-                _registrar.Store(new ObjectMapping(typeof (T), instance));
+                _registrar.Store(new ObjectMapping(typeof(T), instance));
             }
 
             /// <summary>

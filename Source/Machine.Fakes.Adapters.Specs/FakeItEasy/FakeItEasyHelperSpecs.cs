@@ -1,5 +1,5 @@
 using System;
-using FakeItEasy;
+
 using FakeItEasy.Creation;
 using Machine.Fakes.Adapters.FakeItEasy;
 using Machine.Fakes.Adapters.Specs.SampleCode;
@@ -14,7 +14,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         static Delegate action;
 
         Because of = () => 
-            action = FakeItEasyHelper.CreateForType(typeof (DummyNoDefaultCtorClass), new object[] {100});
+            action = FakeItEasyHelper.CreateForType(typeof(DummyNoDefaultCtorClass), new object[] { 100 });
 
         It must_return_a_non_null_delegate = () => 
             action.ShouldNotBeNull();

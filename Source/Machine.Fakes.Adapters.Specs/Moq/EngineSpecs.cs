@@ -57,7 +57,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
         WithCurrentEngine<MoqFakeEngine>
     {
         static DummyNoDefaultCtorClass _fake;
-        static object[] _args = new object[] {1};
+        static object[] _args = new object[] { 1 };
 
         Because of = () => _fake = FakeEngineGateway.Fake<DummyNoDefaultCtorClass>(_args);
 

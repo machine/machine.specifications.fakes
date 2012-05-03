@@ -12,7 +12,7 @@ namespace Machine.Fakes.Examples.ReuseViaBaseClasses
         }
     }
 
-    [Subject(typeof (MoodIdentifier)), Tags("Examples")]
+    [Subject(typeof(MoodIdentifier)), Tags("Examples")]
     public class Given_the_current_day_is_monday_when_identifying_my_mood : TimeSpecification<MoodIdentifier>
     {
         static string _mood;
@@ -27,7 +27,7 @@ namespace Machine.Fakes.Examples.ReuseViaBaseClasses
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
 
-    [Subject(typeof (MoodIdentifier)), Tags("Examples")]
+    [Subject(typeof(MoodIdentifier)), Tags("Examples")]
     public class Given_the_current_day_is_tuesday_when_identifying_my_mood : TimeSpecification<MoodIdentifier>
     {
         static string _mood;

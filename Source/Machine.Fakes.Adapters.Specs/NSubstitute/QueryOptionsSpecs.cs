@@ -39,15 +39,15 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
 
-        Because of = () => _fake.WhenToldTo(x => x.GetService(typeof (string))).Return("string");
+        Because of = () => _fake.WhenToldTo(x => x.GetService(typeof(string))).Return("string");
 
         It should_be_able_to_execute_the_configured_behavior_multiple_times =
             () => Enumerable
                       .Range(0, 3)
-                      .Select((x, y) => _fake.GetService(typeof (string)))
+                      .Select((x, y) => _fake.GetService(typeof(string)))
                       .ShouldEachConformTo(obj => obj != null);
 
-        It should_execute_the_configured_behavior = () => _fake.GetService(typeof (string)).ShouldNotBeNull();
+        It should_execute_the_configured_behavior = () => _fake.GetService(typeof(string)).ShouldNotBeNull();
     }
 
     [Subject(typeof(NSubstituteEngine))]
@@ -61,7 +61,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
 
         Because of = () => _fake
-                               .WhenToldTo(x => x.GetService(typeof (string)))
+                               .WhenToldTo(x => x.GetService(typeof(string)))
                                .Return<Type>(p =>
                                {
                                    _parameter = p;
@@ -70,11 +70,11 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         It should_pass_the_correct_parameter_to_the_callback = () =>
         {
-            _fake.GetService(typeof (string));
-            _parameter.ShouldEqual(typeof (string));
+            _fake.GetService(typeof(string));
+            _parameter.ShouldEqual(typeof(string));
         };
 
-        It should_return_the_return_value_of_the_callback = () => _fake.GetService(typeof (string)).ShouldEqual("ReturnValue");
+        It should_return_the_return_value_of_the_callback = () => _fake.GetService(typeof(string)).ShouldEqual("ReturnValue");
     }
 
     [Subject(typeof(NSubstituteEngine))]
@@ -87,9 +87,9 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
 
         Because of = () => _fake
-                               .WhenToldTo(x => x.GetService(typeof (string)))
+                               .WhenToldTo(x => x.GetService(typeof(string)))
                                .Throw(new Exception("Blah"));
 
-        It should_execute_the_configured_behavior = () => Catch.Exception(() => _fake.GetService(typeof (string))).ShouldNotBeNull();
+        It should_execute_the_configured_behavior = () => Catch.Exception(() => _fake.GetService(typeof(string))).ShouldNotBeNull();
     }
 }
