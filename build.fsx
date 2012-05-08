@@ -145,6 +145,7 @@ Target "BuildNuGet" (fun _ ->
     
     NuGet (fun p ->
         {p with
+            Summary = "A framework for faking dependencies on top of Machine.Specifications."
             Authors = authors
             Project = projectName
             Version = version
@@ -169,6 +170,7 @@ Target "BuildNuGetFlavours" (fun _ ->
 
             NuGet (fun p ->
                 {p with
+                    Summary = sprintf "A framework for faking objects with %s on top of Machine.Specifications." flavour
                     Authors = authors
                     Project = sprintf "%s.%s" projectName flavour
                     Description = sprintf " This is the adapter for %s %s" flavour flavourVersion
