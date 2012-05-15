@@ -38,7 +38,7 @@ let nugetDir = buildDir + @"NuGet\"
 let testDir = buildDir
 let deployDir = @".\Release\"
 let targetPlatformDir = getTargetPlatformDir "v4.0.30319"
-let nugetLibDir = nugetDir + @"lib\"
+let nugetLibDir = nugetDir + @"lib\net40\"
 
 (* files *)
 let slnReferences = !! @".\Source\*.sln"
