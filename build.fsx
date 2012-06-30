@@ -1,11 +1,13 @@
 #I @"Source\packages\Fake.1.64.6\tools"
 #r "FakeLib.dll"
+#r "System.Web.Extensions.dll"
 
 open Fake
 open Fake.Git
+open System.Collections.Generic
 open System.Linq
-open System.Text.RegularExpressions
 open System.IO
+open System.Web.Script.Serialization
 
 (* properties *)
 let authors = ["The machine project"]
@@ -17,13 +19,13 @@ let version =
     if hasBuildParam "version" then getBuildParam "version" else
     if isLocalBuild then getLastTag() else
     // version is set to the last tag retrieved from GitHub Rest API
-    let url = "http://github.com/api/v2/json/repos/show/machine/machine.fakes/tags"
+    // see http://developer.github.com/v3/repos/ for reference
+    let url = "https://api.github.com/repos/machine/machine.fakes/tags"
     tracefn "Downloading tags from %s" url
     let tagsFile = REST.ExecuteGetCommand null null url
-    let r = new Regex("[,{][\"]([^\"]*)[\"]")
-    [for m in r.Matches tagsFile -> m.Groups.[1]]
-        |> List.map (fun m -> m.Value)
-        |> List.filter ((<>) "tags")
+    let tags = (new JavaScriptSerializer()).DeserializeObject(tagsFile) :?> System.Object array
+    [ for tag in tags -> tag :?> Dictionary<string, System.Object> ]
+        |> List.map (fun m -> m.Item("name") :?> string)
         |> List.max
 
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
