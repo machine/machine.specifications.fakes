@@ -13,7 +13,7 @@ namespace Machine.Fakes.Internal
 
         public Type InterfaceType
         {
-            get { return typeof (TInterface); }
+            get { return typeof(TInterface); }
         }
 
         public void Configure(IContainer container)

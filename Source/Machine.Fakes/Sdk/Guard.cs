@@ -58,8 +58,9 @@ namespace Machine.Fakes.Sdk
             if (!assignmentTargetType.IsAssignableFrom(argument))
             {
                 throw new ArgumentException(
-                    string.Format("Type {0} is not assignable to the type {1}", 
-                        argument.FullName, 
+                    string.Format(
+                        "Type {0} is not assignable to the type {1}",
+                        argument.FullName,
                         assignmentTargetType.FullName));
             }
         }

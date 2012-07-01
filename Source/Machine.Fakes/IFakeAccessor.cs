@@ -41,7 +41,6 @@ namespace Machine.Fakes
         /// Creates a fake of the type specified by <typeparamref name="TInterfaceType"/>.
         /// This method reuses existing instances. If an instance of <typeparamref name="TInterfaceType"/>
         /// was already requested it's returned here. (You can say this is kind of a singleton behavior)
-        /// 
         /// Besides that, you can obtain a reference to automatically injected fakes with this 
         /// method.
         /// </summary>

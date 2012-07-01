@@ -1,11 +1,13 @@
 #I @"Source\packages\Fake.1.64.6\tools"
 #r "FakeLib.dll"
+#r "System.Web.Extensions.dll"
 
 open Fake
 open Fake.Git
+open System.Collections.Generic
 open System.Linq
-open System.Text.RegularExpressions
 open System.IO
+open System.Web.Script.Serialization
 
 (* properties *)
 let authors = ["The machine project"]
@@ -17,13 +19,13 @@ let version =
     if hasBuildParam "version" then getBuildParam "version" else
     if isLocalBuild then getLastTag() else
     // version is set to the last tag retrieved from GitHub Rest API
-    let url = "http://github.com/api/v2/json/repos/show/machine/machine.fakes/tags"
+    // see http://developer.github.com/v3/repos/ for reference
+    let url = "https://api.github.com/repos/machine/machine.fakes/tags"
     tracefn "Downloading tags from %s" url
     let tagsFile = REST.ExecuteGetCommand null null url
-    let r = new Regex("[,{][\"]([^\"]*)[\"]")
-    [for m in r.Matches tagsFile -> m.Groups.[1]]
-        |> List.map (fun m -> m.Value)
-        |> List.filter ((<>) "tags")
+    let tags = (new JavaScriptSerializer()).DeserializeObject(tagsFile) :?> System.Object array
+    [ for tag in tags -> tag :?> Dictionary<string, System.Object> ]
+        |> List.map (fun m -> m.Item("name") :?> string)
         |> List.max
 
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
@@ -38,7 +40,7 @@ let nugetDir = buildDir + @"NuGet\"
 let testDir = buildDir
 let deployDir = @".\Release\"
 let targetPlatformDir = getTargetPlatformDir "v4.0.30319"
-let nugetLibDir = nugetDir + @"lib\"
+let nugetLibDir = nugetDir + @"lib\net40\"
 
 (* files *)
 let slnReferences = !! @".\Source\*.sln"
@@ -135,20 +137,22 @@ Target "BuildZip" (fun _ ->
         |> Zip buildDir (deployDir + sprintf "%s-%s.zip" projectName version)
 )
 
+let RequireAtLeast version = sprintf "%s" <| NormalizeVersion version
+
 Target "BuildNuGet" (fun _ ->
     CleanDirs [nugetDir; nugetLibDir]
 
     [buildDir + "Machine.Fakes.dll"]
         |> CopyTo nugetLibDir
-
-
+    
     NuGet (fun p ->
         {p with
+            Summary = "A framework for faking dependencies on top of Machine.Specifications."
             Authors = authors
             Project = projectName
             Version = version
             OutputPath = nugetDir
-            Dependencies = ["Machine.Specifications",RequireExactly MSpecVersion]
+            Dependencies = ["Machine.Specifications",RequireAtLeast MSpecVersion]
             AccessKey = NugetKey
             Publish = NugetKey <> "" })
         "machine.fakes.nuspec"
@@ -168,6 +172,7 @@ Target "BuildNuGetFlavours" (fun _ ->
 
             NuGet (fun p ->
                 {p with
+                    Summary = sprintf "A framework for faking objects with %s on top of Machine.Specifications." flavour
                     Authors = authors
                     Project = sprintf "%s.%s" projectName flavour
                     Description = sprintf " This is the adapter for %s %s" flavour flavourVersion
@@ -175,7 +180,7 @@ Target "BuildNuGetFlavours" (fun _ ->
                     OutputPath = nugetDir
                     Dependencies =
                         ["Machine.Fakes",RequireExactly (NormalizeVersion version)
-                         flavour,RequireExactly flavourVersion]
+                         flavour,RequireAtLeast flavourVersion]
                     AccessKey = NugetKey
                     Publish = NugetKey <> "" })
                 "machine.fakes.nuspec"

@@ -44,7 +44,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
             Method.Returns(f =>
             {
                 var args = f.Args();
-                return valueFunction.Invoke((T1) args[0], (T2) args[1]);
+                return valueFunction.Invoke((T1)args[0], (T2)args[1]);
             });
         }
 
@@ -53,7 +53,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
             Method.Returns(f =>
             {
                 var args = f.Args();
-                return valueFunction.Invoke((T1) args[0], (T2) args[1], (T3) args[2]);
+                return valueFunction.Invoke((T1)args[0], (T2)args[1], (T3)args[2]);
             });
         }
 
@@ -62,7 +62,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
             Method.Returns(f =>
             {
                 var args = f.Args();
-                return valueFunction.Invoke((T1) args[0], (T2) args[1], (T3) args[2], (T4) args[3]);
+                return valueFunction.Invoke((T1)args[0], (T2)args[1], (T3)args[2], (T4)args[3]);
             });
         }
 

@@ -17,3 +17,4 @@ Source/GlobalAssemblyInfo.cs
 
 *.bak
 *_mm_cache.bin
+*.user

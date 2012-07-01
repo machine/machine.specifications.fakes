@@ -47,7 +47,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             TFake fake,
             Expression<Action<TFake>> func) 
         {
-            var compiledFunction =  func.Compile();
+            var compiledFunction = func.Compile();
 
             fake.AssertWasNotCalled(compiledFunction);
         }

@@ -4,7 +4,7 @@ using Machine.Specifications;
 
 namespace Machine.Fakes.Adapters.Specs.RegistrarSpecs
 {
-    [Subject(typeof (SpecificationController<>))]
+    [Subject(typeof(SpecificationController<>))]
     public class When_a_factory_is_specified_in_a_registrar : WithSubject<Configuration, RhinoFakeEngine>
     {
         Establish context = () =>
@@ -28,7 +28,9 @@ namespace Machine.Fakes.Adapters.Specs.RegistrarSpecs
         }
     }
 
-    public interface IConfigurationStore {}
+    public interface IConfigurationStore
+    {
+    }
 
     class ConfigurationStore : IConfigurationStore
     {

@@ -23,11 +23,9 @@ namespace Machine.Fakes.Adapters.Specs.Bugs
     public class AlexRepository
     {
         OnEstablish context = fakeAccessor =>
-        {
             fakeAccessor.The<IContactRepository>()
                 .WhenToldTo(r => r.Get(1))
                 .Return(fakeAccessor.The<IContact>);
-        };
     }
 
     public class Alex

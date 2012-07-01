@@ -40,8 +40,8 @@ namespace Machine.Fakes.Sdk
     public class SpecificationController<TSubject> : IFakeAccessor, IDisposable where TSubject : class
     {
         private readonly BehaviorConfigController _behaviorConfigController = new BehaviorConfigController();
-        private TSubject _specificationSubject;
         private readonly AutoFakeContainer<TSubject> _container;
+        private TSubject _specificationSubject;
         
         /// <summary>
         /// Creates a new instance of the <see cref="SpecificationController{TSubject}"/> class.
@@ -86,12 +86,11 @@ namespace Machine.Fakes.Sdk
         }
 
         /// <summary>
-        ///   Configures the specification to execute a behavior config before the action on the subject
-        ///   is executed (<see cref = "Because" />).
+        /// Configures the specification to execute a behavior config before the action on the subject
+        /// is executed (<see cref="Because"/>).
         /// </summary>
-        /// <typeparam name = "TBehaviorConfig">
-        ///   Specifies the type of the config to be executed.
-        /// </typeparam>
+        /// <typeparam name="TBehaviorConfig">Specifies the type of the config to be executed.</typeparam>
+        /// <returns>The behavior config instance.</returns>
         /// <remarks>
         /// The class specified by <typeparamref name="TBehaviorConfig"/>
         /// needs to have private fields assigned with either <see cref="OnEstablish"/>
@@ -112,7 +111,7 @@ namespace Machine.Fakes.Sdk
         ///   Specifies the behavior config to be executed.
         /// </param>
         /// <remarks>
-        /// The object specified by <see cref="behaviorConfig"/>
+        /// The object specified by <see paramref="behaviorConfig"/>
         /// needs to have private fields assigned with either <see cref="OnEstablish"/>
         /// or <see cref="OnCleanup"/> delegates.
         /// </remarks>
@@ -212,7 +211,9 @@ namespace Machine.Fakes.Sdk
         /// </summary>
         public void EnsureSubjectCreated()
         {
+            // ReSharper disable ReturnValueOfPureMethodIsNotUsed
             Subject.ToString();
+            // ReSharper restore ReturnValueOfPureMethodIsNotUsed
         }
     }
 }

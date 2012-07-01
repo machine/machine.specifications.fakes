@@ -7,7 +7,7 @@ using Machine.Specifications;
 namespace Machine.Fakes.Specs
 {
     [Subject(typeof(SpecificationController<,>))]
-    public class when_using_the_an_method_to_create_an_explicit_fake
+    public class When_using_the_an_method_to_create_an_explicit_fake
     {
         static SpecificationController<object> _specController;
         static object result;
@@ -15,8 +15,7 @@ namespace Machine.Fakes.Specs
 
         Establish context = () =>
         {
-            _fakeEngine = new DummyFakeEngine();
-            _fakeEngine.CreatedFake = new SqlConnection();
+            _fakeEngine = new DummyFakeEngine { CreatedFake = new SqlConnection() };
             _specController = new SpecificationController<object>(_fakeEngine);
         };
 
@@ -27,7 +26,7 @@ namespace Machine.Fakes.Specs
     }
 
     [Subject(typeof(SpecificationController<,>))]
-    public class when_using_the_an_method_with_a_type_with_no_default_constructor
+    public class When_using_the_an_method_with_a_type_with_no_default_constructor
     {
         static SpecificationController<object> _specController;
         static object result;
@@ -36,8 +35,7 @@ namespace Machine.Fakes.Specs
 
         Establish context = () =>
         {
-            _fakeEngine = new DummyFakeEngine();
-            _fakeEngine.CreatedFake = new SqlConnection(connectionString);
+            _fakeEngine = new DummyFakeEngine { CreatedFake = new SqlConnection(connectionString) };
             _specController = new SpecificationController<object>(_fakeEngine);
         };
 

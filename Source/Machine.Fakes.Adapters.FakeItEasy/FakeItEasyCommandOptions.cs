@@ -19,7 +19,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
         public void Callback<T>(Action<T> callback)
         {
-            _configuration.Invokes(f => callback((T) f.Arguments[0]));
+            _configuration.Invokes(f => callback((T)f.Arguments[0]));
         }
 
         public void Callback<T1, T2>(Action<T1, T2> callback)

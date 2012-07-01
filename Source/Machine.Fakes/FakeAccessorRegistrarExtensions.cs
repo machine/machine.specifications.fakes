@@ -10,14 +10,12 @@ namespace Machine.Fakes
     public static class FakeAccessorRegistrarExtensions
     {
         /// <summary>
-        ///     Uses the instance supplied by <paramref name = "instance" /> during the
-        ///     creation of the sut. The specified instance will be injected into the constructor.
+        /// Uses the instance supplied by <paramref name="instance"/> during the
+        /// creation of the sut. The specified instance will be injected into the constructor.
         /// </summary>
-        /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
-        /// <param name = "instance">Specifies the instance to be used for the specification.</param>
-        /// <param name = "accessor">
-        ///     Specifies the fake accessor
-        /// </param>
+        /// <typeparam name="TInterfaceType">Specifies the interface type.</typeparam>
+        /// <param name="accessor">Specifies the fake accessor</param>
+        /// <param name="instance">Specifies the instance to be used for the specification.</param>
         public static void Configure<TInterfaceType>(
             this IFakeAccessor accessor,
             TInterfaceType instance)

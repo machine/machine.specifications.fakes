@@ -20,7 +20,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
                 ? FakeItEasyHelper.CreateForType(interfaceType, args) : null;
 
             var instance = args != null && args.Length > 0 
-                ? Activator.CreateInstance(closedFakeType, new object[] {options}) 
+                ? Activator.CreateInstance(closedFakeType, new object[] { options })
                 : Activator.CreateInstance(closedFakeType);
 
             return objectProperty.GetValue(instance, null);

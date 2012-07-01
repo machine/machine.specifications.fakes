@@ -22,6 +22,9 @@ namespace Machine.Fakes
         where TSubject : class
         where TFakeEngine : IFakeEngine, new()
     {
+        /// <summary>
+        /// The specification controller
+        /// </summary>
         protected static SpecificationController<TSubject, TFakeEngine> _specificationController;
         
         /// <summary>
@@ -152,9 +155,8 @@ namespace Machine.Fakes
         /// Shortcut for <see cref="Configure(Registrar)"/> so that you don't have to create the 
         /// registrar manually.
         /// </summary>
-        /// <typeparam name="TRegistrar">
-        /// Specifies the registrar type.
-        /// </typeparam>
+        /// <typeparam name="TRegistrar">The registrar type.</typeparam>
+        /// <returns>The registrar.</returns>
         protected static TRegistrar Configure<TRegistrar>() where TRegistrar : Registrar, new()
         {
             var registrar = new TRegistrar();
@@ -166,7 +168,6 @@ namespace Machine.Fakes
         /// Shortcut for <see cref="Configure(Registrar)"/>. This one will create
         /// a registrar for you and allow configuration via the delegate passed
         /// in via <paramref name="registrarExpression"/>.
-        /// 
         /// </summary>
         /// <param name="registrarExpression">
         /// Specifies the configuration for the registrar.
@@ -182,12 +183,11 @@ namespace Machine.Fakes
         }
 
         /// <summary>
-        ///   Configures the specification to execute a behavior config before the action on the subject
-        ///   is executed (<see cref = "Because" />).
+        /// Configures the specification to execute a behavior config before the action on the subject
+        /// is executed (<see cref="Because"/>).
         /// </summary>
-        /// <typeparam name = "TBehaviorConfig">
-        ///   Specifies the type of the config to be executed.
-        /// </typeparam>
+        /// <typeparam name="TBehaviorConfig">Specifies the type of the config to be executed.</typeparam>
+        /// <returns>The behavior config instance.</returns>
         /// <remarks>
         /// The class specified by <typeparamref name="TBehaviorConfig"/>
         /// needs to have private fields assigned with either <see cref="OnEstablish"/>
@@ -206,7 +206,7 @@ namespace Machine.Fakes
         ///   Specifies the behavior config to be executed.
         /// </param>
         /// <remarks>
-        /// The object specified by <see cref="behaviorConfig"/>
+        /// The object specified by <see paramref="behaviorConfig"/>
         /// needs to have private fields assigned with either <see cref="OnEstablish"/>
         /// or <see cref="OnCleanup"/> delegates.
         /// </remarks>
@@ -215,6 +215,7 @@ namespace Machine.Fakes
             _specificationController.With(behaviorConfig);
         }
 
+        // ReSharper disable UnusedMember.Local
         Because of = () => _specificationController.EnsureSubjectCreated();
 
         Cleanup after = () =>

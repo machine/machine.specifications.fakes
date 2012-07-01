@@ -7,7 +7,7 @@ using It = Machine.Specifications.It;
 
 namespace Machine.Fakes.Examples.UsingMoqApi
 {
-    [Subject(typeof (MoodIdentifier)), Tags("Examples")]
+    [Subject(typeof(MoodIdentifier)), Tags("Examples")]
     public class Given_the_current_day_is_monday_when_identifying_my_mood
     {
         static MoodIdentifier _moodIdentifier;

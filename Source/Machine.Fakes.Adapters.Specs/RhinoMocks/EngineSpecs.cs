@@ -7,7 +7,7 @@ using Machine.Specifications;
 
 namespace Machine.Fakes.Adapters.Specs.RhinoMocks
 {
-    [Subject(typeof (RhinoFakeEngine))]
+    [Subject(typeof(RhinoFakeEngine))]
     [Tags("Rhinomocks")]
     public class AfterInitializingANewFakeCurrentEngine : WithCurrentEngine<RhinoFakeEngine>
     {
@@ -18,7 +18,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
         It should_be_able_to_create_an_instance = () => _fake.ShouldNotBeNull();
     }
 
-    [Subject(typeof (RhinoFakeEngine))]
+    [Subject(typeof(RhinoFakeEngine))]
     [Tags("Verifying a mock (without inline constraints)", "Rhinomocks")]
     public class Given_that_a_call_was_not_expected_to_happen_but_happened_when_verifying : WithCurrentEngine<RhinoFakeEngine>
     {
@@ -36,7 +36,7 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
         It should_have_thrown_an_exception = () => _exception.ShouldNotBeNull();
     }
 
-    [Subject(typeof (RhinoFakeEngine))]
+    [Subject(typeof(RhinoFakeEngine))]
     [Tags("Verifying a mock (without inline constraints)", "Rhinomocks")]
     public class Given_that_a_call_was_not_expected_to_happen_and_did_not_happened_when_verifying :
         WithCurrentEngine<RhinoFakeEngine>

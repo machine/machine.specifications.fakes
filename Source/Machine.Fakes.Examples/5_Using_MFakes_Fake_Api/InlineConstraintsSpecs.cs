@@ -3,7 +3,7 @@ using Machine.Specifications;
 
 namespace Machine.Fakes.Examples.UsingMFakesApi
 {
-    [Subject(typeof (VIPChecker)), Tags("Examples")]
+    [Subject(typeof(VIPChecker)), Tags("Examples")]
     public class A_person_with_nick_ScottGu : WithFakes
     {
         static VIPChecker _vipChecker;
@@ -19,7 +19,7 @@ namespace Machine.Fakes.Examples.UsingMFakesApi
                 .Return(true);
         };
 
-        Because of = () => { _isVip = _vipChecker.IsVip(new Person {NickName = "ScottGu"}); };
+        Because of = () => { _isVip = _vipChecker.IsVip(new Person { NickName = "ScottGu" }); };
 
         It should_be_vip = () => _isVip.ShouldBeTrue();
     }

@@ -1,5 +1,6 @@
 namespace Machine.Fakes.Sdk
 {
+#pragma warning disable 1591 // Type is self-explaining and needs no comments
     public static class InlineConstraintNames
     {
         public const string IsAny = "IsAny";
@@ -10,4 +11,5 @@ namespace Machine.Fakes.Sdk
         public const string IsNull = "IsNull";
         public const string IsNotNull = "IsNotNull";
     }
+#pragma warning restore 1591
 }
