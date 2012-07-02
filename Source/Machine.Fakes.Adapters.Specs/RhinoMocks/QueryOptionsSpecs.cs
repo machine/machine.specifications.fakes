@@ -2,16 +2,12 @@ using System;
 using System.ComponentModel.Design;
 using System.Linq;
 using Machine.Fakes.Adapters.Rhinomocks;
+using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
 namespace Machine.Fakes.Adapters.Specs.RhinoMocks
 {
-    public interface ICar
-    {
-        bool DoorIsOpen { get; }
-    }
-
     [Subject(typeof(RhinoFakeEngine))]
     [Tags("QueryOptions", "Rhinomocks")]
     public class Given_a_property_configuration_when_triggering_the_behavior : WithCurrentEngine<RhinoFakeEngine>

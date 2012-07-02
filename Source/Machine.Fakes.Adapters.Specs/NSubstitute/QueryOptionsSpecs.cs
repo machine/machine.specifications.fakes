@@ -2,16 +2,12 @@ using System;
 using System.ComponentModel.Design;
 using System.Linq;
 using Machine.Fakes.Adapters.NSubstitute;
+using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
 namespace Machine.Fakes.Adapters.Specs.NSubstitute
 {
-    public interface ICar
-    {
-        bool DoorIsOpen { get; }
-    }
-
     [Subject(typeof(NSubstituteEngine))]
     [Tags("QueryOptions", "NSubstitute")]
     public class Given_a_property_configuration_when_triggering_the_behavior : WithCurrentEngine<NSubstituteEngine>
