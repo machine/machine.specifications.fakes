@@ -20,6 +20,8 @@ namespace Machine.Fakes.Adapters.Moq
             var closedMockType = typeof(Mock<>).MakeGenericType(interfaceType);
             var instance = (args != null && args.Length > 0) ? Activator.CreateInstance(closedMockType, args) : Activator.CreateInstance(closedMockType);
             var objectProperty = closedMockType.GetProperty("Object", closedMockType);
+            var setupAllProperties = closedMockType.GetMethod("SetupAllProperties");
+            setupAllProperties.Invoke(instance, null);
 
             return objectProperty.GetValue(instance, null);
         }
