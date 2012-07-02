@@ -1,4 +1,7 @@
 # Changelog
+## 
+* Updated to NSubstitute 1.4.2.0.
+
 ## 0.4.0
 * Machine.Fakes is considered forward compatible to future versions of Machine.Specifications from now on.
 * Updated to require at least Machine.Specifications 0.5.7
