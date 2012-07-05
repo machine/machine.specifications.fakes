@@ -20,7 +20,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
 
         public override T PartialMock<T>(params object[] args)
         {
-            var mock = MockRepository.GenerateMock<T>(args);
+            var mock = MockRepository.GeneratePartialMock<T>(args);
             mock.Replay();
             return mock;
         }

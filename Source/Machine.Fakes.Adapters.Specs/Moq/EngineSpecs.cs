@@ -91,4 +91,20 @@ namespace Machine.Fakes.Adapters.Specs.Moq
             result.ShouldEqual("Faked result");
         };
     }
+
+    [Subject(typeof(MoqFakeEngine), "Property behaviour")]
+    [Tags("Moq")]
+    public class When_faking_an_interface_with_a_property : WithCurrentEngine<MoqFakeEngine>
+    {
+        static ITypeWithProperty _fake;
+
+        Establish context = () =>
+            _fake = FakeEngineGateway.Fake<ITypeWithProperty>();
+
+        Because of = () =>
+            _fake.Property = "new property value";
+
+        It should_track_property_changes = () =>
+            _fake.Property.ShouldEqual("new property value");
+    }
 }
