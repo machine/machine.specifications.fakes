@@ -92,19 +92,19 @@ namespace Machine.Fakes.Adapters.Specs.Moq
         };
     }
 
-    [Subject(typeof(MoqFakeEngine))]
-    [Tags("Moq", "Setup all properties")]
-    public class Setup_all_properties_on_each_fake : WithCurrentEngine<MoqFakeEngine>
+    [Subject(typeof(MoqFakeEngine), "Property behaviour")]
+    [Tags("Moq")]
+    public class When_faking_an_interface_with_a_property : WithCurrentEngine<MoqFakeEngine>
     {
-        It should_track_property_changes = () =>
-            _fake.VirtualProperty.ShouldEqual("new property value");
-
-        Because of = () =>
-            _fake.VirtualProperty = "new property value";
+        static ITypeWithProperty _fake;
 
         Establish context = () =>
-            _fake = FakeEngineGateway.Fake<ClassWithProperties>();
+            _fake = FakeEngineGateway.Fake<ITypeWithProperty>();
 
-        static ClassWithProperties _fake;
+        Because of = () =>
+            _fake.Property = "new property value";
+
+        It should_track_property_changes = () =>
+            _fake.Property.ShouldEqual("new property value");
     }
 }

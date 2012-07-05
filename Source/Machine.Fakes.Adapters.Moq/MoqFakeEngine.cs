@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+
 using Machine.Fakes.Sdk;
 using Moq;
 
@@ -20,8 +21,7 @@ namespace Machine.Fakes.Adapters.Moq
             var closedMockType = typeof(Mock<>).MakeGenericType(interfaceType);
             var instance = (args != null && args.Length > 0) ? Activator.CreateInstance(closedMockType, args) : Activator.CreateInstance(closedMockType);
             var objectProperty = closedMockType.GetProperty("Object", closedMockType);
-            var setupAllProperties = closedMockType.GetMethod("SetupAllProperties");
-            setupAllProperties.Invoke(instance, null);
+            closedMockType.GetMethod("SetupAllProperties").Invoke(instance, null);
 
             return objectProperty.GetValue(instance, null);
         }

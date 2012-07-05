@@ -1,5 +1,6 @@
 # Changelog
-## 
+## 0.5.0
+* Fakes created with the Moq adapter will now automatically track their property values. (Thanks to [Jason Duffett](https://github.com/laazyj))
 * Updated to NSubstitute 1.4.2.0.
 
 ## 0.4.0

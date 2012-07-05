@@ -176,3 +176,16 @@ This is the "Mood" example with a behavior configuration instead of configuring 
 
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
+
+### Faking properties
+Behaviours can be set up for fake properties like this:
+
+    The<InterfaceWithProperty>().WhenToldTo(x => x.Property).Return(propertyValue);
+
+But property values are also automatically tracked (for all adapters except Rhino Mocks). So you might as well just set the value that should be returned:
+
+    The<InterfaceWithProperty>().Property = propertyValue;
+
+This way you can also check whether a setter has been called:
+
+    The<InterfaceWithProperty>().Property.ShouldEqual(propertyValue);
