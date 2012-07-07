@@ -86,11 +86,6 @@ namespace Machine.Fakes.Internal
             return _autoMocker.Get<TFakeSingleton>();
         }
 
-        public void Inject(Type contract, object implementation)
-        {
-            _autoMocker.Inject(contract, implementation);
-        }
-
         public void Register(Registrar registar)
         {
             _autoMocker.Register(registar);

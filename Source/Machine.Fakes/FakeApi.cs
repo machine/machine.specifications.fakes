@@ -6,8 +6,8 @@ using Machine.Fakes.Sdk;
 namespace Machine.Fakes
 {
     /// <summary>
-    ///   A set of extension methods for setting up behavior on fakes in a fashion independant 
-    ///   to a particular fake framework.
+    ///   A set of extension methods for setting up behavior on fakes in a fashion independent
+    ///   of a particular fake framework.
     /// </summary>
     public static class FakeApi
     {
