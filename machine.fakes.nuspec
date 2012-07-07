@@ -10,7 +10,7 @@ Machine.Fakes attempts to simplify the usage of such frameworks on top of Machin
     <owners>@authors@</owners>
     <language>en-US</language>
     <summary>@summary@</summary>
-    <iconUrl>http://github.com/machine/machine.fakes/raw/dev/machine.fakes.png</iconUrl>
+    <iconUrl>http://github.com/machine/machine.fakes/raw/dev/machine.fakes-128x128.png</iconUrl>
     <projectUrl>http://github.com/machine/machine.fakes</projectUrl>
     <licenseUrl>http://github.com/machine/machine.fakes/raw/dev/License.txt</licenseUrl>
     <tags>tdd bdd testing unittest fakes mocks mspec mfakes</tags>
