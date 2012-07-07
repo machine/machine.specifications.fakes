@@ -29,18 +29,12 @@ namespace Machine.Fakes.Adapters.Moq
         public override T PartialMock<T>(params object[] args) 
         {
             var closedMockType = typeof(Mock<>).MakeGenericType(typeof(T));
-            var callBaseProperty = closedMockType.GetProperty("CallBase", typeof(bool));
-            var objectProperty = closedMockType.GetProperty("Object", typeof(T));
-            var constructor = closedMockType.GetConstructor(new[]
-            {
-                typeof(object[])
-            });
-            var instance = constructor.Invoke(new[]
-            {
-                args
-            });
-            callBaseProperty.SetValue(instance, true, null);
-            return objectProperty.GetValue(instance, null) as T;
+            // ReSharper disable PossibleNullReferenceException
+            // We know that Moq.Mock has this constructor
+            var instance = closedMockType.GetConstructor(new[] { typeof(object[]) }).Invoke(args);
+            // ReSharper restore PossibleNullReferenceException
+            closedMockType.GetProperty("CallBase", typeof(bool)).SetValue(instance, true, null);
+            return closedMockType.GetProperty("Object", typeof(T)).GetValue(instance, null) as T;
         }
 
         protected override IQueryOptions<TReturnValue> OnSetUpQueryBehaviorFor<TFake, TReturnValue>(
