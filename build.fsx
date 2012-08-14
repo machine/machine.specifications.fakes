@@ -47,8 +47,8 @@ let slnReferences = !! @".\Source\*.sln"
 
 (* flavours *)
 let Flavours = ["RhinoMocks"; "FakeItEasy"; "NSubstitute"; "Moq"]
-let MSpecVersion = GetPackageVersion packagesDir "Machine.Specifications"
-let mspecTool = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" MSpecVersion
+let MSpecVersion() = GetPackageVersion packagesDir "Machine.Specifications"
+let mspecTool() = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" (MSpecVersion())
 
 (* Targets *)
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; docsDir; testOutputDir] )
@@ -78,7 +78,7 @@ Target "Test" (fun _ ->
         |> Scan
         |> MSpec (fun p ->
                     {p with
-                        ToolPath = mspecTool
+                        ToolPath = mspecTool()
                         HtmlOutputDir = testOutputDir})
 )
 
@@ -152,7 +152,7 @@ Target "BuildNuGet" (fun _ ->
             Project = projectName
             Version = version
             OutputPath = nugetDir
-            Dependencies = ["Machine.Specifications",RequireAtLeast MSpecVersion]
+            Dependencies = ["Machine.Specifications",RequireAtLeast (MSpecVersion())]
             AccessKey = NugetKey
             Publish = NugetKey <> "" })
         "machine.fakes.nuspec"
