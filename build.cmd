@@ -3,13 +3,12 @@
 :Build
 cls
 
-SET FAKE_VERSION="1.64.6"
-"Source\.nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "Source\packages" "-Version" "%FAKE_VERSION%"
+"Source\.nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "Source\packages" "-Version" "1.64.6" "-ExcludeVersion"
 
 SET TARGET="Default"
 IF NOT [%1]==[] (set TARGET="%1")
 
-"Source\packages\FAKE.%FAKE_VERSION%\tools\Fake.exe" "build.fsx" "target=%TARGET%"
+"Source\packages\FAKE\tools\Fake.exe" "build.fsx" "target=%TARGET%"
 
 rem Bail if we're running a TeamCity build.
 if defined TEAMCITY_PROJECT_NAME goto Quit
