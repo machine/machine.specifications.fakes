@@ -1,4 +1,7 @@
 # Changelog
+## 0.5.2
+* Updated to Machine.Specifications 0.5.8 and FakeItEasy 1.7.4582.63.
+
 ## 0.5.1
 * New icon
 
