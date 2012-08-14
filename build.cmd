@@ -4,7 +4,7 @@
 cls
 
 SET FAKE_VERSION="1.64.6"
-Source\.nuget\nuget.exe install FAKE -OutputDirectory Source\packages -Version %FAKE_VERSION%
+"Source\.nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "Source\packages" "-Version" "%FAKE_VERSION%"
 
 SET TARGET="Default"
 IF NOT [%1]==[] (set TARGET="%1")
