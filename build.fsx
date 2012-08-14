@@ -154,7 +154,8 @@ Target "BuildNuGet" (fun _ ->
             OutputPath = nugetDir
             Dependencies = ["Machine.Specifications",RequireAtLeast (MSpecVersion())]
             AccessKey = NugetKey
-            Publish = NugetKey <> "" })
+            Publish = NugetKey <> ""
+            ToolPath = @".\Source\.nuget\nuget.exe" })
         "machine.fakes.nuspec"
 
     !! (nugetDir + "Machine.Fakes.*.nupkg")
@@ -182,7 +183,8 @@ Target "BuildNuGetFlavours" (fun _ ->
                         ["Machine.Fakes",RequireExactly (NormalizeVersion version)
                          flavour,RequireAtLeast flavourVersion]
                     AccessKey = NugetKey
-                    Publish = NugetKey <> "" })
+                    Publish = NugetKey <> ""
+                    ToolPath = @".\Source\.nuget\nuget.exe" })
                 "machine.fakes.nuspec"
 
             !! (nugetDir + sprintf "Machine.Fakes.%s.*.nupkg" flavour)
