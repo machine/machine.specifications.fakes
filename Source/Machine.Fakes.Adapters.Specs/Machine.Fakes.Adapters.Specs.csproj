@@ -92,6 +92,7 @@
     <Compile Include="RhinoMocks\EngineSpecs.cs" />
     <Compile Include="RhinoMocks\InlineConstraints.cs" />
     <Compile Include="RhinoMocks\MethodCallOccuranceSpecs.cs" />
+    <Compile Include="RhinoMocks\PropertyBehaviorSpecs.cs" />
     <Compile Include="RhinoMocks\QueryOptionsSpecs.cs" />
     <Compile Include="SampleCode\ITypeWithProperty.cs" />
     <Compile Include="SampleCode\ClassWithUnfakableParameter.cs" />

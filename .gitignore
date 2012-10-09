@@ -19,3 +19,4 @@ Source/GlobalAssemblyInfo.cs
 *_mm_cache.bin
 *.user
 Source/packages
+*.ncrunch*
