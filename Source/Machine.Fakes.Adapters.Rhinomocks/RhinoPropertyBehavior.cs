@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Reflection;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
 
-
 // Based on implementation used in Rhino Mocks original Stubs creation
-
 namespace Machine.Fakes.Adapters.Rhinomocks
 {
     internal static class RhinoPropertyBehavior
@@ -20,29 +18,27 @@ namespace Machine.Fakes.Adapters.Rhinomocks
 
         static void CreateDefaultValueForValueTypeProperty(IMockedObject mockedObject, PropertyInfo property)
         {
-            mockedObject.HandleProperty(property.GetSetMethod(true), new[]
-                {
-                    Activator.CreateInstance(property.PropertyType)
-                });
+            mockedObject.HandleProperty(
+                property.GetSetMethod(true),
+                new[] { Activator.CreateInstance(property.PropertyType) });
         }
 
-        static void SetPropertyBehavior(IMockedObject mockedObject, Type[] implementedTypes)
+        static void SetPropertyBehavior(IMockedObject mockedObject, IEnumerable<Type> implementedTypes)
         {
             foreach (Type type in implementedTypes)
             {
-                if (type.BaseType != null && type.BaseType != typeof (object))
-                    SetPropertyBehavior(mockedObject, new[] {type.BaseType});
+                if (type.BaseType != null && type.BaseType != typeof(object))
+                    SetPropertyBehavior(mockedObject, new[] { type.BaseType });
 
                 SetPropertyBehavior(mockedObject, type.GetInterfaces());
+                
                 foreach (PropertyInfo propertyInfo in type.GetProperties())
                 {
-                    if (propertyInfo.CanRead && CanWriteToPropertyThroughPublicSignature(propertyInfo))
-                    {
-                        if (!mockedObject.RegisterPropertyBehaviorFor(propertyInfo) &&
+                    if (propertyInfo.CanRead && CanWriteToPropertyThroughPublicSignature(propertyInfo) &&
+                        !mockedObject.RegisterPropertyBehaviorFor(propertyInfo) &&
                             propertyInfo.PropertyType.IsValueType)
-                        {
-                            CreateDefaultValueForValueTypeProperty(mockedObject, propertyInfo);
-                        }
+                    {
+                        CreateDefaultValueForValueTypeProperty(mockedObject, propertyInfo);
                     }
                 }
             }
@@ -53,7 +49,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             SetPropertyBehavior(mockedObject, mockedObject.ImplementedTypes);
         }
 
-        public static void RemovePropertiesBehavior(object fake)
+        public static void RemovePropertyBehavior(object fake)
         {
             var mockedObject = fake as IMockedObject;
             if (mockedObject != null)

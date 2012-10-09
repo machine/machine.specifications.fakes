@@ -18,19 +18,16 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
 
         Because of = () => _fake.Prop = 2;
 
-        It should_has_value_2 = () => _fake.Prop.ShouldEqual(2);
+        It should_have_value_2 = () => _fake.Prop.ShouldEqual(2);
+        
         static IProperties _fake;
     }
 
-
     [Subject(typeof(RhinoFakeEngine))]
     [Tags("Properties", "Rhinomocks")]
-    public class When_setting_an_behavior_on_a_function_it_should_not_remove_property_behavior : WithCurrentEngine<RhinoFakeEngine>
+    public class When_setting_a_behavior_on_a_function : WithCurrentEngine<RhinoFakeEngine>
     {
-        Establish context = () =>
-        {
-            _fake = FakeEngineGateway.Fake<IProperties>();
-        };
+        Establish context = () => _fake = FakeEngineGateway.Fake<IProperties>();
 
         Because of = () =>
         {
@@ -38,7 +35,8 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
             _fake.Prop = 3;
         };
 
-        It should_the_property_value_is_still_3 = () => _fake.Prop.ShouldEqual(3);
+        It should_not_remove_the_property_behavior = () => _fake.Prop.ShouldEqual(3);
+        
         static IProperties _fake;
     }
 
@@ -54,7 +52,21 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
             _fake.Prop = 3;
         };
 
-        It should_has_value_3 = () => _fake.Prop.ShouldEqual(3);
+        It should_have_value_3 = () => _fake.Prop.ShouldEqual(3);
+
+        static IProperties _fake;
+    }
+
+    [Subject(typeof(RhinoFakeEngine))]
+    [Tags("Properties", "Rhinomocks")]
+    public class When_setting_up_a_return_value_for_a_property_with_getter_and_setter : WithCurrentEngine<RhinoFakeEngine>
+    {
+        Establish context = () => _fake = FakeEngineGateway.Fake<IProperties>();
+
+        Because of = () => _fake.WhenToldTo(a => a.Prop).Return(2);
+
+        It should_return_the_value = () => _fake.Prop.ShouldEqual(2);
+
         static IProperties _fake;
     }
 }

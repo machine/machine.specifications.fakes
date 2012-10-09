@@ -8,12 +8,12 @@ namespace Machine.Fakes.Adapters.Rhinomocks
 {
     public class RhinoFakeEngine : RewritingFakeEngine
     {
-        public RhinoFakeEngine() : base(new RhinoMocksExpressionRewriter()) {}
+        public RhinoFakeEngine() : base(new RhinoMocksExpressionRewriter()) { }
 
         public override object CreateFake(Type interfaceType, params object[] args)
         {
             var stub = MockRepository.GenerateMock(interfaceType, new Type[0], args);
-            RhinoPropertyBehavior.RegisterPropertyBehavior((IMockedObject) stub);
+            RhinoPropertyBehavior.RegisterPropertyBehavior((IMockedObject)stub);
             stub.Replay();
             return stub;
         }
@@ -30,14 +30,10 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             Expression<Func<TDependency, TReturnValue>> func)
         {
             if (IsPropertyAccess(func))
-            {
-                RhinoPropertyBehavior.RemovePropertiesBehavior(fake);
-            }
-            var compiledFunction = func.Compile();
+                RhinoPropertyBehavior.RemovePropertyBehavior(fake);
 
-            return new RhinoQueryOptions<TReturnValue>(fake.Stub(f => compiledFunction(f)));
+            return new RhinoQueryOptions<TReturnValue>(fake.Stub(f => func.Compile()(f)));
         }
-
 
         bool IsPropertyAccess<TDependency, TReturnValue>(Expression<Func<TDependency, TReturnValue>> func)
         {
@@ -48,27 +44,21 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             TFake fake,
             Expression<Action<TFake>> func)
         {
-            var compiledFunction = func.Compile();
-
-            return new RhinoCommandOptions(fake.Stub(compiledFunction));
+            return new RhinoCommandOptions(fake.Stub(func.Compile()));
         }
 
         protected override void OnVerifyBehaviorWasNotExecuted<TFake>(
             TFake fake,
             Expression<Action<TFake>> func)
         {
-            var compiledFunction = func.Compile();
-
-            fake.AssertWasNotCalled(compiledFunction);
+            fake.AssertWasNotCalled(func.Compile());
         }
 
         protected override IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake,
             Expression<Action<TFake>> func)
         {
-            var compiledFunction = func.Compile();
-
-            return new RhinoMethodCallOccurance<TFake>(fake, compiledFunction);
+            return new RhinoMethodCallOccurance<TFake>(fake, func.Compile());
         }
     }
 }

@@ -1,5 +1,6 @@
 # Changelog
-## 0.5.2
+## 0.6.0
+* Fakes created with the Rhino Mocks adapter will now automatically track their property values. (Thanks to [Albert Weinert](https://github.com/DerAlbertCom))
 * Updated to Machine.Specifications 0.5.8 and FakeItEasy 1.7.4582.63.
 
 ## 0.5.1
