@@ -1,3 +1,4 @@
+For latest changes see [the changelog](changelog.markdown).
 # What is Machine.Fakes ? #
 
 Machine.Fakes is a little framework built on top of Machine.Specifications that can best be described as an extended integration layer between Machine.Specifications and different mock/fake/substitute/"whatever you call them now" frameworks. At the moment of writing I prefer the term "fake". (What a surprise judging from the name of this project ;-))
