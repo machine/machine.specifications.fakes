@@ -1,3 +1,4 @@
+For latest changes see [the changelog](https://github.com/machine/machine.fakes/blob/master/changelog.markdown).
 # What is Machine.Fakes ? #
 
 Machine.Fakes is a little framework built on top of Machine.Specifications that can best be described as an extended integration layer between Machine.Specifications and different mock/fake/substitute/"whatever you call them now" frameworks. At the moment of writing I prefer the term "fake". (What a surprise judging from the name of this project ;-))
@@ -182,10 +183,12 @@ Behaviours can be set up for fake properties like this:
 
     The<InterfaceWithProperty>().WhenToldTo(x => x.Property).Return(propertyValue);
 
-But property values are also automatically tracked (for all adapters except Rhino Mocks). So you might as well just set the value that should be returned:
+But property values are also automatically tracked. So you might as well just set the value that should be returned:
 
     The<InterfaceWithProperty>().Property = propertyValue;
 
 This way you can also check whether a setter has been called:
 
     The<InterfaceWithProperty>().Property.ShouldEqual(propertyValue);
+
+The Rhino Mocks adapter is a bit special here: a fake will stop tracking its properties as soon as you set a behavior on one of them.
