@@ -100,9 +100,9 @@ namespace Machine.Fakes.Sdk
         /// <typeparam name="TFake">Specifies the type of the fake.</typeparam>
         /// <param name="fake">Specifies the fake instance.</param>
         /// <param name="func">Specifies the behavior that was supposed to happen.</param>
-        /// <returns>A <see cref="IMethodCallOccurance"/> which can be used
+        /// <returns>A <see cref="IMethodCallOccurrence"/> which can be used
         /// to narrow down the expectations to a particular amount of times.</returns>
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+        public IMethodCallOccurrence VerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) where TFake : class
         {
@@ -117,9 +117,9 @@ namespace Machine.Fakes.Sdk
         /// <param name="fake">Specifies the fake instance.</param>
         /// <param name="func">Specifies the behavior that was supposed to happen
         /// expressed in terms of the target framework.</param>
-        /// <returns>A <see cref="IMethodCallOccurance"/> which can be used
+        /// <returns>A <see cref="IMethodCallOccurrence"/> which can be used
         /// to narrow down the expectations to a particular amount of times.</returns>
-        protected abstract IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
+        protected abstract IMethodCallOccurrence OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake,
             Expression<Action<TFake>> func) where TFake : class;
 

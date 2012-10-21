@@ -64,13 +64,13 @@ namespace Machine.Fakes.Adapters.Moq
             mock.Verify(func, Times.Never());
         }
 
-        protected override IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
+        protected override IMethodCallOccurrence OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) 
         {
             var mock = Mock.Get(fake);
 
-            return new MoqMethodCallOccurance<TFake>(mock, func);
+            return new MoqMethodCallOccurrence<TFake>(mock, func);
         }
     }
 }

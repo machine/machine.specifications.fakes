@@ -51,7 +51,7 @@
     <Compile Include="RhinoMocksExpressionRewriter.cs" />
     <Compile Include="RhinoCommandOptions.cs" />
     <Compile Include="RhinoFakeEngine.cs" />
-    <Compile Include="RhinoMethodCallOccurance.cs" />
+    <Compile Include="RhinoMethodCallOccurrence.cs" />
     <Compile Include="RhinoPropertyBehavior.cs" />
     <Compile Include="RhinoQueryOptions.cs" />
     <Compile Include="WithFakes.cs" />

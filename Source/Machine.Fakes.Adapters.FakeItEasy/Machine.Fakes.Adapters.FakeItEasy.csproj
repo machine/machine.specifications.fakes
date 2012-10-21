@@ -57,7 +57,7 @@
     <Compile Include="FakeItEasyCommandOptions.cs" />
     <Compile Include="FakeItEasyEngine.cs" />
     <Compile Include="FakeItEasyHelper.cs" />
-    <Compile Include="FakeItEasyMethodCallOccurance.cs" />
+    <Compile Include="FakeItEasyMethodCallOccurrence.cs" />
     <Compile Include="FakeItEasyQueryOptions.cs" />
     <Compile Include="FakeItEasyExpressionRewriter.cs" />
     <Compile Include="WithFakes.cs" />

@@ -82,7 +82,7 @@
     <Compile Include="ICommandOptions.cs" />
     <Compile Include="IFakeAccessor.cs" />
     <Compile Include="IFakeEngine.cs" />
-    <Compile Include="IMethodCallOccurance.cs" />
+    <Compile Include="IMethodCallOccurrence.cs" />
     <Compile Include="IQueryOptions.cs" />
     <Compile Include="WithSubject.cs" />
   </ItemGroup>

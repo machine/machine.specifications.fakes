@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface for detail configuration used by <see cref="FakeApi.WasToldTo{TFake}"/>.
     /// </summary>
-    public interface IMethodCallOccurance
+    public interface IMethodCallOccurrence
     {
         /// <summary>
         ///   Specifies that the behavior on the fake should be executed several times. <paramref name = "numberOfTimesTheMethodShouldHaveBeenCalled" />

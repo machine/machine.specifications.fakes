@@ -8,6 +8,7 @@
  * When a type has multiple greediest constructors, the one with the most configured parameters is chosen.
 
  If this breaks existing tests, please revert to a previous version temporarily and file an issue on [github](https://github.com/machine/machine.fakes/issues).
+* **Breaking change**: `IMethodCallOccurance` has been renamed to `IMethodCallOccurrence` and all inheriting classes accordingly.
 
 ## 0.6.0
 * Fakes created with the Rhino Mocks adapter will now automatically track their property values. (Thanks to [Albert Weinert](https://github.com/DerAlbertCom))

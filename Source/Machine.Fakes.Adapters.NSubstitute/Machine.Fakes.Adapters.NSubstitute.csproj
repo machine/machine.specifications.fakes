@@ -52,7 +52,7 @@
     <Compile Include="NSubstituteExpressionRewriter.cs" />
     <Compile Include="NSubstituteCommandOptions.cs" />
     <Compile Include="NSubstituteEngine.cs" />
-    <Compile Include="NSubstituteMethodCallOccurance.cs" />
+    <Compile Include="NSubstituteMethodCallOccurrence.cs" />
     <Compile Include="NSubstituteQueryOptions.cs" />
     <Compile Include="WithFakes.cs" />
     <Compile Include="WithSubject.cs" />

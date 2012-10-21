@@ -51,7 +51,7 @@
     <Compile Include="MoqExpressionRewriter.cs" />
     <Compile Include="MoqCommandOptions.cs" />
     <Compile Include="MoqFakeEngine.cs" />
-    <Compile Include="MoqMethodCallOccurance.cs" />
+    <Compile Include="MoqMethodCallOccurrence.cs" />
     <Compile Include="MoqQueryOptions.cs" />
     <Compile Include="WithFakes.cs" />
     <Compile Include="WithSubject.cs" />

@@ -54,11 +54,11 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             fake.AssertWasNotCalled(func.Compile());
         }
 
-        protected override IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
+        protected override IMethodCallOccurrence OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake,
             Expression<Action<TFake>> func)
         {
-            return new RhinoMethodCallOccurance<TFake>(fake, func.Compile());
+            return new RhinoMethodCallOccurrence<TFake>(fake, func.Compile());
         }
     }
 }

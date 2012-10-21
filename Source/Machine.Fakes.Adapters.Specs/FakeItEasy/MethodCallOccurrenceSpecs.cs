@@ -1,15 +1,15 @@
 using System;
 using System.ComponentModel.Design;
-using Machine.Fakes.Adapters.Moq;
+using Machine.Fakes.Adapters.FakeItEasy;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
-namespace Machine.Fakes.Adapters.Specs.Moq
+namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 {
-    [Subject(typeof(MoqFakeEngine))]
-    [Tags("MethodCallOccurance", "Moq")]
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurrence", "FakeItEasy")]
     public class Given_a_method_was_not_configured_on_a_Fake_when_verifying_whether_it_was_accessed :
-        WithCurrentEngine<MoqFakeEngine>
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -21,10 +21,10 @@ namespace Machine.Fakes.Adapters.Specs.Moq
         It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
-    [Subject(typeof(MoqFakeEngine))]
-    [Tags("MethodCallOccurance", "Moq")]
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurrence", "FakeItEasy")]
     public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed :
-        WithCurrentEngine<MoqFakeEngine>
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -40,10 +40,10 @@ namespace Machine.Fakes.Adapters.Specs.Moq
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 
-    [Subject(typeof(MoqFakeEngine))]
-    [Tags("MethodCallOccurance", "Moq")]
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurrence", "FakeItEasy")]
     public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_twice :
-        WithCurrentEngine<MoqFakeEngine>
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -60,10 +60,10 @@ namespace Machine.Fakes.Adapters.Specs.Moq
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 
-    [Subject(typeof(MoqFakeEngine))]
-    [Tags("MethodCallOccurance", "Moq")]
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurrence", "FakeItEasy")]
     public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_twice_but_was_only_executed_once :
-        WithCurrentEngine<MoqFakeEngine>
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -79,10 +79,10 @@ namespace Machine.Fakes.Adapters.Specs.Moq
         It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
-    [Subject(typeof(MoqFakeEngine))]
-    [Tags("MethodCallOccurance", "Moq")]
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurrence", "FakeItEasy")]
     public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_only_once_but_was_excuted_twice :
-        WithCurrentEngine<MoqFakeEngine>
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -99,10 +99,10 @@ namespace Machine.Fakes.Adapters.Specs.Moq
         It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
-    [Subject(typeof(MoqFakeEngine))]
-    [Tags("MethodCallOccurance", "Moq")]
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("MethodCallOccurrence", "FakeItEasy")]
     public class Given_a_query_was_configured_on_a_fake_when_verifying_whether_it_was_executed :
-        WithCurrentEngine<MoqFakeEngine>
+        WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
         static IServiceContainer _fake;

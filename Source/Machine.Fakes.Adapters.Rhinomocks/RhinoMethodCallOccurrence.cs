@@ -9,17 +9,17 @@ namespace Machine.Fakes.Adapters.Rhinomocks
     /// <typeparam name = "TDependency">
     ///   Specifies the type of the dependency which is configured via the methods on <see cref = "RhinoMocksExtensions" />.
     /// </typeparam>
-    class RhinoMethodCallOccurance<TDependency> : IMethodCallOccurance
+    class RhinoMethodCallOccurrence<TDependency> : IMethodCallOccurrence
     {
         private readonly Action<TDependency> _action;
         private readonly TDependency _fake;
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref = "RhinoMethodCallOccurance{TFake}" /> class.
+        ///   Initializes a new instance of the <see cref = "RhinoMethodCallOccurrencerence{TDependency}" /> class.
         /// </summary>
         /// <param name = "fake">The dependency on which an action is expected.</param>
         /// <param name = "action">The action that should have been called.</param>
-        public RhinoMethodCallOccurance(TDependency fake, Action<TDependency> action)
+        public RhinoMethodCallOccurrence(TDependency fake, Action<TDependency> action)
         {
             _fake = fake;
             _action = action;

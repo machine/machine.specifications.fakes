@@ -7,12 +7,12 @@ using NSubstitute.Exceptions;
 
 namespace Machine.Fakes.Adapters.NSubstitute
 {
-    internal class NSubstituteMethodCallOccurance<TFake> : IMethodCallOccurance where TFake : class
+    internal class NSubstituteMethodCallOccurrence<TFake> : IMethodCallOccurrence where TFake : class
     {
         private readonly TFake _fake;
         private readonly Expression<Action<TFake>> _func;
 
-        public NSubstituteMethodCallOccurance(TFake fake, Expression<Action<TFake>> func)
+        public NSubstituteMethodCallOccurrence(TFake fake, Expression<Action<TFake>> func)
         {
             Guard.AgainstArgumentNull(fake, "fake");
             Guard.AgainstArgumentNull(func, "func");
@@ -23,7 +23,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
             _func.Compile().Invoke(_fake.Received());
         }
 
-        #region IMethodCallOccurance Members
+        #region IMethodCallOccurrence Members
 
         public void Times(int numberOfTimesTheMethodShouldHaveBeenCalled)
         {
