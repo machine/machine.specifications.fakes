@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
@@ -40,7 +42,7 @@ namespace Machine.Fakes.Sdk
     public class SpecificationController<TSubject> : IFakeAccessor, IDisposable where TSubject : class
     {
         private readonly BehaviorConfigController _behaviorConfigController = new BehaviorConfigController();
-        private readonly AutoFakeContainer<TSubject> _container;
+        private readonly AutoFakeContainer _container;
         private TSubject _specificationSubject;
         
         /// <summary>
@@ -53,9 +55,9 @@ namespace Machine.Fakes.Sdk
         {
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
-            _container = new AutoFakeContainer<TSubject>(fakeEngine);
+            _container = new AutoFakeContainer(fakeEngine);
             
-            FakeEngineGateway.EngineIs(_container);
+            FakeEngineGateway.EngineIs(fakeEngine);
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ namespace Machine.Fakes.Sdk
         /// </summary>
         public TSubject Subject
         {
-            get { return _specificationSubject ?? (_specificationSubject = _container.CreateSubject()); }
+            get { return _specificationSubject ?? (_specificationSubject = _container.CreateSubject<TSubject>()); }
             set { _specificationSubject = value; }
         }
 
@@ -82,7 +84,7 @@ namespace Machine.Fakes.Sdk
         {
             Guard.AgainstArgumentNull(registrar, "registar");
 
-            _container.Register(registrar);
+            registrar.Apply(_container.Register);
         }
 
         /// <summary>
@@ -194,7 +196,12 @@ namespace Machine.Fakes.Sdk
         /// </returns>
         public IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class
         {
-            return _container.CreateFakeCollectionOf<TInterfaceType>(amount);
+            if (amount < 0)
+                throw new ArgumentOutOfRangeException("amount");
+
+            return Enumerable.Range(0, amount)
+                .Select(x => (TInterfaceType)_container.CreateFake(typeof(TInterfaceType)))
+                .ToList();
         }
 
         /// <summary>

@@ -39,7 +39,6 @@ let testOutputDir = buildDir + @"Specs\"
 let nugetDir = buildDir + @"NuGet\"
 let testDir = buildDir
 let deployDir = @".\Release\"
-let targetPlatformDir = getTargetPlatformDir "v4.0.30319"
 let nugetLibDir = nugetDir + @"lib\net40\"
 
 (* files *)
@@ -82,32 +81,6 @@ Target "Test" (fun _ ->
                         HtmlOutputDir = testOutputDir})
 )
 
-
-Target "MergeStructureMap" (fun _ ->
-    Rename (buildDir + "Machine.Fakes.Partial.dll") (buildDir + "Machine.Fakes.dll")
-
-    ILMerge
-        (fun p ->
-            {p with
-                Libraries =
-                    [buildDir + "StructureMap.dll"
-                     buildDir + "StructureMap.AutoMocking.dll"]
-                Internalize = InternalizeExcept "ILMergeExcludes.txt"
-                TargetPlatform = sprintf @"v4,%s" targetPlatformDir})
-
-        (buildDir + "Machine.Fakes.dll")
-        (buildDir + "Machine.Fakes.Partial.dll")
-
-    ["StructureMap.dll";
-     "StructureMap.pdb";
-     "StructureMap.xml";
-     "StructureMap.AutoMocking.dll";
-     "StructureMap.AutoMocking.xml";
-     "Machine.Fakes.Partial.dll"]
-        |> Seq.map (fun a -> buildDir + a)
-        |> DeleteFiles
-)
-
 FinalTarget "DeployTestResults" (fun () ->
     !+ (testOutputDir + "\**\*.*")
       |> Scan
@@ -144,6 +117,8 @@ Target "BuildNuGet" (fun _ ->
 
     [buildDir + "Machine.Fakes.dll"]
         |> CopyTo nugetLibDir
+
+    ["readme.txt"] |> CopyTo nugetDir
     
     NuGet (fun p ->
         {p with
@@ -170,6 +145,8 @@ Target "BuildNuGetFlavours" (fun _ ->
 
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour]
               |> CopyTo nugetLibDir
+
+            ["readme.txt"] |> CopyTo nugetDir
 
             NuGet (fun p ->
                 {p with
@@ -198,7 +175,6 @@ Target "Deploy" DoNothing
 "Clean"
   ==> "BuildApp"
   ==> "Test"
-  ==> "MergeStructureMap"
   ==> "BuildZip"
   ==> "GenerateDocumentation"
   ==> "ZipDocumentation"

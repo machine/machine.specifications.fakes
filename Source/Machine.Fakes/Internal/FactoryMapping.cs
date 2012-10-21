@@ -4,21 +4,21 @@ namespace Machine.Fakes.Internal
 {
     class FactoryMapping<TInterface> : IMapping
     {
+        readonly Func<TInterface> factory;
+
         public FactoryMapping(Func<TInterface> factory)
         {
-            Factory = factory;
+            this.factory = factory;
         }
-
-        public Func<TInterface> Factory { get; private set; }
 
         public Type InterfaceType
         {
             get { return typeof(TInterface); }
         }
 
-        public void Configure(IContainer container)
+        public object Resolve(Func<Type, object> instantiateType)
         {
-            container.Register(this);
+            return factory();
         }
     }
 }
