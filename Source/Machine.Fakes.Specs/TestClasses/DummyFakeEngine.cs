@@ -35,7 +35,7 @@ namespace Machine.Fakes.Specs.TestClasses
             throw new NotImplementedException();
         }
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(TFake fake, Expression<Action<TFake>> func) where TFake : class
+        public IMethodCallOccurrence VerifyBehaviorWasExecuted<TFake>(TFake fake, Expression<Action<TFake>> func) where TFake : class
         {
             throw new NotImplementedException();
         }

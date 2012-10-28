@@ -6,6 +6,6 @@ namespace Machine.Fakes.Internal
     {
         Type InterfaceType { get; }
 
-        void Configure(IContainer container);
+        object Resolve(Func<Type, object> instantiateType);
     }
 }

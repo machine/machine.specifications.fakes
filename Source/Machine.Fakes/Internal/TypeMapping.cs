@@ -4,18 +4,19 @@ namespace Machine.Fakes.Internal
 {
     class TypeMapping : IMapping
     {
+        readonly Type implementationType;
+
+        public Type InterfaceType { get; private set; }
+
         public TypeMapping(Type interfaceType, Type implementationType)
         {
             InterfaceType = interfaceType;
-            ImplementationType = implementationType;
+            this.implementationType = implementationType;
         }
 
-        public Type ImplementationType { get; private set; }
-        public Type InterfaceType { get; private set; }
-
-        public void Configure(IContainer container)
+        public object Resolve(Func<Type, object> instantiateType)
         {
-            container.Register(this);
+            return instantiateType(implementationType);
         }
     }
 }

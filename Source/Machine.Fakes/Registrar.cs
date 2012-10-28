@@ -23,21 +23,18 @@ namespace Machine.Fakes
         /// <exception cref="ArgumentNullException">
         /// Thrown when <paramref name="mapping"/> is <c>null</c>.
         /// </exception>
-        internal void Store(IMapping mapping)
+        void Store(IMapping mapping)
         {
             _mappings.GetOrAdd(mapping.InterfaceType, mapping);
         }
 
         /// <summary>
-        /// Uses the information provided by this registrar in order
-        /// to configure the supplied container.
+        /// Applies the configured mappings.
         /// </summary>
-        /// <param name="container">
-        /// Specifies the container that should be configured.
-        /// </param>
-        internal void Configure(IContainer container)
+        /// <param name="register">An action that registers a single mapping</param>
+        internal void Apply(Action<IMapping> register)
         {
-            _mappings.Values.Each(m => m.Configure(container));
+            _mappings.Values.Each(register);
         }
 
         /// <summary>
@@ -147,7 +144,7 @@ namespace Machine.Fakes
         }
 
         /// <summary>
-        /// Concludes the configurataion that was startet with <see cref="For(Type)"/>.
+        /// Concludes the configuration that was started with <see cref="For(Type)"/>.
         /// </summary>
         public sealed class RegistrationExpression<T>
         {

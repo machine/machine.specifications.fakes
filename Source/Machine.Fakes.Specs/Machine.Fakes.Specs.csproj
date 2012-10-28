@@ -56,13 +56,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Specs_for_behavior_configs.cs" />
+    <Compile Include="Specs_for_resolving_dependencies.cs" />
     <Compile Include="Specs_for_using_a_custom_type_in_the_build_process.cs" />
     <Compile Include="Specs_for_the_an_method.cs" />
     <Compile Include="Specs_for_the_The_accessor.cs" />
+    <Compile Include="TestClasses\IDriver.cs" />
+    <Compile Include="TestClasses\WithArrayInConstructor.cs" />
+    <Compile Include="TestClasses\WithEnumerableInConstructor.cs" />
     <Compile Include="TestClasses\DummyFakeEngine.cs" />
     <Compile Include="TestClasses\Car.cs" />
     <Compile Include="TestClasses\IGarage.cs" />
+    <Compile Include="TestClasses\WithFuncOfImplementationInConstructor.cs" />
+    <Compile Include="TestClasses\WithFuncOfInterfaceInConstructor.cs" />
+    <Compile Include="TestClasses\WithLazyInConstructor.cs" />
+    <Compile Include="TestClasses\WithInterfaceArrayInConstructor.cs" />
+    <Compile Include="TestClasses\WithBoolInConstructor.cs" />
+    <Compile Include="TestClasses\WithEnumerableInterfaceInConstructor.cs" />
     <Compile Include="TestClasses\WithMultipleConstructors.cs" />
+    <Compile Include="TestClasses\WithMultipleContructorsOfSameParameterNumber.cs" />
     <Compile Include="TestClasses\WithoutPublicConstructor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClasses\Garage.cs" />

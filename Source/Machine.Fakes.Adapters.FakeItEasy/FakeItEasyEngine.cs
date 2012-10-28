@@ -52,14 +52,14 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             return new FakeItEasyCommandOptions(configuration);
         }
 
-        protected override IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
+        protected override IMethodCallOccurrence OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) 
         {
             var callExpression = func.WrapExpression(fake);
             var configuration = A.CallTo(callExpression);
 
-            return new FakeItEasyMethodCallOccurance(configuration);
+            return new FakeItEasyMethodCallOccurrence(configuration);
         }
 
         protected override void OnVerifyBehaviorWasNotExecuted<TFake>(

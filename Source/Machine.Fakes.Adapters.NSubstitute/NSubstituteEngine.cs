@@ -46,11 +46,11 @@ namespace Machine.Fakes.Adapters.NSubstitute
             func.Compile().Invoke(fake.DidNotReceive());
         }
 
-        protected override IMethodCallOccurance OnVerifyBehaviorWasExecuted<TFake>(
+        protected override IMethodCallOccurrence OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake,
             Expression<Action<TFake>> func) 
         {
-            return new NSubstituteMethodCallOccurance<TFake>(fake, func);
+            return new NSubstituteMethodCallOccurrence<TFake>(fake, func);
         }
     }
 }

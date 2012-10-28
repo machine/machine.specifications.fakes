@@ -45,7 +45,7 @@ namespace Machine.Fakes.Internal
             _fakeEngine.VerifyBehaviorWasNotExecuted(fake, func);
         }
 
-        public static IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+        public static IMethodCallOccurrence VerifyBehaviorWasExecuted<TFake>(
             TFake fake,
             Expression<Action<TFake>> func) where TFake : class
         {

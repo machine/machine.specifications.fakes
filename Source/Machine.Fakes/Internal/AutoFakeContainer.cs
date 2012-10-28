@@ -1,94 +1,207 @@
-using System;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+
 using Machine.Fakes.Sdk;
-using StructureMap;
-using StructureMap.AutoMocking;
+using Machine.Specifications;
 
 namespace Machine.Fakes.Internal
 {
-    sealed class AutoFakeContainer<TSubject> :
-        ServiceLocator,
-        IFakeEngine where TSubject : class
+    class AutoFakeContainer
     {
-        readonly StructureMapAutoMockerAdapter<TSubject> _autoMocker;
+        readonly IDictionary<Type, ICollection<IMapping>> _mappings;
         readonly IFakeEngine _fakeEngine;
 
         public AutoFakeContainer(IFakeEngine fakeEngine)
         {
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
+            _mappings = new Dictionary<Type, ICollection<IMapping>>();
             _fakeEngine = fakeEngine;
-            _autoMocker = new StructureMapAutoMockerAdapter<TSubject>(this);
         }
 
-        public object CreateFake(Type interfaceType, params object[] args)
+        internal object CreateFake(Type interfaceType, params object[] args)
         {
             return _fakeEngine.CreateFake(interfaceType, args);
         }
 
-        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
-            TFake fake,
-            Expression<Func<TFake, TReturnValue>> func) where TFake : class
+        internal TSubject CreateSubject<TSubject>()
         {
-            return _fakeEngine.SetUpQueryBehaviorFor(fake, func);
+            return (TSubject)CreateInstance(typeof(TSubject), new Stack<Type>());
         }
 
-        public ICommandOptions SetUpCommandBehaviorFor<TFake>(
-            TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
+        object CreateInstance(Type type, Stack<Type> buildStack)
         {
-            return _fakeEngine.SetUpCommandBehaviorFor(fake, func);
-        }
+            if (buildStack.Contains(type))
+                throw new SpecificationException(string.Format(
+                    "Unable to create an instance of type {0}, it has a circular dependency to itself.",
+                    type.Name));
 
-        public void VerifyBehaviorWasNotExecuted<TFake>(
-            TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
-        {
-            _fakeEngine.VerifyBehaviorWasNotExecuted(fake, func);
-        }
+            buildStack.Push(type);
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
-            TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
-        {
-            return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
-        }
+            var bestFitConstructor = GetBestFitConstructor(type);
+            var parameters = bestFitConstructor
+                .GetParameters().Select(x => GetArgument(x.ParameterType, buildStack)).ToArray();
 
-        public T PartialMock<T>(params object[] args) where T : class
-        {
-            return _fakeEngine.PartialMock<T>(args);
-        }
-
-        T ServiceLocator.Service<T>()
-        {
-            return _fakeEngine.Stub<T>();
-        }
-
-        object ServiceLocator.Service(Type serviceType)
-        {
-            return _fakeEngine.CreateFake(serviceType);
-        }
-
-        public TSubject CreateSubject()
-        {
+            buildStack.Pop();
             try
             {
-                return _autoMocker.ClassUnderTest;
+                return bestFitConstructor.Invoke(parameters);
             }
-            catch (StructureMapException ex)
+            catch (TargetInvocationException)
             {
-                throw new SubjectCreationException(typeof(TSubject), ex);
+                throw new SpecificationException(string.Format("Unable to create an instance of type {0}.{1}The constructor threw an exception.", type.Name, Environment.NewLine));
             }
         }
 
-        public TFakeSingleton Get<TFakeSingleton>() where TFakeSingleton : class
+        ConstructorInfo GetBestFitConstructor(Type type)
         {
-            return _autoMocker.Get<TFakeSingleton>();
+            var constructors = type.GetConstructors();
+            if (!constructors.Any())
+                throw new SpecificationException(string.Format("Unable to create an instance of type {0}.{1}Please check that the type has at least a single public constructor.", type.Name, Environment.NewLine));
+
+            return constructors.Where(
+                    _ => _.GetParameters().Count() == constructors.Max(x => x.GetParameters().Count()))
+                .OrderBy(CountRegisteredArguments)
+                .Last();
         }
 
-        public void Register(Registrar registar)
+        int CountRegisteredArguments(ConstructorInfo constructor)
         {
-            _autoMocker.Register(registar);
+            return constructor.GetParameters().Count(x => CanBeInstantiated(x.ParameterType));
+        }
+
+        bool CanBeInstantiated(Type type)
+        {
+            if (IsRegistered(type))
+                return true;
+
+            if (type.IsGenericType)
+            {
+                if (type.IsGenericEnumerable())
+                    return IsRegistered(type.GetGenericArguments()[0]);
+
+                if (type.IsFunc() || type.IsLazy())
+                    return true;
+            }
+
+            return type.IsArray && IsRegistered(type.GetElementType());
+        }
+
+        object GetArgument(Type argumentType, Stack<Type> stack)
+        {
+            if (IsRegistered(argumentType))
+                return GetRegisteredInstances(argumentType).Last();
+
+            if (argumentType.IsGenericType)
+            {
+                if (argumentType.IsGenericEnumerable())
+                    return CreateEnumerable(argumentType);
+
+                if (argumentType.IsFunc())
+                    return CreateFunc(argumentType, stack);
+
+                if (argumentType.IsLazy())
+                    return CreateLazy(argumentType, stack);
+            }
+
+            if (argumentType.IsArray)
+                return CreateArray(argumentType);
+
+            return GetSimpleArgument(argumentType, stack);
+        }
+
+        object CreateLazy(Type type, Stack<Type> stack)
+        {
+            // ReSharper disable PossibleNullReferenceException : I know this constructor exists
+            return typeof(Lazy<>)
+                .MakeGenericType(type.GetGenericArguments()[0])
+                .GetConstructor(new[] { typeof(Func<>).MakeGenericType(type.GetGenericArguments()[0]) })
+                .Invoke(new[] { CreateFunc(type, stack) });
+            // ReSharper restore PossibleNullReferenceException
+        }
+
+        object CreateFunc(Type type, Stack<Type> stack)
+        {
+            return Expression.Lambda(
+                Expression.Constant(
+                    GetArgument(type.GetGenericArguments().Last(), stack)))
+                .Compile();
+        }
+
+        object CreateArray(Type type)
+        {
+            Type elementType = type.GetElementType();
+            IEnumerable<object> instances = GetRegisteredInstances(elementType);
+            Array array = Array.CreateInstance(elementType, instances.Count());
+            instances.Aggregate(0, (i, o) => { array.SetValue(o, i); return i + 1; });
+            return array;
+        }
+
+        object CreateEnumerable(Type argumentType)
+        {
+            Type underlyingType = argumentType.GetGenericArguments()[0];
+            if (IsRegistered(underlyingType))
+            {
+                return typeof(Enumerable)
+                    .GetMethod("Cast", new[] { typeof(IEnumerable) })
+                    .MakeGenericMethod(underlyingType)
+                    .Invoke(null, new object[] { GetRegisteredInstances(underlyingType) });
+            }
+
+            return typeof(Enumerable)
+                .GetMethod("Empty")
+                .MakeGenericMethod(underlyingType)
+                .Invoke(null, new object[] { });
+        }
+
+        object GetSimpleArgument(Type argumentType, Stack<Type> stack)
+        {
+            if (argumentType.IsInterface)
+            {
+                var fake = CreateFake(argumentType);
+                Register(new ObjectMapping(argumentType, fake));
+                return fake;
+            }
+
+            if (argumentType.IsValueType)
+                return Activator.CreateInstance(argumentType);
+
+            return CreateInstance(argumentType, stack);
+        }
+
+        internal TFakeSingleton Get<TFakeSingleton>() where TFakeSingleton : class
+        {
+            if (IsRegistered(typeof(TFakeSingleton)))
+                return (TFakeSingleton)GetRegisteredInstances(typeof(TFakeSingleton)).Last();
+
+            var fake = CreateFake(typeof(TFakeSingleton));
+            Register(new ObjectMapping(typeof(TFakeSingleton), fake));
+            return (TFakeSingleton)fake;
+        }
+
+        bool IsRegistered(Type type)
+        {
+            return _mappings.ContainsKey(type);
+        }
+
+        IEnumerable<object> GetRegisteredInstances(Type type)
+        {
+            return !IsRegistered(type)
+                ? Enumerable.Empty<object>()
+                : _mappings[type].Select(m => m.Resolve(t => CreateInstance(t, new Stack<Type>())));
+        }
+
+        public void Register(IMapping mapping)
+        {
+            if (!_mappings.ContainsKey(mapping.InterfaceType))
+                _mappings[mapping.InterfaceType] = new Collection<IMapping>();
+
+            _mappings[mapping.InterfaceType].Add(mapping);
         }
     }
 }

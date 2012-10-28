@@ -46,35 +46,22 @@
     <Reference Include="Machine.Specifications.TDNetRunner">
       <HintPath>..\packages\Machine.Specifications.0.5.9\lib\net40\Machine.Specifications.TDNetRunner.dll</HintPath>
     </Reference>
-    <Reference Include="StructureMap, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap.AutoMocking, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\structuremap.automocking.2.6.4.1\lib\net40\StructureMap.AutoMocking.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\GlobalAssemblyInfo.cs">
-      <Link>GlobalAssemblyInfo.cs</Link>
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BehaviorConfigDelegates.cs" />
-    <Compile Include="Internal\FactoryMapping.cs" />
     <Compile Include="Internal\AutoFakeContainer.cs" />
+    <Compile Include="Internal\FactoryMapping.cs" />
     <Compile Include="Internal\BehaviorConfigController.cs" />
-    <Compile Include="Internal\IContainer.cs" />
     <Compile Include="Internal\IMapping.cs" />
     <Compile Include="Internal\ObjectMapping.cs" />
     <Compile Include="FakeAccessorRegistrarExtensions.cs" />
-    <Compile Include="Internal\StructureMapConfiguration.cs" />
+    <Compile Include="Internal\TypeExtensions.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="Registrar.cs" />
     <Compile Include="Sdk\AbstractExpressionRewriter.cs" />
@@ -95,18 +82,14 @@
     <Compile Include="ICommandOptions.cs" />
     <Compile Include="IFakeAccessor.cs" />
     <Compile Include="IFakeEngine.cs" />
-    <Compile Include="IMethodCallOccurance.cs" />
+    <Compile Include="IMethodCallOccurrence.cs" />
     <Compile Include="IQueryOptions.cs" />
-    <Compile Include="Internal\StructureMapAutoMockerAdapter.cs" />
-    <Compile Include="Internal\SubjectCreationException.cs" />
     <Compile Include="WithSubject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

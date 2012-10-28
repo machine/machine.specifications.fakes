@@ -112,10 +112,10 @@ namespace Machine.Fakes
         /// Specifies the behavior that was supposed to happen.
         /// </param>
         /// <returns>
-        /// A <see cref="IMethodCallOccurance"/> which can be used
+        /// A <see cref="IMethodCallOccurrence"/> which can be used
         /// to narrow down the expectations to a particular amount of times.
         /// </returns>
-        IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+        IMethodCallOccurrence VerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) where TFake : class;
     }

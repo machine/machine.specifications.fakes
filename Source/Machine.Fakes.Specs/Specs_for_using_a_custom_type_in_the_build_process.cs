@@ -59,7 +59,7 @@ namespace Machine.Fakes.Specs
 
         Because of = () => _subject = _specController.Subject;
 
-        It should_used_the_first_configured_type_in_the_build_process =
+        It should_use_the_first_configured_type_in_the_build_process =
             () => _subject.Garage.ShouldBeOfType<Garage>();
 
         It should_also_use_the_second_configured_type_in_the_build_process =

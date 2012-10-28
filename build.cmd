@@ -3,7 +3,7 @@
 :Build
 cls
 
-"Source\.nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "Source\packages" "-Version" "1.64.8" "-ExcludeVersion"
+"Source\.nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "Source\packages" "-Version" "1.64.11" "-ExcludeVersion"
 
 SET TARGET="Default"
 IF NOT [%1]==[] (set TARGET="%1")

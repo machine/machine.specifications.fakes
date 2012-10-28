@@ -47,19 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\GlobalAssemblyInfo.cs">
-      <Link>GlobalAssemblyInfo.cs</Link>
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="NSubstituteExpressionRewriter.cs" />
     <Compile Include="NSubstituteCommandOptions.cs" />
     <Compile Include="NSubstituteEngine.cs" />
-    <Compile Include="NSubstituteMethodCallOccurance.cs" />
+    <Compile Include="NSubstituteMethodCallOccurrence.cs" />
     <Compile Include="NSubstituteQueryOptions.cs" />
     <Compile Include="WithFakes.cs" />
     <Compile Include="WithSubject.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\machine.fakes\Machine.Fakes.csproj">
       <Project>{FF888220-969D-4283-9B00-78D2DA4BD7AB}</Project>

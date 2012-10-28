@@ -4,11 +4,11 @@ using FakeItEasy.Configuration;
 
 namespace Machine.Fakes.Adapters.FakeItEasy
 {
-    class FakeItEasyMethodCallOccurance : IMethodCallOccurance
+    class FakeItEasyMethodCallOccurrence : IMethodCallOccurrence
     {
         readonly IVoidArgumentValidationConfiguration _configuration;
 
-        public FakeItEasyMethodCallOccurance(IVoidArgumentValidationConfiguration configuration)
+        public FakeItEasyMethodCallOccurrence(IVoidArgumentValidationConfiguration configuration)
         {
             _configuration = configuration;
             _configuration.MustHaveHappened();
