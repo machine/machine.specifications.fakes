@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine.Fakes", "machine.fakes\Machine.Fakes.csproj", "{FF888220-969D-4283-9B00-78D2DA4BD7AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machine.Fakes.Adapters.Rhinomocks", "machine.fakes.adapters.rhinomocks\Machine.Fakes.Adapters.Rhinomocks.csproj", "{8515F795-7B08-4B94-8DCB-DC0B0370F6FB}"
