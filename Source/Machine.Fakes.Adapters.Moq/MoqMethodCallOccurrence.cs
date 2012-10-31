@@ -21,8 +21,6 @@ namespace Machine.Fakes.Adapters.Moq
             _mock.Verify(func, global::Moq.Times.AtLeastOnce());
         }
 
-        #region IMethodCallOccurrence Members
-
         public void Times(int numberOfTimesTheMethodShouldHaveBeenCalled)
         {
             _mock.Verify(_func, global::Moq.Times.Exactly(numberOfTimesTheMethodShouldHaveBeenCalled));
@@ -37,7 +35,5 @@ namespace Machine.Fakes.Adapters.Moq
         {
             Times(2);
         }
-
-        #endregion
     }
 }
