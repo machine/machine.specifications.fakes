@@ -1,4 +1,7 @@
 # Changelog
+## 1.0.1
+* Added documentation XML to NuGet packages, so that class and member documentation is available in Visual Studio.
+
 ## 1.0.0
 * **Breaking change**: dependency resolution has changed internally. The basic functionality should be the same, but there are some new features:
  * Types with value type constructor parameters can be instantiated.
