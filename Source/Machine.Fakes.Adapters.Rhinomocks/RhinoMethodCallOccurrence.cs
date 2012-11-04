@@ -15,7 +15,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
         private readonly TDependency _fake;
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref = "RhinoMethodCallOccurrencerence{TDependency}" /> class.
+        ///   Initializes a new instance of the <see cref = "RhinoMethodCallOccurrence{TDependency}" /> class.
         /// </summary>
         /// <param name = "fake">The dependency on which an action is expected.</param>
         /// <param name = "action">The action that should have been called.</param>

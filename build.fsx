@@ -115,7 +115,7 @@ let RequireAtLeast version = sprintf "%s" <| NormalizeVersion version
 Target "BuildNuGet" (fun _ ->
     CleanDirs [nugetDir; nugetLibDir]
 
-    [buildDir + "Machine.Fakes.dll"]
+    [buildDir + "Machine.Fakes.dll"; buildDir + "Machine.Fakes.xml"]
         |> CopyTo nugetLibDir
 
     ["readme.txt"] |> CopyTo nugetDir
@@ -143,7 +143,7 @@ Target "BuildNuGetFlavours" (fun _ ->
             let flavourVersion = GetPackageVersion packagesDir flavour
             CleanDirs [nugetDir; nugetLibDir]
 
-            [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour]
+            [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour; buildDir + sprintf "Machine.Fakes.Adapters.%s.xml" flavour]
               |> CopyTo nugetLibDir
 
             ["readme.txt"] |> CopyTo nugetDir
