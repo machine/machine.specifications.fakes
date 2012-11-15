@@ -1,4 +1,6 @@
 using System;
+
+using FakeItEasy;
 using FakeItEasy.Configuration;
 
 namespace Machine.Fakes.Adapters.FakeItEasy
