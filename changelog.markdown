@@ -1,6 +1,6 @@
 # Changelog
 ## 1.0.2
-* Updated to Machine.Specifications 0.5.10
+* Updated to Machine.Specifications 0.5.10 and FakeItEasy 1.7.4626.65
 
 ## 1.0.1
 * Added documentation XML to NuGet packages, so that class and member documentation is available in Visual Studio.
