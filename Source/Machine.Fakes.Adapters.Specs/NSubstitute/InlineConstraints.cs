@@ -20,7 +20,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin(null, null); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
         It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
@@ -40,7 +40,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL"); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
         It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
@@ -60,7 +60,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin(null, null); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
         It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
@@ -80,7 +80,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL"); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
         It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
@@ -100,7 +100,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin(null, null); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
         It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
@@ -120,7 +120,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL"); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
         It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
@@ -140,7 +140,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin("John", "Doe"); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("John", "Doe");
 
         It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
@@ -160,7 +160,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin("NOT_John", "NOT_Doe"); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NOT_John", "NOT_Doe");
 
         It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
@@ -182,7 +182,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin("John", "Doe"); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("John", "Doe");
 
         It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
@@ -204,7 +204,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () => { _configuredBehaviorWasTriggered = _view.TryLogin("NOT_John", "NOT_Doe"); };
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NOT_John", "NOT_Doe");
 
         It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
@@ -225,10 +225,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () =>
-        {
-            _configuredBehaviorWasTriggered = _flashVerifier.CanPlayFlash(new Xoom());
-        };
+        Because of = () => _configuredBehaviorWasTriggered = _flashVerifier.CanPlayFlash(new Xoom());
 
         It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
@@ -249,11 +246,46 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
                 .Return(true);
         };
 
-        Because of = () =>
-        {
-            _configuredBehaviorWasTriggered = _flashVerifier.CanPlayFlash(new IPad());
-        };
+        Because of = () => _configuredBehaviorWasTriggered = _flashVerifier.CanPlayFlash(new IPad());
 
         It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+    }
+
+    [Subject(typeof(NSubstituteEngine))]
+    [Tags("Inline constraints", "NSubstitute")]
+    public class When_matching_for_equality_without_explicit__Param__constraint_and_the_passed_values_is_not_the_expected_ones
+        : WithCurrentEngine<NSubstituteEngine>
+    {
+        static IView _fake;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _fake = FakeEngineGateway.Fake<IView>();
+            _fake.WhenToldTo(v => v.TryLogin("a", "c")).Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _fake.TryLogin("b", "c");
+
+        It should_not_trigger_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+    }
+
+    [Subject(typeof(NSubstituteEngine))]
+    [Tags("Inline constraints", "NSubstitute")]
+    public class When_matching_for_equality_without_explicit__Param__constraint_and_the_passed_values_are_the_expected_ones
+        : WithCurrentEngine<NSubstituteEngine>
+    {
+        static IView _fake;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _fake = FakeEngineGateway.Fake<IView>();
+            _fake.WhenToldTo(v => v.TryLogin("a", null)).Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _fake.TryLogin("a", null);
+
+        It should_trigger_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 }
