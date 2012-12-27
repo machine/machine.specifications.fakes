@@ -1,4 +1,7 @@
 # Changelog
+## 1.0.3
+* Constructors with pointer parameters are now filtered when instantiating concrete types. This fixes a bug that prevented a string constructor parameter to be automatically resolved to the empty string.
+
 ## 1.0.2
 * Updated to Machine.Specifications 0.5.10 and FakeItEasy 1.7.4626.65
 

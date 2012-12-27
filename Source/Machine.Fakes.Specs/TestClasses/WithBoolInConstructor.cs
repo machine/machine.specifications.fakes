@@ -2,7 +2,7 @@
 {
     public class WithBoolInConstructor
     {
-        public bool Yes { get; set; }
+        public bool Yes { get; private set; }
 
         public WithBoolInConstructor(bool yes)
         {
