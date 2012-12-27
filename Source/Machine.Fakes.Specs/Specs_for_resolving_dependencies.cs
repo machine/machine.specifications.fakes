@@ -126,6 +126,20 @@ namespace Machine.Fakes.Specs
     }
 
     [Subject(typeof(AutoFakeContainer))]
+    public class When_the_subject_has_a_string_constructor_parameter
+    {
+        Establish context = () =>
+            autoFakeContainer = new AutoFakeContainer(new DummyFakeEngine());
+
+        Because of = () => subject = autoFakeContainer.CreateSubject<WithStringInConstructor>();
+
+        It should_use_the_empty_string = () => subject.Content.ShouldEqual("");
+
+        static WithStringInConstructor subject;
+        static AutoFakeContainer autoFakeContainer;
+    }
+
+    [Subject(typeof(AutoFakeContainer))]
     public class When_the_subject_has_a_value_type_constructor_parameter_and_a_value_to_use_has_been_configured
     {
         Establish context = () =>

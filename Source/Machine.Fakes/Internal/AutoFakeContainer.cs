@@ -54,20 +54,46 @@ namespace Machine.Fakes.Internal
             }
             catch (TargetInvocationException)
             {
-                throw new SpecificationException(string.Format("Unable to create an instance of type {0}.{1}The constructor threw an exception.", type.Name, Environment.NewLine));
+                throw InstanceCreationException(type, "The constructor threw an exception");
             }
         }
 
         ConstructorInfo GetBestFitConstructor(Type type)
         {
-            var constructors = type.GetConstructors();
-            if (!constructors.Any())
-                throw new SpecificationException(string.Format("Unable to create an instance of type {0}.{1}Please check that the type has at least a single public constructor.", type.Name, Environment.NewLine));
+            AssertPublicConstructors(type);
 
-            return constructors.Where(
-                    _ => _.GetParameters().Count() == constructors.Max(x => x.GetParameters().Count()))
+            var constructors = GetUsableConstructors(type);
+
+            return constructors
+                .Where(_ => _.GetParameters().Count() == constructors.Max(x => x.GetParameters().Count()))
                 .OrderBy(CountRegisteredArguments)
                 .Last();
+        }
+
+        void AssertPublicConstructors(Type type)
+        {
+            if (!type.GetConstructors().Any())
+                throw InstanceCreationException(type, "Please check that the type has at least a single public constructor");
+        }
+
+        IEnumerable<ConstructorInfo> GetUsableConstructors(Type type)
+        {
+            var constructors = type.GetConstructors().Where(x => x.GetParameters().All(_ => !_.ParameterType.IsPointer));
+
+            if (!constructors.Any())
+                throw InstanceCreationException(type, "Constructors with pointer parameters are not supported");
+
+            return constructors;
+        }
+
+        Exception InstanceCreationException(Type type, string reason)
+        {
+            return new SpecificationException(
+                string.Format(
+                    "Unable to create an instance of type {0}.{1}{2}.",
+                    type.Name,
+                    Environment.NewLine,
+                    reason));
         }
 
         int CountRegisteredArguments(ConstructorInfo constructor)
