@@ -167,6 +167,71 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
 
     [Subject(typeof(RhinoFakeEngine))]
     [Tags("Inline constraints", "Rhinomocks")]
+    public class When_matching_on_a__NewExpression__ : WithCurrentEngine<RhinoFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.TryLogin(Param.Is(new string(new[] { 'a' })), Param.Is(new string(new[] { 'b' }))))
+                 .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("a", "b");
+
+        It should_match_based_on_equality = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(RhinoFakeEngine))]
+    [Tags("Inline constraints", "Rhinomocks")]
+    public class When_matching_on_a_field_expression : WithCurrentEngine<RhinoFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+        static string a = "a";
+        static string b = "b";
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.TryLogin(Param.Is(a), Param.Is(b)))
+                 .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("a", "b");
+
+        It should_match_against_the_member_value = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(RhinoFakeEngine))]
+    [Tags("Inline constraints", "Rhinomocks")]
+    public class When_matching_on_a_method_call_expression : WithCurrentEngine<RhinoFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        static string A() { return "a"; }
+        static string B() { return "b"; }
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.TryLogin(Param.Is(A()), Param.Is(B())))
+                 .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("a", "b");
+
+        It should_match_against_the_method_result = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(RhinoFakeEngine))]
+    [Tags("Inline constraints", "Rhinomocks")]
     public class When_matching_using_expressions_and_passing_in_a_value_that_matches_the_expression : WithCurrentEngine<RhinoFakeEngine>
     {
         static IView _view;

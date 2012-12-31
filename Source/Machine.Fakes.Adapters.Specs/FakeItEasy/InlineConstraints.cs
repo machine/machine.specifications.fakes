@@ -164,6 +164,71 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
+    
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("Inline constraints", "FakeItEasy")]
+    public class When_matching_on_a__NewExpression__ : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.TryLogin(Param.Is(new string(new[] { 'a' })), Param.Is(new string(new[] { 'b' }))))
+                 .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("a", "b");
+
+        It should_match_based_on_equality = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+    
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("Inline constraints", "FakeItEasy")]
+    public class When_matching_on_a_field_expression : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+        static string a = "a";
+        static string b = "b";
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.TryLogin(Param.Is(a), Param.Is(b)))
+                 .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("a", "b");
+
+        It should_match_against_the_member_value = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+    
+    [Subject(typeof(FakeItEasyEngine))]
+    [Tags("Inline constraints", "FakeItEasy")]
+    public class When_matching_on_a_method_call_expression : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        static string A() { return "a"; }
+        static string B() { return "b"; }
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.TryLogin(Param.Is(A()), Param.Is(B())))
+                 .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("a", "b");
+
+        It should_match_against_the_method_result = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
 
     [Subject(typeof(FakeItEasyEngine))]
     [Tags("Inline constraints", "FakeItEasy")]
@@ -211,7 +276,8 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
     [Subject(typeof(FakeItEasyEngine))]
     [Tags("Inline constraints", "FakeItEasy")]
-    public class When_matching_only_when_a_type_implements_an_interface_and_the_parameter_value_implements_that_interface : WithCurrentEngine<FakeItEasyEngine>
+    public class When_matching_only_when_a_type_implements_an_interface_and_the_parameter_value_implements_that_interface
+        : WithCurrentEngine<FakeItEasyEngine>
     {
         static IFlashVerifier _flashVerifier;
         static bool _configuredBehaviorWasTriggered;
@@ -232,7 +298,8 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
     [Subject(typeof(FakeItEasyEngine))]
     [Tags("Inline constraints", "FakeItEasy")]
-    public class When_matching_only_when_a_type_implements_an_interface_and_the_parameter_value_does_not_implement_that_interface : WithCurrentEngine<FakeItEasyEngine>
+    public class When_matching_only_when_a_type_implements_an_interface_and_the_parameter_value_does_not_implement_that_interface
+        : WithCurrentEngine<FakeItEasyEngine>
     {
         static IFlashVerifier _flashVerifier;
         static bool _configuredBehaviorWasTriggered;

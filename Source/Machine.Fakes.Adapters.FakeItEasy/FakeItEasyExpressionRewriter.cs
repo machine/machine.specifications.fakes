@@ -44,16 +44,14 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
         static Expression RewriteIsMethod(MethodCallExpression expression)
         {
-            var argument = (ConstantExpression)expression.Arguments[0];
-            var valueExpression = Expression.Constant(argument.Value);
-            var thatAccess = GetThatAccess(argument.Type);
+            var innerExpression = expression.Arguments[0];
 
             return Expression.Call(
                 typeof(ArgumentConstraintExtensions),
                 "IsEqualTo",
-                new[] { argument.Type },
-                thatAccess,
-                valueExpression);
+                new[] { innerExpression.Type },
+                GetThatAccess(innerExpression.Type),
+                innerExpression);
         }
 
         static Expression RewriteIsNullMember(MemberExpression node)
