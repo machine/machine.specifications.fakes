@@ -99,17 +99,17 @@ namespace Machine.Fakes.Adapters.Moq
 
         static Expression RewriteIsMethod(MethodCallExpression expression)
         {
-            var argument = (ConstantExpression)expression.Arguments[0];
-            var parameterExpression = Expression.Parameter(argument.Type, "param");
-            var lambdaType = typeof(Func<,>).MakeGenericType(argument.Type, typeof(bool));
+            var argument = expression.Arguments[0];
+            var parameter = Expression.Parameter(argument.Type, "param");
 
-            var equalExpression = Expression.Equal(
-                parameterExpression,
-                Expression.Constant(argument.Value));
-
-            var expr = Expression.Lambda(lambdaType, equalExpression, parameterExpression);
-
-            return Expression.Call(typeof(It), "Is", new[] { argument.Type }, expr);
+            return Expression.Call(
+                typeof(It),
+                "Is",
+                new[] { argument.Type },
+                Expression.Lambda(
+                    typeof(Func<,>).MakeGenericType(argument.Type, typeof(bool)),
+                    Expression.Equal(parameter, argument),
+                    parameter));
         }
 
         static Expression RewriteIsAMethod(MethodCallExpression expression)

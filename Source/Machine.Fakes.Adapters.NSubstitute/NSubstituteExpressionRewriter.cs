@@ -84,10 +84,9 @@ namespace Machine.Fakes.Adapters.NSubstitute
 
         static Expression RewriteIsMethod(MethodCallExpression expression)
         {
-            var argument = (ConstantExpression)expression.Arguments[0];
-            var valueExpression = Expression.Constant(argument.Value);
+            var argument = expression.Arguments[0];
 
-            return Expression.Call(typeof(Arg), "Is", new[] { argument.Type }, valueExpression);
+            return Expression.Call(typeof(Arg), "Is", new[] { argument.Type }, argument);
         }
 
         static Expression RewriteIsAMethod(MethodCallExpression expression)

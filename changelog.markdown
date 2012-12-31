@@ -1,4 +1,7 @@
 # Changelog
+## 1.0.4
+* `Param.Is()` now works correctly with all sorts of expressions, not only constant values.
+
 ## 1.0.3
 * Constructors with pointer parameters are now filtered when instantiating concrete types. This fixes a bug that prevented a string constructor parameter to be automatically resolved to the empty string.
 
