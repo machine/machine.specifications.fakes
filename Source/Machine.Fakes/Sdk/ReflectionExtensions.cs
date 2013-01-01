@@ -22,7 +22,7 @@ namespace Machine.Fakes.Sdk
         /// <returns>
         ///     <c>true</c> if it's one of the constraint types. Otherwise not.
         /// </returns>
-        public static bool IsMFakesConstaintType(this Type type)
+        public static bool IsMFakesConstraint(this Type type)
         {
             return type == typeof(Param) || type.ClosesGenericParamType();
         }

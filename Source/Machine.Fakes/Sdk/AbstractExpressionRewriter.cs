@@ -97,7 +97,7 @@ namespace Machine.Fakes.Sdk
             var method = node.Method;
             var declaringType = method.DeclaringType;
 
-            if (!declaringType.IsMFakesConstaintType())
+            if (!declaringType.IsMFakesConstraint())
             {
                 return base.VisitMethodCall(node);
             }
