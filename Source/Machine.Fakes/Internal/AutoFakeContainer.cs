@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -13,14 +12,13 @@ namespace Machine.Fakes.Internal
 {
     class AutoFakeContainer
     {
-        readonly IDictionary<Type, ICollection<IMapping>> _mappings;
+        readonly MappingRegistry _mappings = new MappingRegistry();
         readonly IFakeEngine _fakeEngine;
 
         public AutoFakeContainer(IFakeEngine fakeEngine)
         {
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
-            _mappings = new Dictionary<Type, ICollection<IMapping>>();
             _fakeEngine = fakeEngine;
         }
 
@@ -103,24 +101,24 @@ namespace Machine.Fakes.Internal
 
         bool CanBeInstantiated(Type type)
         {
-            if (IsRegistered(type))
+            if (_mappings.IsRegistered(type))
                 return true;
 
             if (type.IsGenericType)
             {
                 if (type.IsGenericEnumerable())
-                    return IsRegistered(type.GetGenericArguments()[0]);
+                    return _mappings.IsRegistered(type.GetGenericArguments()[0]);
 
                 if (type.IsFunc() || type.IsLazy())
                     return true;
             }
 
-            return type.IsArray && IsRegistered(type.GetElementType());
+            return type.IsArray && _mappings.IsRegistered(type.GetElementType());
         }
 
         object GetArgument(Type argumentType, Stack<Type> stack)
         {
-            if (IsRegistered(argumentType))
+            if (_mappings.IsRegistered(argumentType))
                 return GetRegisteredInstances(argumentType).Last();
 
             if (argumentType.IsGenericType)
@@ -171,7 +169,7 @@ namespace Machine.Fakes.Internal
         object CreateEnumerable(Type argumentType)
         {
             Type underlyingType = argumentType.GetGenericArguments()[0];
-            if (IsRegistered(underlyingType))
+            if (_mappings.IsRegistered(underlyingType))
             {
                 return typeof(Enumerable)
                     .GetMethod("Cast", new[] { typeof(IEnumerable) })
@@ -202,7 +200,7 @@ namespace Machine.Fakes.Internal
 
         internal TFakeSingleton Get<TFakeSingleton>() where TFakeSingleton : class
         {
-            if (IsRegistered(typeof(TFakeSingleton)))
+            if (_mappings.IsRegistered(typeof(TFakeSingleton)))
                 return (TFakeSingleton)GetRegisteredInstances(typeof(TFakeSingleton)).Last();
 
             var fake = CreateFake(typeof(TFakeSingleton));
@@ -210,24 +208,14 @@ namespace Machine.Fakes.Internal
             return (TFakeSingleton)fake;
         }
 
-        bool IsRegistered(Type type)
-        {
-            return _mappings.ContainsKey(type);
-        }
-
         IEnumerable<object> GetRegisteredInstances(Type type)
         {
-            return !IsRegistered(type)
-                ? Enumerable.Empty<object>()
-                : _mappings[type].Select(m => m.Resolve(t => CreateInstance(t, new Stack<Type>())));
+            return _mappings.GetMappingsFor(type).Select(m => m.Resolve(t => CreateInstance(t, new Stack<Type>())));
         }
 
         public void Register(IMapping mapping)
         {
-            if (!_mappings.ContainsKey(mapping.InterfaceType))
-                _mappings[mapping.InterfaceType] = new Collection<IMapping>();
-
-            _mappings[mapping.InterfaceType].Add(mapping);
+            _mappings.Register(mapping);
         }
     }
 }
