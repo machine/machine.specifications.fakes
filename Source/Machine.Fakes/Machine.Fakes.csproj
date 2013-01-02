@@ -61,6 +61,7 @@
     <Compile Include="Internal\FactoryMapping.cs" />
     <Compile Include="Internal\BehaviorConfigController.cs" />
     <Compile Include="Internal\IMapping.cs" />
+    <Compile Include="Internal\InstanceCreationException.cs" />
     <Compile Include="Internal\MappingRegistry.cs" />
     <Compile Include="Internal\ObjectMapping.cs" />
     <Compile Include="FakeAccessorRegistrarExtensions.cs" />

@@ -52,7 +52,7 @@ namespace Machine.Fakes.Internal
             }
             catch (TargetInvocationException)
             {
-                throw InstanceCreationException(type, "The constructor threw an exception");
+                throw new InstanceCreationException(type, "The constructor threw an exception");
             }
         }
 
@@ -71,7 +71,7 @@ namespace Machine.Fakes.Internal
         void AssertPublicConstructors(Type type)
         {
             if (!type.GetConstructors().Any())
-                throw InstanceCreationException(type, "Please check that the type has at least a single public constructor");
+                throw new InstanceCreationException(type, "Please check that the type has at least a single public constructor");
         }
 
         IEnumerable<ConstructorInfo> GetUsableConstructors(Type type)
@@ -79,19 +79,9 @@ namespace Machine.Fakes.Internal
             var constructors = type.GetConstructors().Where(x => x.GetParameters().All(_ => !_.ParameterType.IsPointer));
 
             if (!constructors.Any())
-                throw InstanceCreationException(type, "Constructors with pointer parameters are not supported");
+                throw new InstanceCreationException(type, "Constructors with pointer parameters are not supported");
 
             return constructors;
-        }
-
-        Exception InstanceCreationException(Type type, string reason)
-        {
-            return new SpecificationException(
-                string.Format(
-                    "Unable to create an instance of type {0}.{1}{2}.",
-                    type.Name,
-                    Environment.NewLine,
-                    reason));
         }
 
         int CountRegisteredArguments(ConstructorInfo constructor)
