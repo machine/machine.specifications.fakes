@@ -1,8 +1,13 @@
 ﻿using System;
 
+using Machine.Specifications;
+
 namespace Machine.Fakes.Internal
 {
-    public class InstanceCreationException : Exception
+    /// <summary>
+    /// Exception that occurs when a type cannot be instantiated by the automatic faking/dependency resolution
+    /// </summary>
+    public class InstanceCreationException : SpecificationException
     {
         public InstanceCreationException(Type type, string reason)
             : base(string.Format(
