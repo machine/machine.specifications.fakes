@@ -305,7 +305,7 @@ namespace Machine.Fakes.Specs
     [Behaviors]
     internal class AnEnumerableTypeWithTwoDifferentInstances
     {
-        protected static IEnumerable<ICar> cars;
+        protected static IEnumerable<ICar> cars = Enumerable.Empty<ICar>();
 
         It should_create_an_enumerable = () => cars.ShouldNotBeNull();
 

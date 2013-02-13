@@ -9,6 +9,11 @@ namespace Machine.Fakes.Internal
     /// </summary>
     public class InstanceCreationException : SpecificationException
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="type">Type that cannot be created</param>
+        /// <param name="reason">Reason</param>
         public InstanceCreationException(Type type, string reason)
             : base(string.Format(
                 "Unable to create an instance of type {0}.{1}{2}.",

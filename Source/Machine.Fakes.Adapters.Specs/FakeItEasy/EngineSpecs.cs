@@ -62,6 +62,8 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         Because of = () => _fake = FakeEngineGateway.Fake<DummyNoDefaultCtorClass>(_args);
 
         It should_be_able_to_create_an_instance = () => _fake.ShouldNotBeNull();
+
+        It should_use_the_given_arguments = () => _fake.Value.ShouldEqual(1);
     }
 
     [Subject(typeof(FakeItEasyEngine))]

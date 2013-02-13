@@ -12,10 +12,12 @@ namespace Machine.Fakes.Adapters.Moq
     /// </summary>
     public class MoqFakeEngine : RewritingFakeEngine
     {
-        public MoqFakeEngine() : base(new MoqExpressionRewriter())
-        {
-        }
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public MoqFakeEngine() : base(new MoqExpressionRewriter()) { }
 
+        /// <inheritdoc/>
         public override object CreateFake(Type interfaceType, params object[] args)
         {
             var closedMockType = typeof(Mock<>).MakeGenericType(interfaceType);
@@ -26,6 +28,7 @@ namespace Machine.Fakes.Adapters.Moq
             return objectProperty.GetValue(instance, null);
         }
 
+        /// <inheritdoc/>
         public override T PartialMock<T>(params object[] args) 
         {
             var closedMockType = typeof(Mock<>).MakeGenericType(typeof(T));
@@ -37,6 +40,7 @@ namespace Machine.Fakes.Adapters.Moq
             return closedMockType.GetProperty("Object", typeof(T)).GetValue(instance, null) as T;
         }
 
+        /// <inheritdoc/>
         protected override IQueryOptions<TReturnValue> OnSetUpQueryBehaviorFor<TFake, TReturnValue>(
             TFake fake,
             Expression<Func<TFake, TReturnValue>> func) 
@@ -46,6 +50,7 @@ namespace Machine.Fakes.Adapters.Moq
             return new MoqQueryOptions<TFake, TReturnValue>(mock.Setup(func));
         }
 
+        /// <inheritdoc/>
         protected override ICommandOptions OnSetUpCommandBehaviorFor<TFake>(
             TFake fake,
             Expression<Action<TFake>> func) 
@@ -55,6 +60,7 @@ namespace Machine.Fakes.Adapters.Moq
             return new MoqCommandOptions<TFake>(mock.Setup(func));
         }
 
+        /// <inheritdoc/>
         protected override void OnVerifyBehaviorWasNotExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) 
@@ -64,6 +70,7 @@ namespace Machine.Fakes.Adapters.Moq
             mock.Verify(func, Times.Never());
         }
 
+        /// <inheritdoc/>
         protected override IMethodCallOccurrence OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) 

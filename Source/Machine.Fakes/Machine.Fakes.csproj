@@ -73,7 +73,7 @@
     <Compile Include="Sdk\IExpressionRewriter.cs" />
     <Compile Include="Sdk\InlineConstraintNames.cs" />
     <Compile Include="Sdk\ReflectionExtensions.cs" />
-    <Compile Include="Sdk\ExpressionRewriterBase.cs" />
+    <Compile Include="Sdk\RewritingFakeEngine.cs" />
     <Compile Include="Sdk\SpecificationController.cs" />
     <Compile Include="LocalAssemblyInfo.cs" />
     <Compile Include="Internal\TypeMapping.cs" />

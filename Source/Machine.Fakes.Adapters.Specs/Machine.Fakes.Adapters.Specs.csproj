@@ -78,7 +78,6 @@
     <Compile Include="Bugs\Issue28.cs" />
     <Compile Include="FakeItEasy\CommandOptionsSpecs.cs" />
     <Compile Include="FakeItEasy\EngineSpecs.cs" />
-    <Compile Include="FakeItEasy\FakeItEasyHelperSpecs.cs" />
     <Compile Include="FakeItEasy\InlineConstraints.cs" />
     <Compile Include="Moq\CommandOptionsSpecs.cs" />
     <Compile Include="Moq\EngineSpecs.cs" />

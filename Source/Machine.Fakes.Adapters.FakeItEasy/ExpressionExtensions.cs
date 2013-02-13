@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Machine.Fakes.Adapters.FakeItEasy
 {
-    public static class ExpressionExtensions
+    internal static class ExpressionExtensions
     {
         public static Expression<Func<TReturn>> WrapExpression<TFake, TReturn>(
             this Expression<Func<TFake, TReturn>> expression,

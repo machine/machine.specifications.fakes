@@ -6,8 +6,15 @@ using Machine.Fakes.Sdk;
 
 namespace Machine.Fakes.Adapters.FakeItEasy
 {
+    /// <summary>
+    /// Functionality to transform the inline constraint format used by Machine.Fakes
+    /// into the specific format used by FakeItEasy.
+    /// </summary>
     public class FakeItEasyExpressionRewriter : AbstractExpressionRewriter
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public FakeItEasyExpressionRewriter()
         {
             AddConverter(InlineConstraintNames.IsAny, RewriteIsAnyMethod);
