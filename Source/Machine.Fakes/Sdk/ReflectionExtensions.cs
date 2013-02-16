@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Machine.Specifications.Runner.Impl;
+
+using Machine.Specifications.Utility;
 
 namespace Machine.Fakes.Sdk
 {
@@ -168,7 +169,7 @@ namespace Machine.Fakes.Sdk
                 .GetAllFields()
                 .Where(x => !x.FieldType.IsValueType);
 
-            fields.ForEach(x => x.SetValue(instance, null));
+            fields.Each(x => x.SetValue(instance, null));
         }
 
         static IEnumerable<FieldInfo> GetAllFields(this Type type)
