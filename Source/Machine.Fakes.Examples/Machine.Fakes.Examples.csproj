@@ -41,10 +41,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Machine.Specifications.0.5.11\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.TDNetRunner, Version=0.5.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Machine.Specifications.0.5.10\lib\net40\Machine.Specifications.TDNetRunner.dll</HintPath>
-    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
