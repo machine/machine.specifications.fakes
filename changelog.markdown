@@ -1,4 +1,7 @@
 # Changelog
+## 1.1.0
+* Updated to Machine.Specifications 0.5.11 and FakeItEasy 1.8.0
+
 ## 1.0.4
 * `Param.Is()` now works correctly with all sorts of expressions, not only constant values.
 
