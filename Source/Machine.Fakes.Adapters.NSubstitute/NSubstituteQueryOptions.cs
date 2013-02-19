@@ -5,7 +5,7 @@ using NSubstitute;
 
 namespace Machine.Fakes.Adapters.NSubstitute
 {
-    public class NSubstituteQueryOptions<TFake, T> : IQueryOptions<T> where TFake : class
+    class NSubstituteQueryOptions<TFake, T> : IQueryOptions<T> where TFake : class
     {
         readonly Func<TFake, T> _expression;
         readonly TFake _fake;

@@ -62,6 +62,8 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         Because of = () => _fake = FakeEngineGateway.Fake<DummyNoDefaultCtorClass>(_args);
 
         It should_be_able_to_create_an_instance = () => _fake.ShouldNotBeNull();
+
+        It should_use_the_given_arguments = () => _fake.Value.ShouldEqual(1);
     }
 
     [Subject(typeof(FakeItEasyEngine))]
@@ -80,7 +82,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         Because of = () => _fake = FakeEngineGateway.Fake<ClassWithUnfakableParameter>(_unfakableCtoParameter);
 
         It should_able_to_construct_the_instance_when_ctor_parameters_are_supplied = 
-            () => _fake.RecievedCtorArgument.ShouldEqual(_unfakableCtoParameter);
+            () => _fake.ReceivedConstructorArgument.ShouldEqual(_unfakableCtoParameter);
 
         It should_be_able_to_fake_virtual_methods_on_the_abstract_base_class = () =>
         {

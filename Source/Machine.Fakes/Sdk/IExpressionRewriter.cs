@@ -3,8 +3,8 @@ using System.Linq.Expressions;
 namespace Machine.Fakes.Sdk
 {
     /// <summary>
-    /// Rewriter abstractio that is used by Machine.Fakes
-    /// in order to transform the inline constaint format used by Machine.Fakes
+    /// Rewriter abstraction that is used by Machine.Fakes
+    /// in order to transform the inline constraint format used by Machine.Fakes
     /// into the specific formats used by the different mock frameworks.
     /// </summary>
     public interface IExpressionRewriter

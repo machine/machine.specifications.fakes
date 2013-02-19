@@ -6,10 +6,17 @@ using Rhino.Mocks.Interfaces;
 
 namespace Machine.Fakes.Adapters.Rhinomocks
 {
+    /// <summary>
+    /// An implementation of <see cref = "IFakeEngine" /> using the Rhino Mocks framework.
+    /// </summary>
     public class RhinoFakeEngine : RewritingFakeEngine
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public RhinoFakeEngine() : base(new RhinoMocksExpressionRewriter()) { }
 
+        /// <inheritdoc/>
         public override object CreateFake(Type interfaceType, params object[] args)
         {
             var stub = MockRepository.GenerateMock(interfaceType, new Type[0], args);
@@ -18,6 +25,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             return stub;
         }
 
+        /// <inheritdoc/>
         public override T PartialMock<T>(params object[] args)
         {
             var mock = MockRepository.GeneratePartialMock<T>(args);
@@ -25,6 +33,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             return mock;
         }
 
+        /// <inheritdoc/>
         protected override IQueryOptions<TReturnValue> OnSetUpQueryBehaviorFor<TDependency, TReturnValue>(
             TDependency fake,
             Expression<Func<TDependency, TReturnValue>> func)
@@ -40,6 +49,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             return !(func.Body is MethodCallExpression);
         }
 
+        /// <inheritdoc/>
         protected override ICommandOptions OnSetUpCommandBehaviorFor<TFake>(
             TFake fake,
             Expression<Action<TFake>> func)
@@ -47,6 +57,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             return new RhinoCommandOptions(fake.Stub(func.Compile()));
         }
 
+        /// <inheritdoc/>
         protected override void OnVerifyBehaviorWasNotExecuted<TFake>(
             TFake fake,
             Expression<Action<TFake>> func)
@@ -54,6 +65,7 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             fake.AssertWasNotCalled(func.Compile());
         }
 
+        /// <inheritdoc/>
         protected override IMethodCallOccurrence OnVerifyBehaviorWasExecuted<TFake>(
             TFake fake,
             Expression<Action<TFake>> func)

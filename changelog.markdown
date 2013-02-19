@@ -1,4 +1,9 @@
 # Changelog
+## 1.1.0
+* Updated to Machine.Specifications 0.5.11
+* Updated to FakeItEasy 1.8.0
+* Updated to NSubstitute 1.5.0.0
+
 ## 1.0.4
 * `Param.Is()` now works correctly with all sorts of expressions, not only constant values.
 

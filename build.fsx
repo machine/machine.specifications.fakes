@@ -1,9 +1,9 @@
-#I @"Source\packages\FAKE\tools"
-#r "FakeLib.dll"
+#r @"Source\packages\FAKE\tools\FakeLib.dll"
 #r "System.Web.Extensions.dll"
 
 open Fake
 open Fake.Git
+open Fake.AssemblyInfoFile
 open System.Collections.Generic
 open System.Linq
 open System.IO
@@ -13,7 +13,8 @@ open System.Web.Script.Serialization
 let authors = ["The machine project"]
 let projectName = "Machine.Fakes"
 let copyright = "Copyright - Machine.Fakes 2011 - 2012"
-let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else ""
+// none as workaround for a FAKE bug
+let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else "none"
 
 let version =
     if hasBuildParam "version" then getBuildParam "version" else
@@ -52,18 +53,19 @@ let mspecTool() = sprintf @".\Source\packages\Machine.Specifications.%s\tools\ms
 (* Targets *)
 Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; docsDir; testOutputDir] )
 
-
 Target "BuildApp" (fun _ ->
-    AssemblyInfo
-      (fun p ->
-        {p with
-            CodeLanguage = CSharp;
-            AssemblyVersion = version;
-            AssemblyTitle = title;
-            AssemblyDescription = "An integration layer for fake frameworks on top of MSpec";
-            AssemblyCopyright = copyright;
-            Guid = "3745F3DA-6ABB-4C58-923D-B09E4A04688F";
-            OutputFileName = @".\Source\GlobalAssemblyInfo.cs"})
+    CreateCSharpAssemblyInfo @".\Source\GlobalAssemblyInfo.cs"
+        [Attribute.Version version
+         Attribute.Title title
+         Attribute.Product title
+         Attribute.Description "An integration layer for fake frameworks on top of MSpec"
+         Attribute.Copyright copyright
+         Attribute.Guid "3745F3DA-6ABB-4C58-923D-B09E4A04688F"
+         // specifying DelaySign explicitly because of a bug in FAKE
+         Attribute.BoolAttribute("AssemblyDelaySign", false, "System.Reflection")
+         Attribute.FileVersion version
+         Attribute.ComVisible false
+         Attribute.CLSCompliant false]
 
     slnReferences
         |> MSBuildRelease buildDir "Build"
@@ -117,8 +119,6 @@ Target "BuildNuGet" (fun _ ->
 
     [buildDir + "Machine.Fakes.dll"; buildDir + "Machine.Fakes.xml"]
         |> CopyTo nugetLibDir
-
-    ["readme.txt"] |> CopyTo nugetDir
     
     NuGet (fun p ->
         {p with
@@ -129,8 +129,9 @@ Target "BuildNuGet" (fun _ ->
             OutputPath = nugetDir
             Dependencies = ["Machine.Specifications",RequireAtLeast (MSpecVersion())]
             AccessKey = NugetKey
-            Publish = NugetKey <> ""
-            ToolPath = @".\Source\.nuget\nuget.exe" })
+            Publish = NugetKey <> "none"
+            ToolPath = @".\Source\.nuget\nuget.exe"
+            WorkingDir = "." })
         "machine.fakes.nuspec"
 
     !! (nugetDir + "Machine.Fakes.*.nupkg")
@@ -146,8 +147,6 @@ Target "BuildNuGetFlavours" (fun _ ->
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour; buildDir + sprintf "Machine.Fakes.Adapters.%s.xml" flavour]
               |> CopyTo nugetLibDir
 
-            ["readme.txt"] |> CopyTo nugetDir
-
             NuGet (fun p ->
                 {p with
                     Summary = sprintf "A framework for faking objects with %s on top of Machine.Specifications." flavour
@@ -160,8 +159,9 @@ Target "BuildNuGetFlavours" (fun _ ->
                         ["Machine.Fakes",RequireExactly (NormalizeVersion version)
                          flavour,RequireAtLeast flavourVersion]
                     AccessKey = NugetKey
-                    Publish = NugetKey <> ""
-                    ToolPath = @".\Source\.nuget\nuget.exe" })
+                    Publish = NugetKey <> "none"
+                    ToolPath = @".\Source\.nuget\nuget.exe"
+                    WorkingDir = "." })
                 "machine.fakes.nuspec"
 
             !! (nugetDir + sprintf "Machine.Fakes.%s.*.nupkg" flavour)

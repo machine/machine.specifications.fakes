@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+
 using Machine.Fakes.Sdk;
-using Machine.Specifications.Runner.Impl;
+using Machine.Specifications.Utility;
 
 namespace Machine.Fakes.Internal
 {
@@ -16,7 +17,7 @@ namespace Machine.Fakes.Internal
 
             behaviorConfig
                 .GetFieldValues<OnEstablish>()
-                .ForEach(establishDelegate => establishDelegate(fakeAccessor));
+                .Each(establishDelegate => establishDelegate(fakeAccessor));
 
             _behaviorConfigs.Add(behaviorConfig);
         }
@@ -27,7 +28,7 @@ namespace Machine.Fakes.Internal
 
             _behaviorConfigs
                 .SelectMany(config => config.GetFieldValues<OnCleanup>())
-                .ForEach(cleanupDelegate => cleanupDelegate(subject));
+                .Each(cleanupDelegate => cleanupDelegate(subject));
 
             _behaviorConfigs.ForEach(config => config.ResetReferences());
             _behaviorConfigs.Clear();

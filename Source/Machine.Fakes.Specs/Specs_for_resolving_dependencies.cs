@@ -74,8 +74,8 @@ namespace Machine.Fakes.Specs
 
         Because of = () => _exception = Catch.Exception(() => subject = autoFakeContainer.CreateSubject<Bumsdi>());
 
-        It should_throw_a__SubjectCreationException__ =
-            () => _exception.ShouldBeOfType<SpecificationException>();
+        It should_throw_an_Exception =
+            () => _exception.ShouldBeOfType<InstanceCreationException>();
 
         It should_indicate_that_it_was_unable_to_create_the_subject =
             () => _exception.Message.ShouldStartWith("Unable to create an instance of type Bumsdi");
@@ -97,8 +97,8 @@ namespace Machine.Fakes.Specs
         Because of = () => _exception = Catch.Exception(() =>
             subject = autoFakeContainer.CreateSubject<WithoutPublicConstructor>());
 
-        It should_throw_a__SpecificationException__ =
-            () => _exception.ShouldBeOfType<SpecificationException>();
+        It should_throw_an_Exception =
+            () => _exception.ShouldBeOfType<InstanceCreationException>();
 
         It should_indicate_that_it_was_unable_to_create_the_subject =
             () => _exception.Message.ShouldStartWith("Unable to create an instance of type WithoutPublicConstructor");
@@ -305,7 +305,7 @@ namespace Machine.Fakes.Specs
     [Behaviors]
     internal class AnEnumerableTypeWithTwoDifferentInstances
     {
-        protected static IEnumerable<ICar> cars;
+        protected static IEnumerable<ICar> cars = Enumerable.Empty<ICar>();
 
         It should_create_an_enumerable = () => cars.ShouldNotBeNull();
 

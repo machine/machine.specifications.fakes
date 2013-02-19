@@ -2,10 +2,11 @@ namespace Machine.Fakes.Adapters.Specs.SampleCode
 {
     public class DummyNoDefaultCtorClass
     {
-        readonly int _value;
+        public int Value { get; private set; }
+
         public DummyNoDefaultCtorClass(int value)
         {
-            _value = value;
+            Value = value;
         }
     }
 }
