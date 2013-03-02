@@ -14,6 +14,7 @@ Machine.Fakes attempts to simplify the usage of such frameworks on top of Machin
     <projectUrl>https://github.com/machine/machine.fakes</projectUrl>
     <licenseUrl>https://github.com/machine/machine.fakes/raw/master/License.txt</licenseUrl>
     <tags>tdd bdd testing unittest fakes mocks mspec mfakes</tags>
+    <releaseNotes>See https://github.com/machine/machine.fakes/blob/master/changelog.markdown</releaseNotes>
     @dependencies@
   </metadata>
 </package>
