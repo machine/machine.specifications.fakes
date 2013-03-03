@@ -251,7 +251,7 @@ namespace Machine.Fakes
         {
             if (_specificationController == null)
                 throw new InvalidOperationException(
-                    "WithFakes has not been initialized yet. Are you calling this from a static initialzer?");
+                    "WithFakes has not been initialized yet. Are you calling it from a static initializer?");
         }
 
         [UsedImplicitly]
