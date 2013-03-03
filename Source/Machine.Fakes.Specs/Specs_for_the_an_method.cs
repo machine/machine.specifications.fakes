@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using Machine.Fakes.Sdk;
@@ -43,5 +44,19 @@ namespace Machine.Fakes.Specs
 
         It should_return_a_fake_that_used_the_ctor_parameter = () =>
             ((IDbConnection)result).ConnectionString.ShouldEqual(connectionString);
+    }
+
+    [Subject(typeof(WithFakes<>), "An")]
+    public class When_called_from_a_static_initializer : WithFakes<DummyFakeEngine>
+    {
+        static Exception exception;
+
+        static When_called_from_a_static_initializer()
+        {
+            exception = Catch.Exception(
+                () => An<IDbConnection>());
+        }
+
+        It should_throw_the_right_exception = () => exception.ShouldBeOfType<InvalidOperationException>();
     }
 }
