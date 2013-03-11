@@ -1,5 +1,6 @@
 # Changelog
-## 1.1.1
+## 1.2.0
+* Updated to Machine.Specifications 0.5.12
 * Better error handling when `WithFakes` or `WithSubject` are called before being initialized
 
 ## 1.1.0
