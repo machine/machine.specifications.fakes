@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Machine.Fakes.Sdk;
 using Machine.Specifications;
+using Machine.Specifications.Annotations;
 using Machine.Specifications.Factories;
 
 namespace Machine.Fakes
@@ -44,8 +45,19 @@ namespace Machine.Fakes
         /// </summary>
         protected static TSubject Subject
         {
-            get { return _specificationController.Subject; }
-            set { _specificationController.Subject = value; }
+            get
+            {
+                GuardAgainstStaticContext();
+
+                return _specificationController.Subject;
+            }
+
+            set
+            {
+                GuardAgainstStaticContext();
+                
+                _specificationController.Subject = value;
+            }
         }
 
         /// <summary>
@@ -61,6 +73,8 @@ namespace Machine.Fakes
         /// </returns>
         protected static TInterfaceType The<TInterfaceType>() where TInterfaceType : class
         {
+            GuardAgainstStaticContext();
+
             return _specificationController.The<TInterfaceType>();
         }
 
@@ -76,6 +90,8 @@ namespace Machine.Fakes
         /// </returns>
         protected static TInterfaceType An<TInterfaceType>(params object[] args) where TInterfaceType : class
         {
+            GuardAgainstStaticContext();
+
             return _specificationController.An<TInterfaceType>(args);
         }
 
@@ -87,6 +103,8 @@ namespace Machine.Fakes
         /// <returns>An <see cref = "IList{T}" />.</returns>
         protected static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
+            GuardAgainstStaticContext();
+            
             return _specificationController.Some<TInterfaceType>();
         }
 
@@ -104,6 +122,8 @@ namespace Machine.Fakes
         /// </returns>
         protected static IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class
         {
+            GuardAgainstStaticContext();
+            
             return _specificationController.Some<TInterfaceType>(amount);
         }
 
@@ -115,6 +135,8 @@ namespace Machine.Fakes
         /// <param name = "instance">Specifies the instance to be used for the specification.</param>
         protected static void Configure<TInterfaceType>(TInterfaceType instance)
         {
+            GuardAgainstStaticContext();
+            
             _specificationController.Configure(instance);
         }
 
@@ -131,6 +153,8 @@ namespace Machine.Fakes
         /// </typeparam>
         protected static void Configure<TInterfaceType, TImplementationType>() where TImplementationType : TInterfaceType
         {
+            GuardAgainstStaticContext();
+
             _specificationController.Configure<TInterfaceType, TImplementationType>();
         }
 
@@ -146,6 +170,7 @@ namespace Machine.Fakes
         protected static void Configure(Registrar registrar)
         {
             Guard.AgainstArgumentNull(registrar, "registar");
+            GuardAgainstStaticContext();
 
             _specificationController.Configure(registrar);
         }
@@ -159,6 +184,8 @@ namespace Machine.Fakes
         /// <returns>The registrar.</returns>
         protected static TRegistrar Configure<TRegistrar>() where TRegistrar : Registrar, new()
         {
+            GuardAgainstStaticContext();
+
             var registrar = new TRegistrar();
             _specificationController.Configure(registrar);
             return registrar;
@@ -178,6 +205,7 @@ namespace Machine.Fakes
         protected static void Configure(Action<Registrar> registrarExpression)
         {
             Guard.AgainstArgumentNull(registrarExpression, "registar");
+            GuardAgainstStaticContext();
 
             _specificationController.Configure(registrarExpression);
         }
@@ -195,6 +223,8 @@ namespace Machine.Fakes
         /// </remarks>
         protected static TBehaviorConfig With<TBehaviorConfig>() where TBehaviorConfig : new()
         {
+            GuardAgainstStaticContext();
+
             return _specificationController.With<TBehaviorConfig>();
         }
 
@@ -212,12 +242,22 @@ namespace Machine.Fakes
         /// </remarks>
         protected static void With(object behaviorConfig)
         {
+            GuardAgainstStaticContext();
+
             _specificationController.With(behaviorConfig);
         }
 
-        // ReSharper disable UnusedMember.Local
+        static void GuardAgainstStaticContext()
+        {
+            if (_specificationController == null)
+                throw new InvalidOperationException(
+                    "WithFakes has not been initialized yet. Are you calling it from a static initializer?");
+        }
+
+        [UsedImplicitly]
         Because of = () => _specificationController.EnsureSubjectCreated();
 
+        [UsedImplicitly]
         Cleanup after = () =>
         {
             ContextFactory.ChangeAllowedNumberOfBecauseBlocksTo(1);

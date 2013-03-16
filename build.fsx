@@ -35,7 +35,6 @@ let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash
 (* Directories *)
 let buildDir = @".\Build\"
 let packagesDir = @".\Source\packages\"
-let docsDir = buildDir + @"Documentation\"
 let testOutputDir = buildDir + @"Specs\"
 let nugetDir = buildDir + @"NuGet\"
 let testDir = buildDir
@@ -51,7 +50,7 @@ let MSpecVersion() = GetPackageVersion packagesDir "Machine.Specifications"
 let mspecTool() = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" (MSpecVersion())
 
 (* Targets *)
-Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; docsDir; testOutputDir] )
+Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; testOutputDir] )
 
 Target "BuildApp" (fun _ ->
     CreateCSharpAssemblyInfo @".\Source\GlobalAssemblyInfo.cs"
@@ -87,21 +86,6 @@ FinalTarget "DeployTestResults" (fun () ->
     !+ (testOutputDir + "\**\*.*")
       |> Scan
       |> Zip testOutputDir (sprintf "%sMSpecResults.zip" deployDir)
-)
-
-Target "GenerateDocumentation" (fun _ ->
-    !+ (buildDir + "Machine.Fakes.dll")
-      |> Scan
-      |> Docu (fun p ->
-          {p with
-              ToolPath = "./tools/docu/docu.exe"
-              TemplatesPath = "./tools/docu/templates"
-              OutputPath = docsDir })
-)
-
-Target "ZipDocumentation" (fun _ ->
-    !! (docsDir + "/**/*.*")
-      |> Zip docsDir (deployDir + sprintf "Documentation-%s.zip" version)
 )
 
 Target "BuildZip" (fun _ ->
@@ -176,8 +160,6 @@ Target "Deploy" DoNothing
   ==> "BuildApp"
   ==> "Test"
   ==> "BuildZip"
-  ==> "GenerateDocumentation"
-  ==> "ZipDocumentation"
   ==> "BuildNuGet"
   ==> "BuildNuGetFlavours"
   ==> "Deploy"

@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
+
 using Machine.Fakes.Sdk;
 using Machine.Specifications;
+using Machine.Specifications.Annotations;
 
 namespace Machine.Fakes
 {
@@ -39,6 +42,8 @@ namespace Machine.Fakes
         /// </returns>
         public static TInterfaceType An<TInterfaceType>(params object[] args) where TInterfaceType : class
         {
+            GuardAgainstStaticContext();
+
             return _specificationController.An<TInterfaceType>(args);
         }
 
@@ -50,6 +55,8 @@ namespace Machine.Fakes
         /// <returns>An <see cref = "IList{T}" />.</returns>
         public static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
+            GuardAgainstStaticContext();
+
             return _specificationController.Some<TInterfaceType>();
         }
 
@@ -67,9 +74,19 @@ namespace Machine.Fakes
         /// </returns>
         public static IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class
         {
+            GuardAgainstStaticContext();
+
             return _specificationController.Some<TInterfaceType>(amount);
         }
 
+        static void GuardAgainstStaticContext()
+        {
+            if (_specificationController == null)
+                throw new InvalidOperationException(
+                    "WithFakes has not been initialized yet. Are you calling it from a static initializer?");
+        }
+
+        [UsedImplicitly]
         Cleanup after = () => _specificationController.Dispose();
     }
 }

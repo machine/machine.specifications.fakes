@@ -1,4 +1,9 @@
 # Changelog
+## 1.2.0
+* Updated to Machine.Specifications 0.5.12
+* Updated to FakeItEasy 1.9.1
+* Better error handling when `WithFakes` or `WithSubject` are called before being initialized
+
 ## 1.1.0
 * Updated to Machine.Specifications 0.5.11
 * Updated to FakeItEasy 1.8.0
