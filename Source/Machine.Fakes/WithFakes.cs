@@ -98,11 +98,11 @@ namespace Machine.Fakes
         }
 
         /// <summary>
-        ///   Configures the specification to execute the behavior config specified
-        ///   by <paramref name = "behaviorConfig" /> before the action on the sut is executed (<see cref = "Because" />).
+        /// Configures the specification to execute the behavior config specified
+        /// by <paramref name = "behaviorConfig" /> before the action on the sut is executed (<see cref = "Because" />).
         /// </summary>
         /// <param name = "behaviorConfig">
-        ///   Specifies the behavior config to be executed.
+        /// Specifies the behavior config to be executed.
         /// </param>
         /// <remarks>
         /// The object specified by <see paramref="behaviorConfig"/>

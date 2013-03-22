@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Linq;
+
 using Machine.Fakes.Examples.SampleCode;
 using Machine.Specifications;
+using Machine.Specifications.Annotations;
 
 namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigsWithFakes
 {
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class CurrentTime
     {
         static DateTime _currentDate;
@@ -18,15 +20,15 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigsWithFakes
 
         OnEstablish context = accessor =>
         {
-            /// Can also use accessor.The<> here
-            /// e.g., Clock = accessor.The<ISystemClock>();
+            // Can also use accessor.The<> here
+            // e.g., Clock = accessor.The<ISystemClock>();
             Clock = accessor.An<ISystemClock>();
             Clock.WhenToldTo(x => x.CurrentTime).Return(_currentDate);
         };
     }
 
     [Subject(typeof(MoodIdentifier)), Tags("BehaviorConfigs")]
-    public class Given_the_current_day_is_monday_when_identifying_my_mood2 : WithFakes
+    public class Given_the_current_day_is_monday_when_identifying_my_mood : WithFakes
     {
         static MoodIdentifier _moodIdentifier;
         static string _mood;
@@ -37,10 +39,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigsWithFakes
             _moodIdentifier = new MoodIdentifier(CurrentTime.Clock);
         };
 
-        Because of = () =>
-        {
-            _mood = _moodIdentifier.IdentifyMood();
-        };
+        Because of = () => _mood = _moodIdentifier.IdentifyMood();
 
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
@@ -57,10 +56,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigsWithFakes
             _moodIdentifier = new MoodIdentifier(CurrentTime.Clock);
         };
 
-        Because of = () =>
-        {
-            _mood = _moodIdentifier.IdentifyMood();
-        };
+        Because of = () => _mood = _moodIdentifier.IdentifyMood();
 
         It should_be_Ok = () => _mood.ShouldEqual("Ok");
     }
