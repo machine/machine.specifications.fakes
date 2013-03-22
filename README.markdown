@@ -146,7 +146,7 @@ Very often we try to accomplish re-use in classes by using inheritance and of co
     public class BehaviorConfig
     {
         OnEstablish context = fakeAccessor => {};
-        OnCleanUp subject => subject => {};
+        OnCleanUp subject = subject => {};
     }
 
 `BehaviorConfig`s mimic the setup and teardown phases of the context / specification. They offer access to all the fakes in a specification and can clean up the subject after a specification. You only have to implement the relevant delegate. Machine.Fakes also ignores not initialized delegates. An example for a `BehaviorConfig` in the context of time looks like this:

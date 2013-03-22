@@ -1,10 +1,13 @@
 using System;
+
 using Machine.Fakes.Examples.SampleCode;
 using Machine.Specifications;
+using Machine.Specifications.Annotations;
 
 namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigs
 {
-    public class CurrentTime 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
+    public class CurrentTime
     {
         static DateTime _currentDate;
 
@@ -14,9 +17,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigs
         }
 
         OnEstablish context = accessor =>
-        {
             accessor.The<ISystemClock>().WhenToldTo(x => x.CurrentTime).Return(_currentDate);
-        };
     }
 
     [Subject(typeof(MoodIdentifier)), Tags("BehaviorConfigs")]
@@ -26,10 +27,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigs
 
         Establish context = () => With(new CurrentTime(new DateTime(2011, 02, 14)));
 
-        Because of = () =>
-        {
-            _mood = Subject.IdentifyMood();
-        };
+        Because of = () => _mood = Subject.IdentifyMood();
 
         It should_be_pretty_bad = () => _mood.ShouldEqual("Pretty bad");
     }
@@ -41,10 +39,7 @@ namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigs
 
         Establish context = () => With(new CurrentTime(new DateTime(2011, 02, 15)));
 
-        Because of = () =>
-        {
-            _mood = Subject.IdentifyMood();
-        };
+        Because of = () => _mood = Subject.IdentifyMood();
 
         It should_be_Ok = () => _mood.ShouldEqual("Ok");
     }

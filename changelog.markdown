@@ -1,4 +1,7 @@
 # Changelog
+## 1.3.0
+* Added support for `BehaviorConfig`s to `WithFakes` (thanks to [Robert Anderson](https://github.com/shamp00))
+
 ## 1.2.0
 * Updated to Machine.Specifications 0.5.12
 * Updated to FakeItEasy 1.9.1
