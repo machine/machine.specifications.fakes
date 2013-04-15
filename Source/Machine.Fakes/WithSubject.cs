@@ -19,6 +19,7 @@ namespace Machine.Fakes
     /// Specifies the concrete fake engine that will be used for creating fake instances.
     /// This must be a class with a parameterless constructor that implements <see cref="IFakeEngine"/>.
     /// </typeparam>
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public abstract class WithSubject<TSubject, TFakeEngine> 
         where TSubject : class
         where TFakeEngine : IFakeEngine, new()
