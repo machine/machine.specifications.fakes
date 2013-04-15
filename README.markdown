@@ -137,7 +137,7 @@ You can access the created instance through the lazy `Subject` property (***). T
 
 Having the subject created for us is a good thing but how do we access the injected fake without having a reference to it? That's exactly the purpose of the `The<TFake>()` method (**) which gives access to the injected dependency.
 
-### WithSubject&lt;TSubject&gt; and behavior configurations ###
+### Behavior Configurations ###
 
 Re-use in context / specification is an interesting topic. In case you've already used a test case class per fixture setup (like Machine.Specifications does) then I'm pretty sure you've stumbled upon this, too.
 

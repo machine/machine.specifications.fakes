@@ -1,4 +1,8 @@
 # Changelog
+## 1.4.0
+* Updated to FakeItEasy 1.10.0
+* `WithSubject` and `WithFakes` are marked as used implicitly for ReSharper now.
+
 ## 1.3.0
 * Added support for `BehaviorConfig`s to `WithFakes` (thanks to [Robert Anderson](https://github.com/shamp00))
 
