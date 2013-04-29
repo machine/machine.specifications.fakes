@@ -7,6 +7,7 @@ open Fake.AssemblyInfoFile
 open System.Collections.Generic
 open System.Linq
 open System.IO
+open System.Net
 open System.Web.Script.Serialization
 
 (* properties *)
@@ -16,6 +17,14 @@ let copyright = "Copyright - Machine.Fakes 2011 - 2012"
 // none as workaround for a FAKE bug
 let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else "none"
 
+let ExecuteGetCommand (url:string) =
+    use client = new WebClient()
+    client.Headers.Add("User-Agent", "Machine.Fakes/teamcity.codebetter.com")
+  
+    use stream = client.OpenRead(url)
+    use reader = new StreamReader(stream)
+    reader.ReadToEnd()
+
 let version =
     if hasBuildParam "version" then getBuildParam "version" else
     if isLocalBuild then getLastTag() else
@@ -23,8 +32,7 @@ let version =
     // see http://developer.github.com/v3/repos/ for reference
     let url = "https://api.github.com/repos/machine/machine.fakes/tags"
     tracefn "Downloading tags from %s" url
-    let tagsFile = REST.ExecuteGetCommand null null url
-    let tags = (new JavaScriptSerializer()).DeserializeObject(tagsFile) :?> System.Object array
+    let tags = (new JavaScriptSerializer()).DeserializeObject(ExecuteGetCommand url) :?> System.Object array
     [ for tag in tags -> tag :?> Dictionary<string, System.Object> ]
         |> List.map (fun m -> m.Item("name") :?> string)
         |> List.max
