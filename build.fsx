@@ -13,7 +13,7 @@ open System.Web.Script.Serialization
 (* properties *)
 let authors = ["The machine project"]
 let projectName = "Machine.Fakes"
-let copyright = "Copyright - Machine.Fakes 2011 - 2012"
+let copyright = "Copyright - Machine.Fakes 2011 - 2013"
 // none as workaround for a FAKE bug
 let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else "none"
 
