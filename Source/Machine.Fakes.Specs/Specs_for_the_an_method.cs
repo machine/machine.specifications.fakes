@@ -53,8 +53,7 @@ namespace Machine.Fakes.Specs
 
         static When_called_from_a_static_initializer()
         {
-            exception = Catch.Exception(
-                () => An<IDbConnection>());
+            exception = Catch.Exception(() => An<IDbConnection>());
         }
 
         It should_throw_the_right_exception = () => exception.ShouldBeOfType<InvalidOperationException>();

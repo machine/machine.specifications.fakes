@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
+
 using Machine.Fakes.Sdk;
 using Machine.Specifications;
-using Machine.Specifications.Annotations;
 using Machine.Specifications.Factories;
 
 namespace Machine.Fakes
@@ -12,23 +11,17 @@ namespace Machine.Fakes
     /// to Machine.Specifications. 
     /// </summary>
     /// <typeparam name="TSubject">
-    /// The subject for the specification. This is the type that is created by the
+    /// The subject of the specification. This is the type that is created by the
     /// specification for you.
     /// </typeparam>
     /// <typeparam name="TFakeEngine">
     /// Specifies the concrete fake engine that will be used for creating fake instances.
     /// This must be a class with a parameterless constructor that implements <see cref="IFakeEngine"/>.
     /// </typeparam>
-    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-    public abstract class WithSubject<TSubject, TFakeEngine> 
+    public abstract class WithSubject<TSubject, TFakeEngine> : WithFakes<TSubject, TFakeEngine>
         where TSubject : class
         where TFakeEngine : IFakeEngine, new()
     {
-        /// <summary>
-        /// The specification controller
-        /// </summary>
-        protected static SpecificationController<TSubject, TFakeEngine> _specificationController;
-        
         /// <summary>
         /// Creates a new instance of the <see cref="WithSubject{TSubject, TFakeEngine}"/> class.
         /// </summary>
@@ -77,55 +70,6 @@ namespace Machine.Fakes
             GuardAgainstStaticContext();
 
             return _specificationController.The<TInterfaceType>();
-        }
-
-        /// <summary>
-        ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" />.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">The type to create a fake for. (Should be an interface or an abstract class)</typeparam>
-        /// <param name="args">
-        ///  Optional constructor parameters for abstract base classes as fakes.
-        /// </param>
-        /// <returns>
-        ///   An newly created fake implementing <typeparamref name = "TInterfaceType" />.
-        /// </returns>
-        protected static TInterfaceType An<TInterfaceType>(params object[] args) where TInterfaceType : class
-        {
-            GuardAgainstStaticContext();
-
-            return _specificationController.An<TInterfaceType>(args);
-        }
-
-        /// <summary>
-        ///   Creates a list containing 3 fake instances of the type specified
-        ///   via <typeparamref name = "TInterfaceType" />.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">Specifies the item type of the list. This should be an interface or an abstract class.</typeparam>
-        /// <returns>An <see cref = "IList{T}" />.</returns>
-        protected static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
-        {
-            GuardAgainstStaticContext();
-            
-            return _specificationController.Some<TInterfaceType>();
-        }
-
-        /// <summary>
-        /// Creates a list of fakes.
-        /// </summary>
-        /// <typeparam name="TInterfaceType">
-        /// Specifies the item type of the list. This should be an interface or an abstract class.
-        /// </typeparam>
-        /// <param name="amount">
-        /// Specifies the amount of fakes that have to be created and inserted into the list.
-        /// </param>
-        /// <returns>
-        /// An <see cref="IList{TInterfaceType}"/>.
-        /// </returns>
-        protected static IList<TInterfaceType> Some<TInterfaceType>(int amount) where TInterfaceType : class
-        {
-            GuardAgainstStaticContext();
-            
-            return _specificationController.Some<TInterfaceType>(amount);
         }
 
         /// <summary>
@@ -211,58 +155,8 @@ namespace Machine.Fakes
             _specificationController.Configure(registrarExpression);
         }
 
-        /// <summary>
-        /// Configures the specification to execute a behavior config before the action on the subject
-        /// is executed (<see cref="Because"/>).
-        /// </summary>
-        /// <typeparam name="TBehaviorConfig">Specifies the type of the config to be executed.</typeparam>
-        /// <returns>The behavior config instance.</returns>
-        /// <remarks>
-        /// The class specified by <typeparamref name="TBehaviorConfig"/>
-        /// needs to have private fields assigned with either <see cref="OnEstablish"/>
-        /// or <see cref="OnCleanup"/> delegates.
-        /// </remarks>
-        protected static TBehaviorConfig With<TBehaviorConfig>() where TBehaviorConfig : new()
-        {
-            GuardAgainstStaticContext();
-
-            return _specificationController.With<TBehaviorConfig>();
-        }
-
-        /// <summary>
-        /// Configures the specification to execute the behavior config specified
-        /// by <paramref name = "behaviorConfig" /> before the action on the sut is executed (<see cref = "Because" />).
-        /// </summary>
-        /// <param name = "behaviorConfig">
-        /// Specifies the behavior config to be executed.
-        /// </param>
-        /// <remarks>
-        /// The object specified by <see paramref="behaviorConfig"/>
-        /// needs to have private fields assigned with either <see cref="OnEstablish"/>
-        /// or <see cref="OnCleanup"/> delegates.
-        /// </remarks>
-        protected static void With(object behaviorConfig)
-        {
-            GuardAgainstStaticContext();
-
-            _specificationController.With(behaviorConfig);
-        }
-
-        static void GuardAgainstStaticContext()
-        {
-            if (_specificationController == null)
-                throw new InvalidOperationException(
-                    "WithFakes has not been initialized yet. Are you calling it from a static initializer?");
-        }
-
-        [UsedImplicitly]
         Because of = () => _specificationController.EnsureSubjectCreated();
 
-        [UsedImplicitly]
-        Cleanup after = () =>
-        {
-            ContextFactory.ChangeAllowedNumberOfBecauseBlocksTo(1);
-            _specificationController.Dispose();
-        };
+        Cleanup after = () => ContextFactory.ChangeAllowedNumberOfBecauseBlocksTo(1);
     }
 }

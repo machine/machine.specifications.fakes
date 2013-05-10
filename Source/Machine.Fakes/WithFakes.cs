@@ -8,28 +8,22 @@ using Machine.Specifications.Annotations;
 namespace Machine.Fakes
 {
     /// <summary>
-    /// Base class for the simpler cases than <see cref="WithSubject{TSubject, TFakeEngine}"/>. 
-    /// This class only contains the shortcuts for creating fakes via "An" and "Some".
+    /// Base class for specifications.
     /// </summary>
+    /// <typeparam name="TSubject">The subject of the specification</typeparam>
     /// <typeparam name="TFakeEngine">
     /// Specifies the concrete fake engine that will be used for creating fake instances.
     /// This must be a class with a parameterless constructor that implements <see cref="IFakeEngine"/>.
     /// </typeparam>
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-    public abstract class WithFakes<TFakeEngine> where TFakeEngine : IFakeEngine, new()  
+    public abstract class WithFakes<TSubject, TFakeEngine>
+        where TSubject : class
+        where TFakeEngine : IFakeEngine, new()
     {
         /// <summary>
         /// The specification controller
         /// </summary>
-        protected static SpecificationController<object, TFakeEngine> _specificationController;
-        
-        /// <summary>
-        /// Creates a new instance of the <see cref="WithFakes{TFakeEngine}"/> class.
-        /// </summary>
-        protected WithFakes()
-        {
-            _specificationController = new SpecificationController<object, TFakeEngine>();
-        }
+        protected static SpecificationController<TSubject, TFakeEngine> _specificationController;
 
         /// <summary>
         ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" />.
@@ -117,14 +111,36 @@ namespace Machine.Fakes
             _specificationController.With(behaviorConfig);
         }
 
-        static void GuardAgainstStaticContext()
+        protected static void GuardAgainstStaticContext()
         {
             if (_specificationController == null)
                 throw new InvalidOperationException(
                     "WithFakes has not been initialized yet. Are you calling it from a static initializer?");
         }
 
-        [UsedImplicitly]
-        Cleanup after = () => _specificationController.Dispose();
+        Cleanup after = () =>
+        {
+            _specificationController.Dispose();
+            _specificationController = null;
+        };
+    }
+
+    /// <summary>
+    /// Base class for the simpler cases than <see cref="WithSubject{TSubject, TFakeEngine}"/>. 
+    /// This class only contains the shortcuts for creating fakes via "An" and "Some".
+    /// </summary>
+    /// <typeparam name="TFakeEngine">
+    /// Specifies the concrete fake engine that will be used for creating fake instances.
+    /// This must be a class with a parameterless constructor that implements <see cref="IFakeEngine"/>.
+    /// </typeparam>
+    public abstract class WithFakes<TFakeEngine> : WithFakes<object, TFakeEngine> where TFakeEngine : IFakeEngine, new()
+    {
+        /// <summary>
+        /// Creates a new instance of the <see cref="WithFakes{TFakeEngine}"/> class.
+        /// </summary>
+        protected WithFakes()
+        {
+            _specificationController = new SpecificationController<object, TFakeEngine>();
+        }
     }
 }
