@@ -41,7 +41,7 @@ The core part of Machine.Fakes consists of only two classes: `WithFakes` and `Wi
 
 ### WithFakes ###
 
-Let's take a look at the simpler one first. By deriving from this class you can use the `An<TFake>()` and `Some<TFake>()` (\*) methods for creating fakes as well as the extension methods based API for setting up the behavior (\*\*). The `WithFakes` class only provides the basic fake framework abstraction.
+Let's take a look at the simpler one first. By deriving from this class you can use the `An<TFake>()`, `Some<TFake>()` and `The<TFake>()` (\*) methods for creating fakes as well as the extension methods based API for setting up the behavior (\*\*). The `WithFakes` class only provides the basic fake framework abstraction.
 
 
     public class Given_the_current_day_is_monday_when_identifying_my_mood : WithFakes
