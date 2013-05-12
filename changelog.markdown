@@ -1,4 +1,9 @@
 # Changelog
+## 1.5.0
+* `The()` and `Configure()` are now available on `WithFakes`.
+* Updated to FakeItEasy 1.11.0
+* Updated to NSubsitute 1.6.0.0
+
 ## 1.4.0
 * Updated to FakeItEasy 1.10.0
 * `WithSubject` and `WithFakes` are marked as used implicitly for ReSharper now.
