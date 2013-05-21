@@ -68,22 +68,23 @@
   <ItemGroup>
     <Compile Include="Bugs\Run_more_than_one_behavior_config.cs" />
     <Compile Include="Bugs\Issue28.cs" />
+    <Compile Include="EngineSpecs.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EngineSpecs.tt</DependentUpon>
+    </Compile>
     <Compile Include="FakeItEasy\CommandOptionsSpecs.cs" />
-    <Compile Include="FakeItEasy\EngineSpecs.cs" />
     <Compile Include="FakeItEasy\InlineConstraints.cs" />
     <Compile Include="Moq\CommandOptionsSpecs.cs" />
-    <Compile Include="Moq\EngineSpecs.cs" />
     <Compile Include="Moq\MethodCallOccurrenceSpecs.cs" />
     <Compile Include="Moq\QueryOptionsSpecs.cs" />
     <Compile Include="NSubstitute\CommandOptionsSpecs.cs" />
-    <Compile Include="NSubstitute\EngineSpecs.cs" />
     <Compile Include="NSubstitute\InlineConstraints.cs" />
     <Compile Include="NSubstitute\MethodCallOccurrenceSpecs.cs" />
     <Compile Include="NSubstitute\QueryOptionsSpecs.cs" />
     <Compile Include="RegistrarSpecs\Faking_only_a_particular_dependency_in_an_object_graph.cs" />
     <Compile Include="RegistrarSpecs\Using_registrars_and_factories.cs" />
     <Compile Include="RhinoMocks\CommandOptionsSpecs.cs" />
-    <Compile Include="RhinoMocks\EngineSpecs.cs" />
     <Compile Include="RhinoMocks\InlineConstraints.cs" />
     <Compile Include="RhinoMocks\MethodCallOccurrenceSpecs.cs" />
     <Compile Include="RhinoMocks\PropertyBehaviorSpecs.cs" />
@@ -102,6 +103,10 @@
     <Compile Include="FakeItEasy\QueryOptionsSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="EngineSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EngineSpecs.generated.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +131,9 @@
       <Name>Machine.Fakes</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
