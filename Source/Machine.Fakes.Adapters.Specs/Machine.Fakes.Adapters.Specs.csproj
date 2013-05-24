@@ -68,27 +68,34 @@
   <ItemGroup>
     <Compile Include="Bugs\Run_more_than_one_behavior_config.cs" />
     <Compile Include="Bugs\Issue28.cs" />
+    <Compile Include="CommandOptionsSpecs.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommandOptionsSpecs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MethodCallOccurrenceSpecs.generated.cs">
+      <DependentUpon>MethodCallOccurrenceSpecs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="InlineConstraintSpecs.generated.cs">
+      <DependentUpon>InlineConstraintSpecs.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="EngineSpecs.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EngineSpecs.tt</DependentUpon>
     </Compile>
-    <Compile Include="FakeItEasy\CommandOptionsSpecs.cs" />
-    <Compile Include="FakeItEasy\InlineConstraints.cs" />
-    <Compile Include="Moq\CommandOptionsSpecs.cs" />
-    <Compile Include="Moq\MethodCallOccurrenceSpecs.cs" />
-    <Compile Include="Moq\QueryOptionsSpecs.cs" />
-    <Compile Include="NSubstitute\CommandOptionsSpecs.cs" />
-    <Compile Include="NSubstitute\InlineConstraints.cs" />
-    <Compile Include="NSubstitute\MethodCallOccurrenceSpecs.cs" />
-    <Compile Include="NSubstitute\QueryOptionsSpecs.cs" />
+    <Compile Include="QueryOptionsSpecs.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QueryOptionsSpecs.tt</DependentUpon>
+    </Compile>
     <Compile Include="RegistrarSpecs\Faking_only_a_particular_dependency_in_an_object_graph.cs" />
     <Compile Include="RegistrarSpecs\Using_registrars_and_factories.cs" />
-    <Compile Include="RhinoMocks\CommandOptionsSpecs.cs" />
-    <Compile Include="RhinoMocks\InlineConstraints.cs" />
-    <Compile Include="RhinoMocks\MethodCallOccurrenceSpecs.cs" />
     <Compile Include="RhinoMocks\PropertyBehaviorSpecs.cs" />
-    <Compile Include="RhinoMocks\QueryOptionsSpecs.cs" />
     <Compile Include="SampleCode\ITypeWithProperty.cs" />
     <Compile Include="SampleCode\ClassWithUnfakableParameter.cs" />
     <Compile Include="SampleCode\DummyNoDefaultCtorClass.cs" />
@@ -96,13 +103,26 @@
     <Compile Include="SampleCode\IFlashVerifier.cs" />
     <Compile Include="SampleCode\ITablet.cs" />
     <Compile Include="SampleCode\IView.cs" />
-    <Compile Include="FakeItEasy\MethodCallOccurrenceSpecs.cs" />
-    <Compile Include="Moq\InlineConstraints.cs" />
     <Compile Include="WithCurrentEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FakeItEasy\QueryOptionsSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CommandOptionsSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CommandOptionsSpecs.generated.cs</LastGenOutput>
+    </None>
+    <None Include="MethodCallOccurrenceSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MethodCallOccurrenceSpecs.generated.cs</LastGenOutput>
+    </None>
+    <None Include="InlineConstraintSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InlineConstraintSpecs.generated.cs</LastGenOutput>
+    </None>
+    <None Include="QueryOptionsSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryOptionsSpecs.generated.cs</LastGenOutput>
+    </None>
     <None Include="EngineSpecs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EngineSpecs.generated.cs</LastGenOutput>
