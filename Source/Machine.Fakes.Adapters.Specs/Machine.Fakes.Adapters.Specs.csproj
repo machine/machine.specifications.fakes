@@ -99,7 +99,6 @@
       <DependentUpon>QueryOptionsSpecs.tt</DependentUpon>
     </Compile>
     <Compile Include="RegistrarSpecs\Faking_only_a_particular_dependency_in_an_object_graph.cs" />
-    <Compile Include="RegistrarSpecs\Using_registrars_and_factories.cs" />
     <Compile Include="SampleCode\IProperties.cs" />
     <Compile Include="SampleCode\ITypeWithProperty.cs" />
     <Compile Include="SampleCode\ClassWithUnfakableParameter.cs" />
