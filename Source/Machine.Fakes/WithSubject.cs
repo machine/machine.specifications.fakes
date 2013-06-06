@@ -25,8 +25,6 @@ namespace Machine.Fakes
         /// </summary>
         protected WithSubject()
         {
-            _specificationController = new SpecificationController<TSubject, TFakeEngine>();
-
             ContextFactory.ChangeAllowedNumberOfBecauseBlocksTo(2);
         }
 
