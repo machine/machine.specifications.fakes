@@ -434,4 +434,24 @@ namespace Machine.Fakes.Specs
         static Car createdFake;
         static AutoFakeContainer autoFakeContainer;
     }
+
+    [Subject(typeof(AutoFakeContainer))]
+    public class When_the_dependency_graph_of_a_subject_is_configured_but_one_dependency_is_left_out
+    {
+        static AutoFakeContainer autoFakeContainer;
+        static DummyFakeEngine dummyFakeEngine;
+
+        Establish context = () =>
+        {
+            dummyFakeEngine = new DummyFakeEngine { CreatedFake = new FakeIncomingCommandObjects() };
+            autoFakeContainer = new AutoFakeContainer(dummyFakeEngine);
+            autoFakeContainer.Register(new TypeMapping(typeof(ICommandBus), typeof(CommandBus)));
+            autoFakeContainer.Register(new TypeMapping(typeof(ICommand), typeof(TestCommand)));
+        };
+
+        Because of = () => autoFakeContainer.CreateSubject<ServiceFacade>().DoIt("a");
+
+        It should_replace_the_missing_dependency_with_a_fake = () =>
+            dummyFakeEngine.RequestedFakeType.ShouldEqual(typeof(IIncomingCommandObjects));
+    }
 }

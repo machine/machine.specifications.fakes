@@ -1,15 +1,26 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".generated.cs" #>
+<# var allEngines = new[] { "RhinoFakeEngine", "NSubstituteEngine", "MoqFakeEngine", "FakeItEasyEngine" };  #>
+<# var allNamespaces = new[] { "RhinoMocks", "NSubstitute", "Moq", "FakeItEasy" };  #>
 using System;
 using System.ComponentModel.Design;
+using Machine.Fakes.Adapters.FakeItEasy;
+using Machine.Fakes.Adapters.Moq;
 using Machine.Fakes.Adapters.NSubstitute;
+using Machine.Fakes.Adapters.Rhinomocks;
+using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
+<# for (int i = 0; i < allEngines.Length; i++) { #>
 
-namespace Machine.Fakes.Adapters.Specs.NSubstitute
+namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 {
-    [Subject(typeof(NSubstituteEngine))]
-    [Tags("MethodCallOccurrence", "NSubstitute")]
-    public class Given_a_method_was_not_configured_on_a_Fake_when_verifying_whether_it_was_accessed :
-        WithCurrentEngine<NSubstituteEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_a_method_was_not_configured_on_a_Fake_when_verifying_whether_it_was_accessed : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -21,10 +32,8 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
-    [Subject(typeof(NSubstituteEngine))]
-    [Tags("MethodCallOccurrence", "NSubstitute")]
-    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed :
-        WithCurrentEngine<NSubstituteEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -40,10 +49,8 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 
-    [Subject(typeof(NSubstituteEngine))]
-    [Tags("MethodCallOccurrence", "NSubstitute")]
-    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_twice :
-        WithCurrentEngine<NSubstituteEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_twice : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -60,10 +67,8 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 
-    [Subject(typeof(NSubstituteEngine))]
-    [Tags("MethodCallOccurrence", "NSubstitute")]
-    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_twice_but_was_only_executed_once :
-        WithCurrentEngine<NSubstituteEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_twice_but_was_only_executed_once : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -79,10 +84,8 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
-    [Subject(typeof(NSubstituteEngine))]
-    [Tags("MethodCallOccurrence", "NSubstitute")]
-    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_only_once_but_was_excuted_twice :
-        WithCurrentEngine<NSubstituteEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_only_once_but_was_excuted_twice : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -99,10 +102,8 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         It should_throw_an_exception = () => _exception.ShouldNotBeNull();
     }
 
-    [Subject(typeof(NSubstituteEngine))]
-    [Tags("MethodCallOccurrence", "NSubstitute")]
-    public class Given_a_query_was_configured_on_a_fake_when_verifying_whether_it_was_executed :
-        WithCurrentEngine<NSubstituteEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_a_query_was_configured_on_a_fake_when_verifying_whether_it_was_executed : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static Exception _exception;
         static IServiceContainer _fake;
@@ -118,3 +119,4 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 }
+<# } #>

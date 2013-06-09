@@ -24,7 +24,7 @@ namespace Machine.Fakes
         ///   The fake to configure behavior on.
         /// </param>
         /// <param name = "func">
-        ///   Configures the behavior. This must be a void method.
+        ///   Configures the behavior.
         /// </param>
         /// <returns>
         ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.

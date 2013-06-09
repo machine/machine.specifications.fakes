@@ -1,16 +1,27 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension="generated.cs" #>
+<# var allEngines = new[] { "RhinoFakeEngine", "NSubstituteEngine", "MoqFakeEngine", "FakeItEasyEngine" };  #>
+<# var allNamespaces = new[] { "RhinoMocks", "NSubstitute", "Moq", "FakeItEasy" };  #>
 using System;
 using System.ComponentModel.Design;
 using System.Linq;
+using Machine.Fakes.Adapters.FakeItEasy;
+using Machine.Fakes.Adapters.Moq;
+using Machine.Fakes.Adapters.NSubstitute;
 using Machine.Fakes.Adapters.Rhinomocks;
 using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
+<# for (int i = 0; i < allEngines.Length; i++) { #>
 
-namespace Machine.Fakes.Adapters.Specs.RhinoMocks
+namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 {
-    [Subject(typeof(RhinoFakeEngine))]
-    [Tags("QueryOptions", "Rhinomocks")]
-    public class Given_a_property_configuration_when_triggering_the_behavior : WithCurrentEngine<RhinoFakeEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_a_property_configuration_when_triggering_the_behavior : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static ICar _fake;
 
@@ -27,9 +38,8 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
         It should_execute_the_configured_behavior = () => _fake.DoorIsOpen.ShouldBeTrue();
     }
 
-    [Subject(typeof(RhinoFakeEngine))]
-    [Tags("QueryOptions", "Rhinomocks")]
-    public class Given_a_simple_configured_query_when_triggering_the_behavior : WithCurrentEngine<RhinoFakeEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_a_simple_configured_query_when_triggering_the_behavior : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static IServiceContainer _fake;
 
@@ -46,10 +56,8 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
         It should_execute_the_configured_behavior = () => _fake.GetService(typeof(string)).ShouldNotBeNull();
     }
 
-    [Subject(typeof(RhinoFakeEngine))]
-    [Tags("QueryOptions", "Rhinomocks")]
-    public class Given_an_configured_callback_on_a_query_when_triggering_the_behavior :
-        WithCurrentEngine<RhinoFakeEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_an_configured_callback_on_a_query_when_triggering_the_behavior : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static IServiceContainer _fake;
         static Type _parameter;
@@ -73,10 +81,8 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
         It should_return_the_return_value_of_the_callback = () => _fake.GetService(typeof(string)).ShouldEqual("ReturnValue");
     }
 
-    [Subject(typeof(RhinoFakeEngine))]
-    [Tags("QueryOptions", "Rhinomocks")]
-    public class Given_an_exception_configured_on_a_query_when_triggering_the_behavior :
-        WithCurrentEngine<RhinoFakeEngine>
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_an_exception_configured_on_a_query_when_triggering_the_behavior : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static IServiceContainer _fake;
 
@@ -89,3 +95,4 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
         It should_execute_the_configured_behavior = () => Catch.Exception(() => _fake.GetService(typeof(string))).ShouldNotBeNull();
     }
 }
+<# } #>

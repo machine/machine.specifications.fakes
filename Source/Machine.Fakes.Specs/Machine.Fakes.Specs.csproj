@@ -57,6 +57,8 @@
     <Compile Include="Specs_for_using_a_custom_type_in_the_build_process.cs" />
     <Compile Include="Specs_for_the_an_method.cs" />
     <Compile Include="Specs_for_the_The_accessor.cs" />
+    <Compile Include="Specs_for_using_registrars_and_factories.cs" />
+    <Compile Include="TestClasses\ServiceFacade.cs" />
     <Compile Include="TestClasses\WithStringInConstructor.cs" />
     <Compile Include="TestClasses\IDriver.cs" />
     <Compile Include="TestClasses\WithArrayInConstructor.cs" />
