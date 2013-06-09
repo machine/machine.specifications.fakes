@@ -1,4 +1,8 @@
 # Changelog
+## 1.6.0
+* Fixed `WithFakes` to work correctly under Gallio test runner (thanks to [Alexander Abramov](https://github.com/alexanderabramov))
+* Updated to FakeItEasy 1.12.0
+
 ## 1.5.0
 * `The()` and `Configure()` are now available on `WithFakes`.
 * Updated to FakeItEasy 1.11.0
