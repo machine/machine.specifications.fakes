@@ -25,6 +25,11 @@ namespace Machine.Fakes
         /// </summary>
         protected static SpecificationController<TSubject, TFakeEngine> _specificationController;
 
+        Establish context = () =>
+        {
+            _specificationController = new SpecificationController<TSubject, TFakeEngine>();
+        };
+
         /// <summary>
         ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" />.
         /// </summary>
@@ -238,12 +243,5 @@ namespace Machine.Fakes
     /// </typeparam>
     public abstract class WithFakes<TFakeEngine> : WithFakes<object, TFakeEngine> where TFakeEngine : IFakeEngine, new()
     {
-        /// <summary>
-        /// Creates a new instance of the <see cref="WithFakes{TFakeEngine}"/> class.
-        /// </summary>
-        protected WithFakes()
-        {
-            _specificationController = new SpecificationController<object, TFakeEngine>();
-        }
     }
 }
