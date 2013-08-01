@@ -15,11 +15,14 @@ namespace Machine.Fakes.Adapters.Rhinomocks
             _methodOptions = methodOptions;
         }
 
-        #region ICommandOptions Members
-
         public void Throw(Exception exception)
         {
             _methodOptions.Throw(exception);
+        }
+
+        public ICallbackOptions AssignOutAndRefParameters(params object[] values)
+        {
+            throw new NotSupportedException("The Machine.Fakes RhinoMocks adapter does not support setting up out or ref parameters. Please use FakeItEasy or NSubstitute instead.");
         }
 
         public void Callback(Action callback)
@@ -66,7 +69,5 @@ namespace Machine.Fakes.Adapters.Rhinomocks
                 return true;
             });
         }
-
-        #endregion
     }
 }

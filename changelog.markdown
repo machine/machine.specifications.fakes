@@ -1,4 +1,7 @@
 # Changelog
+## 1.7.0
+* Added support for setting up values for out and ref parameters to FakeItEasy and NSubsitute adapters.
+
 ## 1.6.0
 * Fixed `WithFakes` to work correctly under Gallio test runner (thanks to [Alexander Abramov](https://github.com/alexanderabramov))
 * Updated to FakeItEasy 1.12.0

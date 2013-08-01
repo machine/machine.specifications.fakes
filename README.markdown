@@ -192,3 +192,22 @@ This way you can also check whether a setter has been called:
     The<InterfaceWithProperty>().Property.ShouldEqual(propertyValue);
 
 The Rhino Mocks adapter is a bit special here: a fake will stop tracking its properties as soon as you set a behavior on one of them.
+
+### Faking out and ref parameters
+The FakeItEasy and NSubstitute adapters support setting up values for out and ref parameters on faked method calls. For example, a method
+
+    public interface IReturnOutAndRef
+    {
+		void Invoke(string input, out string output, ref object additional);
+    }
+
+can be faked this way:
+
+	string output;
+	object additional;
+    The<IReturnOutAndRef>().WhenToldTo(x => x.Invoke("a", out output, ref additional))
+            .AssignOutAndRefParameters("b", new object());
+
+`output` will be set to `"b"` and `additional` to a new `object` instance.
+
+`AssignOutAndRefParameters` will use the given values to set up all out and ref parameters in the order they appear in the method signature. Any non out and ref parameters are ignored.
