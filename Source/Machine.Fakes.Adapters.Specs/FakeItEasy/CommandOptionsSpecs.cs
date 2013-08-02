@@ -71,7 +71,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         static IReturnOutAndRef _fake;
         static string initial1;
         static object initial2;
-        static object setupResult;
+        static object setupResult = new object();
 
         Establish context = () => _fake = FakeEngineGateway.Fake<IReturnOutAndRef>();
 
