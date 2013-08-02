@@ -15,11 +15,14 @@ namespace Machine.Fakes.Adapters.Moq
             _methodOptions = methodOptions;
         }
 
-        #region ICommandOptions Members
-
         public void Throw(Exception exception)
         {
             _methodOptions.Throws(exception);
+        }
+
+        public ICallbackOptions AssignOutAndRefParameters(params object[] values)
+        {
+            throw new NotSupportedException("The Machine.Fakes Moq adapter does not support setting up out or ref parameters. Please use FakeItEasy or NSubstitute instead.");
         }
 
         public void Callback(Action callback)
@@ -46,7 +49,5 @@ namespace Machine.Fakes.Adapters.Moq
         {
             _methodOptions.Callback(callback);
         }
-
-        #endregion
     }
 }

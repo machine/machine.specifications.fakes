@@ -52,5 +52,11 @@ namespace Machine.Fakes.Adapters.FakeItEasy
         {
             _configuration.Throws(exception);
         }
+
+        public ICallbackOptions AssignOutAndRefParameters(params object[] values)
+        {
+            _configuration.AssignsOutAndRefParameters(values);
+            return this;
+        }
     }
 }

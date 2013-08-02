@@ -35,24 +35,24 @@
     <NoWarn>169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FakeItEasy, Version=1.12.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+    <Reference Include="FakeItEasy, Version=1.13.1.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FakeItEasy.1.12.0\lib\net40\FakeItEasy.dll</HintPath>
+      <HintPath>..\packages\FakeItEasy.1.13.1\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications, Version=0.5.12.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Machine.Specifications, Version=0.5.14.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Machine.Specifications.0.5.12\lib\net40\Machine.Specifications.dll</HintPath>
+      <HintPath>..\packages\Machine.Specifications.0.5.14\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.Clr4, Version=0.5.12.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Machine.Specifications.Clr4, Version=0.5.14.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Machine.Specifications.0.5.12\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
+      <HintPath>..\packages\Machine.Specifications.0.5.14\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="NSubstitute, Version=1.6.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+    <Reference Include="NSubstitute, Version=1.6.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NSubstitute.1.6.0.0\lib\NET40\NSubstitute.dll</HintPath>
+      <HintPath>..\packages\NSubstitute.1.6.1.0\lib\NET40\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
@@ -73,6 +73,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommandOptionsSpecs.tt</DependentUpon>
     </Compile>
+    <Compile Include="FakeItEasy\CommandOptionsSpecs.cs" />
+    <Compile Include="Moq\CommandOptionsSpecs.cs" />
+    <Compile Include="NSubstitute\CommandOptionsSpecs.cs" />
     <Compile Include="PropertyBehaviorSpecs.generated.cs">
       <DependentUpon>PropertyBehaviorSpecs.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -98,7 +101,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QueryOptionsSpecs.tt</DependentUpon>
     </Compile>
+    <Compile Include="RhinoMocks\CommandOptionsSpecs.cs" />
+    <Compile Include="SampleCode\ILookupService.cs" />
     <Compile Include="SampleCode\IProperties.cs" />
+    <Compile Include="SampleCode\IReturnOutAndRef.cs" />
     <Compile Include="SampleCode\ITypeWithProperty.cs" />
     <Compile Include="SampleCode\ClassWithUnfakableParameter.cs" />
     <Compile Include="SampleCode\DummyNoDefaultCtorClass.cs" />
@@ -106,6 +112,7 @@
     <Compile Include="SampleCode\IFlashVerifier.cs" />
     <Compile Include="SampleCode\ITablet.cs" />
     <Compile Include="SampleCode\IView.cs" />
+    <Compile Include="SampleCode\IWorkOnReferences.cs" />
     <Compile Include="WithCurrentEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,68 +6,8 @@ namespace Machine.Fakes
     ///   Defines a fake framework independent fluent interface for setting up behavior
     ///   for methods returning void (commands)
     /// </summary>
-    public interface ICommandOptions
+    public interface ICommandOptions : ICallbackOptions
     {
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this overload when you're not interested in the parameters.
-        /// </remarks>
-        void Callback(Action callback);
-
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this for callbacks on methods with a single parameter.
-        /// </remarks>
-        void Callback<T>(Action<T> callback);
-
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this for callbacks on methods with two parameters.
-        /// </remarks>
-        void Callback<T1, T2>(Action<T1, T2> callback);
-
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this for callbacks on methods with three parameters.
-        /// </remarks>
-        void Callback<T1, T2, T3>(Action<T1, T2, T3> callback);
-
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this for callbacks on methods with four parameters.
-        /// </remarks>
-        void Callback<T1, T2, T3, T4>(Action<T1, T2, T3, T4> callback);
-
         /// <summary>
         ///   Configures that the invocation of the related behavior
         ///   results in the specified <see cref = "Exception" /> beeing thrown.
@@ -77,5 +17,15 @@ namespace Machine.Fakes
         ///   behavior is invoked.
         /// </param>
         void Throw(Exception exception);
+
+        /// <summary>
+        /// Configures that the out and ref parameters of the method are set to the specified <paramref name="values"/>.
+        /// </summary>
+        /// <param name="values">Values to be set. Specify the values in the order the ref and out parameters appear in the method signature,
+        /// any non out and ref parameters are ignored.</param>
+        /// <returns>Interface for configuring further behavior</returns>
+        /// <remarks>An <see cref="InvalidOperationException"/> is thrown when the method is invoked and if
+        /// more or less values are given than there are out and ref parameters in the method signature.</remarks>
+        ICallbackOptions AssignOutAndRefParameters(params object[] values);
     }
 }

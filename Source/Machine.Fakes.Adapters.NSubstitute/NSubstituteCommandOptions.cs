@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+
 using Machine.Fakes.Sdk;
+
 using NSubstitute;
 
 namespace Machine.Fakes.Adapters.NSubstitute
@@ -9,17 +13,17 @@ namespace Machine.Fakes.Adapters.NSubstitute
     {
         private readonly Action<TFake> _action;
         private readonly TFake _fake;
+        readonly Expression<Action<TFake>> _expression;
 
-        public NSubstituteCommandOptions(TFake fake, Expression<Action<TFake>> action)
+        public NSubstituteCommandOptions(TFake fake, Expression<Action<TFake>> expression)
         {   
             Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(action, "action");
+            Guard.AgainstArgumentNull(expression, "expression");
 
             _fake = fake;
-            _action = action.Compile();
+            _expression = expression;
+            _action = expression.Compile();
         }
-
-        #region ICommandOptions Members
 
         public void Callback(Action callback)
         {
@@ -75,6 +79,33 @@ namespace Machine.Fakes.Adapters.NSubstitute
                 .Do(f => { throw exception; });
         }
 
-        #endregion
+        public ICallbackOptions AssignOutAndRefParameters(params object[] values)
+        {
+            _fake.When(_action).Do(callInfo =>
+            {
+                var parameters = ((MethodCallExpression)_expression.Body).Method.GetParameters();
+
+                if (parameters.Count(IsOutOrRef) != values.Length)
+                    throw new InvalidOperationException(
+                        "A different number of values for out and ref parameters are specified than the number of out and ref parameters in the faked call.");
+                
+                var paramCount = -1;
+
+                foreach (object value in values)
+                {
+                    do
+                        paramCount++;
+                    while (!IsOutOrRef(parameters[paramCount]));
+
+                    callInfo[paramCount] = value;
+                }
+            });
+            return this;
+        }
+
+        bool IsOutOrRef(ParameterInfo p)
+        {
+            return p.IsOut || p.ParameterType.IsByRef;
+        }
     }
 }
