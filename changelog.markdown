@@ -1,4 +1,7 @@
 # Changelog
+## 1.8.0
+* Updated to Machine.Specifications 0.5.15
+
 ## 1.7.0
 * Added support for setting up values for out and ref parameters to FakeItEasy and NSubsitute adapters.
 * Updated to Machine.Specifications 0.5.14
