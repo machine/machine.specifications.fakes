@@ -18,7 +18,7 @@ namespace Machine.Fakes.Adapters.Moq
             _mock = mock;
             _func = func;
 
-            _mock.Verify(func, global::Moq.Times.AtLeastOnce());
+            _mock.Verify(func, global::Moq.Times.AtLeastOnce);
         }
 
         public void Times(int numberOfTimesTheMethodShouldHaveBeenCalled)
@@ -28,7 +28,7 @@ namespace Machine.Fakes.Adapters.Moq
 
         public void OnlyOnce()
         {
-            _mock.Verify(_func, global::Moq.Times.Once());
+            _mock.Verify(_func, global::Moq.Times.Once);
         }
 
         public void Twice()

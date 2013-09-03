@@ -67,7 +67,7 @@ namespace Machine.Fakes.Adapters.Moq
         {
             var mock = Mock.Get(fake);
 
-            mock.Verify(func, Times.Never());
+            mock.Verify(func, Times.Never);
         }
 
         /// <inheritdoc/>
