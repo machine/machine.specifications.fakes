@@ -50,9 +50,10 @@ namespace Machine.Fakes.Internal
             {
                 return bestFitConstructor.Invoke(parameters);
             }
-            catch (TargetInvocationException)
+            catch (TargetInvocationException targetInvocationException)
             {
-                throw new InstanceCreationException(type, "The constructor threw an exception");
+                throw new InstanceCreationException(
+                    type, "The constructor threw an exception", targetInvocationException.InnerException);
             }
         }
 

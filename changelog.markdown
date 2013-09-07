@@ -1,5 +1,6 @@
 # Changelog
 ## 1.8.0
+* When the subject's constructor throws an exception, it is now bubbled up and shown in the failure message.
 * Updated to Machine.Specifications 0.5.16
 * Updated to Moq 4.1.1308.2321
 

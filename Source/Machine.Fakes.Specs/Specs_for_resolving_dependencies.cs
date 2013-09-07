@@ -83,6 +83,9 @@ namespace Machine.Fakes.Specs
         It should_indicate_that_an_exception_was_thrown_in_the_constructor =
             () => _exception.Message.ShouldEndWith("The constructor threw an exception.");
 
+        It should_bubble_up_the_exception = () =>
+            _exception.InnerException.Message.ShouldContain("Bumsdi");
+
         static Bumsdi subject;
         static Exception _exception;
         static AutoFakeContainer autoFakeContainer;
