@@ -1,6 +1,6 @@
 # Changelog
 ## 1.8.0
-* Updated to Machine.Specifications 0.5.15
+* Updated to Machine.Specifications 0.5.16
 * Updated to Moq 4.1.1308.2321
 
 ## 1.7.0
