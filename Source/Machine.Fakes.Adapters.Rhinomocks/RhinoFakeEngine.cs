@@ -20,7 +20,9 @@ namespace Machine.Fakes.Adapters.Rhinomocks
         public override object CreateFake(Type interfaceType, params object[] args)
         {
             var stub = MockRepository.GenerateMock(interfaceType, new Type[0], args);
-            RhinoPropertyBehavior.RegisterPropertyBehavior((IMockedObject)stub);
+            if (!(stub is Delegate))
+                RhinoPropertyBehavior.RegisterPropertyBehavior((IMockedObject)stub);
+
             stub.Replay();
             return stub;
         }

@@ -55,23 +55,10 @@ namespace Machine.Fakes.Adapters.Moq
 
         static Expression RewriteIsNotNullMember(MemberExpression node)
         {
-            var declaringType = node.Member.DeclaringType;
-            var typeArgument = declaringType.GetFirstTypeArgument();
-
-            var parameterExpression = Expression.Parameter(typeArgument, "param");
-            var lambdaType = typeof(Func<,>).MakeGenericType(typeArgument, typeof(bool));
-
-            var notEqualExpression = Expression.Not(
-                Expression.Equal(
-                    parameterExpression,
-                    Expression.Constant(null)));
-
-            var lambda = Expression.Lambda(
-                lambdaType,
-                notEqualExpression,
-                parameterExpression);
-
-            return Expression.Call(typeof(It), "Is", new[] { typeArgument }, lambda);
+            return Expression.Call(
+                typeof(It),
+                "IsNotNull",
+                new[] { node.Member.DeclaringType.GetFirstTypeArgument() });
         }
 
         Expression RewriteMatchesMethod(MethodCallExpression expression)

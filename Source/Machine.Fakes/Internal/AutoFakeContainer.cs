@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 
 using Machine.Fakes.Sdk;
-using Machine.Specifications;
 
 namespace Machine.Fakes.Internal
 {
@@ -35,9 +34,7 @@ namespace Machine.Fakes.Internal
         object CreateInstance(Type type, Stack<Type> buildStack)
         {
             if (buildStack.Contains(type))
-                throw new SpecificationException(string.Format(
-                    "Unable to create an instance of type {0}, it has a circular dependency to itself.",
-                    type.Name));
+                throw new InstanceCreationException(type, "It has a circular dependency to itself");
 
             buildStack.Push(type);
 
@@ -50,9 +47,10 @@ namespace Machine.Fakes.Internal
             {
                 return bestFitConstructor.Invoke(parameters);
             }
-            catch (TargetInvocationException)
+            catch (TargetInvocationException targetInvocationException)
             {
-                throw new InstanceCreationException(type, "The constructor threw an exception");
+                throw new InstanceCreationException(
+                    type, "The constructor threw an exception", targetInvocationException.InnerException);
             }
         }
 

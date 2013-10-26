@@ -102,6 +102,18 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
         It should_track_property_changes = () =>
             _fake.Property.ShouldEqual("new property value");
     }
+
+    [Subject(typeof(RhinoFakeEngine))]
+    public class When_faking_a_delegate : WithCurrentEngine<RhinoFakeEngine>
+    {
+        static MyDelegate _fake;
+        public delegate void MyDelegate();
+
+        Because of = () => _fake = FakeEngineGateway.Fake<MyDelegate>();
+
+        It should_be_able_to_fake_the_delegate_without_throwing_an_exception = () =>
+            _fake.ShouldNotBeNull();
+    }
 }
 
 namespace Machine.Fakes.Adapters.Specs.NSubstitute
@@ -197,6 +209,18 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         It should_track_property_changes = () =>
             _fake.Property.ShouldEqual("new property value");
+    }
+
+    [Subject(typeof(NSubstituteEngine))]
+    public class When_faking_a_delegate : WithCurrentEngine<NSubstituteEngine>
+    {
+        static MyDelegate _fake;
+        public delegate void MyDelegate();
+
+        Because of = () => _fake = FakeEngineGateway.Fake<MyDelegate>();
+
+        It should_be_able_to_fake_the_delegate_without_throwing_an_exception = () =>
+            _fake.ShouldNotBeNull();
     }
 }
 
@@ -294,6 +318,18 @@ namespace Machine.Fakes.Adapters.Specs.Moq
         It should_track_property_changes = () =>
             _fake.Property.ShouldEqual("new property value");
     }
+
+    [Subject(typeof(MoqFakeEngine))]
+    public class When_faking_a_delegate : WithCurrentEngine<MoqFakeEngine>
+    {
+        static MyDelegate _fake;
+        public delegate void MyDelegate();
+
+        Because of = () => _fake = FakeEngineGateway.Fake<MyDelegate>();
+
+        It should_be_able_to_fake_the_delegate_without_throwing_an_exception = () =>
+            _fake.ShouldNotBeNull();
+    }
 }
 
 namespace Machine.Fakes.Adapters.Specs.FakeItEasy
@@ -389,5 +425,17 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         It should_track_property_changes = () =>
             _fake.Property.ShouldEqual("new property value");
+    }
+
+    [Subject(typeof(FakeItEasyEngine))]
+    public class When_faking_a_delegate : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static MyDelegate _fake;
+        public delegate void MyDelegate();
+
+        Because of = () => _fake = FakeEngineGateway.Fake<MyDelegate>();
+
+        It should_be_able_to_fake_the_delegate_without_throwing_an_exception = () =>
+            _fake.ShouldNotBeNull();
     }
 }

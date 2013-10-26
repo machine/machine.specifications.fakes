@@ -111,5 +111,17 @@ namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
         It should_track_property_changes = () =>
             _fake.Property.ShouldEqual("new property value");
     }
+
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class When_faking_a_delegate : WithCurrentEngine<<#= allEngines[i] #>>
+    {
+        static MyDelegate _fake;
+        public delegate void MyDelegate();
+
+        Because of = () => _fake = FakeEngineGateway.Fake<MyDelegate>();
+
+        It should_be_able_to_fake_the_delegate_without_throwing_an_exception = () =>
+            _fake.ShouldNotBeNull();
+    }
 }
 <# } #>
