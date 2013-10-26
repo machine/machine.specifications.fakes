@@ -21,9 +21,8 @@ namespace Machine.Fakes.Adapters.Rhinomocks
         {
             var stub = MockRepository.GenerateMock(interfaceType, new Type[0], args);
             if (!(stub is Delegate))
-            {
                 RhinoPropertyBehavior.RegisterPropertyBehavior((IMockedObject)stub);
-            }
+
             stub.Replay();
             return stub;
         }
