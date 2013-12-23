@@ -1,4 +1,3 @@
-using Machine.Fakes.Sdk;
 using Machine.Specifications;
 using Machine.Specifications.Factories;
 

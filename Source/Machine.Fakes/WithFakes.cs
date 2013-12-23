@@ -25,10 +25,13 @@ namespace Machine.Fakes
         /// </summary>
         protected static SpecificationController<TSubject, TFakeEngine> _specificationController;
 
-        Establish context = () =>
+        /// <summary>
+        /// Creates a new instance of the <see cref="WithFakes{TSubject, TFakeEngine}"/> class.
+        /// </summary>
+        protected WithFakes()
         {
             _specificationController = new SpecificationController<TSubject, TFakeEngine>();
-        };
+        }
 
         /// <summary>
         ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" />.
