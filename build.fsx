@@ -58,7 +58,7 @@ let MSpecVersion() = GetPackageVersion packagesDir "Machine.Specifications"
 let mspecTool() = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" (MSpecVersion())
 
 (* Targets *)
-Target "Clean" (fun _ -> CleanDirs [buildDir; testDir; deployDir; testOutputDir] )
+Target "Clean" (fun _ -> CleanDirs [nugetDir; buildDir; testDir; deployDir; testOutputDir] )
 
 Target "BuildApp" (fun _ ->
     CreateCSharpAssemblyInfo @".\Source\GlobalAssemblyInfo.cs"
@@ -81,9 +81,8 @@ Target "BuildApp" (fun _ ->
 
 Target "Test" (fun _ ->
     ActivateFinalTarget "DeployTestResults"
-    !+ (testDir + "/*.Specs.dll")
+    !! (testDir + "/*.Specs.dll")
       ++ (testDir + "/*.Examples.dll")
-        |> Scan
         |> MSpec (fun p ->
                     {p with
                         ToolPath = mspecTool()
@@ -91,16 +90,14 @@ Target "Test" (fun _ ->
 )
 
 FinalTarget "DeployTestResults" (fun () ->
-    !+ (testOutputDir + "\**\*.*")
-      |> Scan
+    !! (testOutputDir + "\**\*.*")
       |> Zip testOutputDir (sprintf "%sMSpecResults.zip" deployDir)
 )
 
 Target "BuildZip" (fun _ ->
-    !+ (buildDir + "/**/*.*")
+    !! (buildDir + "/**/*.*")
       -- "*.zip"
       -- "**/*.Specs.*"
-        |> Scan
         |> Zip buildDir (deployDir + sprintf "%s-%s.zip" projectName version)
 )
 
@@ -118,16 +115,13 @@ Target "BuildNuGet" (fun _ ->
             Authors = authors
             Project = projectName
             Version = version
-            OutputPath = nugetDir
+            OutputPath = deployDir
             Dependencies = ["Machine.Specifications",RequireAtLeast (MSpecVersion())]
             AccessKey = NugetKey
             Publish = NugetKey <> "none"
             ToolPath = @".\Source\.nuget\nuget.exe"
-            WorkingDir = "." })
+            WorkingDir = nugetDir })
         "machine.fakes.nuspec"
-
-    !! (nugetDir + "Machine.Fakes.*.nupkg")
-      |> CopyTo deployDir
 )
 
 Target "BuildNuGetFlavours" (fun _ ->
@@ -146,18 +140,16 @@ Target "BuildNuGetFlavours" (fun _ ->
                     Project = sprintf "%s.%s" projectName flavour
                     Description = sprintf " This is the adapter for %s %s" flavour flavourVersion
                     Version = version
-                    OutputPath = nugetDir
+                    OutputPath = deployDir
                     Dependencies =
                         ["Machine.Fakes",RequireExactly (NormalizeVersion version)
                          flavour,RequireAtLeast flavourVersion]
                     AccessKey = NugetKey
                     Publish = NugetKey <> "none"
                     ToolPath = @".\Source\.nuget\nuget.exe"
-                    WorkingDir = "." })
+                    WorkingDir = nugetDir })
                 "machine.fakes.nuspec"
-
-            !! (nugetDir + sprintf "Machine.Fakes.%s.*.nupkg" flavour)
-              |> CopyTo deployDir)
+    )
 )
 
 Target "Default" DoNothing
