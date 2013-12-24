@@ -45,7 +45,6 @@ let buildDir = @".\Build\"
 let packagesDir = @".\Source\packages\"
 let testOutputDir = buildDir + @"Specs\"
 let nugetDir = buildDir + @"NuGet\"
-let testDir = buildDir
 let deployDir = @".\Release\"
 let nugetLibDir = nugetDir + @"lib\net40\"
 
@@ -58,7 +57,7 @@ let MSpecVersion() = GetPackageVersion packagesDir "Machine.Specifications"
 let mspecTool() = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" (MSpecVersion())
 
 (* Targets *)
-Target "Clean" (fun _ -> CleanDirs [nugetDir; buildDir; testDir; deployDir; testOutputDir] )
+Target "Clean" (fun _ -> CleanDirs [nugetDir; buildDir; deployDir; testOutputDir] )
 
 Target "BuildApp" (fun _ ->
     CreateCSharpAssemblyInfo @".\Source\GlobalAssemblyInfo.cs"
@@ -81,8 +80,8 @@ Target "BuildApp" (fun _ ->
 
 Target "Test" (fun _ ->
     ActivateFinalTarget "DeployTestResults"
-    !! (testDir + "/*.Specs.dll")
-      ++ (testDir + "/*.Examples.dll")
+    !! (buildDir + "/*.Specs.dll")
+      ++ (buildDir + "/*.Examples.dll")
         |> MSpec (fun p ->
                     {p with
                         ToolPath = mspecTool()
