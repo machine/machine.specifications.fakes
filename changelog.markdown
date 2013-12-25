@@ -1,4 +1,8 @@
 # Changelog
+## 2.0.0
+* **Breaking change**: dropped support for Gallio (following Machine.Specifications)
+* `WithFakes` can now be used as a helper class again without having to execute its `Establish`
+
 ## 1.8.0
 * When the subject's constructor throws an exception, it is now bubbled up and shown in the failure message.
 * Fixed an exception in the Rhino Mocks adapter when faking a delegate (thanks to [Alexis Atkinson](https://github.com/alexisatkinson)).
@@ -59,6 +63,7 @@
  * When a type has multiple greediest constructors, the one with the most configured parameters is chosen.
 
  If this breaks existing tests, please revert to a previous version temporarily and file an issue on [github](https://github.com/machine/machine.fakes/issues).
+
 * **Breaking change**: `IMethodCallOccurance` has been renamed to `IMethodCallOccurrence` and all inheriting classes accordingly.
 
 ## 0.6.0
