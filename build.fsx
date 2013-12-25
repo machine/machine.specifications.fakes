@@ -4,11 +4,8 @@
 open Fake
 open Fake.Git
 open Fake.AssemblyInfoFile
-open System.Collections.Generic
-open System.Linq
 open System.IO
 open System.Net
-open System.Web.Script.Serialization
 
 (* properties *)
 let authors = ["The machine project"]
@@ -25,17 +22,9 @@ let ExecuteGetCommand (url:string) =
     use reader = new StreamReader(stream)
     reader.ReadToEnd()
 
-let version =
-    if hasBuildParam "version" then getBuildParam "version" else
-    if isLocalBuild then getLastTag() else
-    // version is set to the last tag retrieved from GitHub Rest API
-    // see http://developer.github.com/v3/repos/ for reference
-    let url = "https://api.github.com/repos/machine/machine.fakes/tags"
-    tracefn "Downloading tags from %s" url
-    let tags = (new JavaScriptSerializer()).DeserializeObject(ExecuteGetCommand url) :?> System.Object array
-    [ for tag in tags -> tag :?> Dictionary<string, System.Object> ]
-        |> List.map (fun m -> m.Item("name") :?> string)
-        |> List.max
+let release =
+    ReadFile "changelog.markdown"
+    |> ReleaseNotesHelper.parseReleaseNotes
 
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
 
@@ -61,7 +50,7 @@ Target "Clean" (fun _ -> CleanDirs [nugetDir; buildDir; deployDir; testOutputDir
 
 Target "BuildApp" (fun _ ->
     CreateCSharpAssemblyInfo @".\Source\GlobalAssemblyInfo.cs"
-        [Attribute.Version version
+        [Attribute.Version release.AssemblyVersion
          Attribute.Title title
          Attribute.Product title
          Attribute.Description "An integration layer for fake frameworks on top of MSpec"
@@ -69,7 +58,7 @@ Target "BuildApp" (fun _ ->
          Attribute.Guid "3745F3DA-6ABB-4C58-923D-B09E4A04688F"
          // specifying DelaySign explicitly because of a bug in FAKE
          Attribute.BoolAttribute("AssemblyDelaySign", false, "System.Reflection")
-         Attribute.FileVersion version
+         Attribute.FileVersion release.AssemblyVersion
          Attribute.ComVisible false
          Attribute.CLSCompliant false]
 
@@ -97,7 +86,7 @@ Target "BuildZip" (fun _ ->
     !! (buildDir + "/**/*.*")
       -- "*.zip"
       -- "**/*.Specs.*"
-        |> Zip buildDir (deployDir + sprintf "%s-%s.zip" projectName version)
+        |> Zip buildDir (deployDir + sprintf "%s-%s.zip" projectName release.AssemblyVersion)
 )
 
 let RequireAtLeast version = sprintf "%s" <| NormalizeVersion version
@@ -113,7 +102,7 @@ Target "BuildNuGet" (fun _ ->
             Summary = "A framework for faking dependencies on top of Machine.Specifications."
             Authors = authors
             Project = projectName
-            Version = version
+            Version = release.AssemblyVersion
             OutputPath = deployDir
             Dependencies = ["Machine.Specifications",RequireAtLeast (MSpecVersion())]
             AccessKey = NugetKey
@@ -138,10 +127,10 @@ Target "BuildNuGetFlavours" (fun _ ->
                     Authors = authors
                     Project = sprintf "%s.%s" projectName flavour
                     Description = sprintf " This is the adapter for %s %s" flavour flavourVersion
-                    Version = version
+                    Version = release.AssemblyVersion
                     OutputPath = deployDir
                     Dependencies =
-                        ["Machine.Fakes",RequireExactly (NormalizeVersion version)
+                        ["Machine.Fakes",RequireExactly (NormalizeVersion release.AssemblyVersion)
                          flavour,RequireAtLeast flavourVersion]
                     AccessKey = NugetKey
                     Publish = NugetKey <> "none"
