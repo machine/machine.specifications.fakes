@@ -1,5 +1,6 @@
 # Changelog
 ## 2.0.0
+* **Breaking change**: switched to pure MIT license
 * **Breaking change**: dropped support for Gallio (following Machine.Specifications)
 * `WithFakes` can now be used as a helper class again without having to execute its `Establish`
 
