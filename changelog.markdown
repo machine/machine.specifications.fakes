@@ -4,6 +4,7 @@
 * **Breaking change**: dropped support for Gallio (following Machine.Specifications)
 * `WithFakes` can now be used as a helper class again without having to execute its `Establish`
 * Updated to Machine.Specifications 0.6.1
+* Updated to FakeItEasy 1.15.0
 
 ## 1.8.0
 * When the subject's constructor throws an exception, it is now bubbled up and shown in the failure message.
