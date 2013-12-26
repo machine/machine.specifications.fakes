@@ -10,7 +10,6 @@ open System.Net
 (* properties *)
 let authors = ["The machine project"]
 let projectName = "Machine.Fakes"
-let copyright = "Copyright - Machine.Fakes 2011 - 2013"
 // none as workaround for a FAKE bug
 let NugetKey = if System.IO.File.Exists @".\key.txt" then ReadFileAsString @".\key.txt" else "none"
 
@@ -27,7 +26,6 @@ let release =
     |> ReleaseNotesHelper.parseReleaseNotes
 
 let title = if isLocalBuild then sprintf "%s (%s)" projectName <| getCurrentHash() else projectName
-
 
 (* Directories *)
 let buildDir = @".\Build\"
@@ -54,7 +52,7 @@ Target "BuildApp" (fun _ ->
          Attribute.Title title
          Attribute.Product title
          Attribute.Description "An integration layer for fake frameworks on top of MSpec"
-         Attribute.Copyright copyright
+         Attribute.Copyright "2011 - 2014 Bjoern Rochel, Steffen Forkmann, Simon Hohenadl et al."
          Attribute.Guid "3745F3DA-6ABB-4C58-923D-B09E4A04688F"
          // specifying DelaySign explicitly because of a bug in FAKE
          Attribute.BoolAttribute("AssemblyDelaySign", false, "System.Reflection")

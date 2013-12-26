@@ -70,6 +70,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Bugs\Run_more_than_one_behavior_config.cs" />
     <Compile Include="Bugs\Issue28.cs" />
     <Compile Include="CommandOptionsSpecs.generated.cs">
@@ -118,7 +121,6 @@
     <Compile Include="SampleCode\IView.cs" />
     <Compile Include="SampleCode\IWorkOnReferences.cs" />
     <Compile Include="WithCurrentEngine.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CommandOptionsSpecs.tt">
