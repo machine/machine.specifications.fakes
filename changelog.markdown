@@ -2,7 +2,7 @@
 ## 2.0.0
 * **Breaking change**: switched to pure MIT license
 * **Breaking change**: dropped support for Gallio (following Machine.Specifications)
-* `WithFakes` and `WithSubject`can now again be used without executing their `Establish`
+* `WithFakes` and `WithSubject` can now again be used without executing their `Establish`
 * Updated to Machine.Specifications 0.6.1
 * Updated to FakeItEasy 1.15.0
 * Updated to Moq 4.2.1312.1622
