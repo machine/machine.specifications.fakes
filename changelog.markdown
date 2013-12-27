@@ -1,4 +1,12 @@
 # Changelog
+## 2.0.0
+* **Breaking change**: switched to pure MIT license
+* **Breaking change**: dropped support for Gallio (following Machine.Specifications)
+* `WithFakes` and `WithSubject` can now again be used without executing their `Establish`
+* Updated to Machine.Specifications 0.6.1
+* Updated to FakeItEasy 1.15.0
+* Updated to Moq 4.2.1312.1622
+
 ## 1.8.0
 * When the subject's constructor throws an exception, it is now bubbled up and shown in the failure message.
 * Fixed an exception in the Rhino Mocks adapter when faking a delegate (thanks to [Alexis Atkinson](https://github.com/alexisatkinson)).
@@ -59,6 +67,7 @@
  * When a type has multiple greediest constructors, the one with the most configured parameters is chosen.
 
  If this breaks existing tests, please revert to a previous version temporarily and file an issue on [github](https://github.com/machine/machine.fakes/issues).
+
 * **Breaking change**: `IMethodCallOccurance` has been renamed to `IMethodCallOccurrence` and all inheriting classes accordingly.
 
 ## 0.6.0
