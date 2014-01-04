@@ -211,3 +211,5 @@ can be faked this way:
 `output` will be set to `"b"` and `additional` to a new `object` instance.
 
 `AssignOutAndRefParameters` will use the given values to set up all out and ref parameters in the order they appear in the method signature. Any non out and ref parameters are ignored.
+
+![OhLoh](http://www.ohloh.net/p/machinefakes/widgets/project_thin_badge.gif)
