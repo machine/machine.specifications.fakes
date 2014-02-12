@@ -3,6 +3,7 @@
 :Build
 cls
 
+"Source\.nuget\nuget.exe" "restore" "Source\Machine.Fakes.sln"
 "Source\.nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "Source\packages" "-Version" "2.4.3.0" "-ExcludeVersion"
 
 SET TARGET="Default"
