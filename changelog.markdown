@@ -1,4 +1,7 @@
 # Changelog
+## 2.1.0
+* Updated to Machine.Specifications 0.7.0 which does not include assertions any more. A separate assertion package like [Machine.Specifications.Should](https://www.nuget.org/packages/Machine.Specifications.Should/0.7.0) or [Fluent Assertions](https://www.nuget.org/packages/fluentassertions) is required.
+
 ## 2.0.0
 * **Breaking change**: switched to pure MIT license
 * **Breaking change**: dropped support for Gallio (following Machine.Specifications)

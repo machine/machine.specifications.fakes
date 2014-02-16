@@ -75,7 +75,7 @@ namespace Machine.Fakes.Specs
         Because of = () => _exception = Catch.Exception(() => subject = autoFakeContainer.CreateSubject<Bumsdi>());
 
         It should_throw_an_Exception =
-            () => _exception.ShouldBeOfType<InstanceCreationException>();
+            () => _exception.ShouldBeOfExactType<InstanceCreationException>();
 
         It should_indicate_that_it_was_unable_to_create_the_subject =
             () => _exception.Message.ShouldStartWith("Unable to create an instance of type Bumsdi");
@@ -101,7 +101,7 @@ namespace Machine.Fakes.Specs
             subject = autoFakeContainer.CreateSubject<WithoutPublicConstructor>());
 
         It should_throw_an_Exception =
-            () => _exception.ShouldBeOfType<InstanceCreationException>();
+            () => _exception.ShouldBeOfExactType<InstanceCreationException>();
 
         It should_indicate_that_it_was_unable_to_create_the_subject =
             () => _exception.Message.ShouldStartWith("Unable to create an instance of type WithoutPublicConstructor");
@@ -369,7 +369,7 @@ namespace Machine.Fakes.Specs
 
         Because of = () => subject = autoFakeContainer.CreateSubject<WithFuncOfImplementationInConstructor>();
 
-        It should_inject_a_factory_that_returns_the_instance_into_the_subject = () => subject.Car.ShouldBeOfType<Car>();
+        It should_inject_a_factory_that_returns_the_instance_into_the_subject = () => subject.Car.ShouldBeOfExactType<Car>();
 
         static WithFuncOfImplementationInConstructor subject;
         static AutoFakeContainer autoFakeContainer;

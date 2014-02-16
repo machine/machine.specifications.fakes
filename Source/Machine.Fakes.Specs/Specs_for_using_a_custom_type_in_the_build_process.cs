@@ -38,10 +38,10 @@ namespace Machine.Fakes.Specs
         Because of = () => _subject = _specController.Subject;
 
         It should_use_the_configured_type_in_the_build_process = 
-            () => _subject.Garage.ShouldBeOfType<Garage>();
+            () => _subject.Garage.ShouldBeOfExactType<Garage>();
 
         It should_inject_fakes_into_the_configured_type = 
-            () => _subject.Garage.First().ShouldBeOfType<CarFromFakeFramework>();
+            () => _subject.Garage.First().ShouldBeOfExactType<CarFromFakeFramework>();
 
         static SpecificationController<LittleKingdom> _specController;
         static LittleKingdom _subject;
@@ -60,10 +60,10 @@ namespace Machine.Fakes.Specs
         Because of = () => _subject = _specController.Subject;
 
         It should_use_the_first_configured_type_in_the_build_process =
-            () => _subject.Garage.ShouldBeOfType<Garage>();
+            () => _subject.Garage.ShouldBeOfExactType<Garage>();
 
         It should_also_use_the_second_configured_type_in_the_build_process =
-            () => _subject.Garage.First().ShouldBeOfType<Car>();
+            () => _subject.Garage.First().ShouldBeOfExactType<Car>();
 
         static SpecificationController<LittleKingdom> _specController;
         static LittleKingdom _subject;

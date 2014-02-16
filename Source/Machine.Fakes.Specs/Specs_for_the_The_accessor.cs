@@ -42,7 +42,7 @@ namespace Machine.Fakes.Specs
                 exception = Catch.Exception(() => The<IDbConnection>());
             }
 
-            It should_throw_the_right_exception = () => exception.ShouldBeOfType<InvalidOperationException>();
+            It should_throw_the_right_exception = () => exception.ShouldBeOfExactType<InvalidOperationException>();
         }
     }
 }

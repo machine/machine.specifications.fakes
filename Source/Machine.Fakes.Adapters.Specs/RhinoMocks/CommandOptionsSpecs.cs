@@ -20,6 +20,6 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
             exception = Catch.Exception(() => _fake.WhenToldTo(x => x.TryLookup("a", out value)).AssignOutAndRefParameters("b"));
         };
 
-        It should_throw = () => exception.ShouldBeOfType<NotSupportedException>();
+        It should_throw = () => exception.ShouldBeOfExactType<NotSupportedException>();
     }
 }
