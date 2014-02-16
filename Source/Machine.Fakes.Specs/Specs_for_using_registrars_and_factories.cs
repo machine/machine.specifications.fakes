@@ -18,7 +18,7 @@ namespace Machine.Fakes.Specs
         Because of = () => { };
 
         It should_use_the_factory_to_create_the_dependency = () =>
-            specificationController.Subject.ConfigurationStore.ShouldBeOfType<ConfigurationStore>();
+            specificationController.Subject.ConfigurationStore.ShouldBeOfExactType<ConfigurationStore>();
     }
 
     [Subject(typeof(SpecificationController<>))]
@@ -37,8 +37,8 @@ namespace Machine.Fakes.Specs
 
         It should_return_both_configured_dependencies = () =>
         {
-            specificationController.The<ICar>().ShouldBeOfType<Car>();
-            specificationController.The<IGarage>().ShouldBeOfType<Garage>();
+            specificationController.The<ICar>().ShouldBeOfExactType<Car>();
+            specificationController.The<IGarage>().ShouldBeOfExactType<Garage>();
         };
     }
 
@@ -54,8 +54,8 @@ namespace Machine.Fakes.Specs
 
         It should_return_both_configured_dependencies = () =>
         {
-            specificationController.The<ICar>().ShouldBeOfType<Car>();
-            specificationController.The<IGarage>().ShouldBeOfType<Garage>();
+            specificationController.The<ICar>().ShouldBeOfExactType<Car>();
+            specificationController.The<IGarage>().ShouldBeOfExactType<Garage>();
         };
     }
 

@@ -105,7 +105,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
             string actualResult1;
             object actualResult2 = null;
             Catch.Exception(() => _fake.GetTwoValues("a", out actualResult1, ref actualResult2))
-                .ShouldBeOfType<InvalidOperationException>();
+                .ShouldBeOfExactType<InvalidOperationException>();
         };
     }
 
@@ -126,7 +126,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
             string actualResult1;
             object actualResult2 = null;
             Catch.Exception(() => _fake.GetTwoValues("a", out actualResult1, ref actualResult2))
-                .ShouldBeOfType<InvalidOperationException>();
+                .ShouldBeOfExactType<InvalidOperationException>();
         };
     }
 }

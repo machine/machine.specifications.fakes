@@ -23,7 +23,7 @@ namespace Machine.Fakes.Specs
         Because of = () => result = _specController.An(typeof(IDbConnection));
 
         It should_return_a_fake_that_implements_the_specified_type_interface =
-            () => result.ShouldBe(typeof(SqlConnection));
+            () => result.ShouldBeOfExactType<SqlConnection>();
     }
 
     [Subject(typeof(SpecificationController<,>))]
@@ -56,6 +56,6 @@ namespace Machine.Fakes.Specs
             exception = Catch.Exception(() => An<IDbConnection>());
         }
 
-        It should_throw_the_right_exception = () => exception.ShouldBeOfType<InvalidOperationException>();
+        It should_throw_the_right_exception = () => exception.ShouldBeOfExactType<InvalidOperationException>();
     }
 }

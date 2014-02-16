@@ -19,7 +19,7 @@ namespace Machine.Fakes.Specs
 
         It Should_throw_an_exception = () => _exception.ShouldNotBeNull();
 
-        It Should_throw_an_ArgumentOutOfRangeException = () => _exception.ShouldBeOfType<ArgumentOutOfRangeException>();
+        It Should_throw_an_ArgumentOutOfRangeException = () => _exception.ShouldBeOfExactType<ArgumentOutOfRangeException>();
 
         static SpecificationController<object, DummyFakeEngine> _specController;
         static Exception _exception;
