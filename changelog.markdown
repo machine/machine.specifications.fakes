@@ -1,4 +1,10 @@
 # Changelog
+## 2.2.0
+* Updated to Machine.Specifications 0.8.0
+* Updated to FakeItEasy 1.18.0
+* Updated to Moq 4.2.1402.2112
+* Updated to NSubsitute 1.7.2.0
+
 ## 2.1.0
 * Updated to Machine.Specifications 0.7.0 which does not include assertions any more. Installation of [Machine.Specifications.Should](https://www.nuget.org/packages/Machine.Specifications.Should/0.7.0) may be required.
 * Updated to FakeItEasy 1.17.0
