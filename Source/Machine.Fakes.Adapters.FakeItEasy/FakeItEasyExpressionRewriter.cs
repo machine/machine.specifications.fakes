@@ -39,7 +39,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
                 var thatExpression = GetThatAccess(argumentType);
 
                 return Expression.Call(
-                    typeof(ArgumentConstraintExtensions),
+                    typeof(ArgumentConstraintManagerExtensions),
                     "Matches",
                     new[] { argumentType },
                     thatExpression,
@@ -54,7 +54,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             var innerExpression = expression.Arguments[0];
 
             return Expression.Call(
-                typeof(ArgumentConstraintExtensions),
+                typeof(ArgumentConstraintManagerExtensions),
                 "IsEqualTo",
                 new[] { innerExpression.Type },
                 GetThatAccess(innerExpression.Type),
@@ -67,7 +67,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             var thatAccess = GetThatAccess(argumentType);
 
             return Expression.Call(
-                typeof(ArgumentConstraintExtensions),
+                typeof(ArgumentConstraintManagerExtensions),
                 "IsNull",
                 new[] { argumentType },
                 thatAccess);
@@ -83,7 +83,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
                 .MakePropertyAccess("Not", thatAccess);
 
             return Expression.Call(
-                typeof(ArgumentConstraintExtensions),
+                typeof(ArgumentConstraintManagerExtensions),
                 "IsNull",
                 new[] { argumentType },
                 notAccess);
@@ -120,7 +120,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             var thatExpression = GetThatAccess(baseType);
 
             return Expression.Call(
-                    typeof(ArgumentConstraintExtensions),
+                    typeof(ArgumentConstraintManagerExtensions),
                     "Matches",
                     new[] { baseType },
                     thatExpression,
