@@ -1,4 +1,7 @@
 # Changelog
+## 2.2.1
+* Updated to Machine.Specifications 0.8.1
+
 ## 2.2.0
 * Updated to Machine.Specifications 0.8.0
 * Updated to FakeItEasy 1.18.0
