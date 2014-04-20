@@ -117,7 +117,8 @@ Target "BuildNuGetFlavours" (fun _ ->
     Flavours
       |> Seq.iter (fun (flavour) ->
             let flavourVersion = GetPackageVersion packagesDir flavour
-            CleanDirs [nugetDir; nugetLibDir]
+            CleanDirs [nugetDir]
+            CleanDirs [nugetLibDir]
 
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour; buildDir + sprintf "Machine.Fakes.Adapters.%s.xml" flavour]
               |> CopyTo nugetLibDir
