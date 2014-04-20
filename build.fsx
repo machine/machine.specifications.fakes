@@ -44,7 +44,10 @@ let MSpecVersion() = GetPackageVersion packagesDir "Machine.Specifications"
 let mspecTool() = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" (MSpecVersion())
 
 (* Targets *)
-Target "Clean" (fun _ -> CleanDirs [nugetDir; buildDir; deployDir; testOutputDir] )
+Target "Clean" (fun _ ->
+    CleanDirs [buildDir; deployDir]
+    CleanDirs [nugetDir; testOutputDir]
+)
 
 Target "BuildApp" (fun _ ->
     CreateCSharpAssemblyInfo @".\Source\GlobalAssemblyInfo.cs"
