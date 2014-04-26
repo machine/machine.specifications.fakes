@@ -1,4 +1,4 @@
-#r @"Source\packages\FAKE\tools\FakeLib.dll"
+#r @"Source\packages\FAKE.Core\tools\FakeLib.dll"
 #r "System.Web.Extensions.dll"
 
 open Fake
