@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-using Machine.Specifications.Utility;
+using Machine.Fakes.Internal;
 
 namespace Machine.Fakes.Sdk
 {

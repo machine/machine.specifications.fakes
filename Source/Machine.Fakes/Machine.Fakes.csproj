@@ -69,6 +69,7 @@
     <Compile Include="Sdk\ExpressionExtensions.cs" />
     <Compile Include="Sdk\IExpressionRewriter.cs" />
     <Compile Include="Sdk\InlineConstraintNames.cs" />
+    <Compile Include="Sdk\MissingFrameworkExtensions.cs" />
     <Compile Include="Sdk\ReflectionExtensions.cs" />
     <Compile Include="Sdk\RewritingFakeEngine.cs" />
     <Compile Include="Sdk\SpecificationController.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="Internal\TypeMapping.cs" />
     <Compile Include="WithFakes.cs" />
     <Compile Include="Internal\FakeEngineGateway.cs" />
-    <Compile Include="Sdk\EnumerableExtensions.cs" />
     <Compile Include="FakeApi.cs" />
     <Compile Include="Internal\FakeEngineExtensions.cs" />
     <Compile Include="Sdk\Guard.cs" />
