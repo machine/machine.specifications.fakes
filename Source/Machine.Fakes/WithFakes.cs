@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+using Machine.Fakes.ReSharperAnnotations;
 using Machine.Fakes.Sdk;
 using Machine.Specifications;
-using Machine.Specifications.Annotations;
 
 namespace Machine.Fakes
 {
