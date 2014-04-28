@@ -1,4 +1,4 @@
-#r @"Source\packages\FAKE\tools\FakeLib.dll"
+#r @"Source\packages\FAKE.Core\tools\FakeLib.dll"
 #r "System.Web.Extensions.dll"
 
 open Fake
@@ -33,7 +33,6 @@ let packagesDir = @".\Source\packages\"
 let testOutputDir = buildDir + @"Specs\"
 let nugetDir = buildDir + @"NuGet\"
 let deployDir = @".\Release\"
-let nugetLibDir = nugetDir + @"lib\net40\"
 
 (* files *)
 let slnReferences = !! @".\Source\*.sln"
@@ -44,7 +43,10 @@ let MSpecVersion() = GetPackageVersion packagesDir "Machine.Specifications"
 let mspecTool() = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" (MSpecVersion())
 
 (* Targets *)
-Target "Clean" (fun _ -> CleanDirs [nugetDir; buildDir; deployDir; testOutputDir] )
+Target "Clean" (fun _ ->
+    CleanDirs [buildDir; deployDir]
+    CleanDirs [nugetDir; testOutputDir]
+)
 
 Target "BuildApp" (fun _ ->
     CreateCSharpAssemblyInfo @".\Source\GlobalAssemblyInfo.cs"
@@ -90,7 +92,9 @@ Target "BuildZip" (fun _ ->
 let RequireAtLeast version = sprintf "%s" <| NormalizeVersion version
 
 Target "BuildNuGet" (fun _ ->
-    CleanDirs [nugetDir; nugetLibDir]
+    let nugetFakesDir = nugetDir + @"Fakes\"
+    let nugetLibDir = nugetFakesDir + @"lib\net40\"
+    CleanDirs [nugetFakesDir; nugetLibDir]
 
     [buildDir + "Machine.Fakes.dll"; buildDir + "Machine.Fakes.xml"]
         |> CopyTo nugetLibDir
@@ -106,15 +110,18 @@ Target "BuildNuGet" (fun _ ->
             AccessKey = NugetKey
             Publish = NugetKey <> "none"
             ToolPath = @".\Source\.nuget\nuget.exe"
-            WorkingDir = nugetDir })
+            WorkingDir = nugetFakesDir })
         "machine.fakes.nuspec"
 )
 
 Target "BuildNuGetFlavours" (fun _ ->
     Flavours
       |> Seq.iter (fun (flavour) ->
+            let nugetFlavourDir = nugetDir + flavour + @"\"
+            let nugetLibDir = nugetFlavourDir + @"lib\net40\"
             let flavourVersion = GetPackageVersion packagesDir flavour
-            CleanDirs [nugetDir; nugetLibDir]
+            CleanDirs [nugetFlavourDir]
+            CleanDirs [nugetLibDir]
 
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour; buildDir + sprintf "Machine.Fakes.Adapters.%s.xml" flavour]
               |> CopyTo nugetLibDir
@@ -133,7 +140,7 @@ Target "BuildNuGetFlavours" (fun _ ->
                     AccessKey = NugetKey
                     Publish = NugetKey <> "none"
                     ToolPath = @".\Source\.nuget\nuget.exe"
-                    WorkingDir = nugetDir })
+                    WorkingDir = nugetFlavourDir })
                 "machine.fakes.nuspec"
     )
 )

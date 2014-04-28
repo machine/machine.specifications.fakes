@@ -1,8 +1,8 @@
 ﻿using System;
 
 using Machine.Fakes.Examples.SampleCode;
+using Machine.Fakes.ReSharperAnnotations;
 using Machine.Specifications;
-using Machine.Specifications.Annotations;
 
 namespace Machine.Fakes.Examples.ReuseViaBehaviorConfigsWithFakes
 {

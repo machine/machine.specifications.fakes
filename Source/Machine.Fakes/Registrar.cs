@@ -2,7 +2,6 @@ using System;
 using System.Collections.Concurrent;
 using Machine.Fakes.Internal;
 using Machine.Fakes.Sdk;
-using Machine.Specifications.Utility;
 
 namespace Machine.Fakes
 {

@@ -36,13 +36,13 @@
     <DocumentationFile>bin\Release\Machine.Fakes.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Machine.Specifications, Version=0.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Machine.Specifications.0.8.0\lib\net40\Machine.Specifications.dll</HintPath>
+      <HintPath>..\packages\Machine.Specifications.0.8.1\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.Clr4, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Machine.Specifications.Clr4, Version=0.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Machine.Specifications.0.8.0\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
+      <HintPath>..\packages\Machine.Specifications.0.8.1\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,6 +52,7 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Annotations\ReSharperAnnotations.cs" />
     <Compile Include="BehaviorConfigDelegates.cs" />
     <Compile Include="ICallbackOptions.cs" />
     <Compile Include="Internal\AutoFakeContainer.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Sdk\ExpressionExtensions.cs" />
     <Compile Include="Sdk\IExpressionRewriter.cs" />
     <Compile Include="Sdk\InlineConstraintNames.cs" />
+    <Compile Include="Sdk\MissingFrameworkExtensions.cs" />
     <Compile Include="Sdk\ReflectionExtensions.cs" />
     <Compile Include="Sdk\RewritingFakeEngine.cs" />
     <Compile Include="Sdk\SpecificationController.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="Internal\TypeMapping.cs" />
     <Compile Include="WithFakes.cs" />
     <Compile Include="Internal\FakeEngineGateway.cs" />
-    <Compile Include="Sdk\EnumerableExtensions.cs" />
     <Compile Include="FakeApi.cs" />
     <Compile Include="Internal\FakeEngineExtensions.cs" />
     <Compile Include="Sdk\Guard.cs" />
