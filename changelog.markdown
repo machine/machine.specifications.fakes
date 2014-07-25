@@ -1,6 +1,6 @@
 # Changelog
 ## 2.3.1
-* Updated to Machine.Specifications 0.8.2
+* Updated to Machine.Specifications 0.8.3
 
 ## 2.3.0
 * Updated to Machine.Specifications 0.8.1
