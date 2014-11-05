@@ -39,8 +39,8 @@ let slnReferences = !! @".\Source\*.sln"
 
 (* flavours *)
 let Flavours = ["RhinoMocks"; "FakeItEasy"; "NSubstitute"; "Moq"]
-let MSpecVersion() = GetPackageVersion packagesDir "Machine.Specifications"
-let mspecTool() = sprintf @".\Source\packages\Machine.Specifications.%s\tools\mspec-clr4.exe" (MSpecVersion())
+let MSpecVersion() = GetPackageVersion packagesDir "Machine.Specifications.Runner.Console"
+let mspecTool() = sprintf @".\Source\packages\Machine.Specifications.Runner.Console.%s\tools\mspec-clr4.exe" (MSpecVersion())
 
 (* Targets *)
 Target "Clean" (fun _ ->
