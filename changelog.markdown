@@ -1,6 +1,7 @@
 # Changelog
 ## 2.6.0
 * Updated to Machine.Specifications 0.9.1
+* Updated to NSubsitute 1.8.0.0
 
 ## 2.5.0
 * Updated to Machine.Specifications 0.9.0
