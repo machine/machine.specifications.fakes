@@ -3,6 +3,7 @@
 * Updated to Machine.Specifications 0.9.1
 * Updated to NSubsitute 1.8.1.0
 * Updated to FakeItEasy 1.25.1
+* Updated to Moq 4.2.1502.0911
 
 ## 2.5.0
 * Updated to Machine.Specifications 0.9.0
