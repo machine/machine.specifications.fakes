@@ -132,7 +132,7 @@ Target "BuildNuGetFlavours" (fun _ ->
                     Authors = authors
                     Project = sprintf "%s.%s" projectName flavour
                     Description = sprintf " This is the adapter for %s %s" flavour flavourVersion
-                    Version = release.AssemblyVersion
+                    Version = release.NugetVersion
                     OutputPath = deployDir
                     Dependencies =
                         ["Machine.Fakes",RequireExactly (NormalizeVersion release.AssemblyVersion)
