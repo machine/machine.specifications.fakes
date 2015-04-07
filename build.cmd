@@ -4,7 +4,7 @@
 cls
 
 "Source\.nuget\nuget.exe" "restore" "Source\Machine.Fakes.sln"
-"Source\.nuget\nuget.exe" "install" "FAKE.Core" "-OutputDirectory" "Source\packages" "-Version" "3.24.0" "-ExcludeVersion"
+"Source\.nuget\nuget.exe" "install" "FAKE.Core" "-OutputDirectory" "Source\packages" "-Version" "3.26.7" "-ExcludeVersion"
 
 SET TARGET="Default"
 IF NOT [%1]==[] (set TARGET="%1")
