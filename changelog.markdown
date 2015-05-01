@@ -1,5 +1,6 @@
 # Changelog
 ## 2.6.0
+* Fixed counting the number of calls in the NSubstitute adapter when the call includes arguments (thanks to [Robert Anderson](https://github.com/shamp00))
 * Updated to Machine.Specifications 0.9.1
 * Updated to NSubsitute 1.8.1.0
 * Updated to FakeItEasy 1.25.2
