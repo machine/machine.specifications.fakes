@@ -109,6 +109,24 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
 
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
+
+    [Subject(typeof(RhinoFakeEngine))]
+    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_only_once_with_a_given_parameter_but_was_executed_twice_in_total : WithCurrentEngine<RhinoFakeEngine>
+    {
+        static Exception _exception;
+        static IServiceContainer _fake;
+
+        Establish context = () =>
+        {
+            _fake = FakeEngineGateway.Fake<IServiceContainer>();
+            _fake.RemoveService(typeof(Object));
+            _fake.RemoveService(typeof(String));
+        };
+
+        Because of = () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.RemoveService(typeof(String))).OnlyOnce());
+
+        It should_not_throw_an_exception = () => _exception.ShouldBeNull();
+    }
 }
 
 namespace Machine.Fakes.Adapters.Specs.NSubstitute
@@ -209,6 +227,24 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         };
 
         Because of = () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.GetService(null)));
+
+        It should_not_throw_an_exception = () => _exception.ShouldBeNull();
+    }
+
+    [Subject(typeof(NSubstituteEngine))]
+    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_only_once_with_a_given_parameter_but_was_executed_twice_in_total : WithCurrentEngine<NSubstituteEngine>
+    {
+        static Exception _exception;
+        static IServiceContainer _fake;
+
+        Establish context = () =>
+        {
+            _fake = FakeEngineGateway.Fake<IServiceContainer>();
+            _fake.RemoveService(typeof(Object));
+            _fake.RemoveService(typeof(String));
+        };
+
+        Because of = () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.RemoveService(typeof(String))).OnlyOnce());
 
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
@@ -315,6 +351,24 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
+
+    [Subject(typeof(MoqFakeEngine))]
+    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_only_once_with_a_given_parameter_but_was_executed_twice_in_total : WithCurrentEngine<MoqFakeEngine>
+    {
+        static Exception _exception;
+        static IServiceContainer _fake;
+
+        Establish context = () =>
+        {
+            _fake = FakeEngineGateway.Fake<IServiceContainer>();
+            _fake.RemoveService(typeof(Object));
+            _fake.RemoveService(typeof(String));
+        };
+
+        Because of = () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.RemoveService(typeof(String))).OnlyOnce());
+
+        It should_not_throw_an_exception = () => _exception.ShouldBeNull();
+    }
 }
 
 namespace Machine.Fakes.Adapters.Specs.FakeItEasy
@@ -415,6 +469,24 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         };
 
         Because of = () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.GetService(null)));
+
+        It should_not_throw_an_exception = () => _exception.ShouldBeNull();
+    }
+
+    [Subject(typeof(FakeItEasyEngine))]
+    public class Given_a_command_was_configured_on_a_fake_when_verifying_whether_it_was_executed_only_once_with_a_given_parameter_but_was_executed_twice_in_total : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static Exception _exception;
+        static IServiceContainer _fake;
+
+        Establish context = () =>
+        {
+            _fake = FakeEngineGateway.Fake<IServiceContainer>();
+            _fake.RemoveService(typeof(Object));
+            _fake.RemoveService(typeof(String));
+        };
+
+        Because of = () => _exception = Catch.Exception(() => _fake.WasToldTo(f => f.RemoveService(typeof(String))).OnlyOnce());
 
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
