@@ -2,6 +2,7 @@
 ## 2.7.0
 * Updated to Machine.Specifications 0.9.3
 * Updated to Moq 4.2.1507.0118
+* Updated to FakeItEasy 1.25.3
 
 ## 2.6.0
 * Fixed counting the number of calls in the NSubstitute adapter when the call includes arguments (thanks to [Robert Anderson](https://github.com/shamp00))
