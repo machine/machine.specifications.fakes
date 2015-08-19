@@ -20,3 +20,4 @@ Source/GlobalAssemblyInfo.cs
 *.user
 Source/packages
 *.ncrunch*
+.fake
