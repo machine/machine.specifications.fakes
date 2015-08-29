@@ -98,6 +98,8 @@ Target "BuildNuGet" (fun _ ->
 
     [buildDir + "Machine.Fakes.dll"; buildDir + "Machine.Fakes.xml"]
         |> CopyTo nugetLibDir
+
+    ["readme.txt"] |> CopyTo nugetFakesDir
     
     NuGet (fun p ->
         {p with
@@ -125,6 +127,8 @@ Target "BuildNuGetFlavours" (fun _ ->
 
             [buildDir + sprintf "Machine.Fakes.Adapters.%s.dll" flavour; buildDir + sprintf "Machine.Fakes.Adapters.%s.xml" flavour]
               |> CopyTo nugetLibDir
+
+            ["readme.txt"] |> CopyTo nugetFlavourDir
 
             NuGet (fun p ->
                 {p with
