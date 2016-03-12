@@ -38,7 +38,7 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
         Delegate CreateOptionsFor(Type type, IEnumerable ctorArgs)
         {
-            var optType = typeof(IFakeOptionsBuilder<>).MakeGenericType(new[] { type });
+            var optType = typeof(IFakeOptions<>).MakeGenericType(new[] { type });
             var actType = typeof(Action<>).MakeGenericType(new[] { optType });
 
             var r = Expression.Parameter(optType, "r");

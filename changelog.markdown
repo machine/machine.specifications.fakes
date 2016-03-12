@@ -1,4 +1,7 @@
 # Changelog
+## 3.0.0-rc1
+* Updated to FakeItEasy 2.0.0-rc1
+
 ## 2.7.0
 * Updated to Machine.Specifications 0.9.3
 * Updated to Moq 4.2.1507.0118
