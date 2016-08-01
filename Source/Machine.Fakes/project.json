@@ -8,7 +8,7 @@
         "iconUrl": "https://github.com/machine/machine.fakes/raw/master/machine.fakes-128x128.png",
         "tags": [ "tdd", "bdd", "testing", "unittest", "fakes", "mocks", "mspec", "mfakes" ],
         "requireLicenseAcceptance": false,
-        "releaseNotes": "See https://github.com/machine/machine.fakes/blob/master/changelog.markdown"
+        "releaseNotes": "See https://github.com/machine/machine.fakes/releases"
     },
     "authors": [
         "Machine Project"
@@ -28,6 +28,6 @@
         }
     },
     "dependencies": {
-        "Machine.Specifications": "0.10.0-ivanz3"
+        "Machine.Specifications": "0.11-*"
     }
 }
