@@ -23,8 +23,8 @@
         }
     },
     "dependencies": {
-        "Machine.Specifications": "0.10.0-ivanz3",
-        "Machine.Specifications.Should": "0.10.0-ivanz3",
+        "Machine.Specifications": "0.11-*",
+        "Machine.Specifications.Should": "0.11-*",
         "dotnet-test-mspec": "0.2-*",
         "Machine.Fakes": {
             "target": "project"

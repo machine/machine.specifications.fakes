@@ -8,7 +8,7 @@
         "iconUrl": "https://github.com/machine/machine.fakes/raw/master/machine.fakes-128x128.png",
         "tags": [ "tdd", "bdd", "testing", "unittest", "fakes", "mocks", "mspec", "mfakes" ],
         "requireLicenseAcceptance": false,
-        "releaseNotes": "See https://github.com/machine/machine.fakes/blob/master/changelog.markdown"
+        "releaseNotes": "See https://github.com/machine/machine.fakes/releases"
     },
     "description": "Machine.Fakes attempts to simplify the usage of such frameworks on top of Machine.Specifications by helping to reduce a lot of the typical fake framwork related clutter code in specifications. If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. ",
     "authors": [
