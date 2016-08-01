@@ -1,6 +1,6 @@
 using System;
 using System.Linq.Expressions;
-
+using System.Reflection;
 using Machine.Fakes.Sdk;
 using Moq;
 
@@ -29,7 +29,7 @@ namespace Machine.Fakes.Adapters.Moq
         }
 
         /// <inheritdoc/>
-        public override T PartialMock<T>(params object[] args) 
+        public override T PartialMock<T>(params object[] args)
         {
             var closedMockType = typeof(Mock<>).MakeGenericType(typeof(T));
             // ReSharper disable PossibleNullReferenceException
@@ -43,7 +43,7 @@ namespace Machine.Fakes.Adapters.Moq
         /// <inheritdoc/>
         protected override IQueryOptions<TReturnValue> OnSetUpQueryBehaviorFor<TFake, TReturnValue>(
             TFake fake,
-            Expression<Func<TFake, TReturnValue>> func) 
+            Expression<Func<TFake, TReturnValue>> func)
         {
             var mock = Mock.Get(fake);
 
@@ -53,7 +53,7 @@ namespace Machine.Fakes.Adapters.Moq
         /// <inheritdoc/>
         protected override ICommandOptions OnSetUpCommandBehaviorFor<TFake>(
             TFake fake,
-            Expression<Action<TFake>> func) 
+            Expression<Action<TFake>> func)
         {
             var mock = Mock.Get(fake);
 
@@ -62,8 +62,8 @@ namespace Machine.Fakes.Adapters.Moq
 
         /// <inheritdoc/>
         protected override void OnVerifyBehaviorWasNotExecuted<TFake>(
-            TFake fake, 
-            Expression<Action<TFake>> func) 
+            TFake fake,
+            Expression<Action<TFake>> func)
         {
             var mock = Mock.Get(fake);
 
@@ -72,8 +72,8 @@ namespace Machine.Fakes.Adapters.Moq
 
         /// <inheritdoc/>
         protected override IMethodCallOccurrence OnVerifyBehaviorWasExecuted<TFake>(
-            TFake fake, 
-            Expression<Action<TFake>> func) 
+            TFake fake,
+            Expression<Action<TFake>> func)
         {
             var mock = Mock.Get(fake);
 

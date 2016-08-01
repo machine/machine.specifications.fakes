@@ -1,4 +1,4 @@
-using System.ComponentModel.Design;
+using Machine.Fakes.Examples.SampleCode;
 using Machine.Specifications;
 
 namespace Machine.Fakes.Examples.UsingMFakesApi
@@ -7,7 +7,7 @@ namespace Machine.Fakes.Examples.UsingMFakesApi
     public class When_a_method_is_called_on_a_fake : WithFakes
     {
         static IServiceContainer _subject;
-      
+
         Establish context = () =>
         {
             _subject = An<IServiceContainer>();

@@ -1,0 +1,51 @@
+{
+    "version": "0.9.0-ivanz1",
+    "testRunner": "mspec",
+    "frameworks": {
+        "net45": {
+            "frameworkAssemblies": {
+                "System.Data": ""
+            },
+            "dependencies": {
+                "Microsoft.NETCore.Platforms": {
+                    "version": "1.0.1",
+                    "type": "build"
+                },
+                "Machine.Fakes.Adapters.Moq": {
+                    "target": "project"
+                },
+                "Machine.Fakes.Adapters.Rhinomocks": {
+                    "target": "project"
+                },
+                "Machine.Fakes.Adapters.NSubstitute": {
+                    "target": "project"
+                },
+                "Machine.Fakes.Adapters.FakeItEasy": {
+                    "target": "project"
+                }
+            }
+        },
+        "netcoreapp1.0": {
+            "buildOptions": {
+                "define": [
+                    "NETSTANDARD"
+                ]
+            },
+            "dependencies": {
+                "Microsoft.NETCore.App": {
+                    "version": "1.0.0",
+                    "type": "platform"
+                },
+                "System.Data.Common": "4.1.0"
+            }
+        }
+    },
+    "dependencies": {
+        "Machine.Specifications": "0.10.0-ivanz3",
+        "Machine.Specifications.Should": "0.10.0-ivanz3",
+        "dotnet-test-mspec": "0.2-*",
+        "Machine.Fakes.Adapters.Moq": {
+            "target": "project"
+        }
+    }
+}
