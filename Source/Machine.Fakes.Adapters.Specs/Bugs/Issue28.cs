@@ -1,3 +1,5 @@
+#if !NETSTANDARD
+
 using System;
 using Machine.Fakes.Adapters.Rhinomocks;
 using Machine.Specifications;
@@ -35,3 +37,5 @@ namespace Machine.Fakes.Adapters.Specs.Bugs
         event EventHandler SomethingHappened;
     }
 }
+
+#endif

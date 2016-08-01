@@ -92,7 +92,7 @@ namespace Machine.Fakes.Internal
             if (_mappings.IsRegistered(type))
                 return true;
 
-            if (type.IsGenericType)
+            if (type.GetTypeInfo().IsGenericType)
             {
                 if (type.IsGenericEnumerable())
                     return _mappings.IsRegistered(type.GetGenericArguments()[0]);
@@ -109,7 +109,7 @@ namespace Machine.Fakes.Internal
             if (_mappings.IsRegistered(argumentType))
                 return GetRegisteredInstances(argumentType).Last();
 
-            if (argumentType.IsGenericType)
+            if (argumentType.GetTypeInfo().IsGenericType)
             {
                 if (argumentType.IsGenericEnumerable())
                     return CreateEnumerable(argumentType);
@@ -173,14 +173,15 @@ namespace Machine.Fakes.Internal
 
         object GetSimpleArgument(Type argumentType, Stack<Type> stack)
         {
-            if (argumentType.IsInterface)
+            var typeInfo = argumentType.GetTypeInfo();
+            if (typeInfo.IsInterface)
             {
                 var fake = CreateFake(argumentType);
                 Register(new ObjectMapping(argumentType, fake));
                 return fake;
             }
 
-            if (argumentType.IsValueType)
+            if (typeInfo.IsValueType)
                 return Activator.CreateInstance(argumentType);
 
             return CreateInstance(argumentType, stack);

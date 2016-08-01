@@ -5,21 +5,25 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".generated.cs" #>
 <# var allEngines = new[] { "RhinoFakeEngine", "NSubstituteEngine", "MoqFakeEngine", "FakeItEasyEngine" };  #>
-<# var allNamespaces = new[] { "RhinoMocks", "NSubstitute", "Moq", "FakeItEasy" };  #>
+<# var allNamespaces = new[] { "Rhinomocks", "NSubstitute", "Moq", "FakeItEasy" };  #>
+<# var supportsNetStandard = new[] { false, false, true, false };  #>
 using System;
-using System.ComponentModel.Design;
-using Machine.Fakes.Adapters.FakeItEasy;
-using Machine.Fakes.Adapters.Moq;
-using Machine.Fakes.Adapters.NSubstitute;
-using Machine.Fakes.Adapters.Rhinomocks;
 using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 <# for (int i = 0; i < allEngines.Length; i++) { #>
 
+<# if (!supportsNetStandard[i]) { #>
+#if !NETSTANDARD
+<# } #>
+
+
 namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 {
-    [Subject(typeof(<#= allEngines[i] #>))]
+
+	using Machine.Fakes.Adapters.<#= allNamespaces[i] #>;
+    
+	[Subject(typeof(<#= allEngines[i] #>))]
     public class Given_a_method_was_not_configured_on_a_Fake_when_verifying_whether_it_was_accessed : WithCurrentEngine<<#= allEngines[i] #>>
     {
         static Exception _exception;
@@ -137,4 +141,8 @@ namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 }
+
+<# if (!supportsNetStandard[i]) { #>
+#endif
+<# } #>
 <# } #>

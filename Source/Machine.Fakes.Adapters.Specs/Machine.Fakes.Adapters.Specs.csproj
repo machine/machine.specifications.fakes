@@ -82,6 +82,7 @@
       <DependentUpon>CommandOptionsSpecs.tt</DependentUpon>
     </Compile>
     <Compile Include="FakeItEasy\CommandOptionsSpecs.cs" />
+    <Compile Include="IServiceContainer.cs" />
     <Compile Include="Moq\CommandOptionsSpecs.cs" />
     <Compile Include="NSubstitute\CommandOptionsSpecs.cs" />
     <Compile Include="PropertyBehaviorSpecs.generated.cs">

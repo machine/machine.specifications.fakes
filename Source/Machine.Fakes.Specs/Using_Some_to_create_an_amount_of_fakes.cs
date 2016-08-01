@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 
 using Machine.Fakes.Sdk;
 using Machine.Fakes.Specs.TestClasses;
@@ -8,6 +7,10 @@ using Machine.Specifications;
 
 namespace Machine.Fakes.Specs
 {
+    public interface IServiceContainer
+    {
+    }
+
     [Subject(typeof(SpecificationController<,>))]
     public class When_specifying_a_negative_amount_of_fakes_to_the_Some_method
     {

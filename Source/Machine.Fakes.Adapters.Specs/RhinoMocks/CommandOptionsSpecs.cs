@@ -1,3 +1,4 @@
+#if !NETSTANDARD
 using System;
 using Machine.Fakes.Adapters.Rhinomocks;
 using Machine.Fakes.Adapters.Specs.SampleCode;
@@ -23,3 +24,4 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
         It should_throw = () => exception.ShouldBeOfExactType<NotSupportedException>();
     }
 }
+#endif
