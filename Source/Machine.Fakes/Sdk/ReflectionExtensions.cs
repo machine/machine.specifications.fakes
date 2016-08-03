@@ -4,8 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-using Machine.Fakes.Internal;
-
 namespace Machine.Fakes.Sdk
 {
     /// <summary>
@@ -39,7 +37,7 @@ namespace Machine.Fakes.Sdk
         /// </returns>
         public static bool ClosesGenericParamType(this Type type)
         {
-            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Param<>);
+            return type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Param<>);
         }
 
         /// <summary>
@@ -53,7 +51,7 @@ namespace Machine.Fakes.Sdk
         /// </returns>
         public static Type GetFirstTypeArgument(this Type type)
         {
-            if (!type.IsGenericType)
+            if (!type.GetTypeInfo().IsGenericType)
             {
                 throw new ArgumentException("Specified type is not a generic type", "type");
             }
@@ -167,7 +165,7 @@ namespace Machine.Fakes.Sdk
             var fields = instance
                 .GetType()
                 .GetAllFields()
-                .Where(x => !x.FieldType.IsValueType);
+                .Where(x => !x.FieldType.GetTypeInfo().IsValueType);
 
             fields.Each(x => x.SetValue(instance, null));
         }

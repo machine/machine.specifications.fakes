@@ -1,3 +1,6 @@
+project.lock.json
+.vs/
+.vscode/
 key.txt
 /Source/*/obj
 /Source/*/bin

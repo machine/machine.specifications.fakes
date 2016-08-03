@@ -1,16 +1,26 @@
-﻿using System;
-using System.ComponentModel.Design;
-using Machine.Fakes.Adapters.FakeItEasy;
-using Machine.Fakes.Adapters.Moq;
-using Machine.Fakes.Adapters.NSubstitute;
-using Machine.Fakes.Adapters.Rhinomocks;
+﻿
+
+
+
+
+
+
+using System;
 using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
-namespace Machine.Fakes.Adapters.Specs.RhinoMocks
+
+#if !NETSTANDARD
+
+
+
+namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 {
-    [Subject(typeof(RhinoFakeEngine))]
+
+	using Machine.Fakes.Adapters.Rhinomocks;
+    
+	[Subject(typeof(RhinoFakeEngine))]
     public class Given_a_method_was_not_configured_on_a_Fake_when_verifying_whether_it_was_accessed : WithCurrentEngine<RhinoFakeEngine>
     {
         static Exception _exception;
@@ -129,9 +139,20 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 }
 
+#endif
+
+
+
+#if !NETSTANDARD
+
+
+
 namespace Machine.Fakes.Adapters.Specs.NSubstitute
 {
-    [Subject(typeof(NSubstituteEngine))]
+
+	using Machine.Fakes.Adapters.NSubstitute;
+    
+	[Subject(typeof(NSubstituteEngine))]
     public class Given_a_method_was_not_configured_on_a_Fake_when_verifying_whether_it_was_accessed : WithCurrentEngine<NSubstituteEngine>
     {
         static Exception _exception;
@@ -250,9 +271,19 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
     }
 }
 
+#endif
+
+
+
+
+
+
 namespace Machine.Fakes.Adapters.Specs.Moq
 {
-    [Subject(typeof(MoqFakeEngine))]
+
+	using Machine.Fakes.Adapters.Moq;
+    
+	[Subject(typeof(MoqFakeEngine))]
     public class Given_a_method_was_not_configured_on_a_Fake_when_verifying_whether_it_was_accessed : WithCurrentEngine<MoqFakeEngine>
     {
         static Exception _exception;
@@ -371,9 +402,19 @@ namespace Machine.Fakes.Adapters.Specs.Moq
     }
 }
 
+
+
+
+#if !NETSTANDARD
+
+
+
 namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 {
-    [Subject(typeof(FakeItEasyEngine))]
+
+	using Machine.Fakes.Adapters.FakeItEasy;
+    
+	[Subject(typeof(FakeItEasyEngine))]
     public class Given_a_method_was_not_configured_on_a_Fake_when_verifying_whether_it_was_accessed : WithCurrentEngine<FakeItEasyEngine>
     {
         static Exception _exception;
@@ -491,3 +532,6 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 }
+
+#endif
+

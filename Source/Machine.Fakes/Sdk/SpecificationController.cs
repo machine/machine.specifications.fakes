@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Machine.Fakes.Internal;
-using Machine.Specifications;
 
 namespace Machine.Fakes.Sdk
 {
@@ -18,8 +17,8 @@ namespace Machine.Fakes.Sdk
     /// <typeparam name="TFakeEngine">
     /// Specifies the type of the fake engine which will be used.
     /// </typeparam>
-    public class SpecificationController<TSubject, TFakeEngine> : SpecificationController<TSubject> 
-        where TSubject : class 
+    public class SpecificationController<TSubject, TFakeEngine> : SpecificationController<TSubject>
+        where TSubject : class
         where TFakeEngine : IFakeEngine, new()
     {
         /// <summary>
@@ -44,7 +43,7 @@ namespace Machine.Fakes.Sdk
         private readonly BehaviorConfigController _behaviorConfigController = new BehaviorConfigController();
         private readonly AutoFakeContainer _container;
         private TSubject _specificationSubject;
-        
+
         /// <summary>
         /// Creates a new instance of the <see cref="SpecificationController{TSubject}"/> class.
         /// </summary>
@@ -56,7 +55,7 @@ namespace Machine.Fakes.Sdk
             Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
 
             _container = new AutoFakeContainer(fakeEngine);
-            
+
             FakeEngineGateway.EngineIs(fakeEngine);
         }
 

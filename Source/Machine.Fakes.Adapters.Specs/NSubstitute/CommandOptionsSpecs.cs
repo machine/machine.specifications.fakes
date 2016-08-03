@@ -1,3 +1,4 @@
+#if !NETSTANDARD
 using System;
 
 using Machine.Fakes.Adapters.NSubstitute;
@@ -130,3 +131,4 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         };
     }
 }
+#endif

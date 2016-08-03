@@ -1,0 +1,1 @@
+  powershell -f build.ps1 -Configuration Debug -CodeDirectory "Source" -TestsDirectory "Source" -PackageOutputDirectory "Build" -Package "Machine.Fakes","Machine.Fakes.Adapters.FakeItEasy","Machine.Fakes.Adapters.Moq","Machine.Fakes.Adapters.NSubstitute","Machine.Fakes.Adapters.Rhinomocks"

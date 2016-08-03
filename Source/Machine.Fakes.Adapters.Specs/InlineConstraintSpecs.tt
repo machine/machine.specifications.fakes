@@ -5,18 +5,23 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".generated.cs" #>
 <# var allEngines = new[] { "RhinoFakeEngine", "NSubstituteEngine", "MoqFakeEngine", "FakeItEasyEngine" };  #>
-<# var allNamespaces = new[] { "RhinoMocks", "NSubstitute", "Moq", "FakeItEasy" };  #>
-using Machine.Fakes.Adapters.FakeItEasy;
-using Machine.Fakes.Adapters.Moq;
-using Machine.Fakes.Adapters.NSubstitute;
-using Machine.Fakes.Adapters.Rhinomocks;
+<# var allNamespaces = new[] { "Rhinomocks", "NSubstitute", "Moq", "FakeItEasy" };  #>
+<# var supportsNetStandard = new[] { false, false, true, false };  #>
 using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 <# for (int i = 0; i < allEngines.Length; i++) { #>
 
+<# if (!supportsNetStandard[i]) { #>
+#if !NETSTANDARD
+<# } #>
+
 namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 {
+
+	using Machine.Fakes.Adapters.<#= allNamespaces[i] #>;
+
+
     [Subject(typeof(<#= allEngines[i] #>))]
     public class When_matching_any_parameter_value_and_passing_null : WithCurrentEngine<<#= allEngines[i] #>>
     {
@@ -351,4 +356,9 @@ namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
         It should_trigger_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 }
+
+<# if (!supportsNetStandard[i]) { #>
+#endif
+<# } #>
+
 <# } #>
