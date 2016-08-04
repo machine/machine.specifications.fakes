@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>32c3bb15-b6d6-49e8-a41d-0fbb20d03225</ProjectGuid>
-    <RootNamespace>Machine.Fakes.Adapters.Rhinomocks</RootNamespace>
+    <ProjectGuid>86e1223e-4d68-41d8-84ad-b68d40a06d66</ProjectGuid>
+    <RootNamespace>Machine.Fakes.FakeItEasy</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>

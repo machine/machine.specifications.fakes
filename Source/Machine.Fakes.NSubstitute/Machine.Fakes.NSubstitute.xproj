@@ -7,7 +7,7 @@
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>6d31f909-eacc-43a1-be04-d8df66596b2d</ProjectGuid>
-    <RootNamespace>Machine.Fakes.Adapters.NSubstitute</RootNamespace>
+    <RootNamespace>Machine.Fakes.NSubstitute</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>

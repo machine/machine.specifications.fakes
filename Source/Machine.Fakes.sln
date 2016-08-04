@@ -19,13 +19,13 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes", "Machine.Fa
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Examples", "Machine.Fakes.Examples\Machine.Fakes.Examples.xproj", "{97C8E742-61ED-4BDE-B23C-3B5FB45D5A68}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Adapters.Moq", "Machine.Fakes.Adapters.Moq\Machine.Fakes.Adapters.Moq.xproj", "{AB44677E-879D-4CDC-BDFC-522D4AB973E2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Moq", "Machine.Fakes.Moq\Machine.Fakes.Moq.xproj", "{AB44677E-879D-4CDC-BDFC-522D4AB973E2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Adapters.FakeItEasy", "Machine.Fakes.Adapters.FakeItEasy\Machine.Fakes.Adapters.FakeItEasy.xproj", "{86E1223E-4D68-41D8-84AD-B68D40A06D66}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.FakeItEasy", "Machine.Fakes.FakeItEasy\Machine.Fakes.FakeItEasy.xproj", "{86E1223E-4D68-41D8-84AD-B68D40A06D66}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Adapters.NSubstitute", "Machine.Fakes.Adapters.NSubstitute\Machine.Fakes.Adapters.NSubstitute.xproj", "{6D31F909-EACC-43A1-BE04-D8DF66596B2D}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.NSubstitute", "Machine.Fakes.NSubstitute\Machine.Fakes.NSubstitute.xproj", "{6D31F909-EACC-43A1-BE04-D8DF66596B2D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Adapters.Rhinomocks", "Machine.Fakes.Adapters.Rhinomocks\Machine.Fakes.Adapters.Rhinomocks.xproj", "{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Rhinomocks", "Machine.Fakes.Rhinomocks\Machine.Fakes.Rhinomocks.xproj", "{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4", "Machine.Fakes.Adapters.Specs\T4.csproj", "{B5E38E34-9FBE-4CA0-BF8E-B10345AE5735}"
 EndProject

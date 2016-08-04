@@ -29,7 +29,7 @@
         "Machine.Fakes": {
             "target": "project"
         },
-        "Machine.Fakes.Adapters.Moq": {
+        "Machine.Fakes.Moq": {
             "target": "project"
         }
     }
