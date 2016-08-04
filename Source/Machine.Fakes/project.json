@@ -1,0 +1,33 @@
+{
+    "version": "0.0.1-*",
+    "packOptions": {
+        "summary": "An integration layer for fake frameworks on top of Machine.Specifications",
+        "owners": [ "Machine Project" ],
+        "projectUrl": "https://github.com/machine/machine.fakes",
+        "licenseUrl": "https://github.com/machine/machine.fakes/raw/master/License.txt",
+        "iconUrl": "https://github.com/machine/machine.fakes/raw/master/machine.fakes-128x128.png",
+        "tags": [ "tdd", "bdd", "testing", "unittest", "fakes", "mocks", "mspec", "mfakes" ],
+        "requireLicenseAcceptance": false,
+        "releaseNotes": "See https://github.com/machine/machine.fakes/releases"
+    },
+    "authors": [
+        "Machine Project"
+    ],
+    "description": "Machine.Fakes attempts to simplify the usage of such frameworks on top of Machine.Specifications by helping to reduce a lot of the typical fake framwork related clutter code in specifications. If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. ",
+    "frameworks": {
+        "net40": {
+            "buildOptions": {
+                "define": [ "NET40" ]
+            }
+        },
+        "net45": { },
+        "netstandard1.3": {
+            "dependencies": {
+                "NETStandard.Library": "1.6.0"
+            }
+        }
+    },
+    "dependencies": {
+        "Machine.Specifications": "0.11-*"
+    }
+}

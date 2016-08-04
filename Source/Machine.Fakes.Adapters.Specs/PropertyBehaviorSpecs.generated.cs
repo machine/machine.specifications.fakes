@@ -1,13 +1,24 @@
-﻿using Machine.Fakes.Adapters.FakeItEasy;
-using Machine.Fakes.Adapters.Moq;
-using Machine.Fakes.Adapters.NSubstitute;
-using Machine.Fakes.Adapters.Rhinomocks;
+﻿
+
+
+
+
+
+
 using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
-namespace Machine.Fakes.Adapters.Specs.RhinoMocks
+
+
+#if !NETSTANDARD
+
+
+namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 {
+
+	using Machine.Fakes.Adapters.Rhinomocks;
+
     [Subject(typeof(RhinoFakeEngine))]
     public class When_setting_a_simple_property_to_value_2 : WithCurrentEngine<RhinoFakeEngine>
     {
@@ -65,8 +76,19 @@ namespace Machine.Fakes.Adapters.Specs.RhinoMocks
     }
 }
 
+#endif
+
+
+
+
+#if !NETSTANDARD
+
+
 namespace Machine.Fakes.Adapters.Specs.NSubstitute
 {
+
+	using Machine.Fakes.Adapters.NSubstitute;
+
     [Subject(typeof(NSubstituteEngine))]
     public class When_setting_a_simple_property_to_value_2 : WithCurrentEngine<NSubstituteEngine>
     {
@@ -124,8 +146,18 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
     }
 }
 
+#endif
+
+
+
+
+
+
 namespace Machine.Fakes.Adapters.Specs.Moq
 {
+
+	using Machine.Fakes.Adapters.Moq;
+
     [Subject(typeof(MoqFakeEngine))]
     public class When_setting_a_simple_property_to_value_2 : WithCurrentEngine<MoqFakeEngine>
     {
@@ -183,8 +215,18 @@ namespace Machine.Fakes.Adapters.Specs.Moq
     }
 }
 
+
+
+
+
+#if !NETSTANDARD
+
+
 namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 {
+
+	using Machine.Fakes.Adapters.FakeItEasy;
+
     [Subject(typeof(FakeItEasyEngine))]
     public class When_setting_a_simple_property_to_value_2 : WithCurrentEngine<FakeItEasyEngine>
     {
@@ -241,3 +283,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         static IProperties _fake;
     }
 }
+
+#endif
+
+

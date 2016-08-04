@@ -1,3 +1,5 @@
+#if !NETSTANDARD
+
 using System;
 
 using Machine.Fakes.Adapters.FakeItEasy;
@@ -130,3 +132,5 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         };
     }
 }
+
+#endif
