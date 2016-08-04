@@ -12,6 +12,9 @@ deploy:
     on:
       appveyor_repo_tag: true
     prerelease: $(nuget_prerelease)
+    release: v$(nuget_version)
+    auth_token:
+      secure: VrF5TrpBRN0ims9nJC1LG32O6ga5hsRuGNSufEbatAiIWZ1z68iiCYKZtqnAaT9y
 
   - provider: NuGet
     api_key:
