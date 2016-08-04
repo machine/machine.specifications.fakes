@@ -111,9 +111,18 @@ These constraints get translated to the inline constraints of the target framewo
 
 ### WithSubject&lt;TSubject&gt; ###
 
-Back to our example with the `MoodIdentifier`. Do we really need to create the subject of the specification by hand? Can we make it even simpler? Yes, by introducing the concept of an AutoMockingContainer to the specification. That's exactly what WithSubject<TSubject> does. Here's a modified example.
+Back to our example with the `MoodIdentifier`. Do we really need to create the subject of the specification by hand? Can we make it even simpler? Yes, by introducing the concept of an AutoMockingContainer to the specification. That's exactly what `WithSubject<TSubject, TFakeEngine>` does. 
 
-    public class Given_the_current_day_is_monday_when_identifying_my_mood : WithSubject<MoodIdentifier> (*)
+`TFakeEngine` is a plugable implementation of an AutoMocking container. There are multiple provided adapters to common mocking libraries including: Moq, NSubstitute, Rhinomocks, and Specs. These can be accessed by source code or on NUGET. For these examples we are going to use the Moq adapter for reference. To install:
+
+
+    Install-Package Machine.Fakes.Moq
+
+
+
+Here's a modified example.
+
+    public class Given_the_current_day_is_monday_when_identifying_my_mood : WithSubject<MoodIdentifier, MoqFakeEngine> (*)
     {
         static string _mood;
 
@@ -167,7 +176,7 @@ Very often we try to accomplish re-use in classes by using inheritance and of co
 
 This is the "Mood" example with a behavior configuration instead of configuring the fake itself:
 
-    public class Given_the_current_day_is_monday_when_identifying_my_mood : WithSubject<MoodIdentifier>
+    public class Given_the_current_day_is_monday_when_identifying_my_mood : WithSubject<MoodIdentifier, MoqFakeEngine>
     {
         static string _mood;
 
