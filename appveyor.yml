@@ -1,13 +1,12 @@
 environment:
-  nuget_version: '2.8.0-beta4'
-  nuget_prerelease: true
+  nuget_version: '2.8.0'
+  nuget_prerelease: false
   assembly_version: '2.8.0.0'
 
 deploy:
   - provider: GitHub
     description: |
-      * Support for .NET Standard 1.3 and NET Core. (only the Moq adaptor support .NET Standard)
-      * Beta due to Machine.Specifications being in -rc1 and Moq for .NET Standard in alpha
+      * .NET Core / .NET Standard support for NSubstitute, FakeItEasy and Moq.
 
     on:
       appveyor_repo_tag: true

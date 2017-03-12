@@ -15,12 +15,17 @@
         "Machine Project"
     ],
     "frameworks": {
-        "net40": {}
+        "net40": {},
+        "netstandard1.5": {
+            "dependencies": {
+                "NETStandard.Library": "1.6.0"
+            }
+        }
     },
     "dependencies": {
         "Machine.Fakes": {
             "target": "project"
         },
-        "NSubstitute": "1.8.2"
+        "NSubstitute": "2.0.2"
     }
 }
