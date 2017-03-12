@@ -18,12 +18,6 @@
                 },
                 "Machine.Fakes.Rhinomocks": {
                     "target": "project"
-                },
-                "Machine.Fakes.NSubstitute": {
-                    "target": "project"
-                },
-                "Machine.Fakes.FakeItEasy": {
-                    "target": "project"
                 }
             }
         },
@@ -47,6 +41,12 @@
         "Machine.Specifications.Should": "0.11.0",
         "dotnet-test-mspec": "0.2-*",
         "Machine.Fakes.Moq": {
+            "target": "project"
+        },
+        "Machine.Fakes.NSubstitute": {
+            "target": "project"
+        },
+        "Machine.Fakes.FakeItEasy": {
             "target": "project"
         }
     }

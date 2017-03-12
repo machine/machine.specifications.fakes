@@ -101,7 +101,6 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
 
 
-#if !NETSTANDARD
 
 
 
@@ -184,8 +183,6 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         It should_execute_the_configured_behavior = () => Catch.Exception(() => _fake.GetService(typeof(string))).ShouldNotBeNull();
     }
 }
-
-#endif
 
 
 
@@ -277,7 +274,6 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
 
 
-#if !NETSTANDARD
 
 
 
@@ -361,6 +357,5 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
     }
 }
 
-#endif
 
 
