@@ -26,6 +26,6 @@
         "Machine.Fakes": {
             "target": "project"
         },
-        "Moq": "4.6.36-alpha"
+        "Moq": "4.7.1"
     }
 }
