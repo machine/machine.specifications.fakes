@@ -24,8 +24,8 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             AddConverter(InlineConstraintNames.IsA, RewriteIsAMethod);
             AddConverter(InlineConstraintNames.Matches, RewriteMatchesMethod);
             AddConverter(InlineConstraintNames.IsAnything, RewriteIsAnythingMember);
-            AddConverter(InlineConstraintNames.IsNull, RewriteIsNullMember);
-            AddConverter(InlineConstraintNames.IsNotNull, RewriteIsNotNullMember);
+            AddConverter(InlineConstraintNames.IsNull, RewriteNullCheckingMember);
+            AddConverter(InlineConstraintNames.IsNotNull, RewriteNullCheckingMember);
         }
 
         Expression RewriteMatchesMethod(MethodCallExpression expression)
@@ -63,28 +63,26 @@ namespace Machine.Fakes.Adapters.FakeItEasy
                 innerExpression);
         }
 
-        static Expression RewriteIsNullMember(MemberExpression node)
+        static Expression RewriteNullCheckingMember(MemberExpression node)
         {
             var argumentType = node.Member.DeclaringType.GetFirstTypeArgument();
             var thatAccess = GetThatAccess(argumentType);
 
-            var method = GetIsNullMethod(argumentType);
+            var isValueType = argumentType.IsValueType();
+            if (isValueType)
+            {
+                // If we're checking a value type for nullity, it means the type
+                // is Nullable<T>, and we want to find IsNull<T>. (Or IsNotNull<T>.) 
+                argumentType = argumentType.GetGenericArguments().First();
+            }
+
+            var method = typeof(ArgumentConstraintManagerExtensions)
+                .GetMethods()
+                .Where(x => x.Name == node.Member.Name)
+                .Single(x => x.GetGenericArguments().First().IsValueType() == isValueType)
+                .MakeGenericMethod(argumentType);
 
             return Expression.Call(method, thatAccess);
-        }
-
-        static Expression RewriteIsNotNullMember(MemberExpression node)
-        {
-            var argumentType = node.Member.DeclaringType.GetFirstTypeArgument();
-            var thatAccess = GetThatAccess(argumentType);
-
-            var notAccess = typeof(INegatableArgumentConstraintManager<>)
-                .MakeGenericType(argumentType)
-                .MakePropertyAccess("Not", thatAccess);
-
-            var method = GetIsNullMethod(argumentType);
-
-            return Expression.Call(method, notAccess);
         }
 
         static Expression RewriteIsAnyMethod(MethodCallExpression expression)
@@ -131,16 +129,5 @@ namespace Machine.Fakes.Adapters.FakeItEasy
                 .MakeGenericType(typeArgument)
                 .MakeStaticPropertyAccess("That");
         }
-
-        static MethodInfo GetIsNullMethod(Type argumentType)
-        {
-            var isValueType = argumentType.IsValueType();
-
-            return typeof(ArgumentConstraintManagerExtensions)
-                .GetMethods()
-                .Where(x => x.Name == "IsNull")
-                .Single(x => x.GetGenericArguments().First().IsValueType() == isValueType)
-                .MakeGenericMethod(argumentType);
-        }
-    }
+   }
 }
