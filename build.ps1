@@ -78,6 +78,6 @@ Write-Host "Creating a nuget package in ${PackageOutputDirectory}"
 
 $Package | ForEach {
     $_ -split "," | ForEach{
-        Invoke-ExpressionExitCodeCheck "dotnet pack ${CodeDirectory}\$($_) -c ${Configuration} -o ${PackageOutputDirectory}"
+        Invoke-ExpressionExitCodeCheck "dotnet pack ${CodeDirectory}\$($_) -c ${Configuration} -o ${PackageOutputDirectory} /p:PackageVersion=${Version}"
     }
 }
