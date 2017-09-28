@@ -7,8 +7,8 @@ Param(
     [string[]] $Package
 )
 
-$tests = Get-ChildItem $TestsDirectory -Directory | where { $_.FullName -imatch "^.*\.(?:Specs|Tests|Test)$" }
-$projects = Get-ChildItem $CodeDirectory -Recurse -File -Filter "project.json"
+$tests = Get-ChildItem $TestsDirectory -Recurse -File -Filter "*.Specs.csproj"
+$projects = Get-ChildItem $CodeDirectory -Recurse -File -Filter "*.csproj"
 
 function Invoke-ExpressionExitCodeCheck([string] $command)
 {
@@ -45,10 +45,10 @@ if ($Version) {
 # Build
 
 Write-Host "Restoring packages..."
-Invoke-ExpressionExitCodeCheck "dotnet restore" -ErrorAction Stop
+Invoke-ExpressionExitCodeCheck "dotnet restore Source\Machine.Fakes.sln" -ErrorAction Stop
 
 Write-Host "Building in ${Configuration}..."
-Invoke-ExpressionExitCodeCheck "dotnet build ${CodeDirectory}\**\project.json -c ${Configuration}" -ErrorAction Stop
+Invoke-ExpressionExitCodeCheck "dotnet build Source\Machine.Fakes.sln -c ${Configuration}" -ErrorAction Stop
 
 
 # Test
