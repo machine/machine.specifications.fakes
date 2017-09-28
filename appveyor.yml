@@ -1,3 +1,5 @@
+image: Visual Studio 2017
+
 environment:
   nuget_version: '2.9.0'
   nuget_prerelease: false
