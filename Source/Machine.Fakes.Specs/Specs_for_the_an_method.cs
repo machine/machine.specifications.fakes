@@ -1,6 +1,4 @@
 using System;
-using System.Data;
-using System.Data.SqlClient;
 using Machine.Fakes.Sdk;
 using Machine.Fakes.Specs.TestClasses;
 using Machine.Specifications;

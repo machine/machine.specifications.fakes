@@ -1,7 +1,9 @@
+image: Visual Studio 2017
+
 environment:
-  nuget_version: '2.8.0'
+  nuget_version: '2.9.0'
   nuget_prerelease: false
-  assembly_version: '2.8.0.0'
+  assembly_version: '2.9.0.0'
 
 deploy:
   - provider: GitHub
@@ -40,7 +42,7 @@ build_script:
 - cmd: >-
     powershell -f build.ps1 -CodeDirectory "Source" -TestsDirectory "Source" -PackageOutputDirectory "Build" -Package "Machine.Fakes","Machine.Fakes.FakeItEasy","Machine.Fakes.Moq","Machine.Fakes.NSubstitute","Machine.Fakes.Rhinomocks" -Version "%NUGET_VERSION%" -Configuration "%CONFIGURATION%"
 artifacts:
-- path: Build\*.nupkg
+- path: Source\**\Build\*.nupkg
 
 test: off
 

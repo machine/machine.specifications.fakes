@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Machine.Fakes attempts to simplify the usage of such frameworks on top of Machine.Specifications by helping to reduce a lot of the typical fake framwork related clutter code in specifications. If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. </Description>
+    <VersionPrefix>1</VersionPrefix>
+    <Authors>Machine Project</Authors>
+    <TargetFrameworks>net45;netstandard1.3</TargetFrameworks>
+    <AssemblyName>Machine.Fakes.Moq</AssemblyName>
+    <PackageId>Machine.Fakes.Moq</PackageId>
+    <PackageTags>tdd;bdd;testing;unittest;fakes;mocks;mspec;mfakes</PackageTags>
+    <PackageReleaseNotes>See https://github.com/machine/machine.fakes/releases</PackageReleaseNotes>
+    <PackageIconUrl>https://github.com/machine/machine.fakes/raw/master/machine.fakes-128x128.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/machine/machine.fakes</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/machine/machine.fakes/raw/master/License.txt</PackageLicenseUrl>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.1</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Machine.Fakes\Machine.Fakes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.7.127" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

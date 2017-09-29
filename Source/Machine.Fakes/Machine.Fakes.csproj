@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Machine.Fakes attempts to simplify the usage of such frameworks on top of Machine.Specifications by helping to reduce a lot of the typical fake framwork related clutter code in specifications. If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. </Description>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Authors>Machine Project</Authors>
+    <TargetFrameworks>net40;net45;netstandard1.3</TargetFrameworks>
+    <AssemblyName>Machine.Fakes</AssemblyName>
+    <PackageId>Machine.Fakes</PackageId>
+    <PackageTags>tdd;bdd;testing;unittest;fakes;mocks;mspec;mfakes</PackageTags>
+    <PackageReleaseNotes>See https://github.com/machine/machine.fakes/releases</PackageReleaseNotes>
+    <PackageIconUrl>https://github.com/machine/machine.fakes/raw/master/machine.fakes-128x128.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/machine/machine.fakes</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/machine/machine.fakes/raw/master/License.txt</PackageLicenseUrl>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.0</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Machine.Specifications" Version="0.11.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <DefineConstants>$(DefineConstants);NET40</DefineConstants>
+  </PropertyGroup>
+
+</Project>

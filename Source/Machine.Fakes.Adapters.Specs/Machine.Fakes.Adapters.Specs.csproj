@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VersionPrefix>0.9.0-ivanz1</VersionPrefix>
+    <TargetFrameworks>net45;netcoreapp1.0</TargetFrameworks>
+    <NoWarn>$(NoWarn);169</NoWarn>
+    <AssemblyName>Machine.Fakes.Adapters.Specs</AssemblyName>
+    <PackageId>Machine.Fakes.Adapters.Specs</PackageId>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">1.0.4</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Machine.Fakes.Moq\Machine.Fakes.Moq.csproj" />
+    <ProjectReference Include="..\Machine.Fakes.NSubstitute\Machine.Fakes.NSubstitute.csproj" />
+    <ProjectReference Include="..\Machine.Fakes.FakeItEasy\Machine.Fakes.FakeItEasy.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <ProjectReference Include="..\Machine.Fakes.Rhinomocks\Machine.Fakes.Rhinomocks.csproj" />
+    <Reference Include="System.Data" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Machine.Specifications.Runner.VisualStudio" Version="2.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="Machine.Specifications" Version="0.11.1" />
+    <PackageReference Include="Machine.Specifications.Should" Version="0.11.0" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
+    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
+  </ItemGroup>
+
+</Project>

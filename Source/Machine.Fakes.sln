@@ -1,31 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specs", "Specs", "{167B9F97-0E10-4E03-A1C9-7AD403B9AC34}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DD71738D-4BBF-4EDD-82B3-64F33F0FA96C}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Adapters.Specs", "Machine.Fakes.Adapters.Specs\Machine.Fakes.Adapters.Specs.csproj", "{5C67C58C-C33F-41B9-B877-4F93F668FBBD}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Adapters.Specs", "Machine.Fakes.Adapters.Specs\Machine.Fakes.Adapters.Specs.xproj", "{5C67C58C-C33F-41B9-B877-4F93F668FBBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Specs", "Machine.Fakes.Specs\Machine.Fakes.Specs.csproj", "{C39A2221-CA3A-4456-983A-DB6A410CD05B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Specs", "Machine.Fakes.Specs\Machine.Fakes.Specs.xproj", "{C39A2221-CA3A-4456-983A-DB6A410CD05B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes", "Machine.Fakes\Machine.Fakes.csproj", "{BE617946-FFB8-47FA-A333-2C762AB5127C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes", "Machine.Fakes\Machine.Fakes.xproj", "{BE617946-FFB8-47FA-A333-2C762AB5127C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Examples", "Machine.Fakes.Examples\Machine.Fakes.Examples.csproj", "{97C8E742-61ED-4BDE-B23C-3B5FB45D5A68}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Examples", "Machine.Fakes.Examples\Machine.Fakes.Examples.xproj", "{97C8E742-61ED-4BDE-B23C-3B5FB45D5A68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Moq", "Machine.Fakes.Moq\Machine.Fakes.Moq.csproj", "{AB44677E-879D-4CDC-BDFC-522D4AB973E2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Moq", "Machine.Fakes.Moq\Machine.Fakes.Moq.xproj", "{AB44677E-879D-4CDC-BDFC-522D4AB973E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.FakeItEasy", "Machine.Fakes.FakeItEasy\Machine.Fakes.FakeItEasy.csproj", "{86E1223E-4D68-41D8-84AD-B68D40A06D66}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.FakeItEasy", "Machine.Fakes.FakeItEasy\Machine.Fakes.FakeItEasy.xproj", "{86E1223E-4D68-41D8-84AD-B68D40A06D66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.NSubstitute", "Machine.Fakes.NSubstitute\Machine.Fakes.NSubstitute.csproj", "{6D31F909-EACC-43A1-BE04-D8DF66596B2D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.NSubstitute", "Machine.Fakes.NSubstitute\Machine.Fakes.NSubstitute.xproj", "{6D31F909-EACC-43A1-BE04-D8DF66596B2D}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Machine.Fakes.Rhinomocks", "Machine.Fakes.Rhinomocks\Machine.Fakes.Rhinomocks.xproj", "{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Rhinomocks", "Machine.Fakes.Rhinomocks\Machine.Fakes.Rhinomocks.csproj", "{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4", "Machine.Fakes.Adapters.Specs\T4.csproj", "{B5E38E34-9FBE-4CA0-BF8E-B10345AE5735}"
 EndProject
@@ -77,5 +71,8 @@ Global
 		{5C67C58C-C33F-41B9-B877-4F93F668FBBD} = {167B9F97-0E10-4E03-A1C9-7AD403B9AC34}
 		{C39A2221-CA3A-4456-983A-DB6A410CD05B} = {167B9F97-0E10-4E03-A1C9-7AD403B9AC34}
 		{B5E38E34-9FBE-4CA0-BF8E-B10345AE5735} = {167B9F97-0E10-4E03-A1C9-7AD403B9AC34}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A4ACCE3-4FF4-4698-BDCB-A94F019A26CB}
 	EndGlobalSection
 EndGlobal
