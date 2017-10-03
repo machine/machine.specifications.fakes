@@ -14,7 +14,7 @@ _ReSharper.*
 *.swp
 NDependOut
 Source/GlobalAssemblyInfo.cs
-/Build
+Build
 /Release
 /Documentation
 

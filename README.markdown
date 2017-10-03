@@ -21,7 +21,7 @@ Many credits for the ideas incorporated in this framework go to Jean Paul Boodho
 
 ## Building Machine.Fakes from source ##
 
-Just download the repository from github and run the build.cmd (or build.NoGit.cmd if you don't have git installed). The build of Machine.Fakes only requires the .NET Framework 4.0 to be installed on your machine. Everything else should work out-of-the-box. If not, please take the time to add an issue to this project. After a successful build you will find all the assemblies in a zip file under the "Release" folder.
+Just download the repository from github and run `build.ps1`. The build of Machine.Fakes requires .NET Core SDK 2.0.0 to be installed on your machine. Everything else should work out-of-the-box. If not, please take the time to add an issue to this project. After a successful build you will find the nupkgs in the "Build" folder under their respective project (e.g. `Source\Machine.Fakes\Build`).
 
 ## Getting Machine.Fakes via the NuGet package manager
 

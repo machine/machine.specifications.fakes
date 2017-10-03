@@ -1,10 +1,10 @@
 Param(
     [string] $Configuration = "Debug",
-    [string] $CodeDirectory = ".",
-    [string] $TestsDirectory = ".",
+    [string] $CodeDirectory = "Source",
+    [string] $TestsDirectory = "Source",
     [string] $PackageOutputDirectory = "Build",
     [string] $Version,
-    [string[]] $Package
+    [string[]] $Package = @("Machine.Fakes","Machine.Fakes.FakeItEasy","Machine.Fakes.Moq","Machine.Fakes.NSubstitute","Machine.Fakes.Rhinomocks")
 )
 
 $tests = Get-ChildItem $TestsDirectory -Recurse -File -Filter "*.Specs.csproj"
@@ -26,7 +26,7 @@ if ($Version) {
     $projects | ForEach {
         Write-Host "Updating version: $($_.FullName)"
 
-        $foundVersion = $false; # replace only the first occurance of versin (assumes package version is on top)
+        $foundVersion = $false; # replace only the first occurance of version (assumes package version is on top)
 
         (Get-Content $_.FullName -ErrorAction Stop) |
             Foreach-Object {
@@ -74,10 +74,9 @@ if ($testsFailed) {
 
 # NuGet packaging
 
-Write-Host "Creating a nuget package in ${PackageOutputDirectory}"
-
-$Package | ForEach {
-    $_ -split "," | ForEach{
+if ($Package) {
+    $Package | ForEach {
+        Write-Host "Creating nuget package in $CodeDirectory\$_\$PackageOutputDirectory"
         Invoke-ExpressionExitCodeCheck "dotnet pack ${CodeDirectory}\$($_) -c ${Configuration} -o ${PackageOutputDirectory} /p:PackageVersion=${Version}"
     }
 }
