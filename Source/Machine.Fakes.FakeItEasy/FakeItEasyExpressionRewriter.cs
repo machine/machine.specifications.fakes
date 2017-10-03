@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using FakeItEasy;
 
 using Machine.Fakes.Sdk;
@@ -66,11 +68,9 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             var argumentType = node.Member.DeclaringType.GetFirstTypeArgument();
             var thatAccess = GetThatAccess(argumentType);
 
-            return Expression.Call(
-                typeof(ArgumentConstraintManagerExtensions),
-                "IsNull",
-                new[] { argumentType },
-                thatAccess);
+            var method = GetIsNullMethod(argumentType);
+
+            return Expression.Call(method, thatAccess);
         }
 
         static Expression RewriteIsNotNullMember(MemberExpression node)
@@ -78,15 +78,13 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             var argumentType = node.Member.DeclaringType.GetFirstTypeArgument();
             var thatAccess = GetThatAccess(argumentType);
 
-            var notAccess = typeof(IArgumentConstraintManager<>)
+            var notAccess = typeof(INegatableArgumentConstraintManager<>)
                 .MakeGenericType(argumentType)
                 .MakePropertyAccess("Not", thatAccess);
 
-            return Expression.Call(
-                typeof(ArgumentConstraintManagerExtensions),
-                "IsNull",
-                new[] { argumentType },
-                notAccess);
+            var method = GetIsNullMethod(argumentType);
+
+            return Expression.Call(method, notAccess);
         }
 
         static Expression RewriteIsAnyMethod(MethodCallExpression expression)
@@ -132,6 +130,17 @@ namespace Machine.Fakes.Adapters.FakeItEasy
             return typeof(A<>)
                 .MakeGenericType(typeArgument)
                 .MakeStaticPropertyAccess("That");
+        }
+
+        static MethodInfo GetIsNullMethod(Type argumentType)
+        {
+            var isValueType = argumentType.IsValueType();
+
+            return typeof(ArgumentConstraintManagerExtensions)
+                .GetMethods()
+                .Where(x => x.Name == "IsNull")
+                .Single(x => x.GetGenericArguments().First().IsValueType() == isValueType)
+                .MakeGenericMethod(argumentType);
         }
     }
 }
