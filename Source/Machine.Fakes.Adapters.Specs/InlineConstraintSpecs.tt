@@ -6,7 +6,7 @@
 <#@ output extension=".generated.cs" #>
 <# var allEngines = new[] { "RhinoFakeEngine", "NSubstituteEngine", "MoqFakeEngine", "FakeItEasyEngine" };  #>
 <# var allNamespaces = new[] { "Rhinomocks", "NSubstitute", "Moq", "FakeItEasy" };  #>
-<# var supportsNetStandard = new[] { false, false, true, false };  #>
+<# var supportsNetStandard = new[] { false, true, true, true };  #>
 using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;

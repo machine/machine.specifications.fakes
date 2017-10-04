@@ -1397,3 +1397,4 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 }
 
 
+
