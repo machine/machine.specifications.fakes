@@ -35,7 +35,46 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(RhinoFakeEngine))]
+    public class When_matching_any_nullable_parameter_value_and_passing_null : WithCurrentEngine<RhinoFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param.IsAny<int?>(), Param.IsAny<int?>()))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(null, null);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+
+    [Subject(typeof(RhinoFakeEngine))]
+    public class When_matching_any_nullable_parameter_value_and_passing_non_null : WithCurrentEngine<RhinoFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param.IsAny<int?>(), Param.IsAny<int?>()))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(2, 4);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(RhinoFakeEngine))]
@@ -54,7 +93,7 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(RhinoFakeEngine))] 
@@ -73,7 +112,7 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(RhinoFakeEngine))] 
@@ -92,7 +131,45 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(RhinoFakeEngine))]
+    public class When_matching_only_non_null_parameter_values_and_passing_in_non_null_nullable_values : WithCurrentEngine<RhinoFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param<int?>.IsNotNull, Param<int?>.IsNotNull))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(3, 5);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(RhinoFakeEngine))]
+    public class When_matching_only_non_null_parameter_values_and_passing_in_null_nullable_values : WithCurrentEngine<RhinoFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param<int?>.IsNotNull, Param<int?>.IsNotNull))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(null, null);
+
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(RhinoFakeEngine))] 
@@ -111,7 +188,7 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(RhinoFakeEngine))] 
@@ -383,7 +460,46 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(NSubstituteEngine))]
+    public class When_matching_any_nullable_parameter_value_and_passing_null : WithCurrentEngine<NSubstituteEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param.IsAny<int?>(), Param.IsAny<int?>()))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(null, null);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+
+    [Subject(typeof(NSubstituteEngine))]
+    public class When_matching_any_nullable_parameter_value_and_passing_non_null : WithCurrentEngine<NSubstituteEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param.IsAny<int?>(), Param.IsAny<int?>()))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(2, 4);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(NSubstituteEngine))]
@@ -402,7 +518,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(NSubstituteEngine))] 
@@ -421,7 +537,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(NSubstituteEngine))] 
@@ -440,7 +556,45 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(NSubstituteEngine))]
+    public class When_matching_only_non_null_parameter_values_and_passing_in_non_null_nullable_values : WithCurrentEngine<NSubstituteEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param<int?>.IsNotNull, Param<int?>.IsNotNull))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(3, 5);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(NSubstituteEngine))]
+    public class When_matching_only_non_null_parameter_values_and_passing_in_null_nullable_values : WithCurrentEngine<NSubstituteEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param<int?>.IsNotNull, Param<int?>.IsNotNull))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(null, null);
+
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(NSubstituteEngine))] 
@@ -459,7 +613,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(NSubstituteEngine))] 
@@ -730,7 +884,46 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(MoqFakeEngine))]
+    public class When_matching_any_nullable_parameter_value_and_passing_null : WithCurrentEngine<MoqFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param.IsAny<int?>(), Param.IsAny<int?>()))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(null, null);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+
+    [Subject(typeof(MoqFakeEngine))]
+    public class When_matching_any_nullable_parameter_value_and_passing_non_null : WithCurrentEngine<MoqFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param.IsAny<int?>(), Param.IsAny<int?>()))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(2, 4);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(MoqFakeEngine))]
@@ -749,7 +942,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(MoqFakeEngine))] 
@@ -768,7 +961,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(MoqFakeEngine))] 
@@ -787,7 +980,45 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(MoqFakeEngine))]
+    public class When_matching_only_non_null_parameter_values_and_passing_in_non_null_nullable_values : WithCurrentEngine<MoqFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param<int?>.IsNotNull, Param<int?>.IsNotNull))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(3, 5);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(MoqFakeEngine))]
+    public class When_matching_only_non_null_parameter_values_and_passing_in_null_nullable_values : WithCurrentEngine<MoqFakeEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param<int?>.IsNotNull, Param<int?>.IsNotNull))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(null, null);
+
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(MoqFakeEngine))] 
@@ -806,7 +1037,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(MoqFakeEngine))] 
@@ -1077,7 +1308,46 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(FakeItEasyEngine))]
+    public class When_matching_any_nullable_parameter_value_and_passing_null : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param.IsAny<int?>(), Param.IsAny<int?>()))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(null, null);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+
+    [Subject(typeof(FakeItEasyEngine))]
+    public class When_matching_any_nullable_parameter_value_and_passing_non_null : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param.IsAny<int?>(), Param.IsAny<int?>()))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(2, 4);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(FakeItEasyEngine))]
@@ -1096,7 +1366,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(FakeItEasyEngine))] 
@@ -1115,7 +1385,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(FakeItEasyEngine))] 
@@ -1134,7 +1404,45 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(FakeItEasyEngine))]
+    public class When_matching_only_non_null_parameter_values_and_passing_in_non_null_nullable_values : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param<int?>.IsNotNull, Param<int?>.IsNotNull))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(3, 5);
+
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+    }
+
+    [Subject(typeof(FakeItEasyEngine))]
+    public class When_matching_only_non_null_parameter_values_and_passing_in_null_nullable_values : WithCurrentEngine<FakeItEasyEngine>
+    {
+        static IView _view;
+        static bool _configuredBehaviorWasTriggered;
+
+        Establish context = () =>
+        {
+            _view = FakeEngineGateway.Fake<IView>();
+
+            _view.WhenToldTo(v => v.AreBothOdd(Param<int?>.IsNotNull, Param<int?>.IsNotNull))
+                .Return(true);
+        };
+
+        Because of = () => _configuredBehaviorWasTriggered = _view.AreBothOdd(null, null);
+
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(FakeItEasyEngine))] 
@@ -1153,7 +1461,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(FakeItEasyEngine))] 
@@ -1395,5 +1703,6 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         It should_trigger_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 }
+
 
 
