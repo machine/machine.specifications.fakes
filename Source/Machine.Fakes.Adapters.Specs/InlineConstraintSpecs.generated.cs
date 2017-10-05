@@ -35,7 +35,7 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(RhinoFakeEngine))]
@@ -54,7 +54,7 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(RhinoFakeEngine))] 
@@ -73,7 +73,7 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(RhinoFakeEngine))] 
@@ -92,7 +92,7 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(RhinoFakeEngine))] 
@@ -111,7 +111,7 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(RhinoFakeEngine))] 
@@ -383,7 +383,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(NSubstituteEngine))]
@@ -402,7 +402,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(NSubstituteEngine))] 
@@ -421,7 +421,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(NSubstituteEngine))] 
@@ -440,7 +440,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(NSubstituteEngine))] 
@@ -459,7 +459,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(NSubstituteEngine))] 
@@ -730,7 +730,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(MoqFakeEngine))]
@@ -749,7 +749,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(MoqFakeEngine))] 
@@ -768,7 +768,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(MoqFakeEngine))] 
@@ -787,7 +787,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(MoqFakeEngine))] 
@@ -806,7 +806,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(MoqFakeEngine))] 
@@ -1077,7 +1077,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(FakeItEasyEngine))]
@@ -1096,7 +1096,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(FakeItEasyEngine))] 
@@ -1115,7 +1115,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(FakeItEasyEngine))] 
@@ -1134,7 +1134,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(FakeItEasyEngine))] 
@@ -1153,7 +1153,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(FakeItEasyEngine))] 

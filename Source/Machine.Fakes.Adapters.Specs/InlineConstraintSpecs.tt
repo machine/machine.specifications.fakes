@@ -38,7 +38,7 @@ namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(<#= allEngines[i] #>))]
@@ -57,7 +57,7 @@ namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(<#= allEngines[i] #>))] 
@@ -76,7 +76,7 @@ namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_not_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
+        It should_not_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeFalse();
     }
 
     [Subject(typeof(<#= allEngines[i] #>))] 
@@ -95,7 +95,7 @@ namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin("NON_NULL", "ALSO_NON_NULL");
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(<#= allEngines[i] #>))] 
@@ -114,7 +114,7 @@ namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 
         Because of = () => _configuredBehaviorWasTriggered = _view.TryLogin(null, null);
 
-        It should_have_trigged_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
+        It should_have_triggered_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 
     [Subject(typeof(<#= allEngines[i] #>))] 
