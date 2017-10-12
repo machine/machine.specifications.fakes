@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>0.9.0-ivanz1</VersionPrefix>
-    <TargetFrameworks>net45;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp2.0</TargetFrameworks>
     <NoWarn>$(NoWarn);169</NoWarn>
     <AssemblyName>Machine.Fakes.Adapters.Specs</AssemblyName>
     <PackageId>Machine.Fakes.Adapters.Specs</PackageId>
@@ -16,7 +16,7 @@
     <ProjectReference Include="..\Machine.Fakes.FakeItEasy\Machine.Fakes.FakeItEasy.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <ProjectReference Include="..\Machine.Fakes.Rhinomocks\Machine.Fakes.Rhinomocks.csproj" />
     <Reference Include="System.Data" />
     <Reference Include="System" />
@@ -26,7 +26,7 @@
   <ItemGroup>
     <PackageReference Include="Machine.Specifications.Runner.VisualStudio" Version="2.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Include="Machine.Specifications" Version="0.11.1" />
+    <PackageReference Include="Machine.Specifications" Version="0.12.0" />
     <PackageReference Include="Machine.Specifications.Should" Version="0.11.0" />
   </ItemGroup>
 
