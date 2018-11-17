@@ -1,9 +1,9 @@
 image: Visual Studio 2017
 
 environment:
-  nuget_version: '2.9.0'
+  nuget_version: '2.10.0'
   nuget_prerelease: false
-  assembly_version: '2.9.0.0'
+  assembly_version: '2.10.0.0'
 
 deploy:
   - provider: GitHub
