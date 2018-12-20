@@ -1,5 +1,6 @@
 using FakeItEasy;
 using FakeItEasy.Configuration;
+using NumberOfTimes = FakeItEasy.Times;
 
 namespace Machine.Fakes.Adapters.FakeItEasy
 {
@@ -15,17 +16,17 @@ namespace Machine.Fakes.Adapters.FakeItEasy
 
         public void Times(int numberOfTimesTheMethodShouldHaveBeenCalled)
         {
-            _configuration.MustHaveHappened(Repeated.Exactly.Times(numberOfTimesTheMethodShouldHaveBeenCalled));
+            _configuration.MustHaveHappened(numberOfTimesTheMethodShouldHaveBeenCalled, NumberOfTimes.Exactly);
         }
 
         public void OnlyOnce()
         {
-            _configuration.MustHaveHappened(Repeated.Exactly.Once);
+            _configuration.MustHaveHappenedOnceExactly();
         }
 
         public void Twice()
         {
-            _configuration.MustHaveHappened(Repeated.Exactly.Twice);
+            _configuration.MustHaveHappenedTwiceExactly();
         }
     }
 }
