@@ -1,48 +1,36 @@
 image: Visual Studio 2017
 
-environment:
-  nuget_version: '2.10.0'
-  nuget_prerelease: false
-  assembly_version: '2.10.0.0'
+configuration: Release
 
-deploy:
-  - provider: GitHub
-    description: |
-      * .NET Core / .NET Standard support for NSubstitute, FakeItEasy and Moq.
+install:
+  - choco install gitversion.portable -pre -y
 
-    on:
-      appveyor_repo_tag: true
-    prerelease: $(nuget_prerelease)
-    release: v$(nuget_version)
-    auth_token:
-      secure: VrF5TrpBRN0ims9nJC1LG32O6ga5hsRuGNSufEbatAiIWZ1z68iiCYKZtqnAaT9y
-
-  - provider: NuGet
-    api_key:
-        secure: R+qirYPrTX9IzJHpRLL6KAV1Lo+vlAnInf6ShiIB2rAGIP28ceJxRAh1jirHE/uD
-    on:
-        appveyor_repo_tag: true
-
-clone_depth: 5
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: $(GitVersion_NuGetVersion)
+  package_version: $(GitVersion_NuGetVersion)
+  assembly_version: $(GitVersion_MajorMinorPatch)
+  file_version: $(GitVersion_MajorMinorPatch)
+  informational_version: $(GitVersion_MajorMinorPatch)
 
 pull_requests:
   do_not_increment_build_number: true
+    
+before_build:
+  - cmd: dotnet restore
+  - ps: gitversion /l console /output buildserver
 
-version: '$(nuget_version)+{build}'
-configuration: Release
+build:
+  publish_nuget: true
 
-assembly_info:
-  patch: true
-  file: Source\**\Properties\AssemblyInfo.cs
-  assembly_version: '$(assembly_version)'
-  assembly_file_version: '$(assembly_version)'
-  assembly_informational_version: '$(nuget_version)'
+test_script:
+  - dotnet test -c %CONFIGURATION% Source\Machine.Fakes.Adapters.Specs
+  - dotnet test -c %CONFIGURATION% Source\Machine.Fakes.Specs
 
-build_script:
-- cmd: >-
-    powershell -f build.ps1 -Version "%NUGET_VERSION%" -Configuration "%CONFIGURATION%"
-artifacts:
-- path: Source\**\Build\*.nupkg
-
-test: off
-
+deploy:
+  - provider: NuGet
+    api_key:
+      secure: TL0dRg5VvDEghNB05X4nTEOECXqoNiuhVIhCFYrFg3pcaK8jNybRuruK8+S8KdJN
+    on:
+      appveyor_repo_tag: true
