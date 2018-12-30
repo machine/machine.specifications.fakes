@@ -9,7 +9,7 @@
     <PackageId>Machine.Fakes.NSubstitute</PackageId>
     <PackageTags>tdd;bdd;testing;unittest;fakes;mocks;mspec;mfakes</PackageTags>
     <PackageReleaseNotes>See https://github.com/machine/machine.fakes/releases</PackageReleaseNotes>
-    <PackageIconUrl>https://github.com/machine/machine.fakes/raw/master/machine.fakes-128x128.png</PackageIconUrl>
+    <PackageIconUrl>https://github.com/machine/machine.fakes/raw/master/Misc/machine.fakes-128x128.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/machine/machine.fakes</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/machine/machine.fakes/raw/master/License.txt</PackageLicenseUrl>
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.1</NetStandardImplicitPackageVersion>
