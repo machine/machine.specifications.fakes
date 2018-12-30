@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Machine.Fakes attempts to simplify the usage of such frameworks on top of Machine.Specifications by helping to reduce a lot of the typical fake framwork related clutter code in specifications. If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. </Description>
-    <VersionPrefix>1</VersionPrefix>
+    <Version>1.0.0</Version>
     <Authors>Machine Project</Authors>
     <TargetFrameworks>net45;netstandard1.3</TargetFrameworks>
     <AssemblyName>Machine.Fakes.Moq</AssemblyName>
