@@ -35,7 +35,68 @@
     <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+  <ItemGroup>
+    <None Update="CommandOptionsSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CommandOptionsSpecs.generated.cs</LastGenOutput>
+    </None>
+    <None Update="EngineSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EngineSpecs.generated.cs</LastGenOutput>
+    </None>
+    <None Update="InlineConstraintSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InlineConstraintSpecs.generated.cs</LastGenOutput>
+    </None>
+    <None Update="MethodCallOccurrenceSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MethodCallOccurrenceSpecs.generated.cs</LastGenOutput>
+    </None>
+    <None Update="PropertyBehaviorSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyBehaviorSpecs.generated.cs</LastGenOutput>
+    </None>
+    <None Update="QueryOptionsSpecs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryOptionsSpecs.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CommandOptionsSpecs.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CommandOptionsSpecs.tt</DependentUpon>
+    </Compile>
+    <Compile Update="EngineSpecs.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EngineSpecs.tt</DependentUpon>
+    </Compile>
+    <Compile Update="InlineConstraintSpecs.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InlineConstraintSpecs.tt</DependentUpon>
+    </Compile>
+    <Compile Update="MethodCallOccurrenceSpecs.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MethodCallOccurrenceSpecs.tt</DependentUpon>
+    </Compile>
+    <Compile Update="PropertyBehaviorSpecs.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PropertyBehaviorSpecs.tt</DependentUpon>
+    </Compile>
+    <Compile Update="QueryOptionsSpecs.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryOptionsSpecs.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

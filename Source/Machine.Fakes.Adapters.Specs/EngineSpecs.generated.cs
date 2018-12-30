@@ -120,6 +120,8 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 #endif
 
 
+#if !NETSTANDARD
+
 namespace Machine.Fakes.Adapters.Specs.NSubstitute
 {
 
@@ -232,6 +234,7 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
     }
 }
 
+#endif
 
 
 
@@ -349,6 +352,7 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
 
 
+#if !NETSTANDARD
 
 namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 {
@@ -461,4 +465,7 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
             _fake.ShouldNotBeNull();
     }
 }
+
+#endif
+
 

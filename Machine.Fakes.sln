@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specs", "Specs", "{167B9F97-0E10-4E03-A1C9-7AD403B9AC34}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Adapters.Specs", "Source\Machine.Fakes.Adapters.Specs\Machine.Fakes.Adapters.Specs.csproj", "{5C67C58C-C33F-41B9-B877-4F93F668FBBD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Specs", "Source\Machine.Fakes.Specs\Machine.Fakes.Specs.csproj", "{C39A2221-CA3A-4456-983A-DB6A410CD05B}"
@@ -20,8 +18,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.NSubstitute", "Source\Machine.Fakes.NSubstitute\Machine.Fakes.NSubstitute.csproj", "{6D31F909-EACC-43A1-BE04-D8DF66596B2D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Rhinomocks", "Source\Machine.Fakes.Rhinomocks\Machine.Fakes.Rhinomocks.csproj", "{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4", "Source\Machine.Fakes.Adapters.Specs\T4.csproj", "{B5E38E34-9FBE-4CA0-BF8E-B10345AE5735}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,16 +57,9 @@ Global
 		{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5E38E34-9FBE-4CA0-BF8E-B10345AE5735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5E38E34-9FBE-4CA0-BF8E-B10345AE5735}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5C67C58C-C33F-41B9-B877-4F93F668FBBD} = {167B9F97-0E10-4E03-A1C9-7AD403B9AC34}
-		{C39A2221-CA3A-4456-983A-DB6A410CD05B} = {167B9F97-0E10-4E03-A1C9-7AD403B9AC34}
-		{B5E38E34-9FBE-4CA0-BF8E-B10345AE5735} = {167B9F97-0E10-4E03-A1C9-7AD403B9AC34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A4ACCE3-4FF4-4698-BDCB-A94F019A26CB}
