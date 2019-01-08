@@ -1,31 +1,21 @@
-For latest changes see [the changelog](https://github.com/machine/machine.fakes/blob/master/changelog.markdown).
-# What is Machine.Fakes ? #
+## Machine.Fakes
+This project is an integration of the most popular mocking libraries to extend Machine.Specifications.
 
-Machine.Fakes is a little framework built on top of Machine.Specifications that can best be described as an extended integration layer between Machine.Specifications and different mock/fake/substitute/"whatever you call them now" frameworks. At the moment of writing I prefer the term "fake". (What a surprise judging from the name of this project ;-))
+To open an issue, please visit the [core issue tracker](https://github.com/machine/machine.specifications/issues).
+
+## What is Machine.Fakes ?
+
+Machine.Fakes is a little framework built on top of Machine.Specifications that can best be described as an extended integration layer between Machine.Specifications and different mock/fake/substitute frameworks.
 
 Machine.Fakes attempts to simplify the usage of such fake frameworks on top of MSpec by helping to reduce a lot of the typical fake framework related clutter code in specifications.
 
 If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks.
 
-Many credits for the ideas incorporated in this framework go to Jean Paul Boodhoo (http://blog.jpboodhoo.com/) who introduced me to a completely different way of handling mocks/fakes/etc during his NothingButDotnet bootcamp. Maybe this is a way for me to give something back ...
+## How to get started
 
-## How to contribute code ##
+### Getting Machine.Fakes via the NuGet package manager
 
-* Login to github (you need an account)
-* Fork the main repository from [Github](https://github.com/machine/machine.fakes)
-* Please contribute only on the dev branch. (We don't develop on the master branch. Only releases are built from it.)
-* Push your changes to your GitHub repository.
-* Send us a pull request
-
-# How to get started #
-
-## Building Machine.Fakes from source ##
-
-Just download the repository from github and run `build.ps1`. The build of Machine.Fakes requires .NET Core SDK 2.0.0 to be installed on your machine. Everything else should work out-of-the-box. If not, please take the time to add an issue to this project. After a successful build you will find the nupkgs in the "Build" folder under their respective project (e.g. `Source\Machine.Fakes\Build`).
-
-## Getting Machine.Fakes via the NuGet package manager
-
-If you've got NuGet installed on your machine it gets even easier. Currently there are 5 packages available on NuGet. These are the core framework and the different adapters for Rhino.Mocks, Moq, NSubstitute and FakeItEasy. If you want to use Machine.Fakes with FakeItEasy for example, just go ahead and type
+Currently there are 5 packages available on NuGet. These are the core framework and the different adapters for Rhino.Mocks, Moq, NSubstitute and FakeItEasy. If you want to use Machine.Fakes with FakeItEasy for example, just go ahead and type
 
          install-package Machine.Fakes.FakeItEasy
 
@@ -35,11 +25,11 @@ in the package management console and all necessary dependencies including FakeI
          install-package Machine.Fakes.NSubstitute
          install-package Machine.Fakes.Moq
 
-## How to use it ##
+## How to use it
 
 The core part of Machine.Fakes consists of only two classes: `WithFakes` and `WithSubject<TSubject>`.
 
-### WithFakes ###
+### WithFakes
 
 Let's take a look at the simpler one first. By deriving from this class you can use the `An<TFake>()`, `Some<TFake>()` and `The<TFake>()` (\*) methods for creating fakes as well as the extension methods based API for setting up the behavior (\*\*). The `WithFakes` class only provides the basic fake framework abstraction.
 
@@ -106,10 +96,7 @@ Machine.Fakes even provides an abstraction for the various kinds of inline const
 
 These constraints get translated to the inline constraints of the target framework when Machine.Fakes executes. With this Machine.Fakes even preserves the nice verification error messages from the target frameworks and still allows you to be fake framework independent.
 
-*Isn't that cool?*
-
-
-### WithSubject&lt;TSubject&gt; ###
+### WithSubject&lt;TSubject&gt;
 
 Back to our example with the `MoodIdentifier`. Do we really need to create the subject of the specification by hand? Can we make it even simpler? Yes, by introducing the concept of an AutoMockingContainer to the specification. That's exactly what WithSubject<TSubject> does. Here's a modified example.
 
@@ -137,7 +124,7 @@ You can access the created instance through the lazy `Subject` property (***). T
 
 Having the subject created for us is a good thing but how do we access the injected fake without having a reference to it? That's exactly the purpose of the `The<TFake>()` method (**) which gives access to the injected dependency.
 
-### Behavior Configurations ###
+### Behavior Configurations
 
 Re-use in context / specification is an interesting topic. In case you've already used a test case class per fixture setup (like Machine.Specifications does) then I'm pretty sure you've stumbled upon this, too.
 
@@ -211,5 +198,3 @@ can be faked this way:
 `output` will be set to `"b"` and `additional` to a new `object` instance.
 
 `AssignOutAndRefParameters` will use the given values to set up all out and ref parameters in the order they appear in the method signature. Any non out and ref parameters are ignored.
-
-![OhLoh](http://www.ohloh.net/p/machinefakes/widgets/project_thin_badge.gif)
