@@ -3,21 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Adapters.Specs", "Source\Machine.Fakes.Adapters.Specs\Machine.Fakes.Adapters.Specs.csproj", "{5C67C58C-C33F-41B9-B877-4F93F668FBBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Adapters.Specs", "src\Machine.Fakes.Adapters.Specs\Machine.Fakes.Adapters.Specs.csproj", "{5C67C58C-C33F-41B9-B877-4F93F668FBBD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Specs", "Source\Machine.Fakes.Specs\Machine.Fakes.Specs.csproj", "{C39A2221-CA3A-4456-983A-DB6A410CD05B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Specs", "src\Machine.Fakes.Specs\Machine.Fakes.Specs.csproj", "{C39A2221-CA3A-4456-983A-DB6A410CD05B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes", "Source\Machine.Fakes\Machine.Fakes.csproj", "{BE617946-FFB8-47FA-A333-2C762AB5127C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes", "src\Machine.Fakes\Machine.Fakes.csproj", "{BE617946-FFB8-47FA-A333-2C762AB5127C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Examples", "Source\Machine.Fakes.Examples\Machine.Fakes.Examples.csproj", "{97C8E742-61ED-4BDE-B23C-3B5FB45D5A68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Examples", "src\Machine.Fakes.Examples\Machine.Fakes.Examples.csproj", "{97C8E742-61ED-4BDE-B23C-3B5FB45D5A68}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Moq", "Source\Machine.Fakes.Moq\Machine.Fakes.Moq.csproj", "{AB44677E-879D-4CDC-BDFC-522D4AB973E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Moq", "src\Machine.Fakes.Moq\Machine.Fakes.Moq.csproj", "{AB44677E-879D-4CDC-BDFC-522D4AB973E2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.FakeItEasy", "Source\Machine.Fakes.FakeItEasy\Machine.Fakes.FakeItEasy.csproj", "{86E1223E-4D68-41D8-84AD-B68D40A06D66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.FakeItEasy", "src\Machine.Fakes.FakeItEasy\Machine.Fakes.FakeItEasy.csproj", "{86E1223E-4D68-41D8-84AD-B68D40A06D66}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.NSubstitute", "Source\Machine.Fakes.NSubstitute\Machine.Fakes.NSubstitute.csproj", "{6D31F909-EACC-43A1-BE04-D8DF66596B2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.NSubstitute", "src\Machine.Fakes.NSubstitute\Machine.Fakes.NSubstitute.csproj", "{6D31F909-EACC-43A1-BE04-D8DF66596B2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Rhinomocks", "Source\Machine.Fakes.Rhinomocks\Machine.Fakes.Rhinomocks.csproj", "{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Rhinomocks", "src\Machine.Fakes.Rhinomocks\Machine.Fakes.Rhinomocks.csproj", "{32C3BB15-B6D6-49E8-A41D-0FBB20D03225}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{F82140EF-B1D6-448E-8DBD-ED050946F6C3}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		build.cake = build.cake
+		CONTRIBUTING.md = CONTRIBUTING.md
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
