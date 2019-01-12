@@ -1,0 +1,137 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".generated.cs" #>
+<# var allEngines = new[] { "RhinoFakeEngine", "NSubstituteEngine", "MoqFakeEngine", "FakeItEasyEngine" };  #>
+<# var allNamespaces = new[] { "Rhinomocks", "NSubstitute", "Moq", "FakeItEasy" };  #>
+<# var supportsNetStandard = new[] { false, false, true, false };  #>
+using System;
+using Machine.Fakes.Adapters.Specs.SampleCode;
+using Machine.Fakes.Internal;
+using Machine.Specifications;
+<# for (int i = 0; i < allEngines.Length; i++) { #>
+
+<# if (!supportsNetStandard[i]) { #>
+#if !NETSTANDARD
+<# } #>
+
+namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
+{
+
+	using Machine.Fakes.Adapters.<#= allNamespaces[i] #>;
+
+
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class AfterInitializingANewFakeCurrentEngine : WithCurrentEngine<<#= allEngines[i] #>>
+    {
+        static IServiceContainer _fake;
+
+        Because of = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
+
+        It should_be_able_to_create_an_instance = () => _fake.ShouldNotBeNull();
+    }
+
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_that_a_call_was_not_expected_to_happen_but_happened_when_verifying : WithCurrentEngine<<#= allEngines[i] #>>
+    {
+        static Exception _exception;
+        static IServiceContainer _fake;
+
+        Establish context = () =>
+        {
+            _fake = FakeEngineGateway.Fake<IServiceContainer>();
+            _fake.RemoveService(null);
+        };
+
+        Because of = () => _exception = Catch.Exception(() => _fake.WasNotToldTo(f => f.RemoveService(null)));
+
+        It should_have_thrown_an_exception = () => _exception.ShouldNotBeNull();
+    }
+
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Given_that_a_call_was_not_expected_to_happen_and_did_not_happened_when_verifying : WithCurrentEngine<<#= allEngines[i] #>>
+    {
+        static Exception _exception;
+        static IServiceContainer _fake;
+
+        Establish context = () => _fake = FakeEngineGateway.Fake<IServiceContainer>();
+
+        Because of = () => _exception = Catch.Exception(() => _fake.WasNotToldTo(f => f.RemoveService(null)));
+
+        It should_not_have_thrown_an_exception = () => _exception.ShouldBeNull();
+    }
+
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class Now_we_can_initialize_a_class_with_no_default_ctor : WithCurrentEngine<<#= allEngines[i] #>>
+    {
+        static DummyNoDefaultCtorClass _fake;
+        static object[] _args = new object[] { 1 };
+
+        Because of = () => _fake = FakeEngineGateway.Fake<DummyNoDefaultCtorClass>(_args);
+
+        It should_be_able_to_create_an_instance = () => _fake.ShouldNotBeNull();
+
+        It should_use_the_given_arguments = () => _fake.Value.ShouldEqual(1);
+    }
+
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class When_using_an_abstract_base_class_as_a_fake_and_a_constructor_parameter_is_unfakable : WithCurrentEngine<<#= allEngines[i] #>>
+    {
+        static ClassWithUnfakableParameter _fake;
+        static string _unfakableCtoParameter;
+        static string _recievedValue;
+
+        Establish context = () =>
+        {
+            _unfakableCtoParameter = "Look at me! I'm unfakable!!!";
+        };
+
+        Because of = () => _fake = FakeEngineGateway.Fake<ClassWithUnfakableParameter>(_unfakableCtoParameter);
+
+        It should_able_to_construct_the_instance_when_ctor_parameters_are_supplied =
+            () => _fake.ReceivedConstructorArgument.ShouldEqual(_unfakableCtoParameter);
+
+        It should_be_able_to_fake_virtual_methods_on_the_abstract_base_class = () =>
+        {
+            _fake.WhenToldTo(x => x.VirtualMethod()).Return("Faked result");
+
+            var result = _fake.VirtualMethod();
+
+            result.ShouldEqual("Faked result");
+        };
+    }
+
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class When_faking_an_interface_with_a_property : WithCurrentEngine<<#= allEngines[i] #>>
+    {
+        static ITypeWithProperty _fake;
+
+        Establish context = () => _fake = FakeEngineGateway.Fake<ITypeWithProperty>();
+
+        Because of = () => _fake.Property = "new property value";
+
+        It should_track_property_changes = () =>
+            _fake.Property.ShouldEqual("new property value");
+    }
+
+    [Subject(typeof(<#= allEngines[i] #>))]
+    public class When_faking_a_delegate : WithCurrentEngine<<#= allEngines[i] #>>
+    {
+        static MyDelegate _fake;
+        public delegate void MyDelegate();
+
+        Because of = () => _fake = FakeEngineGateway.Fake<MyDelegate>();
+
+        It should_be_able_to_fake_the_delegate_without_throwing_an_exception = () =>
+            _fake.ShouldNotBeNull();
+    }
+}
+
+<# if (!supportsNetStandard[i]) { #>
+#endif
+<# } #>
+
+<# } #>
+

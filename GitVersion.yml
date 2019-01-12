@@ -1,4 +1,2 @@
-next-version: 2.10.1
-branches: {}
-ignore:
-  sha: []
+mode: ContinuousDelivery
+commit-message-incrementing: Disabled
