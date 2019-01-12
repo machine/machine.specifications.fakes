@@ -9,7 +9,7 @@
     <PackageReleaseNotes>See https://github.com/machine/machine.fakes/releases</PackageReleaseNotes>
     <PackageIconUrl>https://github.com/machine/media/raw/master/machine.fakes-128x128.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/machine/machine.fakes</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/machine/machine.fakes/raw/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/machine/machine.fakes/raw/master/License.txt</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
