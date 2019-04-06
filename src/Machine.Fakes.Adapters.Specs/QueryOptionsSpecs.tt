@@ -6,7 +6,8 @@
 <#@ output extension="generated.cs" #>
 <# var allEngines = new[] { "RhinoFakeEngine", "NSubstituteEngine", "MoqFakeEngine", "FakeItEasyEngine" };  #>
 <# var allNamespaces = new[] { "Rhinomocks", "NSubstitute", "Moq", "FakeItEasy" };  #>
-<# var supportsNetStandard = new[] { false, false, true, false };  #>
+<# var supportsNetStandard = new[] { false, true, true, true };  #>
+<# var supportsNet46 = new[] { false, true, true, true }; #>
 using System;
 using System.Linq;
 using Machine.Fakes.Adapters.Specs.SampleCode;
@@ -15,7 +16,10 @@ using Machine.Specifications;
 <# for (int i = 0; i < allEngines.Length; i++) { #>
 
 <# if (!supportsNetStandard[i]) { #>
-#if !NETSTANDARD
+#if !NETSTANDARD && !NETCOREAPP
+<# } #>
+<# if (!supportsNet46[i]) { #>
+#if !NET46
 <# } #>
 
 
@@ -100,6 +104,9 @@ namespace Machine.Fakes.Adapters.Specs.<#= allNamespaces[i] #>
 }
 
 <# if (!supportsNetStandard[i]) { #>
+#endif
+<# } #>
+<# if (!supportsNet46[i]) { #>
 #endif
 <# } #>
 
