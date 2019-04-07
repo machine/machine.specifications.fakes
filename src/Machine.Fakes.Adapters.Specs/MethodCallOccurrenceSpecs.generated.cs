@@ -1,18 +1,10 @@
-﻿
-
-
-
-
-
-
-using System;
+﻿using System;
 using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
-
-#if !NETSTANDARD
-
+#if !NETSTANDARD && !NETCOREAPP
+#if !NET46
 
 
 namespace Machine.Fakes.Adapters.Specs.Rhinomocks
@@ -140,10 +132,8 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 }
 
 #endif
+#endif
 
-
-
-#if !NETSTANDARD
 
 
 
@@ -270,9 +260,6 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         It should_not_throw_an_exception = () => _exception.ShouldBeNull();
     }
 }
-
-#endif
-
 
 
 
@@ -405,9 +392,6 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
 
 
-#if !NETSTANDARD
-
-
 
 namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 {
@@ -533,5 +517,4 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
     }
 }
 
-#endif
 

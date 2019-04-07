@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Version>0.1.0</Version>
-    <TargetFrameworks>net46;netstandard1.3</TargetFrameworks>
+    <TargetFrameworks>net46;netstandard1.3;netstandard2.0</TargetFrameworks>
     <Description>Machine.Fakes attempts to simplify the usage of such frameworks on top of Machine.Specifications by helping to reduce a lot of the typical fake framwork related clutter code in specifications. If you choose so, Machine.Fakes even helps you to stay mostly independent of a concrete fake framework by providing a little wrapper API and a provider model for fake frameworks. </Description>
     <Authors>Machine Specifications</Authors>
     <PackageTags>tdd;bdd;testing;unittest;fakes;mocks;mspec;mfakes</PackageTags>

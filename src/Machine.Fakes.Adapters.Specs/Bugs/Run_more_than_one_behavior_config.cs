@@ -1,4 +1,4 @@
-#if !NETSTANDARD
+#if !NETSTANDARD && !NETCOREAPP && !NET46
 
 using Machine.Fakes.Adapters.Rhinomocks;
 using Machine.Specifications;

@@ -1,17 +1,9 @@
-﻿
-
-
-
-
-
-
-using Machine.Fakes.Adapters.Specs.SampleCode;
+﻿using Machine.Fakes.Adapters.Specs.SampleCode;
 using Machine.Fakes.Internal;
 using Machine.Specifications;
 
-
-#if !NETSTANDARD
-
+#if !NETSTANDARD && !NETCOREAPP
+#if !NET46
 
 namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 {
@@ -432,9 +424,7 @@ namespace Machine.Fakes.Adapters.Specs.Rhinomocks
 }
 
 #endif
-
-
-
+#endif
 
 
 
@@ -855,9 +845,6 @@ namespace Machine.Fakes.Adapters.Specs.NSubstitute
         It should_trigger_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 }
-
-
-
 
 
 
@@ -1283,9 +1270,6 @@ namespace Machine.Fakes.Adapters.Specs.Moq
 
 
 
-
-
-
 namespace Machine.Fakes.Adapters.Specs.FakeItEasy
 {
 
@@ -1703,6 +1687,5 @@ namespace Machine.Fakes.Adapters.Specs.FakeItEasy
         It should_trigger_the_configured_behavior = () => _configuredBehaviorWasTriggered.ShouldBeTrue();
     }
 }
-
 
 
