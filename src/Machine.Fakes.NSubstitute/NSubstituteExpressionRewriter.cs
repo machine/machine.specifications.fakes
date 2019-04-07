@@ -24,7 +24,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
             var typeArgument = declaringType.GetFirstTypeArgument();
 
             return Expression.Call(
-                typeof(Arg),
+                typeof(Arg.Compat),
                 "Any",
                 new[] { typeArgument });
         }
@@ -47,7 +47,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
                 parameterExpression);
 
             return Expression.Call(
-                typeof(Arg),
+                typeof(Arg.Compat),
                 "Is",
                 new[] { typeArgument },
                 expr);
@@ -71,13 +71,13 @@ namespace Machine.Fakes.Adapters.NSubstitute
                 notEqualExpression,
                 parameterExpression);
 
-            return Expression.Call(typeof(Arg), "Is", new[] { typeArgument }, lambda);
+            return Expression.Call(typeof(Arg.Compat), "Is", new[] { typeArgument }, lambda);
         }
 
         static Expression RewriteIsAnyMethod(MethodCallExpression expression)
         {
             return Expression.Call(
-                typeof(Arg),
+                typeof(Arg.Compat),
                 "Any",
                 new[] { expression.Method.GetFirstTypeArgument() });
         }
@@ -86,7 +86,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
         {
             var argument = expression.Arguments[0];
 
-            return Expression.Call(typeof(Arg), "Is", new[] { argument.Type }, argument);
+            return Expression.Call(typeof(Arg.Compat), "Is", new[] { argument.Type }, argument);
         }
 
         static Expression RewriteIsAMethod(MethodCallExpression expression)
@@ -98,7 +98,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
             var isTypeExpression = Expression.TypeIs(parameterExpression, derivedType);
             var lambda = Expression.Lambda(lamdaType, isTypeExpression, parameterExpression);
 
-            return Expression.Call(typeof(Arg), "Is", new[] { baseType }, lambda);
+            return Expression.Call(typeof(Arg.Compat), "Is", new[] { baseType }, lambda);
         }
 
         Expression RewriteMatchesMethod(MethodCallExpression expression)
@@ -117,7 +117,7 @@ namespace Machine.Fakes.Adapters.NSubstitute
                     oldLambda.Parameters);
 
                 return Expression.Call(
-                    typeof(Arg), 
+                    typeof(Arg.Compat), 
                     "Is",
                     new[] { typeParameter },
                     newLambda);
