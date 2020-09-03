@@ -7,7 +7,7 @@
     <Authors>Machine Specifications</Authors>
     <PackageTags>tdd;bdd;testing;unittest;fakes;mocks;mspec;mfakes</PackageTags>
     <PackageReleaseNotes>See https://github.com/machine/machine.fakes/releases</PackageReleaseNotes>
-    <PackageIconUrl>https://github.com/machine/media/raw/master/machine.fakes-128x128.png</PackageIconUrl>
+    <PackageIcon>Machine.png</PackageIcon>
     <PackageProjectUrl>https://github.com/machine/machine.fakes</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
@@ -18,6 +18,10 @@
 
   <ItemGroup>
     <PackageReference Include="RhinoMocks" Version="3.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\Machine.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
