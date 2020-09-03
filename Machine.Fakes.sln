@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Adapters.Specs", "src\Machine.Fakes.Adapters.Specs\Machine.Fakes.Adapters.Specs.csproj", "{5C67C58C-C33F-41B9-B877-4F93F668FBBD}"
 EndProject
@@ -21,9 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Machine.Fakes.Rhinomocks", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{F82140EF-B1D6-448E-8DBD-ED050946F6C3}"
 	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
-		build.cake = build.cake
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		.github\workflows\build.yml = .github\workflows\build.yml
 		CONTRIBUTING.md = CONTRIBUTING.md
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+		GitVersion.yml = GitVersion.yml
+		.github\workflows\publish.yml = .github\workflows\publish.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
