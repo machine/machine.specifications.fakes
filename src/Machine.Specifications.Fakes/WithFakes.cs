@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-
 using Machine.Fakes.ReSharperAnnotations;
-using Machine.Fakes.Sdk;
-using Machine.Specifications;
+using Machine.Specifications.Fakes.Sdk;
 
-namespace Machine.Fakes
+namespace Machine.Specifications.Fakes
 {
     /// <summary>
     /// Base class for specifications.
@@ -202,7 +200,7 @@ namespace Machine.Fakes
         }
 
         /// <summary>
-        /// Shortcut for <see cref="Configure(Machine.Fakes.Registrar)"/>. This one will create
+        /// Shortcut for <see cref="Configure(Registrar)"/>. This one will create
         /// a registrar for you and allow configuration via the delegate passed
         /// in via <paramref name="registrarExpression"/>.
         /// </summary>

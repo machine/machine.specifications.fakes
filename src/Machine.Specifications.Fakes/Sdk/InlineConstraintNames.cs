@@ -1,4 +1,4 @@
-namespace Machine.Fakes.Sdk
+namespace Machine.Specifications.Fakes.Sdk
 {
 #pragma warning disable 1591 // Type is self-explaining and needs no comments
     public static class InlineConstraintNames

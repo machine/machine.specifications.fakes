@@ -2,7 +2,7 @@
 
 using Machine.Specifications;
 
-namespace Machine.Fakes.Internal
+namespace Machine.Specifications.Fakes.Internal
 {
     /// <summary>
     /// Exception that occurs when a type cannot be instantiated by the automatic faking/dependency resolution

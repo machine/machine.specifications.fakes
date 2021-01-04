@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Machine.Fakes.Sdk
+namespace Machine.Specifications.Fakes.Sdk
 {
     /// <summary>
     /// A helper class for extensions on expression.

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Concurrent;
-using Machine.Fakes.Internal;
-using Machine.Fakes.Sdk;
+using Machine.Specifications.Fakes.Internal;
+using Machine.Specifications.Fakes.Sdk;
 
-namespace Machine.Fakes
+namespace Machine.Specifications.Fakes
 {
     /// <summary>
     /// Registration endpoint for configuring the underlying container with 

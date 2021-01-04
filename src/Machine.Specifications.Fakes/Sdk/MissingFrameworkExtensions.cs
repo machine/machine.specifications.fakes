@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Machine.Fakes.Sdk
+namespace Machine.Specifications.Fakes.Sdk
 {
     internal static class MissingFrameworkExtensions
     {

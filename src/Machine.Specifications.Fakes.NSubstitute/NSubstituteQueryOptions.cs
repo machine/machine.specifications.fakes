@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Machine.Fakes.Sdk;
+using Machine.Specifications.Fakes.Sdk;
 using NSubstitute;
 
-namespace Machine.Fakes.Adapters.NSubstitute
+namespace Machine.Specifications.Fakes.Adapters.NSubstitute
 {
     class NSubstituteQueryOptions<TFake, T> : IQueryOptions<T> where TFake : class
     {

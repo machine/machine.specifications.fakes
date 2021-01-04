@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace Machine.Fakes.Sdk
+namespace Machine.Specifications.Fakes.Sdk
 {
     /// <summary>
     /// Rewriter abstraction that is used by Machine.Fakes

@@ -1,6 +1,6 @@
 using System;
 
-namespace Machine.Fakes
+namespace Machine.Specifications.Fakes
 {
     /// <summary>
     /// Interface for setting up callbacks for methods returning void (commands).

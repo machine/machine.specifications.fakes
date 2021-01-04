@@ -1,6 +1,6 @@
-using Machine.Fakes.Sdk;
+using Machine.Specifications.Fakes.Sdk;
 
-namespace Machine.Fakes.Internal
+namespace Machine.Specifications.Fakes.Internal
 {
     /// <summary>
     /// A set of extension methods to simplify the strong typed fake creation

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Machine.Fakes.Internal
+namespace Machine.Specifications.Fakes.Internal
 {
     internal class MappingRegistry
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Machine.Fakes
+namespace Machine.Specifications.Fakes
 {
     /// <summary>
     ///   Defines a fake framework independent fluent interface for setting up behavior

@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Machine.Fakes.Sdk
+namespace Machine.Specifications.Fakes.Sdk
 {
     /// <summary>
     /// Derive from this class in order to make inline constraints work.

@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Machine.Fakes
+namespace Machine.Specifications.Fakes
 {
     /// <summary>
     /// Interface to a fake framework. 

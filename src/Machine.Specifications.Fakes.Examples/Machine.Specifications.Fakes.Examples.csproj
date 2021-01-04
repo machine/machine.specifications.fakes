@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Machine.Specifications.Fakes\Machine.Specifications.Fakes.csproj" />
-    <ProjectReference Include="..\Machine.Specifications.Fakes.Moq\Machine.Specifications.Fakes.Moq.csproj" />
   </ItemGroup>
 
   <ItemGroup>

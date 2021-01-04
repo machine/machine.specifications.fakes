@@ -1,7 +1,7 @@
 using System;
-using Machine.Fakes.Sdk;
+using Machine.Specifications.Fakes.Sdk;
 
-namespace Machine.Fakes
+namespace Machine.Specifications.Fakes
 {
     /// <summary>
     /// This class implements the several way that can be used to work with the

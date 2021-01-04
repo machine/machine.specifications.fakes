@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
-using Machine.Fakes.Sdk;
+using Machine.Specifications.Fakes.Sdk;
 using NSubstitute;
 
-namespace Machine.Fakes.Adapters.NSubstitute
+namespace Machine.Specifications.Fakes.Adapters.NSubstitute
 {
     internal class NSubstituteMethodCallOccurrence<TFake> : IMethodCallOccurrence where TFake : class
     {

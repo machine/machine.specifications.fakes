@@ -1,6 +1,6 @@
-using Machine.Fakes.Adapters.NSubstitute;
+using Machine.Specifications.Fakes.Adapters.NSubstitute;
 
-namespace Machine.Fakes
+namespace Machine.Specifications.Fakes
 {
     /// <inheritdoc/>
     public class WithFakes : WithFakes<NSubstituteEngine>

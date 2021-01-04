@@ -1,4 +1,4 @@
-namespace Machine.Fakes
+namespace Machine.Specifications.Fakes
 {
     /// <summary>
     /// Delegate used in behavior configs in order

@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Machine.Specifications.Fakes.Sdk;
 
-using Machine.Fakes.Sdk;
-
-namespace Machine.Fakes.Internal
+namespace Machine.Specifications.Fakes.Internal
 {
     class BehaviorConfigController
     {

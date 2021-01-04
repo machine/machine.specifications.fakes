@@ -1,4 +1,4 @@
-﻿namespace Machine.Fakes
+﻿namespace Machine.Specifications.Fakes
 {
     /// <summary>
     /// Interface for detail configuration used by <see cref="FakeApi.WasToldTo{TFake}"/>.

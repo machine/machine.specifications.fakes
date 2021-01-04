@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Machine.Fakes.Internal
+namespace Machine.Specifications.Fakes.Internal
 {
     interface IMapping
     {

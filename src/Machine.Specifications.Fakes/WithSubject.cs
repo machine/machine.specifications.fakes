@@ -1,7 +1,7 @@
 using Machine.Specifications;
 using Machine.Specifications.Factories;
 
-namespace Machine.Fakes
+namespace Machine.Specifications.Fakes
 {
     /// <summary>
     /// Base class that adds auto mocking (grasp), I mean auto faking capabilities

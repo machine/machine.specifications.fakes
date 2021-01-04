@@ -1,8 +1,8 @@
 using System;
 using System.Linq.Expressions;
-using Machine.Fakes.Sdk;
+using Machine.Specifications.Fakes.Sdk;
 
-namespace Machine.Fakes.Internal
+namespace Machine.Specifications.Fakes.Internal
 {
     class FakeEngineGateway
     {

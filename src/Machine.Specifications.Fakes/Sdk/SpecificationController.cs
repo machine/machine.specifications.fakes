@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Machine.Specifications.Fakes.Internal;
 
-using Machine.Fakes.Internal;
-
-namespace Machine.Fakes.Sdk
+namespace Machine.Specifications.Fakes.Sdk
 {
     /// <summary>
     /// Shortcut for <see cref="SpecificationController{TSubject}"/> which

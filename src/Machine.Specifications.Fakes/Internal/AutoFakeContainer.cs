@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Machine.Specifications.Fakes.Sdk;
 
-using Machine.Fakes.Sdk;
-
-namespace Machine.Fakes.Internal
+namespace Machine.Specifications.Fakes.Internal
 {
     class AutoFakeContainer
     {

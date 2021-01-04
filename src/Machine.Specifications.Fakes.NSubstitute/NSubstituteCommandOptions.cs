@@ -2,12 +2,10 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
-using Machine.Fakes.Sdk;
-
+using Machine.Specifications.Fakes.Sdk;
 using NSubstitute;
 
-namespace Machine.Fakes.Adapters.NSubstitute
+namespace Machine.Specifications.Fakes.Adapters.NSubstitute
 {
     internal class NSubstituteCommandOptions<TFake> : ICommandOptions where TFake : class
     {

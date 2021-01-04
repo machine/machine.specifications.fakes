@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Machine.Fakes.Sdk
+namespace Machine.Specifications.Fakes.Sdk
 {
     /// <summary>
     /// Container class for (as it name implies) guard clauses.
