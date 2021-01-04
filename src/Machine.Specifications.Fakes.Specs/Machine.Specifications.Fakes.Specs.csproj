@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Machine.Fakes\Machine.Fakes.csproj" />
+    <ProjectReference Include="..\Machine.Specifications.Fakes\Machine.Specifications.Fakes.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Machine.Fakes\Machine.Fakes.csproj" />
-    <ProjectReference Include="..\Machine.Fakes.Moq\Machine.Fakes.Moq.csproj" />
+    <ProjectReference Include="..\Machine.Specifications.Fakes\Machine.Specifications.Fakes.csproj" />
+    <ProjectReference Include="..\Machine.Specifications.Fakes.Moq\Machine.Specifications.Fakes.Moq.csproj" />
   </ItemGroup>
 
   <ItemGroup>

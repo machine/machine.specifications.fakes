@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Machine.Fakes.Moq\Machine.Fakes.Moq.csproj" />
-    <ProjectReference Include="..\Machine.Fakes.NSubstitute\Machine.Fakes.NSubstitute.csproj" />
-    <ProjectReference Include="..\Machine.Fakes.FakeItEasy\Machine.Fakes.FakeItEasy.csproj" />
+    <ProjectReference Include="..\Machine.Specifications.Fakes.Moq\Machine.Specifications.Fakes.Moq.csproj" />
+    <ProjectReference Include="..\Machine.Specifications.Fakes.NSubstitute\Machine.Specifications.Fakes.NSubstitute.csproj" />
+    <ProjectReference Include="..\Machine.Specifications.Fakes.FakeItEasy\Machine.Specifications.Fakes.FakeItEasy.csproj" />
   </ItemGroup>
 
   <ItemGroup>
