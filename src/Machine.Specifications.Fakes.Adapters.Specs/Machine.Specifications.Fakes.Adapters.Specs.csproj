@@ -2,21 +2,15 @@
 
   <PropertyGroup>
     <Version>0.1.0</Version>
-    <TargetFrameworks>net46;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Machine.Fakes.Moq\Machine.Fakes.Moq.csproj" />
-    <ProjectReference Include="..\Machine.Fakes.NSubstitute\Machine.Fakes.NSubstitute.csproj" />
-    <ProjectReference Include="..\Machine.Fakes.FakeItEasy\Machine.Fakes.FakeItEasy.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
-    <ProjectReference Include="..\Machine.Fakes.Rhinomocks\Machine.Fakes.Rhinomocks.csproj" />
-    <Reference Include="System.Data" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
+    <ProjectReference Include="..\Machine.Specifications.Fakes.Moq\Machine.Specifications.Fakes.Moq.csproj" />
+    <ProjectReference Include="..\Machine.Specifications.Fakes.NSubstitute\Machine.Specifications.Fakes.NSubstitute.csproj" />
+    <ProjectReference Include="..\Machine.Specifications.Fakes.FakeItEasy\Machine.Specifications.Fakes.FakeItEasy.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,10 +19,6 @@
     <PackageReference Include="Machine.Specifications" Version="1.0.0" />
     <PackageReference Include="Machine.Specifications.Should" Version="1.0.0" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
-  </PropertyGroup>
 
   <ItemGroup>
     <None Update="CommandOptionsSpecs.tt">
