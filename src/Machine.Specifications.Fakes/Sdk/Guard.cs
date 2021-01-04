@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 
 namespace Machine.Specifications.Fakes.Sdk
 {

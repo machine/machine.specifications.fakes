@@ -6,7 +6,7 @@ namespace Machine.Specifications.Fakes.Internal
     {
         readonly Type implementationType;
 
-        public Type InterfaceType { get; private set; }
+        public Type InterfaceType { get; }
 
         public TypeMapping(Type interfaceType, Type implementationType)
         {

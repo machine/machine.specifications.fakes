@@ -37,7 +37,8 @@ namespace Machine.Specifications.Fakes.Sdk
     /// The subject for the specification. This is the type that is created by the
     /// specification for you.
     /// </typeparam>
-    public class SpecificationController<TSubject> : IFakeAccessor, IDisposable where TSubject : class
+    public class SpecificationController<TSubject> : IFakeAccessor, IDisposable
+        where TSubject : class
     {
         private readonly BehaviorConfigController _behaviorConfigController = new BehaviorConfigController();
         private readonly AutoFakeContainer _container;

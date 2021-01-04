@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Machine.Specifications;
-
 namespace Machine.Specifications.Fakes.Internal
 {
     /// <summary>

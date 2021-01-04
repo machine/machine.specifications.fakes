@@ -1,4 +1,3 @@
-using Machine.Specifications;
 using Machine.Specifications.Factories;
 
 namespace Machine.Specifications.Fakes
