@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Machine.Specifications.Fakes.Sdk;
 using NSubstitute;
 
 namespace Machine.Specifications.Fakes.Adapters.NSubstitute
@@ -14,12 +13,9 @@ namespace Machine.Specifications.Fakes.Adapters.NSubstitute
         readonly Expression<Action<TFake>> _expression;
 
         public NSubstituteCommandOptions(TFake fake, Expression<Action<TFake>> expression)
-        {   
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(expression, "expression");
-
-            _fake = fake;
-            _expression = expression;
+        {
+            _fake = fake ?? throw new ArgumentNullException(nameof(fake));
+            _expression = expression ?? throw new ArgumentNullException(nameof(expression));
             _action = expression.Compile();
         }
 

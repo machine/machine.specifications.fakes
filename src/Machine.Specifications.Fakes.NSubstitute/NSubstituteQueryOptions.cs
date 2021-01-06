@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Machine.Specifications.Fakes.Sdk;
 using NSubstitute;
 
 namespace Machine.Specifications.Fakes.Adapters.NSubstitute
@@ -12,10 +11,12 @@ namespace Machine.Specifications.Fakes.Adapters.NSubstitute
 
         public NSubstituteQueryOptions(TFake fake, Expression<Func<TFake, T>> expression)
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(expression, "expression");
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
 
-            _fake = fake;
+            _fake = fake ?? throw new ArgumentNullException(nameof(fake));
             _expression = expression.Compile();
         }
 

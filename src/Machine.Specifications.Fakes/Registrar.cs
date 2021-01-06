@@ -51,7 +51,10 @@ namespace Machine.Specifications.Fakes
         /// </exception>
         public static Registrar New(Action<Registrar> configurationExpression)
         {
-            Guard.AgainstArgumentNull(configurationExpression, "configurationExpression");
+            if (configurationExpression == null)
+            {
+                throw new ArgumentNullException(nameof(configurationExpression));
+            }
 
             var registrar = new Registrar();
             configurationExpression(registrar);
@@ -72,7 +75,10 @@ namespace Machine.Specifications.Fakes
         /// </exception>
         public RegistrationExpression For(Type type)
         {
-            Guard.AgainstArgumentNull(type, "type");
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
 
             return new RegistrationExpression(type, this);
         }
@@ -118,7 +124,10 @@ namespace Machine.Specifications.Fakes
             /// </exception>
             public void Use(object implementation)
             {
-                Guard.AgainstArgumentNull(implementation, "implementation");
+                if (implementation == null)
+                {
+                    throw new ArgumentNullException(nameof(implementation));
+                }
 
                 _registrar.Store(new ObjectMapping(_interfaceType, implementation));
             }
@@ -136,7 +145,10 @@ namespace Machine.Specifications.Fakes
             /// </exception>
             public void Use(Type implementationType)
             {
-                Guard.AgainstArgumentNull(implementationType, "implementationType");
+                if (implementationType == null)
+                {
+                    throw new ArgumentNullException(nameof(implementationType));
+                }
 
                 _registrar.Store(new TypeMapping(_interfaceType, implementationType));
             }
@@ -192,7 +204,10 @@ namespace Machine.Specifications.Fakes
             /// </exception>
             public void Use(Func<T> factory)
             {
-                Guard.AgainstArgumentNull(factory, "factory");
+                if (factory == null)
+                {
+                    throw new ArgumentNullException(nameof(factory));
+                }
 
                 _registrar.Store(new FactoryMapping<T>(factory));
             }

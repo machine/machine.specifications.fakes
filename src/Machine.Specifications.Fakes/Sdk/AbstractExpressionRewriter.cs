@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
 
@@ -60,8 +61,14 @@ namespace Machine.Specifications.Fakes.Sdk
         /// </param>
         protected void AddConverter(string methodName, MethodExpressionConverter converter)
         {
-            Guard.AgainstArgumentNull(methodName, "methodName");
-            Guard.AgainstArgumentNull(converter, "converter");
+            if (methodName == null)
+            {
+                throw new ArgumentNullException(nameof(methodName));
+            }
+            if (converter == null)
+            {
+                throw new ArgumentNullException(nameof(converter));
+            }
 
             _methodCallConverters.AddOrUpdate(methodName, converter, (m, c) => converter);
         }
@@ -77,8 +84,15 @@ namespace Machine.Specifications.Fakes.Sdk
         /// </param>
         protected void AddConverter(string methodName, MemberExpressionConverter converter)
         {
-            Guard.AgainstArgumentNull(methodName, "methodName");
-            Guard.AgainstArgumentNull(converter, "converter");
+            if (methodName == null)
+            {
+                throw new ArgumentNullException(nameof(methodName));
+            }
+
+            if (converter == null)
+            {
+                throw new ArgumentNullException(nameof(converter));
+            }
 
             _memberAccessConverters.AddOrUpdate(methodName, converter, (m, c) => converter);
         }

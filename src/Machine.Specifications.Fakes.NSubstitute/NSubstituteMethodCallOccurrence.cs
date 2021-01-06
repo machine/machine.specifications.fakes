@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Machine.Specifications.Fakes.Sdk;
 using NSubstitute;
 
 namespace Machine.Specifications.Fakes.Adapters.NSubstitute
@@ -12,11 +11,8 @@ namespace Machine.Specifications.Fakes.Adapters.NSubstitute
 
         public NSubstituteMethodCallOccurrence(TFake fake, Expression<Action<TFake>> func)
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(func, "func");
-
-            _fake = fake;
-            _func = func;
+            _fake = fake ?? throw new ArgumentNullException(nameof(fake));
+            _func = func ?? throw new ArgumentNullException(nameof(func));
 
             _func.Compile().Invoke(_fake.Received());
         }

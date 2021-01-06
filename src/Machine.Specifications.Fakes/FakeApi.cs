@@ -33,8 +33,15 @@ namespace Machine.Specifications.Fakes
             this TFake fake,
             Expression<Func<TFake, TReturnValue>> func) where TFake : class
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(func, "func");
+            if (fake == null)
+            {
+                throw new ArgumentNullException(nameof(fake));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
 
             return FakeEngineGateway.SetUpQueryBehaviorFor(fake, func);
         }
@@ -61,8 +68,15 @@ namespace Machine.Specifications.Fakes
             this TFake fake,
             Expression<Action<TFake>> func) where TFake : class
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(func, "func");
+            if (fake == null)
+            {
+                throw new ArgumentNullException(nameof(fake));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
 
             return FakeEngineGateway.SetUpCommandBehaviorFor(fake, func);
         }
@@ -84,8 +98,15 @@ namespace Machine.Specifications.Fakes
             this TFake fake,
             Expression<Action<TFake>> func) where TFake : class 
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(func, "func");
+            if (fake == null)
+            {
+                throw new ArgumentNullException(nameof(fake));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
 
             FakeEngineGateway.VerifyBehaviorWasNotExecuted(fake, func);
         }
@@ -111,8 +132,15 @@ namespace Machine.Specifications.Fakes
             this TFake fake, 
             Expression<Action<TFake>> func) where TFake : class
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(func, "func");
+            if (fake == null)
+            {
+                throw new ArgumentNullException(nameof(fake));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
 
             return FakeEngineGateway.VerifyBehaviorWasExecuted(fake, func);
         }

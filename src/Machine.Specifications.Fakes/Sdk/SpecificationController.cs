@@ -52,7 +52,10 @@ namespace Machine.Specifications.Fakes.Sdk
         /// </param>
         public SpecificationController(IFakeEngine fakeEngine)
         {
-            Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
+            if (fakeEngine == null)
+            {
+                throw new ArgumentNullException(nameof(fakeEngine));
+            }
 
             _container = new AutoFakeContainer(fakeEngine);
 
@@ -81,7 +84,10 @@ namespace Machine.Specifications.Fakes.Sdk
         /// </exception>
         public void Configure(Registrar registrar)
         {
-            Guard.AgainstArgumentNull(registrar, "registar");
+            if (registrar == null)
+            {
+                throw new ArgumentNullException(nameof(registrar));
+            }
 
             registrar.Apply(_container.Register);
         }

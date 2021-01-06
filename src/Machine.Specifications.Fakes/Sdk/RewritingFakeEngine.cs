@@ -21,9 +21,7 @@ namespace Machine.Specifications.Fakes.Sdk
         /// </param>
         protected RewritingFakeEngine(IExpressionRewriter rewriter)
         {
-            Guard.AgainstArgumentNull(rewriter, "rewriter");
-
-            _rewriter = rewriter;
+            _rewriter = rewriter ?? throw new ArgumentNullException(nameof(rewriter));
         }
 
         /// <summary>

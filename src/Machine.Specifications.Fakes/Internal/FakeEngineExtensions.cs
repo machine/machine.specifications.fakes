@@ -1,3 +1,4 @@
+using System;
 using Machine.Specifications.Fakes.Sdk;
 
 namespace Machine.Specifications.Fakes.Internal
@@ -15,7 +16,10 @@ namespace Machine.Specifications.Fakes.Internal
         /// <returns>A new fake for the type specified via <typeparamref name="T"/>.</returns>
         public static T Stub<T>(this IFakeEngine fakeEngine, params object[] args)
         {
-            Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
+            if (fakeEngine == null)
+            {
+                throw new ArgumentNullException(nameof(fakeEngine));
+            }
 
             return args != null && args.Length > 0
                 ? (T)fakeEngine.CreateFake(typeof(T), args)

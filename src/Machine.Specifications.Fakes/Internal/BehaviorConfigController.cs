@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Machine.Specifications.Fakes.Sdk;
@@ -10,8 +11,15 @@ namespace Machine.Specifications.Fakes.Internal
 
         public void Establish(object behaviorConfig, IFakeAccessor fakeAccessor)
         {
-            Guard.AgainstArgumentNull(behaviorConfig, "behaviorConfig");
-            Guard.AgainstArgumentNull(fakeAccessor, "fakeAccessor");
+            if (behaviorConfig == null)
+            {
+                throw new ArgumentNullException(nameof(behaviorConfig));
+            }
+
+            if (fakeAccessor == null)
+            {
+                throw new ArgumentNullException(nameof(fakeAccessor));
+            }
 
             behaviorConfig
                 .GetFieldValues<OnEstablish>()
@@ -22,7 +30,10 @@ namespace Machine.Specifications.Fakes.Internal
 
         public void CleanUp(object subject)
         {
-            Guard.AgainstArgumentNull(subject, "subject");
+            if (subject == null)
+            {
+                throw new ArgumentNullException(nameof(subject));
+            }
 
             _behaviorConfigs
                 .SelectMany(config => config.GetFieldValues<OnCleanup>())

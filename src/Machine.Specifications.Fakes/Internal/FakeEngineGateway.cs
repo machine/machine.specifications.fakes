@@ -1,6 +1,5 @@
 using System;
 using System.Linq.Expressions;
-using Machine.Specifications.Fakes.Sdk;
 
 namespace Machine.Specifications.Fakes.Internal
 {
@@ -10,7 +9,10 @@ namespace Machine.Specifications.Fakes.Internal
 
         public static void EngineIs(IFakeEngine fakeEngine)
         {
-            Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
+            if (fakeEngine == null)
+            {
+                throw new ArgumentNullException(nameof(fakeEngine));
+            }
 
             _fakeEngine = fakeEngine;
         }
@@ -19,8 +21,15 @@ namespace Machine.Specifications.Fakes.Internal
             TFake fake,
             Expression<Func<TFake, TReturnValue>> func) where TFake : class
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(func, "func");
+            if (fake == null)
+            {
+                throw new ArgumentNullException(nameof(fake));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
 
             return _fakeEngine.SetUpQueryBehaviorFor(fake, func);
         }
@@ -29,8 +38,15 @@ namespace Machine.Specifications.Fakes.Internal
             TFake fake,
             Expression<Action<TFake>> func) where TFake : class
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(func, "func");
+            if (fake == null)
+            {
+                throw new ArgumentNullException(nameof(fake));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
 
             return _fakeEngine.SetUpCommandBehaviorFor(fake, func);
         }
@@ -39,8 +55,15 @@ namespace Machine.Specifications.Fakes.Internal
             TFake fake,
             Expression<Action<TFake>> func) where TFake : class
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(func, "func");
+            if (fake == null)
+            {
+                throw new ArgumentNullException(nameof(fake));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
 
             _fakeEngine.VerifyBehaviorWasNotExecuted(fake, func);
         }
@@ -49,8 +72,15 @@ namespace Machine.Specifications.Fakes.Internal
             TFake fake,
             Expression<Action<TFake>> func) where TFake : class
         {
-            Guard.AgainstArgumentNull(fake, "fake");
-            Guard.AgainstArgumentNull(func, "func");
+            if (fake == null)
+            {
+                throw new ArgumentNullException(nameof(fake));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
 
             return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
         }

@@ -177,7 +177,11 @@ namespace Machine.Specifications.Fakes
         /// </exception>
         protected static void Configure(Registrar registrar)
         {
-            Guard.AgainstArgumentNull(registrar, "registar");
+            if (registrar == null)
+            {
+                throw new ArgumentNullException(nameof(registrar));
+            }
+
             GuardAgainstStaticContext();
 
             _specificationController.Configure(registrar);
@@ -212,7 +216,11 @@ namespace Machine.Specifications.Fakes
         /// </exception>
         protected static void Configure(Action<Registrar> registrarExpression)
         {
-            Guard.AgainstArgumentNull(registrarExpression, "registar");
+            if (registrarExpression == null)
+            {
+                throw new ArgumentNullException(nameof(registrarExpression));
+            }
+
             GuardAgainstStaticContext();
 
             _specificationController.Configure(registrarExpression);

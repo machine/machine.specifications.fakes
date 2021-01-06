@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Machine.Specifications.Fakes.Sdk;
 
 namespace Machine.Specifications.Fakes.Internal
 {
@@ -15,9 +14,7 @@ namespace Machine.Specifications.Fakes.Internal
 
         public AutoFakeContainer(IFakeEngine fakeEngine)
         {
-            Guard.AgainstArgumentNull(fakeEngine, "fakeEngine");
-
-            _fakeEngine = fakeEngine;
+            _fakeEngine = fakeEngine ?? throw new ArgumentNullException(nameof(fakeEngine));
         }
 
         internal object CreateFake(Type interfaceType, params object[] args)

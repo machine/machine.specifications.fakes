@@ -31,8 +31,15 @@ namespace Machine.Specifications.Fakes.Sdk
             this Expression<Func<TType, TValue>> expression, 
             IExpressionRewriter rewriter)
         {
-            Guard.AgainstArgumentNull(expression, "expression");
-            Guard.AgainstArgumentNull(rewriter, "rewriter");
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            if (rewriter == null)
+            {
+                throw new ArgumentNullException(nameof(rewriter));
+            }
 
             return rewriter.Rewrite(expression) as Expression<Func<TType, TValue>>;
         }
@@ -57,8 +64,15 @@ namespace Machine.Specifications.Fakes.Sdk
             this Expression<Action<TType>> expression, 
             IExpressionRewriter rewriter)
         {
-            Guard.AgainstArgumentNull(expression, "expression");
-            Guard.AgainstArgumentNull(rewriter, "rewriter");
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            if (rewriter == null)
+            {
+                throw new ArgumentNullException(nameof(rewriter));
+            }
 
             return rewriter.Rewrite(expression) as Expression<Action<TType>>;
         }

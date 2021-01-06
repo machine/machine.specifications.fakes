@@ -95,9 +95,20 @@ namespace Machine.Specifications.Fakes.Sdk
         /// </returns>
         public static MemberExpression MakePropertyAccess(this Type targetType, string property, Expression instanceExpression)
         {
-            Guard.AgainstArgumentNull(targetType, "targetType");
-            Guard.AgainstArgumentNull(property, "property");
-            Guard.AgainstArgumentNull(instanceExpression, "instanceExpression");
+            if (targetType == null)
+            {
+                throw new ArgumentNullException(nameof(targetType));
+            }
+
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
+
+            if (instanceExpression == null)
+            {
+                throw new ArgumentNullException(nameof(instanceExpression));
+            }
 
             return MakePropertyAccess(
                 targetType,
@@ -120,8 +131,15 @@ namespace Machine.Specifications.Fakes.Sdk
         /// </returns>
         public static MemberExpression MakeStaticPropertyAccess(this Type targetType, string property)
         {
-            Guard.AgainstArgumentNull(targetType, "targetType");
-            Guard.AgainstArgumentNull(property, "property");
+            if (targetType == null)
+            {
+                throw new ArgumentNullException(nameof(targetType));
+            }
+
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
 
             return MakePropertyAccess(
                 targetType,
@@ -144,7 +162,10 @@ namespace Machine.Specifications.Fakes.Sdk
         /// </returns>
         public static IEnumerable<TFieldType> GetFieldValues<TFieldType>(this object instance)
         {
-            Guard.AgainstArgumentNull(instance, "instance");
+            if (instance == null)
+            {
+                throw new ArgumentNullException(nameof(instance));
+            }
 
             var fieldValues = instance
                 .GetType()
@@ -184,8 +205,15 @@ namespace Machine.Specifications.Fakes.Sdk
 
         static MemberExpression MakePropertyAccess(this Type targetType, string property, BindingFlags flags, Expression instanceExpression)
         {
-            Guard.AgainstArgumentNull(targetType, "targetType");
-            Guard.AgainstArgumentNull(property, "property");
+            if (targetType == null)
+            {
+                throw new ArgumentNullException(nameof(targetType));
+            }
+
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
 
             var targetProperty = targetType.GetProperty(property, flags);
 

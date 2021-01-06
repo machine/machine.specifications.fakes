@@ -20,7 +20,10 @@ namespace Machine.Specifications.Fakes
             this IFakeAccessor accessor,
             TInterfaceType instance)
         {
-            Guard.AgainstArgumentNull(accessor, "accessor");
+            if (accessor == null)
+            {
+                throw new ArgumentNullException(nameof(accessor));
+            }
 
             accessor.Configure(Registrar.New(config => config.For<TInterfaceType>().Use(instance)));
         }
@@ -43,7 +46,10 @@ namespace Machine.Specifications.Fakes
             this IFakeAccessor accessor)
             where TImplementationType : TInterfaceType
         {
-            Guard.AgainstArgumentNull(accessor, "accessor");
+            if (accessor == null)
+            {
+                throw new ArgumentNullException(nameof(accessor));
+            }
 
             accessor.Configure(Registrar.New(config => config.For<TInterfaceType>().Use<TImplementationType>()));
         }
@@ -66,8 +72,15 @@ namespace Machine.Specifications.Fakes
             this IFakeAccessor accessor,
             Action<Registrar> registrarExpression)
         {
-            Guard.AgainstArgumentNull(accessor, "accessor");
-            Guard.AgainstArgumentNull(registrarExpression, "registrarExpression");
+            if (accessor == null)
+            {
+                throw new ArgumentNullException(nameof(accessor));
+            }
+
+            if (registrarExpression == null)
+            {
+                throw new ArgumentNullException(nameof(registrarExpression));
+            }
 
             accessor.Configure(Registrar.New(registrarExpression));
         }
