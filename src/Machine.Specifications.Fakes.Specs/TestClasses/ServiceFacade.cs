@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Machine.Specifications.Utility;
 
-using Machine.Fakes.Sdk;
-
-namespace Machine.Fakes.Specs.TestClasses
+namespace Machine.Specifications.Fakes.Specs.TestClasses
 {
     public class ServiceFacade
     {

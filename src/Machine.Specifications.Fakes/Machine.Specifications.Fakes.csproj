@@ -14,11 +14,19 @@
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.1" />
+    <PackageReference Include="InternalsVisibleTo.MSBuild" Version="1.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Machine.Specifications" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Resources\Machine.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Machine.Specifications.Fakes.Specs" />
   </ItemGroup>
 
 </Project>

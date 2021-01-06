@@ -1,9 +1,8 @@
 using System;
-using Machine.Fakes.Sdk;
-using Machine.Fakes.Specs.TestClasses;
-using Machine.Specifications;
+using Machine.Specifications.Fakes.Sdk;
+using Machine.Specifications.Fakes.Specs.TestClasses;
 
-namespace Machine.Fakes.Specs
+namespace Machine.Specifications.Fakes.Specs
 {
     public class Specs_for_the_The_accessor
     {

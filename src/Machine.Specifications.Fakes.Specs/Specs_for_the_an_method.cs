@@ -1,9 +1,8 @@
 using System;
-using Machine.Fakes.Sdk;
-using Machine.Fakes.Specs.TestClasses;
-using Machine.Specifications;
+using Machine.Specifications.Fakes.Sdk;
+using Machine.Specifications.Fakes.Specs.TestClasses;
 
-namespace Machine.Fakes.Specs
+namespace Machine.Specifications.Fakes.Specs
 {
     [Subject(typeof(SpecificationController<,>))]
     public class When_using_the_an_method_to_create_an_explicit_fake

@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Machine.Fakes.Specs.TestClasses
+namespace Machine.Specifications.Fakes.Specs.TestClasses
 {
     public class DummyFakeEngine : IFakeEngine
     {

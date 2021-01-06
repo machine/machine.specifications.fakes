@@ -1,8 +1,7 @@
-using Machine.Fakes.Sdk;
-using Machine.Fakes.Specs.TestClasses;
-using Machine.Specifications;
+using Machine.Specifications.Fakes.Sdk;
+using Machine.Specifications.Fakes.Specs.TestClasses;
 
-namespace Machine.Fakes.Specs
+namespace Machine.Specifications.Fakes.Specs
 {
     [Subject(typeof(SpecificationController<>))]
     public class When_a_factory_is_used_to_configure_a_dependency

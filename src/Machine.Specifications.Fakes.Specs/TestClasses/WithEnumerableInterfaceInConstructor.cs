@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Machine.Fakes.Specs.TestClasses
+namespace Machine.Specifications.Fakes.Specs.TestClasses
 {
     public class WithEnumerableInterfaceInConstructor
     {

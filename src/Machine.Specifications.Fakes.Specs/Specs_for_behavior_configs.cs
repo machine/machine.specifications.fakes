@@ -1,9 +1,8 @@
 using System;
-using Machine.Fakes.Sdk;
-using Machine.Fakes.Specs.TestClasses;
-using Machine.Specifications;
+using Machine.Specifications.Fakes.Sdk;
+using Machine.Specifications.Fakes.Specs.TestClasses;
 
-namespace Machine.Fakes.Specs
+namespace Machine.Specifications.Fakes.Specs
 {
     public class EmptyBehaviorConfig
     {
@@ -11,10 +10,12 @@ namespace Machine.Fakes.Specs
 
     [Subject(typeof(SpecificationController<>))]
     [Tags("BehaviorConfigs")]
-    public class When_executing_a_behavior_config_that_does_not_contain_the_relevant_delegate_definitions
+    class When_executing_a_behavior_config_that_does_not_contain_the_relevant_delegate_definitions
     {
         static SpecificationController<object, DummyFakeEngine> _controller;
+
         static Exception _exception;
+
         Cleanup after = () => _controller.Dispose();
 
         Establish context = () => { _controller = new SpecificationController<object, DummyFakeEngine>(); };

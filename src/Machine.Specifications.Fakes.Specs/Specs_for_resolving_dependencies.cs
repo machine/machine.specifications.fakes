@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Machine.Specifications.Fakes.Internal;
+using Machine.Specifications.Fakes.Specs.TestClasses;
 
-using Machine.Fakes.Internal;
-using Machine.Fakes.Specs.TestClasses;
-using Machine.Specifications;
-
-namespace Machine.Fakes.Specs
+namespace Machine.Specifications.Fakes.Specs
 {
     [Subject(typeof(AutoFakeContainer))]
     public class When_the_subjects_contstructor_contains_an_interface_dependency

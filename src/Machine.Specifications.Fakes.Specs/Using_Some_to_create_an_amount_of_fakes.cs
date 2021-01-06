@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Machine.Specifications.Fakes.Sdk;
+using Machine.Specifications.Fakes.Specs.TestClasses;
 
-using Machine.Fakes.Sdk;
-using Machine.Fakes.Specs.TestClasses;
-using Machine.Specifications;
-
-namespace Machine.Fakes.Specs
+namespace Machine.Specifications.Fakes.Specs
 {
     public interface IServiceContainer
     {
